@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Mon Jul 15 15:02:38 EEST 2019
+#Mon Jul 15 17:00:01 EEST 2019
 33.base=/home/bogdan/Desktop/pixelatus/fazanMobile/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 47.base=/home/bogdan/Desktop/pixelatus/fazanMobile/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 50.base=/home/bogdan/Desktop/pixelatus/fazanMobile/android/app/build/intermediates/transforms/mergeJniLibs/debug/0

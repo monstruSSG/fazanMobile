@@ -5,6 +5,7 @@ INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/An
 INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:1:1-26:12
 INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:1:1-26:12
 MERGED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:1:1-26:12
+MERGED from [:react-native-vector-icons] /home/bogdan/Desktop/pixelatus/fazanMobile/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-gesture-handler] /home/bogdan/Desktop/pixelatus/fazanMobile/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [com.facebook.react:react-native:0.60.3] /root/.gradle/caches/transforms-2/files-2.1/eb08323d612caeca03c904aea08b2302/AndroidManifest.xml:2:1-13:12
 MERGED from [org.webkit:android-jsc:r245459] /root/.gradle/caches/transforms-2/files-2.1/e7c89a5a5f29942cdab5cd92b467f759/AndroidManifest.xml:2:1-11:12
@@ -133,6 +134,8 @@ uses-sdk
 INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml
 INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml
+MERGED from [:react-native-vector-icons] /home/bogdan/Desktop/pixelatus/fazanMobile/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-vector-icons] /home/bogdan/Desktop/pixelatus/fazanMobile/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] /home/bogdan/Desktop/pixelatus/fazanMobile/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] /home/bogdan/Desktop/pixelatus/fazanMobile/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.60.3] /root/.gradle/caches/transforms-2/files-2.1/eb08323d612caeca03c904aea08b2302/AndroidManifest.xml:7:5-9:41

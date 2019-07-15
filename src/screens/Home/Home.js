@@ -9,10 +9,10 @@ class HomeScreen extends Component {
         return (
             <View style={styles.homePage}>
                 <View style={styles.logoContainer}>
-                    <Image source={require('../../../assets/fazanLogo.png')} />
+                    <Image source={require('../../assets/fazanLogo.png')} />
                 </View>
                 <View style={styles.titleContainer}>
-                    <Image source={require('../../../assets/fazanTitle.png')} />
+                    <Image source={require('../../assets/fazanTitle.png')} />
                 </View>
 
                 <View style={styles.content}>
