@@ -7,10 +7,19 @@ class HomeScreen extends Component {
 
     render() {
         return (
-            <View>
-                <Text>HOME PAGE</Text>
-                <Button title="Go toSingleplayer" onPress={this.navigateSingleplayerScreen}></Button>
-                <Button title="Go to Search game " onPress={this.navigateSearchGameScreen}></Button>
+            <View style={styles.homePage}>
+                <View style={styles.logoContainer}>
+                    <Image source={require('../../../assets/fazanLogo.png')} />
+                </View>
+                <View style={styles.titleContainer}>
+                    <Image source={require('../../../assets/fazanTitle.png')} />
+                </View>
+
+                <View style={styles.content}>
+                    <Button color={CONSTANTS.buttonColor} width={250} height={45} onPress={() => alert("Single")}>SINGLE PLAYER</Button>
+                    <Text color={CONSTANTS.textColor}>OR</Text>
+                    <Button color={CONSTANTS.buttonColor} width={250} height={45} onPress={() => alert("Mutiplayer")}>MULTIPLAYER</Button>
+                </View>
             </View>
         );
     }
