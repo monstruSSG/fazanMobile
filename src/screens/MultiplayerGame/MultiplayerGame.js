@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
-
-import { MULTIPLAYER_GAME_SCREEN } from '../navigationPaths';
+import { View, StyleSheet, Text } from 'react-native';
 
 class MultiplayerGameScreen extends Component {
-    static navigationOptions = {
-        title: MULTIPLAYER_GAME_SCREEN
-    }
-
     render() {
         return (
             <View>
-                MULTIPLAYER GAME
+                < Text>MULTIPLAYER GAME</Text>
             </View>
         );
     }

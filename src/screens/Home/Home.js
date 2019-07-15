@@ -1,26 +1,16 @@
 import React, { Component } from 'react';
-import { View, Button, StyleSheet } from 'react-native';
-
-import { HOME_SCREEN, SINGLEPLAYER_GAME_SCREEN, MULTIPLAYER_GAME_SCRREN } from '../navigationPaths';
+import { View, Button, StyleSheet, Text } from 'react-native';
 
 class HomeScreen extends Component {
-    static navigationOptions = {
-        title: HOME_SCREEN
-    }
-
-    navigateSingleplayerScreen = () => this.props.navigation.navigate(SINGLEPLAYER_GAME_SCREEN);
-    navigateMultyplayerScreen = () => this.props.navigation.navigate(MULTIPLAYER_GAME_SCRREN);
+    navigateSingleplayerScreen = () => this.props.navigation.navigate('Singleplayer');
+    navigateSearchGameScreen = () => this.props.navigation.navigate('SearchGame');
 
     render() {
         return (
             <View>
-                HOME PAGE
-                <Button onPress={this.navigateSingleplayerScreen}>
-                    GO TO SINGLEPLAYER
-                </Button>
-                <Button onPress={this.navigateMultyplayerScreen}>
-                    GO TO MULTIPLAYER
-                </Button>
+                <Text>HOME PAGE</Text>
+                <Button title="Go toSingleplayer" onPress={this.navigateSingleplayerScreen}></Button>
+                <Button title="Go to Search game " onPress={this.navigateSearchGameScreen}></Button>
             </View>
         );
     }
