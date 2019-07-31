@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
     homePage: {
         flex: 1,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        backgroundColor: CONSTANTS.backgroundColor
     },
     logoContainer: {
         position: "relative",
