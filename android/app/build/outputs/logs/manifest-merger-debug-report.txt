@@ -1,226 +1,226 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:1:1-26:12
-INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:1:1-26:12
-INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:1:1-26:12
-INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:1:1-26:12
-MERGED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:1:1-26:12
-MERGED from [:react-native-vector-icons] /home/bogdan/Desktop/pixelatus/fazanMobile/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
-MERGED from [:react-native-gesture-handler] /home/bogdan/Desktop/pixelatus/fazanMobile/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
-MERGED from [com.facebook.react:react-native:0.60.3] /root/.gradle/caches/transforms-2/files-2.1/eb08323d612caeca03c904aea08b2302/AndroidManifest.xml:2:1-13:12
-MERGED from [org.webkit:android-jsc:r245459] /root/.gradle/caches/transforms-2/files-2.1/e7c89a5a5f29942cdab5cd92b467f759/AndroidManifest.xml:2:1-11:12
-MERGED from [androidx.appcompat:appcompat:1.0.2] /root/.gradle/caches/transforms-2/files-2.1/b32e81201d0e61c846930f42d9b13500/AndroidManifest.xml:17:1-22:12
-MERGED from [com.facebook.fresco:fresco:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/c56d7bb49d05684bd6cc962d7009e7eb/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/ebb21797c2ff564d13e2b46ac31117c6/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:drawee:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/cba6718e9183028d254ea41e5429f51d/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/54546ffb0615fefd758760abbfb965e4/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/aa2fe7668a3bca35049d4d76f4c5ec23/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/9539906e8cd69caab596a4aa66fcafa3/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/9e169c7b78b3886a502e979ae9d4e77f/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.soloader:soloader:0.6.0] /root/.gradle/caches/transforms-2/files-2.1/b884db1ad49586c2a648f025884970e0/AndroidManifest.xml:2:1-13:12
-MERGED from [androidx.fragment:fragment:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/5777f7bbaed79eb2687a05bc8da2e6ef/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/32107af276b41d7eb7a4cde803221d34/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/4eab9992b911c97582e6a0cc848ca0c0/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/d621e367fecaf682438abcd33bb87dd3/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /root/.gradle/caches/transforms-2/files-2.1/167fcedc7aed569a5124b2b25d30e000/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.loader:loader:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/5ac8097c0e93e83e1ee9e1550928852a/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.viewpager:viewpager:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/49c6f4469e619d34c1d885bbdb753b3d/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/7d9c066078f76eb9c3a1e38aaf174b18/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/398d6ee3a8c088465c2e4c3782fba86d/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/1813c44479d386b9241ada9f50e1447d/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.customview:customview:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/b4010b10a4d466321d526dfb0165afb3/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/fdf54089310c28dc0790ff3a0417d1d8/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/5ac94b45f79bd3b950676283af314770/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.core:core:1.0.1] /root/.gradle/caches/transforms-2/files-2.1/69abaca793e0c2549b9c618b2f34067f/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/ea49c86e0928ec4b719676b37e91c400/AndroidManifest.xml:17:1-25:12
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/c742baf0aed8e1742d82f26df4ab509a/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/89b1da8348974886602d63be81f91748/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.documentfile:documentfile:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/f645e25898ed06f4a8fc79ca2c119a11/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/dfc67af265e0c0a90f32c0a7fce81d79/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.print:print:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/247d5619223067af124b51e79be612eb/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/9eb553aec15501fd900b28461d2aa27f/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/63cdae873efaf04e019e1bd1c9151470/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/fad469c461255d3974a666447823dcaf/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.arch.core:core-runtime:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/b4ebf1a2f1b70de6fae7602da5c54d94/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.interpolator:interpolator:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/eeb8f93d52f257c8b2383b6f0e6c0525/AndroidManifest.xml:17:1-22:12
-MERGED from [com.facebook.fresco:fbcore:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/17c9e5e14e75b480b63a6caec904e75c/AndroidManifest.xml:2:1-9:12
-INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml:2:1-8:12
-INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml:2:1-8:12
-INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml:2:1-8:12
+ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:1:1-26:12
+INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:1:1-26:12
+INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:1:1-26:12
+INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:1:1-26:12
+MERGED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:1:1-26:12
+MERGED from [:react-native-vector-icons] /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [com.facebook.react:react-native:0.60.4] /home/bogdi/.gradle/caches/transforms-2/files-2.1/7a5bbd9b733d1ba39bef7c383a49655b/AndroidManifest.xml:2:1-13:12
+MERGED from [org.webkit:android-jsc:r245459] /home/bogdi/.gradle/caches/transforms-2/files-2.1/f3c7d71a2018175cfe77fe3c48af99ac/AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-gesture-handler] /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat:1.0.2] /home/bogdi/.gradle/caches/transforms-2/files-2.1/3e7f50258c6fc296e7a406c5938d8f71/AndroidManifest.xml:17:1-22:12
+MERGED from [com.facebook.fresco:fresco:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/035c240fd11d62ee08a0802ce41b55c8/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/4b3813bca894a5017bcab8a59ca9389b/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:drawee:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/c75da5d017d63e8fe8a084380c430824/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/eb1f208aaf4358a28b1a388d52c62205/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/bbd632a0204cf83115b2cb3d1eedb515/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/fa74cbe9a51f0c0b7c0968b4f60d7edd/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/d4289fe415fc6613122a96a14aed9a9a/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.soloader:soloader:0.6.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/376ae6bed6d1ed435fb03cdc7c106ce7/AndroidManifest.xml:2:1-13:12
+MERGED from [androidx.fragment:fragment:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/d85db8f94a4c7de3934819aab56aa85f/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/24b8452364f02667228cf4dc53d27b80/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/82fb919829458cc6660891f354ced059/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/1c04d787ea3338e61c0c401700685261/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /home/bogdi/.gradle/caches/transforms-2/files-2.1/888ccb133550ce44d3be0a96d235c91f/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/42297ecb4db5a671a41f58c1dd0cb119/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/f161f51bb55015a693a7990e06ad655a/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/bc51e3d46893519e8636ea716ca435f5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/efb5d18809ecc1f196921460c5e7c3bc/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/fdb20e9637646c477e0e2cd2bb895bfc/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/06a5096222dce5b0f4041ef9e672a318/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/271ffb295070d051f37466cebe47a409/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/e5dc9fb874c6abc88e63cd3c9d22ff46/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.0.1] /home/bogdi/.gradle/caches/transforms-2/files-2.1/726f063258dc7e9b70f8dd314f28655c/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/8bc554636f6502166c39a3b4a3bd18e8/AndroidManifest.xml:17:1-25:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/de872143df75121f4cddd673809d6dac/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/21e0e810a5211b7d0acb49d81daa795e/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/f0789a6af810002b24a291c1760072a4/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/04df3b99e26bf2c5e016b3c45a02efc1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/29c061814aaab821e2ca2bf31244cdd0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/dd81f42ec0be879c62bcb79805020eee/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/369318ecb3283931a7a3dd6643f4b0d1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/7036419a7e4fbebac18385346b0b88a7/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/fa403c7357644e2ae52aec5b056cc7f5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/4eacd1de25a8a559717ac71220da609b/AndroidManifest.xml:17:1-22:12
+MERGED from [com.facebook.fresco:fbcore:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/6f61be080a55bab95eda21fe4bd91687/AndroidManifest.xml:2:1-9:12
+INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/debug/AndroidManifest.xml:2:1-8:12
+INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/debug/AndroidManifest.xml:2:1-8:12
+INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/debug/AndroidManifest.xml:2:1-8:12
 	package
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:2:3-28
-		INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:2:3-28
-		INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:2:3-28
+		INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:2:3-28
+		INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/debug/AndroidManifest.xml
 	android:versionName
-		INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:1:1-26:12
-		INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml
+		INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:1:1-26:12
+		INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/debug/AndroidManifest.xml
 	xmlns:tools
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml:3:5-51
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/debug/AndroidManifest.xml:3:5-51
 	android:versionCode
-		INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:1:1-26:12
-		INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml
+		INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:1:1-26:12
+		INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/debug/AndroidManifest.xml
 	xmlns:android
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:1:11-69
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:1:11-69
 uses-permission#android.permission.INTERNET
-ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:4:5-67
+ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:4:5-67
 	android:name
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:4:22-64
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:4:22-64
 application
-ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:6:5-24:19
-MERGED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:6:5-24:19
-MERGED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:6:5-24:19
-MERGED from [com.facebook.react:react-native:0.60.3] /root/.gradle/caches/transforms-2/files-2.1/eb08323d612caeca03c904aea08b2302/AndroidManifest.xml:11:5-20
-MERGED from [com.facebook.react:react-native:0.60.3] /root/.gradle/caches/transforms-2/files-2.1/eb08323d612caeca03c904aea08b2302/AndroidManifest.xml:11:5-20
-MERGED from [com.facebook.soloader:soloader:0.6.0] /root/.gradle/caches/transforms-2/files-2.1/b884db1ad49586c2a648f025884970e0/AndroidManifest.xml:11:5-20
-MERGED from [com.facebook.soloader:soloader:0.6.0] /root/.gradle/caches/transforms-2/files-2.1/b884db1ad49586c2a648f025884970e0/AndroidManifest.xml:11:5-20
-MERGED from [androidx.core:core:1.0.1] /root/.gradle/caches/transforms-2/files-2.1/69abaca793e0c2549b9c618b2f34067f/AndroidManifest.xml:22:5-89
-MERGED from [androidx.core:core:1.0.1] /root/.gradle/caches/transforms-2/files-2.1/69abaca793e0c2549b9c618b2f34067f/AndroidManifest.xml:22:5-89
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/ea49c86e0928ec4b719676b37e91c400/AndroidManifest.xml:22:5-23:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/ea49c86e0928ec4b719676b37e91c400/AndroidManifest.xml:22:5-23:19
+ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:6:5-24:19
+MERGED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:6:5-24:19
+MERGED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:6:5-24:19
+MERGED from [com.facebook.react:react-native:0.60.4] /home/bogdi/.gradle/caches/transforms-2/files-2.1/7a5bbd9b733d1ba39bef7c383a49655b/AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.react:react-native:0.60.4] /home/bogdi/.gradle/caches/transforms-2/files-2.1/7a5bbd9b733d1ba39bef7c383a49655b/AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.soloader:soloader:0.6.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/376ae6bed6d1ed435fb03cdc7c106ce7/AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.soloader:soloader:0.6.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/376ae6bed6d1ed435fb03cdc7c106ce7/AndroidManifest.xml:11:5-20
+MERGED from [androidx.core:core:1.0.1] /home/bogdi/.gradle/caches/transforms-2/files-2.1/726f063258dc7e9b70f8dd314f28655c/AndroidManifest.xml:22:5-89
+MERGED from [androidx.core:core:1.0.1] /home/bogdi/.gradle/caches/transforms-2/files-2.1/726f063258dc7e9b70f8dd314f28655c/AndroidManifest.xml:22:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/8bc554636f6502166c39a3b4a3bd18e8/AndroidManifest.xml:22:5-23:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/8bc554636f6502166c39a3b4a3bd18e8/AndroidManifest.xml:22:5-23:19
 	android:appComponentFactory
-		ADDED from [androidx.core:core:1.0.1] /root/.gradle/caches/transforms-2/files-2.1/69abaca793e0c2549b9c618b2f34067f/AndroidManifest.xml:22:18-86
+		ADDED from [androidx.core:core:1.0.1] /home/bogdi/.gradle/caches/transforms-2/files-2.1/726f063258dc7e9b70f8dd314f28655c/AndroidManifest.xml:22:18-86
 	android:label
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:8:7-39
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:8:7-39
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:8:7-39
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:8:7-39
 	tools:ignore
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml:7:75-114
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/debug/AndroidManifest.xml:7:75-114
 	android:roundIcon
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:10:7-52
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:10:7-52
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:10:7-52
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:10:7-52
 	tools:targetApi
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml:7:54-74
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/debug/AndroidManifest.xml:7:54-74
 	android:icon
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:9:7-41
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:9:7-41
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:9:7-41
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:9:7-41
 	android:allowBackup
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:11:7-34
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:11:7-34
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:11:7-34
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:11:7-34
 	android:theme
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:12:7-38
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:12:7-38
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:12:7-38
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:12:7-38
 	android:usesCleartextTraffic
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml:7:18-53
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/debug/AndroidManifest.xml:7:18-53
 	android:name
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:7:7-38
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:7:7-38
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:7:7-38
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:7:7-38
 activity#com.fazanmobile.MainActivity
-ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:13:7-22:18
+ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:13:7-22:18
 	android:label
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:15:9-41
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:15:9-41
 	android:windowSoftInputMode
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:17:9-51
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:17:9-51
 	android:configChanges
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:16:9-79
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:16:9-79
 	android:name
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:14:9-37
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:14:9-37
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:18:9-21:25
+ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:18:9-21:25
 action#android.intent.action.MAIN
-ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:19:13-65
+ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:19:13-65
 	android:name
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:19:21-62
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:19:21-62
 category#android.intent.category.LAUNCHER
-ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:20:13-73
+ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:20:13-73
 	android:name
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:20:23-70
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:20:23-70
 activity#com.facebook.react.devsupport.DevSettingsActivity
-ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:23:7-84
+ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:23:7-84
 	android:name
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:23:17-81
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml:23:17-81
 uses-sdk
-INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
-INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml
-INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml
-MERGED from [:react-native-vector-icons] /home/bogdan/Desktop/pixelatus/fazanMobile/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-vector-icons] /home/bogdan/Desktop/pixelatus/fazanMobile/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-gesture-handler] /home/bogdan/Desktop/pixelatus/fazanMobile/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-gesture-handler] /home/bogdan/Desktop/pixelatus/fazanMobile/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.60.3] /root/.gradle/caches/transforms-2/files-2.1/eb08323d612caeca03c904aea08b2302/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.60.3] /root/.gradle/caches/transforms-2/files-2.1/eb08323d612caeca03c904aea08b2302/AndroidManifest.xml:7:5-9:41
-MERGED from [org.webkit:android-jsc:r245459] /root/.gradle/caches/transforms-2/files-2.1/e7c89a5a5f29942cdab5cd92b467f759/AndroidManifest.xml:7:5-9:41
-MERGED from [org.webkit:android-jsc:r245459] /root/.gradle/caches/transforms-2/files-2.1/e7c89a5a5f29942cdab5cd92b467f759/AndroidManifest.xml:7:5-9:41
-MERGED from [androidx.appcompat:appcompat:1.0.2] /root/.gradle/caches/transforms-2/files-2.1/b32e81201d0e61c846930f42d9b13500/AndroidManifest.xml:20:5-44
-MERGED from [androidx.appcompat:appcompat:1.0.2] /root/.gradle/caches/transforms-2/files-2.1/b32e81201d0e61c846930f42d9b13500/AndroidManifest.xml:20:5-44
-MERGED from [com.facebook.fresco:fresco:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/c56d7bb49d05684bd6cc962d7009e7eb/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fresco:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/c56d7bb49d05684bd6cc962d7009e7eb/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/ebb21797c2ff564d13e2b46ac31117c6/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/ebb21797c2ff564d13e2b46ac31117c6/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/cba6718e9183028d254ea41e5429f51d/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/cba6718e9183028d254ea41e5429f51d/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/54546ffb0615fefd758760abbfb965e4/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/54546ffb0615fefd758760abbfb965e4/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/aa2fe7668a3bca35049d4d76f4c5ec23/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/aa2fe7668a3bca35049d4d76f4c5ec23/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/9539906e8cd69caab596a4aa66fcafa3/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/9539906e8cd69caab596a4aa66fcafa3/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/9e169c7b78b3886a502e979ae9d4e77f/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/9e169c7b78b3886a502e979ae9d4e77f/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.soloader:soloader:0.6.0] /root/.gradle/caches/transforms-2/files-2.1/b884db1ad49586c2a648f025884970e0/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.soloader:soloader:0.6.0] /root/.gradle/caches/transforms-2/files-2.1/b884db1ad49586c2a648f025884970e0/AndroidManifest.xml:7:5-9:41
-MERGED from [androidx.fragment:fragment:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/5777f7bbaed79eb2687a05bc8da2e6ef/AndroidManifest.xml:20:5-44
-MERGED from [androidx.fragment:fragment:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/5777f7bbaed79eb2687a05bc8da2e6ef/AndroidManifest.xml:20:5-44
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/32107af276b41d7eb7a4cde803221d34/AndroidManifest.xml:20:5-44
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/32107af276b41d7eb7a4cde803221d34/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/4eab9992b911c97582e6a0cc848ca0c0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/4eab9992b911c97582e6a0cc848ca0c0/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/d621e367fecaf682438abcd33bb87dd3/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/d621e367fecaf682438abcd33bb87dd3/AndroidManifest.xml:20:5-44
-MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /root/.gradle/caches/transforms-2/files-2.1/167fcedc7aed569a5124b2b25d30e000/AndroidManifest.xml:20:5-44
-MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /root/.gradle/caches/transforms-2/files-2.1/167fcedc7aed569a5124b2b25d30e000/AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/5ac8097c0e93e83e1ee9e1550928852a/AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/5ac8097c0e93e83e1ee9e1550928852a/AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/49c6f4469e619d34c1d885bbdb753b3d/AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/49c6f4469e619d34c1d885bbdb753b3d/AndroidManifest.xml:20:5-44
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/7d9c066078f76eb9c3a1e38aaf174b18/AndroidManifest.xml:20:5-44
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/7d9c066078f76eb9c3a1e38aaf174b18/AndroidManifest.xml:20:5-44
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/398d6ee3a8c088465c2e4c3782fba86d/AndroidManifest.xml:20:5-44
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/398d6ee3a8c088465c2e4c3782fba86d/AndroidManifest.xml:20:5-44
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/1813c44479d386b9241ada9f50e1447d/AndroidManifest.xml:20:5-44
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/1813c44479d386b9241ada9f50e1447d/AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/b4010b10a4d466321d526dfb0165afb3/AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/b4010b10a4d466321d526dfb0165afb3/AndroidManifest.xml:20:5-44
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/fdf54089310c28dc0790ff3a0417d1d8/AndroidManifest.xml:20:5-44
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/fdf54089310c28dc0790ff3a0417d1d8/AndroidManifest.xml:20:5-44
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/5ac94b45f79bd3b950676283af314770/AndroidManifest.xml:20:5-44
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/5ac94b45f79bd3b950676283af314770/AndroidManifest.xml:20:5-44
-MERGED from [androidx.core:core:1.0.1] /root/.gradle/caches/transforms-2/files-2.1/69abaca793e0c2549b9c618b2f34067f/AndroidManifest.xml:20:5-44
-MERGED from [androidx.core:core:1.0.1] /root/.gradle/caches/transforms-2/files-2.1/69abaca793e0c2549b9c618b2f34067f/AndroidManifest.xml:20:5-44
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/ea49c86e0928ec4b719676b37e91c400/AndroidManifest.xml:20:5-44
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/ea49c86e0928ec4b719676b37e91c400/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/c742baf0aed8e1742d82f26df4ab509a/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/c742baf0aed8e1742d82f26df4ab509a/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/89b1da8348974886602d63be81f91748/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/89b1da8348974886602d63be81f91748/AndroidManifest.xml:20:5-44
-MERGED from [androidx.documentfile:documentfile:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/f645e25898ed06f4a8fc79ca2c119a11/AndroidManifest.xml:20:5-44
-MERGED from [androidx.documentfile:documentfile:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/f645e25898ed06f4a8fc79ca2c119a11/AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/dfc67af265e0c0a90f32c0a7fce81d79/AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/dfc67af265e0c0a90f32c0a7fce81d79/AndroidManifest.xml:20:5-44
-MERGED from [androidx.print:print:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/247d5619223067af124b51e79be612eb/AndroidManifest.xml:20:5-44
-MERGED from [androidx.print:print:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/247d5619223067af124b51e79be612eb/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/9eb553aec15501fd900b28461d2aa27f/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/9eb553aec15501fd900b28461d2aa27f/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/63cdae873efaf04e019e1bd1c9151470/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/63cdae873efaf04e019e1bd1c9151470/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/fad469c461255d3974a666447823dcaf/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/fad469c461255d3974a666447823dcaf/AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/b4ebf1a2f1b70de6fae7602da5c54d94/AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/b4ebf1a2f1b70de6fae7602da5c54d94/AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/eeb8f93d52f257c8b2383b6f0e6c0525/AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/eeb8f93d52f257c8b2383b6f0e6c0525/AndroidManifest.xml:20:5-44
-MERGED from [com.facebook.fresco:fbcore:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/17c9e5e14e75b480b63a6caec904e75c/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fbcore:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/17c9e5e14e75b480b63a6caec904e75c/AndroidManifest.xml:5:5-7:41
-INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml
-INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml
+INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml
+INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml
+MERGED from [:react-native-vector-icons] /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-vector-icons] /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.60.4] /home/bogdi/.gradle/caches/transforms-2/files-2.1/7a5bbd9b733d1ba39bef7c383a49655b/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.60.4] /home/bogdi/.gradle/caches/transforms-2/files-2.1/7a5bbd9b733d1ba39bef7c383a49655b/AndroidManifest.xml:7:5-9:41
+MERGED from [org.webkit:android-jsc:r245459] /home/bogdi/.gradle/caches/transforms-2/files-2.1/f3c7d71a2018175cfe77fe3c48af99ac/AndroidManifest.xml:7:5-9:41
+MERGED from [org.webkit:android-jsc:r245459] /home/bogdi/.gradle/caches/transforms-2/files-2.1/f3c7d71a2018175cfe77fe3c48af99ac/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-gesture-handler] /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-gesture-handler] /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
+MERGED from [androidx.appcompat:appcompat:1.0.2] /home/bogdi/.gradle/caches/transforms-2/files-2.1/3e7f50258c6fc296e7a406c5938d8f71/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.0.2] /home/bogdi/.gradle/caches/transforms-2/files-2.1/3e7f50258c6fc296e7a406c5938d8f71/AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.fresco:fresco:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/035c240fd11d62ee08a0802ce41b55c8/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fresco:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/035c240fd11d62ee08a0802ce41b55c8/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/4b3813bca894a5017bcab8a59ca9389b/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/4b3813bca894a5017bcab8a59ca9389b/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/c75da5d017d63e8fe8a084380c430824/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/c75da5d017d63e8fe8a084380c430824/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/eb1f208aaf4358a28b1a388d52c62205/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/eb1f208aaf4358a28b1a388d52c62205/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/bbd632a0204cf83115b2cb3d1eedb515/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/bbd632a0204cf83115b2cb3d1eedb515/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/fa74cbe9a51f0c0b7c0968b4f60d7edd/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/fa74cbe9a51f0c0b7c0968b4f60d7edd/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/d4289fe415fc6613122a96a14aed9a9a/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/d4289fe415fc6613122a96a14aed9a9a/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.soloader:soloader:0.6.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/376ae6bed6d1ed435fb03cdc7c106ce7/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.soloader:soloader:0.6.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/376ae6bed6d1ed435fb03cdc7c106ce7/AndroidManifest.xml:7:5-9:41
+MERGED from [androidx.fragment:fragment:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/d85db8f94a4c7de3934819aab56aa85f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/d85db8f94a4c7de3934819aab56aa85f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/24b8452364f02667228cf4dc53d27b80/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/24b8452364f02667228cf4dc53d27b80/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/82fb919829458cc6660891f354ced059/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/82fb919829458cc6660891f354ced059/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/1c04d787ea3338e61c0c401700685261/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/1c04d787ea3338e61c0c401700685261/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /home/bogdi/.gradle/caches/transforms-2/files-2.1/888ccb133550ce44d3be0a96d235c91f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /home/bogdi/.gradle/caches/transforms-2/files-2.1/888ccb133550ce44d3be0a96d235c91f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/42297ecb4db5a671a41f58c1dd0cb119/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/42297ecb4db5a671a41f58c1dd0cb119/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/f161f51bb55015a693a7990e06ad655a/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/f161f51bb55015a693a7990e06ad655a/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/bc51e3d46893519e8636ea716ca435f5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/bc51e3d46893519e8636ea716ca435f5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/efb5d18809ecc1f196921460c5e7c3bc/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/efb5d18809ecc1f196921460c5e7c3bc/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/fdb20e9637646c477e0e2cd2bb895bfc/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/fdb20e9637646c477e0e2cd2bb895bfc/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/06a5096222dce5b0f4041ef9e672a318/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/06a5096222dce5b0f4041ef9e672a318/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/271ffb295070d051f37466cebe47a409/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/271ffb295070d051f37466cebe47a409/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/e5dc9fb874c6abc88e63cd3c9d22ff46/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/e5dc9fb874c6abc88e63cd3c9d22ff46/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.0.1] /home/bogdi/.gradle/caches/transforms-2/files-2.1/726f063258dc7e9b70f8dd314f28655c/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.0.1] /home/bogdi/.gradle/caches/transforms-2/files-2.1/726f063258dc7e9b70f8dd314f28655c/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/8bc554636f6502166c39a3b4a3bd18e8/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/8bc554636f6502166c39a3b4a3bd18e8/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/de872143df75121f4cddd673809d6dac/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/de872143df75121f4cddd673809d6dac/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/21e0e810a5211b7d0acb49d81daa795e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/21e0e810a5211b7d0acb49d81daa795e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/f0789a6af810002b24a291c1760072a4/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/f0789a6af810002b24a291c1760072a4/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/04df3b99e26bf2c5e016b3c45a02efc1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/04df3b99e26bf2c5e016b3c45a02efc1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/29c061814aaab821e2ca2bf31244cdd0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/29c061814aaab821e2ca2bf31244cdd0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/dd81f42ec0be879c62bcb79805020eee/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/dd81f42ec0be879c62bcb79805020eee/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/369318ecb3283931a7a3dd6643f4b0d1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/369318ecb3283931a7a3dd6643f4b0d1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/7036419a7e4fbebac18385346b0b88a7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/7036419a7e4fbebac18385346b0b88a7/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/fa403c7357644e2ae52aec5b056cc7f5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/fa403c7357644e2ae52aec5b056cc7f5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/4eacd1de25a8a559717ac71220da609b/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/4eacd1de25a8a559717ac71220da609b/AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.fresco:fbcore:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/6f61be080a55bab95eda21fe4bd91687/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:2.0.0] /home/bogdi/.gradle/caches/transforms-2/files-2.1/6f61be080a55bab95eda21fe4bd91687/AndroidManifest.xml:5:5-7:41
+INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/debug/AndroidManifest.xml
+INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/debug/AndroidManifest.xml
 	android:targetSdkVersion
-		INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml
-		INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml
+		INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/debug/AndroidManifest.xml
 	android:minSdkVersion
-		INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml
-		INJECTED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml
+		INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/debug/AndroidManifest.xml
 uses-permission#android.permission.SYSTEM_ALERT_WINDOW
-ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml:5:5-77
+ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/debug/AndroidManifest.xml:5:5-77
 	android:name
-		ADDED from /home/bogdan/Desktop/pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml:5:22-75
+		ADDED from /home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/src/debug/AndroidManifest.xml:5:22-75

@@ -24,7 +24,7 @@ public class PackageList {
   public PackageList(ReactNativeHost reactNativeHost) {
     this.reactNativeHost = reactNativeHost;
   }
-  
+
   public PackageList(Application application) {
     this.reactNativeHost = null;
     this.application = application;
