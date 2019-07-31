@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed Jul 31 07:27:26 EEST 2019
+#Wed Jul 31 08:57:58 EEST 2019
 56.path=lib/armeabi-v7a/libreactnativejni.so
 5.base=/home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/build/intermediates/transforms/mergeJniLibs/debug/0
 42.base=/home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/build/intermediates/transforms/mergeJniLibs/debug/0

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, Button, StyleSheet, Image } from 'react-native';
 
 import CONSTANTS from '../../utils/constants';
+import FbButton from '../../components/AuthButtons/FbButton/FbButton';
+
 import Logo from '../../assets/fazanLogo.png';
 import Title from '../../assets/fazanTitle.png';
 
@@ -39,6 +41,7 @@ class HomeScreen extends Component {
                         height={45}
                         onPress={this.navigateSearchGameScreen}>SEARCH GAME</Button>
                 </View>
+                <FbButton />
             </View>
         );
     }

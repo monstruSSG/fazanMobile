@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import com.fazanmobile.BuildConfig;
 import com.fazanmobile.R;
 
+// react-native-fbsdk
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 // react-native-vector-icons
@@ -50,6 +52,7 @@ public class PackageList {
   public ArrayList<ReactPackage> getPackages() {
     return new ArrayList<>(Arrays.<ReactPackage>asList(
       new MainReactPackage(),
+      new FBSDKPackage(),
       new RNGestureHandlerPackage(),
       new VectorIconsPackage()
     ));

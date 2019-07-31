@@ -6,7 +6,7 @@ import { AppRegistry } from 'react-native';
 import { Provider } from 'react-redux';
 
 import { name as appName } from './app.json';
-import configureStore from './src/store/configureStore';
+import configureStore from './src/store/configureStore'
 
 import Router from './src/screens/Router'
 

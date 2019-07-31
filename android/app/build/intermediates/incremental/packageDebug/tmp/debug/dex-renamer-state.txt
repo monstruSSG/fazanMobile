@@ -1,4 +1,4 @@
-#Wed Jul 31 07:28:34 EEST 2019
+#Wed Jul 31 08:59:20 EEST 2019
 base.0=/home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/build/intermediates/transforms/dexMerger/debug/0
 renamed.0=classes.dex
 path.0=classes.dex
