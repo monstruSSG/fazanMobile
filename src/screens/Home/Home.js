@@ -17,6 +17,7 @@ class HomeScreen extends Component {
     }
 
     navigateSingleplayerScreen = () => this.props.navigation.navigate('Singleplayer');
+    navigateAccountScreen = () => this.props.navigation.navigate('Account');
     navigateSearchGameScreen = () => this.props.navigation.navigate('SearchGame');
 
     render() {

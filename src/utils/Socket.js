@@ -6,7 +6,7 @@ class Socket extends Component {
 
     constructor(props) {
         super(props);
-        this.socket = SocketIOClient('http://192.168.43.228'); // replace 'environment.serverUrl' with your server url
+        this.socket = SocketIOClient('http://192.168.43.241'); // replace 'environment.serverUrl' with your server url
         //this.socket.emit('pingEvent', 'Hi server'); // emits 'hi server' to your server
 
         // Listens to channel2 and display the data recieved

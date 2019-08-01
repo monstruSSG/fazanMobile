@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { View, StyleSheet, Image, ScrollView, Button } from 'react-native';
 
 import CONSTANTS from '../../utils/constants';
 
@@ -40,16 +40,30 @@ class SingleplayerGameScreen extends Component {
                     <Image source={Hourglass} />
                 </View>
                 <View style={styles.oponentInput}>
-                    <Text>Current word: {this.state.words[this.state.words.length-1]}</Text>
+                    <Text>Current word: {this.state.words[this.state.words.length - 1]}</Text>
                 </View>
-                <View style={styles.previousWords}>
+                <ScrollView style={styles.previousWords}>
                     {this.state.words.map(word => <Text>{word}</Text>)}
-                </View>
+                </ScrollView>
                 <View style={styles.myInput}>
-                    <Text>Insert word:</Text>
-                    <Input value={this.state.word} onChangeText={word => this.onWordChangeHandler(word)} placeholder="Your word..."></Input>
+                    <View style={styles.myInputTitle}>
+                        <Text>Insert word:</Text>
+                    </View>
+                    <View style={styles.submitForm}>
+                        <Input
+                            value={this.state.word}
+                            onChangeText={word => this.onWordChangeHandler(word)}
+                            placeholder="Your word..."
+                            style={styles.textInput} />
+                        <Socket
+                            saveWord={word => this.saveWordHandler(word)}
+                            word={this.state.word}
+                            style={styles.submitButton} />
+                    </View>
+                    <View style={styles.giveUpButton}>
+                        <Button title="GIVE UP" />
+                    </View>
                 </View>
-                <Socket saveWord={word => this.saveWordHandler(word)} word={this.state.word}/>
             </View>
         );
     }
@@ -69,14 +83,31 @@ const styles = StyleSheet.create({
     },
     previousWords: {
         flex: 1,
-        justifyContent: "center",
-        height: "75%"
+        height: "75%",
     },
     myInput: {
-        height: "25%",
+        flex: 1,
         width: "100%",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+    },
+    submitForm: {
+        flex: 1,
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    textInput: {
+        paddingRight: 6
+    },
+    submitButton: {
+
+    },
+    myInputTitle: {
+        flex: 1,
+        justifyContent: "flex-end"
+    },
+    giveUpButton: {
+        flex: 1
     }
 });
 

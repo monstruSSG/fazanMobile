@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
+            "outputFile": "/home/silviu/Documente/Pixelatus/fazanMobile/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
             "map": [
                 {
-                    "source": "/home/bogdi/.gradle/caches/transforms-2/files-2.1/3e7f50258c6fc296e7a406c5938d8f71/res/values-v24/values-v24.xml",
+                    "source": "/root/.gradle/caches/transforms-2/files-2.1/00bd22ab9e7a3fe83949d8989dfd8fbf/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/home/bogdi/.gradle/caches/transforms-2/files-2.1/c84d6df1ed5b3e747e68d53bba78c11f/res/values-v24/values-v24.xml",
+                    "source": "/root/.gradle/caches/transforms-2/files-2.1/5d48d413748fa53220b2c24116fbd2f5/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",
