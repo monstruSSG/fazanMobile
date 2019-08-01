@@ -20,6 +20,19 @@ class SearchGameScreen extends Component {
 
     onPlayGameHandler = () => {
         this.socket = createConnection()
+        this.socket.on('reqConnectedUsers', { name: "Silviu123" })
+
+        this.socket.on('recConnectedUsers', data => {
+            if (data.users.length) this.socket.emit('invitationSent', { socketId: data.users[0] })
+        })
+
+        this.socket.on('invitationReceived', data => {
+            this.socket.emit('invitationAccepted', { socketId: data.socketId })
+        })
+
+        this.socket.on('startGame', data => {
+            alert("STARTED")
+        })
     }
 
     onExitGameHandler = () => {
