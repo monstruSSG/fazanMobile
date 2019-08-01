@@ -7,52 +7,52 @@ INJECTED from /home/silviu/Documente/Pixelatus/fazanMobile/android/app/src/main/
 MERGED from /home/silviu/Documente/Pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:1:1-30:12
 MERGED from [:react-native-fbsdk] /home/silviu/Documente/Pixelatus/fazanMobile/node_modules/react-native-fbsdk/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:21:1-30:12
 MERGED from [:react-native-vector-icons] /home/silviu/Documente/Pixelatus/fazanMobile/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
-MERGED from [com.facebook.react:react-native:0.60.4] /root/.gradle/caches/transforms-2/files-2.1/3e294895f9db7bfef286a539cb7c2b3d/AndroidManifest.xml:2:1-13:12
-MERGED from [org.webkit:android-jsc:r245459] /root/.gradle/caches/transforms-2/files-2.1/139b2eaf6205dc75159f7895160040bb/AndroidManifest.xml:2:1-11:12
+MERGED from [com.facebook.react:react-native:0.60.4] /home/silviu/.gradle/caches/transforms-2/files-2.1/f83ca5c8e7068b2b021b2eb8eff54668/AndroidManifest.xml:2:1-13:12
+MERGED from [org.webkit:android-jsc:r245459] /home/silviu/.gradle/caches/transforms-2/files-2.1/139b2eaf6205dc75159f7895160040bb/AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-gesture-handler] /home/silviu/Documente/Pixelatus/fazanMobile/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
-MERGED from [com.facebook.android:facebook-login:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/bbb52a603c1d45390e320b395d5cf757/AndroidManifest.xml:21:1-31:12
-MERGED from [com.facebook.android:facebook-share:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/cb61deb4acead5075f232a52046b3115/AndroidManifest.xml:21:1-31:12
-MERGED from [com.facebook.android:facebook-common:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/fd458849fd6d4e2a7325e6983a54788e/AndroidManifest.xml:21:1-37:12
-MERGED from [androidx.appcompat:appcompat:1.0.2] /root/.gradle/caches/transforms-2/files-2.1/00bd22ab9e7a3fe83949d8989dfd8fbf/AndroidManifest.xml:17:1-22:12
-MERGED from [com.facebook.fresco:fresco:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/ae5b335f2dfebdc3353e517e76f3505b/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/b386685f898a9a2460fd3d04de4cfb9d/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:drawee:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/53b193cdeae543e320f728c61ee370c9/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/4821a5f00d02948aec4fb03ae3ec0586/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/e7f55aff0abf104241454802b365f635/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/e304314dfe81c0caa0071e0728352373/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/0d65e04ad30ab1f0e920a4b1e6ddb8b0/AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.soloader:soloader:0.6.0] /root/.gradle/caches/transforms-2/files-2.1/e02184cdf7becbd3abb2783ca120c941/AndroidManifest.xml:2:1-13:12
-MERGED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:21:1-61:12
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/5d48725cc4382b3af19ab89ef694ba70/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.fragment:fragment:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/6a7a6177ee58f446450a7081917133d5/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/88cfe9f2d15bf00661b6fc6d22680816/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.browser:browser:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/3a32f5809674d8101e70b522e270869a/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/e8c2fb52d4af73d7ff23557bdd90c937/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/9390a8efa04a51a115e018dd676e74c7/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /root/.gradle/caches/transforms-2/files-2.1/8b5320b17e3869f8cb0dafba8e378391/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.loader:loader:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/e367c946a866769be42902db7847c337/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.viewpager:viewpager:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/0f54f42e74f6b406c2750e9b5dcc03ac/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/40ba666b9914f65cfbd15d9a3f3d6a9f/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/88ba6356d767465441e0a2240a7537c7/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/f53709c37125698cf61d9407d053054f/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.customview:customview:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/22fdc82563c4cb77349c7869bba334c5/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/1d1db341f5edb4ed1812a958a16b2160/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/6b8fb98efac3e185918c6a83c938da06/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.media:media:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/5d48d413748fa53220b2c24116fbd2f5/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.core:core:1.0.1] /root/.gradle/caches/transforms-2/files-2.1/3e63271533e2c6747d3e7658ecc5000e/AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/c30f9dc643d6fd573c73d78b154fdb2c/AndroidManifest.xml:17:1-25:12
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/46f98049a25ecc1ab83d5bd1370ae559/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/1237bd8bd96beaf7b0a243356f02c840/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.documentfile:documentfile:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/13542c14227a1c093b75a792f2f25c2c/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/b12dc25d709d7db9aab3781ee8a885a4/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.print:print:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/0a146abd0f3980266004a2fa827cd9be/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/a9e02eb964548fee85cf57be0ae3c5c7/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.cardview:cardview:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/8e298b048307f1e8d19b85e79789cc12/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/105c32e0fb64b94395d7977f0477b7a1/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/de81eaba7350099e565b7df5d641bb3d/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.arch.core:core-runtime:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/f206e66a5e02c918b52e83debafa91e5/AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.interpolator:interpolator:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/c8f0890f42419ed27054996875173e98/AndroidManifest.xml:17:1-22:12
-MERGED from [com.facebook.fresco:fbcore:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/923e556a0635f40b6688a0985dbdc0e2/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.android:facebook-login:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/debf53824da371e0e68cde9ade4a6791/AndroidManifest.xml:21:1-31:12
+MERGED from [com.facebook.android:facebook-share:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/f771d80e9d3c7aca1bde83aa1d0f555f/AndroidManifest.xml:21:1-31:12
+MERGED from [com.facebook.android:facebook-common:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ea38eaf8dd48193e996ce2ec30391ee3/AndroidManifest.xml:21:1-37:12
+MERGED from [androidx.appcompat:appcompat:1.0.2] /home/silviu/.gradle/caches/transforms-2/files-2.1/273cb20c2de65df74ec531657939b338/AndroidManifest.xml:17:1-22:12
+MERGED from [com.facebook.fresco:fresco:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/8e35ee0bbc456cf6c38d18d5ec69a126/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/19f772086d2d6ddcac59c652b5db5760/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:drawee:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/eeec88f61a4fe2351023cd9bac655e5f/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/521542cdfbae1740a214006edf30f57f/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4b1310eac429eef0839648f1dc4da1a2/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/53e96d832c68649fc1daf53c5431daf8/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ec2fc6102d50d663d2905c86f77cb44f/AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.soloader:soloader:0.6.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/9442acf5afa4bfaddc9f1956b8626af4/AndroidManifest.xml:2:1-13:12
+MERGED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:21:1-61:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/51f559c6daa91e7665720a880ae8df37/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.fragment:fragment:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/0aa1e7509e28bbec4ed3eedbe0287dfc/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/0277083905e58b1889f37f5647504f15/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.browser:browser:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/546f26e07cc361afa304ad96f6446200/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/932ba74d0754c40acf83341c6d329098/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/7dd77818eb12875be7221c2ad550e342/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /home/silviu/.gradle/caches/transforms-2/files-2.1/66c42fdda4bf6e6071c9057b4c4e76f9/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/020a1d33521dd74d3593c8d516490ff9/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4ee9c1514e69d31e40a5edbaf1a71f4a/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/a0082825bd2e60380e24c772571f0f57/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/77d72ef6b56bc051ec1b664cb8a6d3e2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ee01c6fd85fe202541bc20559ada8d63/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4d93e8e8912b92d73c67bb7ef124088b/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/d94b0d2da87e747e5d3806e05761443f/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/f5b86a9223abfa2dacd56716902e4bd2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media:media:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/934bbb014c5ae28b2fc17a09be4858df/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.0.1] /home/silviu/.gradle/caches/transforms-2/files-2.1/3e7041fa231a0337a8d49ba6f17a012e/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/7740e68727235bf9337e499e8a18d61f/AndroidManifest.xml:17:1-25:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4ea8bbe97c923569ff4f83eebee977ee/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/7135fe6b6ec61025b58f7ad21d3a48c9/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/5c9d08f5a8501925df64d3cc31bf85fd/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/cc232fd96a0549af85c1e1d3d776e3b1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/81717490e5a32dd2c53a0bdd4e5b0afd/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/871c8c4c77ee690515b201bbf68cfa9b/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cardview:cardview:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ae74a2ae50c89def3813544087e96dfc/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/eb80a51cbb6936f504369bd8420426a9/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/d3031fa3b79cc199caf1d61ba339b4eb/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/7c7f89e23df169478d4a73090e4641a5/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/11a1f362920c1ea6ba3d4fc5e6ad1896/AndroidManifest.xml:17:1-22:12
+MERGED from [com.facebook.fresco:fbcore:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4db69e6c47ae7b681ae804d0e2e5736f/AndroidManifest.xml:2:1-9:12
 INJECTED from /home/silviu/Documente/Pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml:2:1-8:12
 INJECTED from /home/silviu/Documente/Pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml:2:1-8:12
 INJECTED from /home/silviu/Documente/Pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml:2:1-8:12
@@ -83,26 +83,26 @@ MERGED from /home/silviu/Documente/Pixelatus/fazanMobile/android/app/src/main/An
 MERGED from /home/silviu/Documente/Pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:6:5-28:19
 MERGED from [:react-native-fbsdk] /home/silviu/Documente/Pixelatus/fazanMobile/node_modules/react-native-fbsdk/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:28:5-20
 MERGED from [:react-native-fbsdk] /home/silviu/Documente/Pixelatus/fazanMobile/node_modules/react-native-fbsdk/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:28:5-20
-MERGED from [com.facebook.react:react-native:0.60.4] /root/.gradle/caches/transforms-2/files-2.1/3e294895f9db7bfef286a539cb7c2b3d/AndroidManifest.xml:11:5-20
-MERGED from [com.facebook.react:react-native:0.60.4] /root/.gradle/caches/transforms-2/files-2.1/3e294895f9db7bfef286a539cb7c2b3d/AndroidManifest.xml:11:5-20
-MERGED from [com.facebook.android:facebook-login:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/bbb52a603c1d45390e320b395d5cf757/AndroidManifest.xml:28:5-29:19
-MERGED from [com.facebook.android:facebook-login:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/bbb52a603c1d45390e320b395d5cf757/AndroidManifest.xml:28:5-29:19
-MERGED from [com.facebook.android:facebook-share:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/cb61deb4acead5075f232a52046b3115/AndroidManifest.xml:28:5-29:19
-MERGED from [com.facebook.android:facebook-share:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/cb61deb4acead5075f232a52046b3115/AndroidManifest.xml:28:5-29:19
-MERGED from [com.facebook.android:facebook-common:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/fd458849fd6d4e2a7325e6983a54788e/AndroidManifest.xml:28:5-35:19
-MERGED from [com.facebook.android:facebook-common:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/fd458849fd6d4e2a7325e6983a54788e/AndroidManifest.xml:28:5-35:19
-MERGED from [com.facebook.soloader:soloader:0.6.0] /root/.gradle/caches/transforms-2/files-2.1/e02184cdf7becbd3abb2783ca120c941/AndroidManifest.xml:11:5-20
-MERGED from [com.facebook.soloader:soloader:0.6.0] /root/.gradle/caches/transforms-2/files-2.1/e02184cdf7becbd3abb2783ca120c941/AndroidManifest.xml:11:5-20
-MERGED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:28:5-59:19
-MERGED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:28:5-59:19
-MERGED from [androidx.core:core:1.0.1] /root/.gradle/caches/transforms-2/files-2.1/3e63271533e2c6747d3e7658ecc5000e/AndroidManifest.xml:22:5-89
-MERGED from [androidx.core:core:1.0.1] /root/.gradle/caches/transforms-2/files-2.1/3e63271533e2c6747d3e7658ecc5000e/AndroidManifest.xml:22:5-89
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/c30f9dc643d6fd573c73d78b154fdb2c/AndroidManifest.xml:22:5-23:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/c30f9dc643d6fd573c73d78b154fdb2c/AndroidManifest.xml:22:5-23:19
+MERGED from [com.facebook.react:react-native:0.60.4] /home/silviu/.gradle/caches/transforms-2/files-2.1/f83ca5c8e7068b2b021b2eb8eff54668/AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.react:react-native:0.60.4] /home/silviu/.gradle/caches/transforms-2/files-2.1/f83ca5c8e7068b2b021b2eb8eff54668/AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.android:facebook-login:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/debf53824da371e0e68cde9ade4a6791/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-login:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/debf53824da371e0e68cde9ade4a6791/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-share:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/f771d80e9d3c7aca1bde83aa1d0f555f/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-share:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/f771d80e9d3c7aca1bde83aa1d0f555f/AndroidManifest.xml:28:5-29:19
+MERGED from [com.facebook.android:facebook-common:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ea38eaf8dd48193e996ce2ec30391ee3/AndroidManifest.xml:28:5-35:19
+MERGED from [com.facebook.android:facebook-common:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ea38eaf8dd48193e996ce2ec30391ee3/AndroidManifest.xml:28:5-35:19
+MERGED from [com.facebook.soloader:soloader:0.6.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/9442acf5afa4bfaddc9f1956b8626af4/AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.soloader:soloader:0.6.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/9442acf5afa4bfaddc9f1956b8626af4/AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:28:5-59:19
+MERGED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:28:5-59:19
+MERGED from [androidx.core:core:1.0.1] /home/silviu/.gradle/caches/transforms-2/files-2.1/3e7041fa231a0337a8d49ba6f17a012e/AndroidManifest.xml:22:5-89
+MERGED from [androidx.core:core:1.0.1] /home/silviu/.gradle/caches/transforms-2/files-2.1/3e7041fa231a0337a8d49ba6f17a012e/AndroidManifest.xml:22:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/7740e68727235bf9337e499e8a18d61f/AndroidManifest.xml:22:5-23:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/7740e68727235bf9337e499e8a18d61f/AndroidManifest.xml:22:5-23:19
 	android:appComponentFactory
-		ADDED from [androidx.core:core:1.0.1] /root/.gradle/caches/transforms-2/files-2.1/3e63271533e2c6747d3e7658ecc5000e/AndroidManifest.xml:22:18-86
+		ADDED from [androidx.core:core:1.0.1] /home/silviu/.gradle/caches/transforms-2/files-2.1/3e7041fa231a0337a8d49ba6f17a012e/AndroidManifest.xml:22:18-86
 	android:supportsRtl
-		ADDED from [com.facebook.android:facebook-login:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/bbb52a603c1d45390e320b395d5cf757/AndroidManifest.xml:28:18-44
+		ADDED from [com.facebook.android:facebook-login:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/debf53824da371e0e68cde9ade4a6791/AndroidManifest.xml:28:18-44
 	android:label
 		ADDED from /home/silviu/Documente/Pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:8:7-39
 		ADDED from /home/silviu/Documente/Pixelatus/fazanMobile/android/app/src/main/AndroidManifest.xml:8:7-39
@@ -173,98 +173,98 @@ MERGED from [:react-native-fbsdk] /home/silviu/Documente/Pixelatus/fazanMobile/n
 MERGED from [:react-native-fbsdk] /home/silviu/Documente/Pixelatus/fazanMobile/node_modules/react-native-fbsdk/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:24:5-26:41
 MERGED from [:react-native-vector-icons] /home/silviu/Documente/Pixelatus/fazanMobile/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-vector-icons] /home/silviu/Documente/Pixelatus/fazanMobile/node_modules/react-native-vector-icons/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.60.4] /root/.gradle/caches/transforms-2/files-2.1/3e294895f9db7bfef286a539cb7c2b3d/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.60.4] /root/.gradle/caches/transforms-2/files-2.1/3e294895f9db7bfef286a539cb7c2b3d/AndroidManifest.xml:7:5-9:41
-MERGED from [org.webkit:android-jsc:r245459] /root/.gradle/caches/transforms-2/files-2.1/139b2eaf6205dc75159f7895160040bb/AndroidManifest.xml:7:5-9:41
-MERGED from [org.webkit:android-jsc:r245459] /root/.gradle/caches/transforms-2/files-2.1/139b2eaf6205dc75159f7895160040bb/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.60.4] /home/silviu/.gradle/caches/transforms-2/files-2.1/f83ca5c8e7068b2b021b2eb8eff54668/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.60.4] /home/silviu/.gradle/caches/transforms-2/files-2.1/f83ca5c8e7068b2b021b2eb8eff54668/AndroidManifest.xml:7:5-9:41
+MERGED from [org.webkit:android-jsc:r245459] /home/silviu/.gradle/caches/transforms-2/files-2.1/139b2eaf6205dc75159f7895160040bb/AndroidManifest.xml:7:5-9:41
+MERGED from [org.webkit:android-jsc:r245459] /home/silviu/.gradle/caches/transforms-2/files-2.1/139b2eaf6205dc75159f7895160040bb/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] /home/silviu/Documente/Pixelatus/fazanMobile/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] /home/silviu/Documente/Pixelatus/fazanMobile/node_modules/react-native-gesture-handler/android/build/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.android:facebook-login:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/bbb52a603c1d45390e320b395d5cf757/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-login:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/bbb52a603c1d45390e320b395d5cf757/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-share:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/cb61deb4acead5075f232a52046b3115/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-share:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/cb61deb4acead5075f232a52046b3115/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-common:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/fd458849fd6d4e2a7325e6983a54788e/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-common:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/fd458849fd6d4e2a7325e6983a54788e/AndroidManifest.xml:24:5-26:41
-MERGED from [androidx.appcompat:appcompat:1.0.2] /root/.gradle/caches/transforms-2/files-2.1/00bd22ab9e7a3fe83949d8989dfd8fbf/AndroidManifest.xml:20:5-44
-MERGED from [androidx.appcompat:appcompat:1.0.2] /root/.gradle/caches/transforms-2/files-2.1/00bd22ab9e7a3fe83949d8989dfd8fbf/AndroidManifest.xml:20:5-44
-MERGED from [com.facebook.fresco:fresco:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/ae5b335f2dfebdc3353e517e76f3505b/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fresco:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/ae5b335f2dfebdc3353e517e76f3505b/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/b386685f898a9a2460fd3d04de4cfb9d/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/b386685f898a9a2460fd3d04de4cfb9d/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/53b193cdeae543e320f728c61ee370c9/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/53b193cdeae543e320f728c61ee370c9/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/4821a5f00d02948aec4fb03ae3ec0586/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/4821a5f00d02948aec4fb03ae3ec0586/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/e7f55aff0abf104241454802b365f635/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/e7f55aff0abf104241454802b365f635/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/e304314dfe81c0caa0071e0728352373/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/e304314dfe81c0caa0071e0728352373/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/0d65e04ad30ab1f0e920a4b1e6ddb8b0/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/0d65e04ad30ab1f0e920a4b1e6ddb8b0/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.soloader:soloader:0.6.0] /root/.gradle/caches/transforms-2/files-2.1/e02184cdf7becbd3abb2783ca120c941/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.soloader:soloader:0.6.0] /root/.gradle/caches/transforms-2/files-2.1/e02184cdf7becbd3abb2783ca120c941/AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:24:5-26:41
-MERGED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:24:5-26:41
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/5d48725cc4382b3af19ab89ef694ba70/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/5d48725cc4382b3af19ab89ef694ba70/AndroidManifest.xml:20:5-44
-MERGED from [androidx.fragment:fragment:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/6a7a6177ee58f446450a7081917133d5/AndroidManifest.xml:20:5-44
-MERGED from [androidx.fragment:fragment:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/6a7a6177ee58f446450a7081917133d5/AndroidManifest.xml:20:5-44
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/88cfe9f2d15bf00661b6fc6d22680816/AndroidManifest.xml:20:5-44
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/88cfe9f2d15bf00661b6fc6d22680816/AndroidManifest.xml:20:5-44
-MERGED from [androidx.browser:browser:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/3a32f5809674d8101e70b522e270869a/AndroidManifest.xml:20:5-44
-MERGED from [androidx.browser:browser:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/3a32f5809674d8101e70b522e270869a/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/e8c2fb52d4af73d7ff23557bdd90c937/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/e8c2fb52d4af73d7ff23557bdd90c937/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/9390a8efa04a51a115e018dd676e74c7/AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/9390a8efa04a51a115e018dd676e74c7/AndroidManifest.xml:20:5-44
-MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /root/.gradle/caches/transforms-2/files-2.1/8b5320b17e3869f8cb0dafba8e378391/AndroidManifest.xml:20:5-44
-MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /root/.gradle/caches/transforms-2/files-2.1/8b5320b17e3869f8cb0dafba8e378391/AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/e367c946a866769be42902db7847c337/AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/e367c946a866769be42902db7847c337/AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/0f54f42e74f6b406c2750e9b5dcc03ac/AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/0f54f42e74f6b406c2750e9b5dcc03ac/AndroidManifest.xml:20:5-44
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/40ba666b9914f65cfbd15d9a3f3d6a9f/AndroidManifest.xml:20:5-44
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/40ba666b9914f65cfbd15d9a3f3d6a9f/AndroidManifest.xml:20:5-44
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/88ba6356d767465441e0a2240a7537c7/AndroidManifest.xml:20:5-44
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/88ba6356d767465441e0a2240a7537c7/AndroidManifest.xml:20:5-44
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/f53709c37125698cf61d9407d053054f/AndroidManifest.xml:20:5-44
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/f53709c37125698cf61d9407d053054f/AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/22fdc82563c4cb77349c7869bba334c5/AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/22fdc82563c4cb77349c7869bba334c5/AndroidManifest.xml:20:5-44
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/1d1db341f5edb4ed1812a958a16b2160/AndroidManifest.xml:20:5-44
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/1d1db341f5edb4ed1812a958a16b2160/AndroidManifest.xml:20:5-44
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/6b8fb98efac3e185918c6a83c938da06/AndroidManifest.xml:20:5-44
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/6b8fb98efac3e185918c6a83c938da06/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media:media:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/5d48d413748fa53220b2c24116fbd2f5/AndroidManifest.xml:20:5-44
-MERGED from [androidx.media:media:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/5d48d413748fa53220b2c24116fbd2f5/AndroidManifest.xml:20:5-44
-MERGED from [androidx.core:core:1.0.1] /root/.gradle/caches/transforms-2/files-2.1/3e63271533e2c6747d3e7658ecc5000e/AndroidManifest.xml:20:5-44
-MERGED from [androidx.core:core:1.0.1] /root/.gradle/caches/transforms-2/files-2.1/3e63271533e2c6747d3e7658ecc5000e/AndroidManifest.xml:20:5-44
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/c30f9dc643d6fd573c73d78b154fdb2c/AndroidManifest.xml:20:5-44
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/c30f9dc643d6fd573c73d78b154fdb2c/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/46f98049a25ecc1ab83d5bd1370ae559/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/46f98049a25ecc1ab83d5bd1370ae559/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/1237bd8bd96beaf7b0a243356f02c840/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/1237bd8bd96beaf7b0a243356f02c840/AndroidManifest.xml:20:5-44
-MERGED from [androidx.documentfile:documentfile:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/13542c14227a1c093b75a792f2f25c2c/AndroidManifest.xml:20:5-44
-MERGED from [androidx.documentfile:documentfile:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/13542c14227a1c093b75a792f2f25c2c/AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/b12dc25d709d7db9aab3781ee8a885a4/AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/b12dc25d709d7db9aab3781ee8a885a4/AndroidManifest.xml:20:5-44
-MERGED from [androidx.print:print:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/0a146abd0f3980266004a2fa827cd9be/AndroidManifest.xml:20:5-44
-MERGED from [androidx.print:print:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/0a146abd0f3980266004a2fa827cd9be/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/a9e02eb964548fee85cf57be0ae3c5c7/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/a9e02eb964548fee85cf57be0ae3c5c7/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cardview:cardview:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/8e298b048307f1e8d19b85e79789cc12/AndroidManifest.xml:20:5-44
-MERGED from [androidx.cardview:cardview:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/8e298b048307f1e8d19b85e79789cc12/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/105c32e0fb64b94395d7977f0477b7a1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/105c32e0fb64b94395d7977f0477b7a1/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/de81eaba7350099e565b7df5d641bb3d/AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/de81eaba7350099e565b7df5d641bb3d/AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/f206e66a5e02c918b52e83debafa91e5/AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/f206e66a5e02c918b52e83debafa91e5/AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/c8f0890f42419ed27054996875173e98/AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] /root/.gradle/caches/transforms-2/files-2.1/c8f0890f42419ed27054996875173e98/AndroidManifest.xml:20:5-44
-MERGED from [com.facebook.fresco:fbcore:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/923e556a0635f40b6688a0985dbdc0e2/AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fbcore:2.0.0] /root/.gradle/caches/transforms-2/files-2.1/923e556a0635f40b6688a0985dbdc0e2/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.android:facebook-login:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/debf53824da371e0e68cde9ade4a6791/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-login:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/debf53824da371e0e68cde9ade4a6791/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-share:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/f771d80e9d3c7aca1bde83aa1d0f555f/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-share:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/f771d80e9d3c7aca1bde83aa1d0f555f/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-common:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ea38eaf8dd48193e996ce2ec30391ee3/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-common:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ea38eaf8dd48193e996ce2ec30391ee3/AndroidManifest.xml:24:5-26:41
+MERGED from [androidx.appcompat:appcompat:1.0.2] /home/silviu/.gradle/caches/transforms-2/files-2.1/273cb20c2de65df74ec531657939b338/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.0.2] /home/silviu/.gradle/caches/transforms-2/files-2.1/273cb20c2de65df74ec531657939b338/AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.fresco:fresco:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/8e35ee0bbc456cf6c38d18d5ec69a126/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fresco:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/8e35ee0bbc456cf6c38d18d5ec69a126/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/19f772086d2d6ddcac59c652b5db5760/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/19f772086d2d6ddcac59c652b5db5760/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/eeec88f61a4fe2351023cd9bac655e5f/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/eeec88f61a4fe2351023cd9bac655e5f/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/521542cdfbae1740a214006edf30f57f/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/521542cdfbae1740a214006edf30f57f/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4b1310eac429eef0839648f1dc4da1a2/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4b1310eac429eef0839648f1dc4da1a2/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/53e96d832c68649fc1daf53c5431daf8/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/53e96d832c68649fc1daf53c5431daf8/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ec2fc6102d50d663d2905c86f77cb44f/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ec2fc6102d50d663d2905c86f77cb44f/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.soloader:soloader:0.6.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/9442acf5afa4bfaddc9f1956b8626af4/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.soloader:soloader:0.6.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/9442acf5afa4bfaddc9f1956b8626af4/AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:24:5-26:41
+MERGED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:24:5-26:41
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/51f559c6daa91e7665720a880ae8df37/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/51f559c6daa91e7665720a880ae8df37/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/0aa1e7509e28bbec4ed3eedbe0287dfc/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/0aa1e7509e28bbec4ed3eedbe0287dfc/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/0277083905e58b1889f37f5647504f15/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/0277083905e58b1889f37f5647504f15/AndroidManifest.xml:20:5-44
+MERGED from [androidx.browser:browser:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/546f26e07cc361afa304ad96f6446200/AndroidManifest.xml:20:5-44
+MERGED from [androidx.browser:browser:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/546f26e07cc361afa304ad96f6446200/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/932ba74d0754c40acf83341c6d329098/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/932ba74d0754c40acf83341c6d329098/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/7dd77818eb12875be7221c2ad550e342/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/7dd77818eb12875be7221c2ad550e342/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /home/silviu/.gradle/caches/transforms-2/files-2.1/66c42fdda4bf6e6071c9057b4c4e76f9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] /home/silviu/.gradle/caches/transforms-2/files-2.1/66c42fdda4bf6e6071c9057b4c4e76f9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/020a1d33521dd74d3593c8d516490ff9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/020a1d33521dd74d3593c8d516490ff9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4ee9c1514e69d31e40a5edbaf1a71f4a/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4ee9c1514e69d31e40a5edbaf1a71f4a/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/a0082825bd2e60380e24c772571f0f57/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/a0082825bd2e60380e24c772571f0f57/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/77d72ef6b56bc051ec1b664cb8a6d3e2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/77d72ef6b56bc051ec1b664cb8a6d3e2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ee01c6fd85fe202541bc20559ada8d63/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ee01c6fd85fe202541bc20559ada8d63/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4d93e8e8912b92d73c67bb7ef124088b/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4d93e8e8912b92d73c67bb7ef124088b/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/d94b0d2da87e747e5d3806e05761443f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/d94b0d2da87e747e5d3806e05761443f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/f5b86a9223abfa2dacd56716902e4bd2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/f5b86a9223abfa2dacd56716902e4bd2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/934bbb014c5ae28b2fc17a09be4858df/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/934bbb014c5ae28b2fc17a09be4858df/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.0.1] /home/silviu/.gradle/caches/transforms-2/files-2.1/3e7041fa231a0337a8d49ba6f17a012e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.0.1] /home/silviu/.gradle/caches/transforms-2/files-2.1/3e7041fa231a0337a8d49ba6f17a012e/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/7740e68727235bf9337e499e8a18d61f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/7740e68727235bf9337e499e8a18d61f/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4ea8bbe97c923569ff4f83eebee977ee/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4ea8bbe97c923569ff4f83eebee977ee/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/7135fe6b6ec61025b58f7ad21d3a48c9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/7135fe6b6ec61025b58f7ad21d3a48c9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/5c9d08f5a8501925df64d3cc31bf85fd/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/5c9d08f5a8501925df64d3cc31bf85fd/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/cc232fd96a0549af85c1e1d3d776e3b1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/cc232fd96a0549af85c1e1d3d776e3b1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/81717490e5a32dd2c53a0bdd4e5b0afd/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/81717490e5a32dd2c53a0bdd4e5b0afd/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/871c8c4c77ee690515b201bbf68cfa9b/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/871c8c4c77ee690515b201bbf68cfa9b/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ae74a2ae50c89def3813544087e96dfc/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ae74a2ae50c89def3813544087e96dfc/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/eb80a51cbb6936f504369bd8420426a9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/eb80a51cbb6936f504369bd8420426a9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/d3031fa3b79cc199caf1d61ba339b4eb/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/d3031fa3b79cc199caf1d61ba339b4eb/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/7c7f89e23df169478d4a73090e4641a5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/7c7f89e23df169478d4a73090e4641a5/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/11a1f362920c1ea6ba3d4fc5e6ad1896/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/11a1f362920c1ea6ba3d4fc5e6ad1896/AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.fresco:fbcore:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4db69e6c47ae7b681ae804d0e2e5736f/AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:2.0.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4db69e6c47ae7b681ae804d0e2e5736f/AndroidManifest.xml:5:5-7:41
 INJECTED from /home/silviu/Documente/Pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml
 INJECTED from /home/silviu/Documente/Pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml
 	android:targetSdkVersion
@@ -278,52 +278,52 @@ ADDED from /home/silviu/Documente/Pixelatus/fazanMobile/android/app/src/debug/An
 	android:name
 		ADDED from /home/silviu/Documente/Pixelatus/fazanMobile/android/app/src/debug/AndroidManifest.xml:5:22-75
 activity#com.facebook.FacebookActivity
-ADDED from [com.facebook.android:facebook-common:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/fd458849fd6d4e2a7325e6983a54788e/AndroidManifest.xml:29:9-32:66
+ADDED from [com.facebook.android:facebook-common:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ea38eaf8dd48193e996ce2ec30391ee3/AndroidManifest.xml:29:9-32:66
 	android:configChanges
-		ADDED from [com.facebook.android:facebook-common:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/fd458849fd6d4e2a7325e6983a54788e/AndroidManifest.xml:31:13-96
+		ADDED from [com.facebook.android:facebook-common:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ea38eaf8dd48193e996ce2ec30391ee3/AndroidManifest.xml:31:13-96
 	android:theme
-		ADDED from [com.facebook.android:facebook-common:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/fd458849fd6d4e2a7325e6983a54788e/AndroidManifest.xml:32:13-63
+		ADDED from [com.facebook.android:facebook-common:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ea38eaf8dd48193e996ce2ec30391ee3/AndroidManifest.xml:32:13-63
 	android:name
-		ADDED from [com.facebook.android:facebook-common:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/fd458849fd6d4e2a7325e6983a54788e/AndroidManifest.xml:30:13-57
+		ADDED from [com.facebook.android:facebook-common:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ea38eaf8dd48193e996ce2ec30391ee3/AndroidManifest.xml:30:13-57
 activity#com.facebook.CustomTabMainActivity
-ADDED from [com.facebook.android:facebook-common:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/fd458849fd6d4e2a7325e6983a54788e/AndroidManifest.xml:33:9-71
+ADDED from [com.facebook.android:facebook-common:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ea38eaf8dd48193e996ce2ec30391ee3/AndroidManifest.xml:33:9-71
 	android:name
-		ADDED from [com.facebook.android:facebook-common:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/fd458849fd6d4e2a7325e6983a54788e/AndroidManifest.xml:33:19-68
+		ADDED from [com.facebook.android:facebook-common:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ea38eaf8dd48193e996ce2ec30391ee3/AndroidManifest.xml:33:19-68
 activity#com.facebook.CustomTabActivity
-ADDED from [com.facebook.android:facebook-common:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/fd458849fd6d4e2a7325e6983a54788e/AndroidManifest.xml:34:9-67
+ADDED from [com.facebook.android:facebook-common:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ea38eaf8dd48193e996ce2ec30391ee3/AndroidManifest.xml:34:9-67
 	android:name
-		ADDED from [com.facebook.android:facebook-common:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/fd458849fd6d4e2a7325e6983a54788e/AndroidManifest.xml:34:19-64
+		ADDED from [com.facebook.android:facebook-common:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/ea38eaf8dd48193e996ce2ec30391ee3/AndroidManifest.xml:34:19-64
 provider#com.facebook.internal.FacebookInitProvider
-ADDED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:39:9-42:40
+ADDED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:39:9-42:40
 	android:authorities
-		ADDED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:41:13-72
+		ADDED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:41:13-72
 	android:exported
-		ADDED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:42:13-37
+		ADDED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:42:13-37
 	android:name
-		ADDED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:40:13-70
+		ADDED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:40:13-70
 receiver#com.facebook.CurrentAccessTokenExpirationBroadcastReceiver
-ADDED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:44:9-50:20
+ADDED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:44:9-50:20
 	android:exported
-		ADDED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:46:13-37
+		ADDED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:46:13-37
 	android:name
-		ADDED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:45:13-86
+		ADDED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:45:13-86
 intent-filter#action:name:com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED
-ADDED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:47:13-49:29
+ADDED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:47:13-49:29
 action#com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED
-ADDED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:48:17-95
+ADDED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:48:17-95
 	android:name
-		ADDED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:48:25-92
+		ADDED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:48:25-92
 receiver#com.facebook.CampaignTrackingReceiver
-ADDED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:51:9-58:20
+ADDED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:51:9-58:20
 	android:exported
-		ADDED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:53:13-36
+		ADDED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:53:13-36
 	android:permission
-		ADDED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:54:13-69
+		ADDED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:54:13-69
 	android:name
-		ADDED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:52:13-65
+		ADDED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:52:13-65
 intent-filter#action:name:com.android.vending.INSTALL_REFERRER
-ADDED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:55:13-57:29
+ADDED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:55:13-57:29
 action#com.android.vending.INSTALL_REFERRER
-ADDED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:56:17-79
+ADDED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:56:17-79
 	android:name
-		ADDED from [com.facebook.android:facebook-core:5.2.0] /root/.gradle/caches/transforms-2/files-2.1/857bc067d0d52f60ff66947ac8e1d955/AndroidManifest.xml:56:25-76
+		ADDED from [com.facebook.android:facebook-core:5.2.0] /home/silviu/.gradle/caches/transforms-2/files-2.1/4c5c3a4eb30f9ca03375436a02a379a5/AndroidManifest.xml:56:25-76
