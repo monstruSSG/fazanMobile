@@ -17,6 +17,8 @@ import com.fazanmobile.R;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+// react-native-sqlite-2
+import dog.craftz.sqlite_2.RNSqlite2Package;
 // react-native-vector-icons
 import com.oblador.vectoricons.VectorIconsPackage;
 
@@ -54,6 +56,7 @@ public class PackageList {
       new MainReactPackage(),
       new FBSDKPackage(),
       new RNGestureHandlerPackage(),
+      new RNSqlite2Package(),
       new VectorIconsPackage()
     ));
   }

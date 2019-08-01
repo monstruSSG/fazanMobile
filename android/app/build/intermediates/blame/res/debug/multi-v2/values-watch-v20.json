@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/home/silviu/Documente/Pixelatus/fazanMobile/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-watch-v20/values-watch-v20.xml",
+            "outputFile": "/home/bogdi/Desktop/pixelatus/fazan/fazanMobile/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-watch-v20/values-watch-v20.xml",
             "map": [
                 {
-                    "source": "/home/silviu/.gradle/caches/transforms-2/files-2.1/273cb20c2de65df74ec531657939b338/res/values-watch-v20/values-watch-v20.xml",
+                    "source": "/root/.gradle/caches/transforms-2/files-2.1/00bd22ab9e7a3fe83949d8989dfd8fbf/res/values-watch-v20/values-watch-v20.xml",
                     "from": {
                         "startLines": "2,5,8",
                         "startColumns": "4,4,4",

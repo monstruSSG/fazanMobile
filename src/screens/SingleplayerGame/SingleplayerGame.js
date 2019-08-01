@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, ScrollView, Button } from 'react-native';
+import SQL from 'react-native-sqlite-2';
 
 import CONSTANTS from '../../utils/constants';
 
@@ -18,6 +19,21 @@ class SingleplayerGameScreen extends Component {
         headerRight: (
             <Text>Score:</Text>
         )
+    }
+
+    componentDidMount() {
+        const dbMaster = SQL
+            .openDatabase({
+                name: "words",
+                readOnly: true,
+                createFromLocation: '../../utils/words.sqlite3'
+            })
+        
+        dbMaster.transaction(tx => {
+            tx.executeSql('SELECT * FROM words')
+        }, err => alert(err.message),
+        res => alert(res + 'RESULT'))
+        
     }
 
     state = {
