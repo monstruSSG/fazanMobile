@@ -3,13 +3,22 @@ import { View, StyleSheet, Image, ScrollView, Button } from 'react-native';
 import SQL from 'react-native-sqlite-storage';
 
 import CONSTANTS from '../../utils/constants';
+import { GET_WORDS } from '../../utils/querys';
 
 import Hourglass from '../../assets/glass.png';
 import Text from '../../components/UI/Text/Text';
-import Input from '../../components/UI/DefaultInput/DefaultInput'
-import Socket from '../../utils/Socket'
+import Input from '../../components/UI/DefaultInput/DefaultInput';
 
 class SingleplayerGameScreen extends Component {
+    static navigationOptions = {
+        title: 'Oponent name',
+        headerStyle: {
+            backgroundColor: '#7b5e20'
+        },
+        headerRight: (
+            <Text>Score:</Text>
+        )
+    }
 
     constructor(props) {
         super(props);
@@ -23,39 +32,57 @@ class SingleplayerGameScreen extends Component {
         this.state = {
             db,
             words: [],
-            currentWord: ''
+            word: ''
         }
     }
 
     dbErrHandler = err => { }
     dbSuccessHandler = () => { }
 
-    static navigationOptions = {
-        title: 'Oponent name',
-        headerStyle: {
-            backgroundColor: '#7b5e20'
-        },
-        headerRight: (
-            <Text>Score:</Text>
-        )
-    }
-    
+    checkWordExists = word => new Promise((resolve, reject) =>
+        db.transaction(tx =>
+            tx.executeSql(`${GET_WORDS} WHERE word=?`, [word], (tx, res) => resolve(res.rows),
+                err => reject(err.message)),
+            err => reject(err.message)))
+
+    checkWordExistsWithPrefix = word => new Promise((resolve, reject) =>
+        db.transaction(tx =>
+            tx.executeSql(`${GET_WORDS} WHERE word LIKE '${word.slice(-2)}%'`, [ ], (tx, res) => resolve(res.rows),
+                err => reject(err.message)),
+            err => reject(err.message)))
+
     componentWillUnmount() {
         const { db } = this.state;
+
+        db.close();
     }
 
+    insertWordHandler = () => {
+        let { word } = this.state;
+
+        return this.checkWordExists(word)
+            .then(words => {
+                if (words.length < 1) return alert('Cuvantul nu exista')
+
+                this.setState(prevState => ({
+                    word: prevState.word.slice(-2),
+                    words: prevState.words.concat(prevState.word)
+                }), Promise.resolve)
+            })
+            .then(() => this.checkWordExistsWithPrefix(this.state.word))
+            .then(words => {
+                if(words.lengt < 1) return alert('Ai fost inchis')
+            })
+            .catch(err => console.log(err))
+    }
 
     onWordChangeHandler = word => {
         this.setState({ word })
     }
 
-    saveWordHandler = word => {
-        this.setState(prevState => ({ words: prevState.words.concat(word), word: "" }))
-    }
-
     render() {
         return (
-            <View style={styles.singlePlayerContainer}>
+            <View style={styles.singlePlayerContainer} >
                 <View style={styles.hourglass}>
                     <Image source={Hourglass} />
                 </View>
@@ -73,8 +100,9 @@ class SingleplayerGameScreen extends Component {
                         <Input
                             value={this.state.word}
                             onChangeText={word => this.onWordChangeHandler(word)}
-                            placeholder="Your word..."
+                            placeholder='Introdu un cuvant...'
                             style={styles.textInput} />
+                        <Button style={styles.submitButton} title='SALVEAZA' onPress={this.insertWordHandler} />
                     </View>
                 </View>
             </View>
@@ -113,7 +141,7 @@ const styles = StyleSheet.create({
         paddingRight: 6
     },
     submitButton: {
-
+        flex: 1
     },
     myInputTitle: {
         flex: 1,
