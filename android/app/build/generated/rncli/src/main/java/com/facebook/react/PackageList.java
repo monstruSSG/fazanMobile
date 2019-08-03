@@ -15,10 +15,12 @@ import com.fazanmobile.R;
 
 // react-native-fbsdk
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
+// react-native-fs
+import com.rnfs.RNFSPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
-// react-native-sqlite-2
-import dog.craftz.sqlite_2.RNSqlite2Package;
+// react-native-sqlite-storage
+import org.pgsqlite.SQLitePluginPackage;
 // react-native-vector-icons
 import com.oblador.vectoricons.VectorIconsPackage;
 
@@ -55,8 +57,9 @@ public class PackageList {
     return new ArrayList<>(Arrays.<ReactPackage>asList(
       new MainReactPackage(),
       new FBSDKPackage(),
+      new RNFSPackage(),
       new RNGestureHandlerPackage(),
-      new RNSqlite2Package(),
+      new SQLitePluginPackage(),
       new VectorIconsPackage()
     ));
   }

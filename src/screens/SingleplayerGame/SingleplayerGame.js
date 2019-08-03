@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, ScrollView, Button } from 'react-native';
-import SQL from 'react-native-sqlite-2';
+import SQL from 'react-native-sqlite-storage';
 
 import CONSTANTS from '../../utils/constants';
 
@@ -11,6 +11,25 @@ import Socket from '../../utils/Socket'
 
 class SingleplayerGameScreen extends Component {
 
+    constructor(props) {
+        super(props);
+
+        db = SQL.openDatabase({
+            name: 'fazanWords.db',
+            readOnly: true,
+            createFromLocation: 1
+        }, this.dbSuccessHandler, this.dbErrHandler)
+
+        this.state = {
+            db,
+            words: [],
+            currentWord: ''
+        }
+    }
+
+    dbErrHandler = err => { }
+    dbSuccessHandler = () => { }
+
     static navigationOptions = {
         title: 'Oponent name',
         headerStyle: {
@@ -20,26 +39,11 @@ class SingleplayerGameScreen extends Component {
             <Text>Score:</Text>
         )
     }
-
-    componentDidMount() {
-        const dbMaster = SQL
-            .openDatabase({
-                name: "words",
-                readOnly: true,
-                createFromLocation: '../../utils/words.sqlite3'
-            })
-        
-        dbMaster.transaction(tx => {
-            tx.executeSql('SELECT * FROM words')
-        }, err => alert(err.message),
-        res => alert(res + 'RESULT'))
-        
+    
+    componentWillUnmount() {
+        const { db } = this.state;
     }
 
-    state = {
-        word: "",
-        words: []
-    }
 
     onWordChangeHandler = word => {
         this.setState({ word })
@@ -71,13 +75,6 @@ class SingleplayerGameScreen extends Component {
                             onChangeText={word => this.onWordChangeHandler(word)}
                             placeholder="Your word..."
                             style={styles.textInput} />
-                        <Socket
-                            saveWord={word => this.saveWordHandler(word)}
-                            word={this.state.word}
-                            style={styles.submitButton} />
-                    </View>
-                    <View style={styles.giveUpButton}>
-                        <Button title="GIVE UP" />
                     </View>
                 </View>
             </View>
@@ -121,9 +118,6 @@ const styles = StyleSheet.create({
     myInputTitle: {
         flex: 1,
         justifyContent: "flex-end"
-    },
-    giveUpButton: {
-        flex: 1
     }
 });
 
