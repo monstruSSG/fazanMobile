@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ScrollView, Button } from 'react-native';
+import { View, StyleSheet, Image, ScrollView, Button, Modal } from 'react-native';
 import SQL from 'react-native-sqlite-storage';
 
 import CONSTANTS from '../../utils/constants';
@@ -32,12 +32,20 @@ class SingleplayerGameScreen extends Component {
         this.state = {
             db,
             words: [],
-            word: ''
+            word: '',
+            gameFinished: false
         }
     }
 
     dbErrHandler = err => { }
     dbSuccessHandler = () => { }
+
+    generateWord = word => new Promise((resolve, reject) => this.checkWordExistsWithPrefix(word)
+        .then(words => {
+            if (words.length > 0) return resolve(words.item(0))
+            return resolve('')
+        })
+        .then(reject))
 
     checkWordExists = word => new Promise((resolve, reject) =>
         db.transaction(tx =>
@@ -47,7 +55,7 @@ class SingleplayerGameScreen extends Component {
 
     checkWordExistsWithPrefix = word => new Promise((resolve, reject) =>
         db.transaction(tx =>
-            tx.executeSql(`${GET_WORDS} WHERE word LIKE '${word.slice(-2)}%'`, [ ], (tx, res) => resolve(res.rows),
+            tx.executeSql(`${GET_WORDS} WHERE word LIKE '${word.slice(-2)}%'`, [], (tx, res) => resolve(res.rows),
                 err => reject(err.message)),
             err => reject(err.message)))
 
@@ -62,16 +70,23 @@ class SingleplayerGameScreen extends Component {
 
         return this.checkWordExists(word)
             .then(words => {
-                if (words.length < 1) return alert('Cuvantul nu exista')
+                if (words.length < 1) return this.setState({ gameFinished: true })
+
+                return this.checkWordExistsWithPrefix(this.state.word)
+            })
+            .then(words => {
+                if (words.length < 1) return this.setState({ gameFinished: true })
+
+                return this.generateWord(this.state.word)
+            })
+            .then(nextWord => {
+
+                if (nextWord.word.length < 1) return this.setState({ gameFinished: true })
 
                 this.setState(prevState => ({
-                    word: prevState.word.slice(-2),
-                    words: prevState.words.concat(prevState.word)
-                }), Promise.resolve)
-            })
-            .then(() => this.checkWordExistsWithPrefix(this.state.word))
-            .then(words => {
-                if(words.lengt < 1) return alert('Ai fost inchis')
+                    word: nextWord.word.slice(-2),
+                    words: prevState.words.concat([prevState.word, nextWord.word])
+                }))
             })
             .catch(err => console.log(err))
     }
@@ -80,9 +95,18 @@ class SingleplayerGameScreen extends Component {
         this.setState({ word })
     }
 
+    newGame = () => this.setState({ words: [], word: '', gameFinished: false })
+
     render() {
         return (
             <View style={styles.singlePlayerContainer} >
+                <Modal
+                    animationType="slide"
+                    transparent={false}
+                    visible={this.state.gameFinished}
+                    onRequestClose={() => this.setState({ gameFinished: false })}>
+                        <Text> You Lost</Text>
+                    </Modal>
                 <View style={styles.hourglass}>
                     <Image source={Hourglass} />
                 </View>
