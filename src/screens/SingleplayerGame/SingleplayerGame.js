@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, ScrollView, Button, Modal } from 'react-native';
-import SQL from 'react-native-sqlite-storage';
+import { connect } from 'react-redux';
 
+import * as WORDS from '../../store/actions/words'
 import CONSTANTS from '../../utils/constants';
 import { GET_WORDS } from '../../utils/querys';
 
@@ -20,25 +21,16 @@ class SingleplayerGameScreen extends Component {
         )
     }
 
-    constructor(props) {
-        super(props);
-
-        db = SQL.openDatabase({
-            name: 'fazanWords.db',
-            readOnly: true,
-            createFromLocation: 1
-        }, this.dbSuccessHandler, this.dbErrHandler)
-
-        this.state = {
-            db,
-            words: [],
-            word: '',
-            gameFinished: false
-        }
+    state = {
+        db: null,
+        words: [],
+        word: '',
+        gameFinished: false
     }
 
-    dbErrHandler = err => { }
-    dbSuccessHandler = () => { }
+    componentDidMount() {
+        this.props.connectToDb()
+    }
 
     generateWord = word => new Promise((resolve, reject) => this.checkWordExistsWithPrefix(word)
         .then(words => {
@@ -105,8 +97,8 @@ class SingleplayerGameScreen extends Component {
                     transparent={false}
                     visible={this.state.gameFinished}
                     onRequestClose={() => this.setState({ gameFinished: false })}>
-                        <Text> You Lost</Text>
-                    </Modal>
+                    <Text> You Lost</Text>
+                </Modal>
                 <View style={styles.hourglass}>
                     <Image source={Hourglass} />
                 </View>
@@ -173,4 +165,16 @@ const styles = StyleSheet.create({
     }
 });
 
-export default SingleplayerGameScreen;
+const mapStateToProps = state => ({
+    db: state.db
+})
+
+const mapDispatchToProps = dispatch => ({
+    connectToDb: () => dispatch(WORDS.connectToDb()),
+    closeDbConnection: () => dispatch(WORDS.closeDbConnection())
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SingleplayerGameScreen);
