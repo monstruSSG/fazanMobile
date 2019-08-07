@@ -7,7 +7,6 @@ import * as SOCKET from '../../store/actions/socket'
 
 import Button from '../../components/UI/Button/Button'
 import Input from '../../components/UI/DefaultInput/DefaultInput'
-import { createConnection } from '../../utils/socketConnection';
 
 class SearchGameScreen extends Component {
 
@@ -18,22 +17,19 @@ class SearchGameScreen extends Component {
         },
     }
 
+    navigateMultiplayerScreen = () => this.props.navigation.navigate('Multiplayer');
+
     onPlayGameHandler = () => {
         this.props.createSocketConnection().then(socket => {
-            this.props.on('reqConnectedUsers', { name: "Silviu123" })
+            socket.on('reqConnectedUsers', { name: "Silviu123" })
+            socket.on('recConnectedUsers', data => {
+                if (data.users.length) this.socket.emit('invitationSent', { socketId: data.users[0] })
+            })
+            socket.on('invitationReceived', data => {
+                socket.emit('invitationAccepted', { socketId: data.socketId })
+                this.navigateMultiplayerScreen()
+            })
         })
-
-        // this.socket.on('recConnectedUsers', data => {
-        //     if (data.users.length) this.socket.emit('invitationSent', { socketId: data.users[0] })
-        // })
-
-        // this.socket.on('invitationReceived', data => {
-        //     this.socket.emit('invitationAccepted', { socketId: data.socketId })
-        // })
-
-        // this.socket.on('startGame', data => {
-            
-        // })
     }
 
     onExitGameHandler = () => {

@@ -11,6 +11,11 @@ const socketReducer = (state = initialState, action) => {
                 ...state,
                 socket: action.payload
             }
+        case CLOSE_CONNECTION:
+            return {
+                ...state,
+                socket: action.payload
+            }
         default:
             return state;
     }
