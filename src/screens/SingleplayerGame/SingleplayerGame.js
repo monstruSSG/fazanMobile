@@ -22,7 +22,6 @@ class SingleplayerGameScreen extends Component {
     }
 
     state = {
-        db: null,
         words: [],
         word: '',
         gameFinished: false
@@ -32,52 +31,37 @@ class SingleplayerGameScreen extends Component {
         this.props.connectToDb()
     }
 
-    generateWord = word => new Promise((resolve, reject) => this.checkWordExistsWithPrefix(word)
-        .then(words => {
-            if (words.length > 0) return resolve(words.item(0))
-            return resolve('')
-        })
-        .then(reject))
+    generateWord = word => this.props.generateWord(word.slice(-2))
 
-    checkWordExists = word => new Promise((resolve, reject) =>
-        db.transaction(tx =>
-            tx.executeSql(`${GET_WORDS} WHERE word=?`, [word], (tx, res) => resolve(res.rows),
-                err => reject(err.message)),
-            err => reject(err.message)))
+    checkWordExists = word => this.props.checkWordExists(word)
 
-    checkWordExistsWithPrefix = word => new Promise((resolve, reject) =>
-        db.transaction(tx =>
-            tx.executeSql(`${GET_WORDS} WHERE word LIKE '${word.slice(-2)}%'`, [], (tx, res) => resolve(res.rows),
-                err => reject(err.message)),
-            err => reject(err.message)))
+    checkWordExistsWithPrefix = word => this.props.checkWordExistsWithPrefix(word.slice(-2))
 
     componentWillUnmount() {
-        const { db } = this.state;
-
-        db.close();
+        this.props.closeDbConnection()
     }
 
     insertWordHandler = () => {
         let { word } = this.state;
 
         return this.checkWordExists(word)
-            .then(words => {
-                if (words.length < 1) return this.setState({ gameFinished: true })
+            .then(existsWord => {
+                if (!existsWord) return this.setState({ gameFinished: true })
 
                 return this.checkWordExistsWithPrefix(this.state.word)
             })
-            .then(words => {
-                if (words.length < 1) return this.setState({ gameFinished: true })
+            .then(existsWordWithPrefix => {
+                if (!existsWordWithPrefix) return this.setState({ gameFinished: true })
 
                 return this.generateWord(this.state.word)
             })
             .then(nextWord => {
-
-                if (nextWord.word.length < 1) return this.setState({ gameFinished: true })
+                console.log(nextWord, 'NEXT WORD')
+                if (nextWord.length < 1) return this.setState({ gameFinished: true })
 
                 this.setState(prevState => ({
-                    word: nextWord.word.slice(-2),
-                    words: prevState.words.concat([prevState.word, nextWord.word])
+                    word: nextWord.slice(-2),
+                    words: prevState.words.concat([prevState.word, nextWord])
                 }))
             })
             .catch(err => console.log(err))
@@ -166,12 +150,15 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-    db: state.db
+    db: state.words.db
 })
 
 const mapDispatchToProps = dispatch => ({
     connectToDb: () => dispatch(WORDS.connectToDb()),
-    closeDbConnection: () => dispatch(WORDS.closeDbConnection())
+    closeDbConnection: () => dispatch(WORDS.closeDbConnection()),
+    checkWordExists: word => dispatch(WORDS.checkWordExists(word)),
+    checkWordExistsWithPrefix: prefix => dispatch(WORDS.checkWordExistsWithPrefix(prefix)),
+    generateWord: prefix => dispatch(WORDS.generateWord(prefix))
 })
 
 export default connect(
