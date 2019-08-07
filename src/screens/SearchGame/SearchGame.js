@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, ScrollView, Text } from 'react-native';
+import { connect } from 'react-redux'
 
 import CONSTANTS from '../../utils/constants';
+import * as SOCKET from '../../store/actions/socket'
 
 import Button from '../../components/UI/Button/Button'
 import Input from '../../components/UI/DefaultInput/DefaultInput'
-import { createConnection } from '../../utils/socketConnection';
 
 class SearchGameScreen extends Component {
 
@@ -16,22 +17,18 @@ class SearchGameScreen extends Component {
         },
     }
 
-    socket = null
+    navigateMultiplayerScreen = () => this.props.navigation.navigate('Multiplayer');
 
     onPlayGameHandler = () => {
-        this.socket = createConnection()
-        this.socket.on('reqConnectedUsers', { name: "Silviu123" })
-
-        this.socket.on('recConnectedUsers', data => {
-            if (data.users.length) this.socket.emit('invitationSent', { socketId: data.users[0] })
-        })
-
-        this.socket.on('invitationReceived', data => {
-            this.socket.emit('invitationAccepted', { socketId: data.socketId })
-        })
-
-        this.socket.on('startGame', data => {
-            alert("STARTED")
+        this.props.createSocketConnection().then(socket => {
+            socket.on('reqConnectedUsers', { name: "Silviu123" })
+            socket.on('recConnectedUsers', data => {
+                if (data.users.length) this.socket.emit('invitationSent', { socketId: data.users[0] })
+            })
+            socket.on('invitationReceived', data => {
+                socket.emit('invitationAccepted', { socketId: data.socketId })
+                this.navigateMultiplayerScreen()
+            })
         })
     }
 
@@ -84,4 +81,16 @@ const styles = StyleSheet.create({
     }
 });
 
-export default SearchGameScreen;
+
+const mapStateToProps = state => ({
+    socket: state.socket
+});
+
+const mapDispatchToProps = dispatch => ({
+    createSocketConnection: () => dispatch(SOCKET.createSocketConnection())
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SearchGameScreen);
