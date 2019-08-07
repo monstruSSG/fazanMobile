@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import * as WORDS from '../../store/actions/words'
 import CONSTANTS from '../../utils/constants';
-import { GET_WORDS } from '../../utils/querys';
 
 import Hourglass from '../../assets/glass.png';
 import Text from '../../components/UI/Text/Text';
@@ -56,7 +55,6 @@ class SingleplayerGameScreen extends Component {
                 return this.generateWord(this.state.word)
             })
             .then(nextWord => {
-                console.log(nextWord, 'NEXT WORD')
                 if (nextWord.length < 1) return this.setState({ gameFinished: true })
 
                 this.setState(prevState => ({
@@ -64,7 +62,6 @@ class SingleplayerGameScreen extends Component {
                     words: prevState.words.concat([prevState.word, nextWord])
                 }))
             })
-            .catch(err => console.log(err))
     }
 
     onWordChangeHandler = word => {

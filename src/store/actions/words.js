@@ -2,10 +2,11 @@ import SQL from 'react-native-sqlite-storage';
 
 import { CONNECT_DB, CLOSE_DB } from './actionTypes';
 import { GET_WORDS } from '../../utils/querys';
+import CONSTANTS from '../../utils/constants';
 
 export const connectToDb = () => dispatch => new Promise((resolve, reject) => {
     let db = SQL.openDatabase({
-        name: 'fazanWords.db',
+        name: CONSTANTS.db.name,
         readOnly: true,
         createFromLocation: 1
     }, () => {
