@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, ScrollView, Text } from 'react-native';
+import { connect } from 'react-redux'
 
 import CONSTANTS from '../../utils/constants';
+import * as SOCKET from '../../store/actions/socket'
 
 import Button from '../../components/UI/Button/Button'
 import Input from '../../components/UI/DefaultInput/DefaultInput'
@@ -16,23 +18,22 @@ class SearchGameScreen extends Component {
         },
     }
 
-    socket = null
-
     onPlayGameHandler = () => {
-        this.socket = createConnection()
-        this.socket.on('reqConnectedUsers', { name: "Silviu123" })
-
-        this.socket.on('recConnectedUsers', data => {
-            if (data.users.length) this.socket.emit('invitationSent', { socketId: data.users[0] })
+        this.props.createSocketConnection().then(socket => {
+            this.props.on('reqConnectedUsers', { name: "Silviu123" })
         })
 
-        this.socket.on('invitationReceived', data => {
-            this.socket.emit('invitationAccepted', { socketId: data.socketId })
-        })
+        // this.socket.on('recConnectedUsers', data => {
+        //     if (data.users.length) this.socket.emit('invitationSent', { socketId: data.users[0] })
+        // })
 
-        this.socket.on('startGame', data => {
-            alert("STARTED")
-        })
+        // this.socket.on('invitationReceived', data => {
+        //     this.socket.emit('invitationAccepted', { socketId: data.socketId })
+        // })
+
+        // this.socket.on('startGame', data => {
+            
+        // })
     }
 
     onExitGameHandler = () => {
@@ -84,4 +85,16 @@ const styles = StyleSheet.create({
     }
 });
 
-export default SearchGameScreen;
+
+const mapStateToProps = state => ({
+    socket: state.socket
+});
+
+const mapDispatchToProps = dispatch => ({
+    createSocketConnection: () => dispatch(SOCKET.createSocketConnection())
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SearchGameScreen);

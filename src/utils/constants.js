@@ -4,6 +4,6 @@ export default {
     textColor: "#7b5e20",
 
     socket: {
-        socketURL: "http://192.168.43.241"
+        socketURL: "http://192.168.254.68"
     }
 };
