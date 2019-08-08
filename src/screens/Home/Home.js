@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
-import { View, Button, StyleSheet, Image } from 'react-native';
+import { View, Button, StyleSheet, Image, Text } from 'react-native';
 
 import CONSTANTS from '../../utils/constants';
+import MyButton from '../../components/UI/Button/Button'
 import FbButton from '../../components/AuthButtons/FbButton/FbButton';
 
-import Logo from '../../assets/fazanLogo.png';
+import Logo from '../../assets/image.png';
 import Title from '../../assets/fazanTitle.png';
 
 class HomeScreen extends Component {
     static navigationOptions = {
+<<<<<<< HEAD
         header: null
+=======
+        // title: 'Home',
+        header: null
+        // headerStyle: {
+        //     backgroundColor: '#b23a01'
+        // }
+>>>>>>> working at styling
     }
 
     navigateSingleplayerScreen = () => this.props.navigation.navigate('Singleplayer');
@@ -21,23 +30,19 @@ class HomeScreen extends Component {
         return (
             <View style={styles.homePage}>
                 <View style={styles.logoContainer}>
-                    <Image source={Logo} />
+                    <Image style={styles.log} source={Logo} />
                 </View>
-                <View style={styles.titleContainer}>
-                    <Image source={Title} />
-                </View>
-
                 <View style={styles.content}>
-                    <Button color={CONSTANTS.buttonColor}
-                        title="Singleplayer"
+                    <MyButton color={CONSTANTS.buttonColor}
+
                         width={250}
                         height={45}
-                        onPress={this.navigateSingleplayerScreen}>SINGLE PLAYER</Button>
-                    <Button color={CONSTANTS.buttonColor}
-                        title="Multiplayer"
+                        onPress={this.navigateSingleplayerScreen}>SINGLE PLAYER</MyButton>
+                    <MyButton color={CONSTANTS.buttonColor}
+
                         width={250}
                         height={45}
-                        onPress={this.navigateSearchGameScreen}>SEARCH GAME</Button>
+                        onPress={this.navigateSearchGameScreen}>SEARCH GAME</MyButton>
                 </View>
                 <FbButton />
                 <Button onPress={this.navigateProfileScreen} title="This will be an icon with an user profile" />
@@ -54,12 +59,21 @@ const styles = StyleSheet.create({
         backgroundColor: CONSTANTS.backgroundColor
     },
     logoContainer: {
-        position: "relative",
-        bottom: "15%"
+        flex: 1,
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center"
     },
-    titleContainer: {
-        position: "relative",
-        bottom: "15%"
+    log: {
+        width: "75%",
+        height: "100%",
+        resizeMode: 'stretch'
+    },
+    content: {
+        flex: 1,
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center"
     }
 });
 

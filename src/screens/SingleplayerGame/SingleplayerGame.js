@@ -102,10 +102,16 @@ class SingleplayerGameScreen extends Component {
             <View style={styles.singlePlayerContainer} >
                 <Modal
                     animationType="slide"
-                    transparent={false}
+                    transparent={true}
                     visible={this.state.gameFinished}
                     onRequestClose={() => this.setState({ gameFinished: false })}>
-                    <Text> You Lost</Text>
+                    <View style={styles.modalViewContainer}>
+                        <View style={styles.modalDetails}>
+                            <Text>LOSER</Text>
+                            <Button onPress={() => this.setState({ gameFinished: false })} title="EXIT"></Button>
+                            <Button onPress={this.newGame} title="Play again"></Button>
+                        </View>
+                    </View>
                 </Modal>
                 <TouchableWithoutFeedback onPress={this.startCurrentWordAnimation}>
                     <Animated.View
@@ -168,6 +174,25 @@ const styles = StyleSheet.create({
     },
     submitButton: {
         flex: 1
+<<<<<<< HEAD
+=======
+    },
+    myInputTitle: {
+        flex: 1,
+        justifyContent: "flex-end"
+    },
+    modalViewContainer: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+    },
+    modalDetails: {
+        height: "50%",
+        width: "75%",
+        backgroundColor: "red"
+>>>>>>> working at styling
     }
 });
 
