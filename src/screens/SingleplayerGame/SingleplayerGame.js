@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, ScrollView, Button, Modal } from 'react-native';
-import SQL from 'react-native-sqlite-storage';
+import { connect } from 'react-redux';
 
+import * as WORDS from '../../store/actions/words'
 import CONSTANTS from '../../utils/constants';
-import { GET_WORDS } from '../../utils/querys';
 
 import Hourglass from '../../assets/glass.png';
 import Text from '../../components/UI/Text/Text';
@@ -20,75 +20,48 @@ class SingleplayerGameScreen extends Component {
         )
     }
 
-    constructor(props) {
-        super(props);
-
-        db = SQL.openDatabase({
-            name: 'fazanWords.db',
-            readOnly: true,
-            createFromLocation: 1
-        }, this.dbSuccessHandler, this.dbErrHandler)
-
-        this.state = {
-            db,
-            words: [],
-            word: '',
-            gameFinished: false
-        }
+    state = {
+        words: [],
+        word: '',
+        gameFinished: false
     }
 
-    dbErrHandler = err => { }
-    dbSuccessHandler = () => { }
+    componentDidMount() {
+        this.props.connectToDb()
+    }
 
-    generateWord = word => new Promise((resolve, reject) => this.checkWordExistsWithPrefix(word)
-        .then(words => {
-            if (words.length > 0) return resolve(words.item(0))
-            return resolve('')
-        })
-        .then(reject))
+    generateWord = word => this.props.generateWord(word.slice(-2))
 
-    checkWordExists = word => new Promise((resolve, reject) =>
-        db.transaction(tx =>
-            tx.executeSql(`${GET_WORDS} WHERE word=?`, [word], (tx, res) => resolve(res.rows),
-                err => reject(err.message)),
-            err => reject(err.message)))
+    checkWordExists = word => this.props.checkWordExists(word)
 
-    checkWordExistsWithPrefix = word => new Promise((resolve, reject) =>
-        db.transaction(tx =>
-            tx.executeSql(`${GET_WORDS} WHERE word LIKE '${word.slice(-2)}%'`, [], (tx, res) => resolve(res.rows),
-                err => reject(err.message)),
-            err => reject(err.message)))
+    checkWordExistsWithPrefix = word => this.props.checkWordExistsWithPrefix(word.slice(-2))
 
     componentWillUnmount() {
-        const { db } = this.state;
-
-        db.close();
+        this.props.closeDbConnection()
     }
 
     insertWordHandler = () => {
         let { word } = this.state;
 
         return this.checkWordExists(word)
-            .then(words => {
-                if (words.length < 1) return this.setState({ gameFinished: true })
+            .then(existsWord => {
+                if (!existsWord) return this.setState({ gameFinished: true })
 
                 return this.checkWordExistsWithPrefix(this.state.word)
             })
-            .then(words => {
-                if (words.length < 1) return this.setState({ gameFinished: true })
+            .then(existsWordWithPrefix => {
+                if (!existsWordWithPrefix) return this.setState({ gameFinished: true })
 
                 return this.generateWord(this.state.word)
             })
             .then(nextWord => {
-
-                if (nextWord.word.length < 1) return this.setState({ gameFinished: true })
+                if (nextWord.length < 1) return this.setState({ gameFinished: true })
 
                 this.setState(prevState => ({
-                    word: nextWord.word.slice(-2),
-                    words: prevState.words.concat([prevState.word, nextWord.word])
+                    word: nextWord.slice(-2),
+                    words: prevState.words.concat([prevState.word, nextWord])
                 }))
             })
-            .catch(err => console.log(err))
     }
 
     onWordChangeHandler = word => {
@@ -105,8 +78,8 @@ class SingleplayerGameScreen extends Component {
                     transparent={false}
                     visible={this.state.gameFinished}
                     onRequestClose={() => this.setState({ gameFinished: false })}>
-                        <Text> You Lost</Text>
-                    </Modal>
+                    <Text> You Lost</Text>
+                </Modal>
                 <View style={styles.hourglass}>
                     <Image source={Hourglass} />
                 </View>
@@ -173,4 +146,19 @@ const styles = StyleSheet.create({
     }
 });
 
-export default SingleplayerGameScreen;
+const mapStateToProps = state => ({
+    db: state.words.db
+})
+
+const mapDispatchToProps = dispatch => ({
+    connectToDb: () => dispatch(WORDS.connectToDb()),
+    closeDbConnection: () => dispatch(WORDS.closeDbConnection()),
+    checkWordExists: word => dispatch(WORDS.checkWordExists(word)),
+    checkWordExistsWithPrefix: prefix => dispatch(WORDS.checkWordExistsWithPrefix(prefix)),
+    generateWord: prefix => dispatch(WORDS.generateWord(prefix))
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SingleplayerGameScreen);
