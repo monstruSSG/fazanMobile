@@ -1,29 +1,29 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ScrollView, Button, Modal } from 'react-native';
+import {
+    View, StyleSheet,
+    Image, ScrollView,
+    Button, Modal, Animated,
+    TouchableWithoutFeedback, Easing
+} from 'react-native';
 import { connect } from 'react-redux';
 
 import * as WORDS from '../../store/actions/words'
 import CONSTANTS from '../../utils/constants';
 
-import Hourglass from '../../assets/glass.png';
 import Text from '../../components/UI/Text/Text';
 import Input from '../../components/UI/DefaultInput/DefaultInput';
 
 class SingleplayerGameScreen extends Component {
     static navigationOptions = {
-        title: 'Oponent name',
-        headerStyle: {
-            backgroundColor: '#7b5e20'
-        },
-        headerRight: (
-            <Text>Score:</Text>
-        )
+        header: null
     }
 
     state = {
+        animation: new Animated.Value(1),
         usedWords: [],
         words: [],
         word: '',
+        lastWord: '',
         gameFinished: false
     }
 
@@ -64,7 +64,7 @@ class SingleplayerGameScreen extends Component {
                     usedWords: prevState.usedWords.concat([prevState.word, nextWord]),
                     word: nextWord.slice(-2),
                     words: prevState.words.concat([prevState.word, nextWord])
-                }))
+                }), () => this.startCurrentWordAnimation(word))
             })
     }
 
@@ -74,7 +74,30 @@ class SingleplayerGameScreen extends Component {
 
     newGame = () => this.setState({ words: [], word: '', gameFinished: false })
 
+    startCurrentWordAnimation = word => {
+        Animated.timing(this.state.animation, {
+            toValue: 0,
+            duration: 300,
+            useNativeDriver: true
+        }).start(() =>
+            this.setState({ lastWord: word }, () => {
+                Animated.timing(this.state.animation, {
+                    toValue: 1,
+                    duration: 300,
+                    useNativeDriver: true
+                }).start()
+            }))
+    }
+
     render() {
+        const animatedStyle = {
+            transform: [
+                {
+                    scaleX: this.state.animation
+                }
+            ]
+        }
+
         return (
             <View style={styles.singlePlayerContainer} >
                 <Modal
@@ -84,19 +107,16 @@ class SingleplayerGameScreen extends Component {
                     onRequestClose={() => this.setState({ gameFinished: false })}>
                     <Text> You Lost</Text>
                 </Modal>
-                <View style={styles.hourglass}>
-                    <Image source={Hourglass} />
-                </View>
-                <View style={styles.oponentInput}>
-                    <Text>Current word: {this.state.words[this.state.words.length - 1]}</Text>
-                </View>
+                <TouchableWithoutFeedback onPress={this.startCurrentWordAnimation}>
+                    <Animated.View
+                        style={[styles.oponentInput, animatedStyle]}>
+                        <Text style={styles.currentWord}>{this.state.lastWord}</Text>
+                    </Animated.View>
+                </TouchableWithoutFeedback>
                 <ScrollView style={styles.previousWords}>
                     {this.state.words.map(word => <Text>{word}</Text>)}
                 </ScrollView>
                 <View style={styles.myInput}>
-                    <View style={styles.myInputTitle}>
-                        <Text>Insert word:</Text>
-                    </View>
                     <View style={styles.submitForm}>
                         <Input
                             value={this.state.word}
@@ -118,6 +138,11 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     oponentInput: {
+        flex: 1,
+        width: '80%',
+        alignItems: 'center'
+    },
+    currentWord: {
     },
     hourglass: {
         height: "25%",
@@ -143,10 +168,6 @@ const styles = StyleSheet.create({
     },
     submitButton: {
         flex: 1
-    },
-    myInputTitle: {
-        flex: 1,
-        justifyContent: "flex-end"
     }
 });
 
