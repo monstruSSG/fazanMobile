@@ -21,6 +21,7 @@ class SingleplayerGameScreen extends Component {
     }
 
     state = {
+        usedWords: [],
         words: [],
         word: '',
         gameFinished: false
@@ -55,9 +56,11 @@ class SingleplayerGameScreen extends Component {
                 return this.generateWord(this.state.word)
             })
             .then(nextWord => {
+
                 if (nextWord.length < 1) return this.setState({ gameFinished: true })
 
                 this.setState(prevState => ({
+                    usedWords: prevState.usedWords.concat([prevState.word, nextWord]),
                     word: nextWord.slice(-2),
                     words: prevState.words.concat([prevState.word, nextWord])
                 }))
