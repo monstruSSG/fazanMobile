@@ -39,8 +39,9 @@ export const checkWordExistsWithPrefix = prefix => (dispatch, getState) =>
         return db.transaction(tx =>
             tx.executeSql(`${GET_WORDS} WHERE word LIKE '${prefix}%'`, [], (tx, res) => {
                 resolve(res.rows.length > 0)
+
             }),
-                err => reject(err.message),
+            err => reject(err.message),
             err => reject(err.message))
     })
 
@@ -51,9 +52,13 @@ export const generateWord = prefix => (dispatch, getState) =>
 
         return db.transaction(tx =>
             tx.executeSql(`${GET_WORDS} WHERE word LIKE '${prefix}%'`, [], (tx, res) => {
-                if(res.rows.length < 0) return resolve('')
+                let endOfInterval = res.rows.length;
 
-                return resolve(res.rows.item(0).word)
+                if (endOfInterval < 0) return resolve('')
+
+                let randomNumber = Math.floor(Math.random() * (endOfInterval + 1))
+
+                return resolve(res.rows.item(randomNumber).word)
             },
                 err => reject(err.message)),
             err => reject(err.message))
