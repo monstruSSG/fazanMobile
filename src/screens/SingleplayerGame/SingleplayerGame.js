@@ -58,6 +58,7 @@ class SingleplayerGameScreen extends Component {
             .then(nextWord => {
 
                 if (nextWord.length < 1) return this.setState({ gameFinished: true })
+                if (usedWords.includes(nextWord)) return this.setState({ gameFinished: true })
 
                 this.setState(prevState => ({
                     usedWords: prevState.usedWords.concat([prevState.word, nextWord]),
