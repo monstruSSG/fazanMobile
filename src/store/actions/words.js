@@ -46,12 +46,12 @@ export const checkWordExistsWithPrefix = prefix => (dispatch, getState) =>
     })
 
 //returns first words found with given prefix, emptyarray otherwise
-export const generateWord = prefix => (dispatch, getState) =>
+export const generateWord = word => (dispatch, getState) =>
     new Promise((resolve, reject) => {
         const { db } = getState().words;
 
         return db.transaction(tx =>
-            tx.executeSql(`${GET_WORDS} WHERE word LIKE '${prefix}%'`, [], (tx, res) => {
+            tx.executeSql(`${GET_WORDS} WHERE word LIKE '${word.slice(-2)}%'`, [], (tx, res) => {
                 let endOfInterval = res.rows.length;
 
                 if (endOfInterval < 0) return resolve('')

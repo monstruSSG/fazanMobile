@@ -31,7 +31,7 @@ class SingleplayerGameScreen extends Component {
         this.props.connectToDb()
     }
 
-    generateWord = (word, usedWords) => this.props.generateWord(word, usedWords)
+    generateWord = word => this.props.generateWord(word)
 
     checkWordExists = word => this.props.checkWordExists(word)
 
@@ -53,7 +53,7 @@ class SingleplayerGameScreen extends Component {
             .then(existsWordWithPrefix => {
                 if (!existsWordWithPrefix) return this.setState({ gameFinished: true })
 
-                return this.generateWord(word, usedWords)
+                return this.generateWord(word)
             })
             .then(nextWord => {
 
@@ -158,7 +158,7 @@ const mapDispatchToProps = dispatch => ({
     closeDbConnection: () => dispatch(WORDS.closeDbConnection()),
     checkWordExists: word => dispatch(WORDS.checkWordExists(word)),
     checkWordExistsWithPrefix: prefix => dispatch(WORDS.checkWordExistsWithPrefix(prefix)),
-    generateWord: (word, usedWords) => dispatch(WORDS.generateWord(word, usedWords))
+    generateWord: word => dispatch(WORDS.generateWord(word))
 })
 
 export default connect(
