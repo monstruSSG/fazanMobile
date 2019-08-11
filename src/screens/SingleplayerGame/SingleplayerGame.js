@@ -9,9 +9,10 @@ import { connect } from 'react-redux';
 
 import * as WORDS from '../../store/actions/words'
 import CONSTANTS from '../../utils/constants';
-
+import Logo from '../../assets/fazanLogo.png';
 import Text from '../../components/UI/Text/Text';
 import Input from '../../components/UI/DefaultInput/DefaultInput';
+import Timer from '../../components/Timer/Timer';
 
 class SingleplayerGameScreen extends Component {
     static navigationOptions = {
@@ -20,11 +21,16 @@ class SingleplayerGameScreen extends Component {
 
     state = {
         animation: new Animated.Value(1),
+        animationOpWord: new Animated.Value(0),
+        animationYourWord: new Animated.Value(0),
         usedWords: [],
         words: [],
         word: '',
         lastWord: '',
-        gameFinished: false
+        opLastWord: '',
+        yourLastWord: '',
+        gameFinished: false,
+        showTimer: true
     }
 
     componentDidMount() {
@@ -41,24 +47,40 @@ class SingleplayerGameScreen extends Component {
         this.props.closeDbConnection()
     }
 
+    onTimeExpiredHandler = time => {
+        if (time < 0) return this.setState({ gameFinished: true }, () => alert('Ai pierdut'))
+    }
+
     insertWordHandler = () => {
         let { word, usedWords } = this.state;
 
         return this.checkWordExists(word)
             .then(existsWord => {
-                if (!existsWord || usedWords.includes(word)) return this.setState({ gameFinished: true })
+                if (!existsWord || usedWords.includes(word)) return this.setState({ gameFinished: true }, () => alert('Ai pierdut'))
 
                 return this.checkWordExistsWithPrefix(word)
             })
             .then(existsWordWithPrefix => {
-                if (!existsWordWithPrefix) return this.setState({ gameFinished: true })
+                if (!existsWordWithPrefix) return this.setState({ gameFinished: true }, () => alert('Ai pierdut'))
 
-                return this.generateWord(word)
+                // Reset timer
+                this.resetTimer();
+
+                // Start animation for user inserted word
+                this.startYourWordAnimation(word);
+
+                return this.generateWord(word);
             })
             .then(nextWord => {
 
-                if (nextWord.length < 1) return this.setState({ gameFinished: true })
-                if (usedWords.includes(nextWord)) return this.setState({ gameFinished: true })
+                if (nextWord.length < 1) return this.setState({ gameFinished: true }, () => alert('Ai pierdut'))
+                if (usedWords.includes(nextWord)) return alert('Cuvantul a mai fost folosit')
+
+                // Reset timer
+                this.resetTimer();
+
+                // Start animation for AI generated word
+                this.startOpWordAnimation(nextWord);
 
                 this.setState(prevState => ({
                     usedWords: prevState.usedWords.concat([prevState.word, nextWord]),
@@ -77,17 +99,49 @@ class SingleplayerGameScreen extends Component {
     startCurrentWordAnimation = word => {
         Animated.timing(this.state.animation, {
             toValue: 0,
-            duration: 300,
-            useNativeDriver: true
+            duration: 200
         }).start(() =>
             this.setState({ lastWord: word }, () => {
                 Animated.timing(this.state.animation, {
                     toValue: 1,
-                    duration: 300,
-                    useNativeDriver: true
+                    duration: 200
                 }).start()
             }))
     }
+
+    startOpWordAnimation = word => {
+        Animated.timing(this.state.animationOpWord, {
+            toValue: 1,
+            duration: 300
+        }).start(() => this.setState({
+            opLastWord: word
+        }, () => Animated.timing(this.state.animationOpWord, {
+            toValue: 0,
+            duration: 500
+        }).start()))
+    }
+
+    startYourWordAnimation = word => {
+        Animated.timing(this.state.animationYourWord, {
+            toValue: 1,
+            duration: 500
+        }).start(() => {
+            this.setState({
+                yourLastWord: word
+            }, () => {
+                Animated.timing(this.state.animationYourWord, {
+                    toValue: 0,
+                    duration: 300
+                }).start()
+            })
+        })
+    }
+
+    resetTimer = () => this.setState({
+        showTimer: false
+    }, () => this.setState({
+        showTimer: true
+    }))
 
     render() {
         const animatedStyle = {
@@ -96,6 +150,20 @@ class SingleplayerGameScreen extends Component {
                     scaleX: this.state.animation
                 }
             ]
+        };
+
+        const yourWordAnimationStyle = {
+            left: this.state.animationYourWord.interpolate({
+                inputRange: [0, 1],
+                outputRange: ['-30%', '-100%']
+            })
+        }
+
+        const opWordAnimationStyle = {
+            right: this.state.animationOpWord.interpolate({
+                inputRange: [0, 1],
+                outputRange: ['-30%', '-100%']
+            })
         }
 
         return (
@@ -103,13 +171,18 @@ class SingleplayerGameScreen extends Component {
                 style={styles.singlePlayerContainer} >
                 <View style={styles.header}>
                     <View style={styles.cell}>
-                        <Text style={styles.center}>Exit game</Text>
                     </View>
                     <View style={styles.cell}>
-                        <Text style={styles.center}>Logo/Title</Text>
+                        <Image
+                            style={styles.logo}
+                            resizeMode='contain'
+                            source={Logo} />
                     </View>
                     <View style={styles.cell}>
-                        <Text style={styles.center}>Timer</Text>
+                        {!this.state.gameFinished && this.state.showTimer && <Timer
+                            count={5}
+                            onTimeExpired={this.onTimeExpiredHandler}
+                        />}
                     </View>
                 </View>
                 <Animated.View
@@ -117,12 +190,12 @@ class SingleplayerGameScreen extends Component {
                     <Text style={styles.currentWord}>{this.state.lastWord}</Text>
                 </Animated.View>
                 <View style={styles.lastWords}>
-                    <View style={styles.cell}>
-                        <Text style={styles.center}>My word</Text>
-                    </View>
-                    <View style={styles.cell}>
-                        <Text style={styles.center}>Oponent Word</Text>
-                    </View>
+                    <Animated.View style={[styles.cell, yourWordAnimationStyle]}>
+                        <Text style={styles.center}>{this.state.yourLastWord}</Text>
+                    </Animated.View>
+                    <Animated.View style={[styles.cell, opWordAnimationStyle]}>
+                        <Text style={styles.center}>{this.state.opLastWord}</Text>
+                    </Animated.View>
                 </View>
                 <View style={styles.myInput}>
                     <View style={styles.submitForm}>
@@ -145,13 +218,17 @@ const styles = StyleSheet.create({
         backgroundColor: CONSTANTS.backgroundColor,
         alignItems: "center",
     },
+    logo: {
+        width: '100%',
+        height: '100%'
+    },
     oponentInput: {
         height: '15%',
         width: '80%',
-        alignItems: 'center',
-        backgroundColor: 'yellow'
+        alignItems: 'center'
     },
     center: {
+        textAlign: 'left'
     },
     lastWords: {
         flex: 1,
@@ -161,20 +238,19 @@ const styles = StyleSheet.create({
     },
     header: {
         height: '15%',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        backgroundColor: CONSTANTS.buttonColor
     },
     cell: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'pink'
+        alignItems: 'center'
     },
     myInput: {
         flex: 1,
         width: "80%",
         alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: 'red'
+        justifyContent: "center"
     },
     submitForm: {
         flex: 1,
