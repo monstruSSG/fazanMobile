@@ -13,7 +13,7 @@ const defaultInput = props => (
 
 const styles = StyleSheet.create({
   input: {
-    width: "75%",
+    flex: 1,
     borderColor: CONSTANTS.textColor,
     borderWidth: 3,
     padding: 5,
