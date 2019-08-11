@@ -10,15 +10,7 @@ import Title from '../../assets/fazanTitle.png';
 
 class HomeScreen extends Component {
     static navigationOptions = {
-<<<<<<< HEAD
         header: null
-=======
-        // title: 'Home',
-        header: null
-        // headerStyle: {
-        //     backgroundColor: '#b23a01'
-        // }
->>>>>>> working at styling
     }
 
     navigateSingleplayerScreen = () => this.props.navigation.navigate('Singleplayer');

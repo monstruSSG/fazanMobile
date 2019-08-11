@@ -174,8 +174,6 @@ const styles = StyleSheet.create({
     },
     submitButton: {
         flex: 1
-<<<<<<< HEAD
-=======
     },
     myInputTitle: {
         flex: 1,
@@ -192,7 +190,6 @@ const styles = StyleSheet.create({
         height: "50%",
         width: "75%",
         backgroundColor: "red"
->>>>>>> working at styling
     }
 });
 
