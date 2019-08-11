@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-    View, StyleSheet,
+    View, KeyboardAvoidingView, StyleSheet,
     Image, ScrollView,
     Button, Modal, Animated,
     TouchableWithoutFeedback, Easing
@@ -99,34 +99,42 @@ class SingleplayerGameScreen extends Component {
         }
 
         return (
-            <View style={styles.singlePlayerContainer} >
-                <Modal
-                    animationType="slide"
-                    transparent={false}
-                    visible={this.state.gameFinished}
-                    onRequestClose={() => this.setState({ gameFinished: false })}>
-                    <Text> You Lost</Text>
-                </Modal>
-                <TouchableWithoutFeedback onPress={this.startCurrentWordAnimation}>
-                    <Animated.View
-                        style={[styles.oponentInput, animatedStyle]}>
-                        <Text style={styles.currentWord}>{this.state.lastWord}</Text>
-                    </Animated.View>
-                </TouchableWithoutFeedback>
-                <ScrollView style={styles.previousWords}>
-                    {this.state.words.map(word => <Text>{word}</Text>)}
-                </ScrollView>
+            <KeyboardAvoidingView
+                style={styles.singlePlayerContainer} >
+                <View style={styles.header}>
+                    <View style={styles.cell}>
+                        <Text style={styles.center}>Exit game</Text>
+                    </View>
+                    <View style={styles.cell}>
+                        <Text style={styles.center}>Logo/Title</Text>
+                    </View>
+                    <View style={styles.cell}>
+                        <Text style={styles.center}>Timer</Text>
+                    </View>
+                </View>
+                <Animated.View
+                    style={[styles.oponentInput, animatedStyle]}>
+                    <Text style={styles.currentWord}>{this.state.lastWord}</Text>
+                </Animated.View>
+                <View style={styles.lastWords}>
+                    <View style={styles.cell}>
+                        <Text style={styles.center}>My word</Text>
+                    </View>
+                    <View style={styles.cell}>
+                        <Text style={styles.center}>Oponent Word</Text>
+                    </View>
+                </View>
                 <View style={styles.myInput}>
                     <View style={styles.submitForm}>
                         <Input
                             value={this.state.word}
                             onChangeText={word => this.onWordChangeHandler(word)}
                             placeholder='Introdu un cuvant...'
-                            style={styles.textInput} />
-                        <Button style={styles.submitButton} title='SALVEAZA' onPress={this.insertWordHandler} />
+                        />
+                        <Button title='SALVEAZA' onPress={this.insertWordHandler} />
                     </View>
                 </View>
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 }
@@ -138,25 +146,35 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     oponentInput: {
-        flex: 1,
+        height: '15%',
         width: '80%',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: 'yellow'
+    },
+    center: {
+    },
+    lastWords: {
+        flex: 1,
+        width: '80%'
     },
     currentWord: {
     },
-    hourglass: {
-        height: "25%",
-        justifyContent: "center"
+    header: {
+        height: '15%',
+        flexDirection: 'row'
     },
-    previousWords: {
+    cell: {
         flex: 1,
-        height: "75%",
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'pink'
     },
     myInput: {
         flex: 1,
-        width: "100%",
+        width: "80%",
         alignItems: "center",
         justifyContent: "center",
+        backgroundColor: 'red'
     },
     submitForm: {
         flex: 1,
