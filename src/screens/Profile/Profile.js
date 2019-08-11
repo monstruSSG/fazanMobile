@@ -5,6 +5,7 @@ import Pie from 'react-native-pie';
 import Text from '../../components/UI/Text/Text';
 import CONSTANTS from '../../utils/constants';
 import Header from '../../components/Header/Header';
+import GameDetails from '../../components/GameDetails/GameDetails';
 
 class ProfileScreen extends Component {
     static navigationOptions = {
@@ -35,12 +36,18 @@ class ProfileScreen extends Component {
                 <View style={styles.lastGames}>
                     <FlatList
                         data={[
-                            {key: 'a', text: 'Ana are foarte multe mere'}, 
-                            {key: 'b', text:'Fain flatlistu,nu?'}
+                            { key: 'a', name: 'Silviu MSR', points: 12312 },
+                            { key: 'b', name: 'Comiati RUPTU', points: 200 },
+                            { key: 'c', name: 'Comiati RUPTU', points: 200 },
+                            { key: 'd', name: 'Cozloschi', points: 210 },
+                            { key: 'e', name: 'Rapperu xxx', points: 21200 },
+                            { key: 'f', name: 'Unknown', points: 9200 }
                         ]}
-                        renderItem={({item}) => <Text>{item.key}</Text>}
+                        renderItem={({ item }) => <GameDetails
+                            name={item.name}
+                            points={item.points}
+                        />}
                     />
-                    <Text>Ana are mere</Text>
                 </View>
             </View>
         );
@@ -55,24 +62,22 @@ const styles = StyleSheet.create({
     },
     lastGames: {
         flex: 1,
+        justifyContent: 'center',
         backgroundColor: 'red'
     },
     stats: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'yellow'
+        alignItems: 'center'
     },
     points: {
         flex: 1,
-        justifyContent: 'center',
-        backgroundColor: 'pink'
+        justifyContent: 'center'
     },
     textPointWrapper: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'white'
+        alignItems: 'center'
     },
     textPoint: {
         fontSize: 30,
@@ -81,8 +86,7 @@ const styles = StyleSheet.create({
     levelPointWrapper: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'blue'
+        alignItems: 'center'
     },
     levelPoint: {
         fontSize: 30,
@@ -91,8 +95,7 @@ const styles = StyleSheet.create({
     gamesData: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'center',
-        backgroundColor: 'green'
+        justifyContent: 'center'
     }
 
 });
