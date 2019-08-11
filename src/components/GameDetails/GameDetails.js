@@ -20,7 +20,7 @@ export default props => (
             </View>
         </View>
         <View style={styles.resultWrapper}>
-            <Icon name='rocket' size={30} />
+            <Icon name='facebook' size={30} />
         </View>
     </View>
 );
@@ -28,11 +28,9 @@ export default props => (
 const styles = StyleSheet.create({
     content: {
         flex: 1,
-        flexDirection: 'row',
-        backgroundColor: 'yellow'
+        flexDirection: 'row'
     },
     imageWrapper: {
-        backgroundColor: 'white'
     },
     oponentPointsWrapper: {
         flex: 1,
@@ -40,7 +38,6 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     resultWrapper: {
-        backgroundColor: 'grey'
     },
     image: {
         width: 30,

@@ -62,8 +62,7 @@ const styles = StyleSheet.create({
     },
     lastGames: {
         flex: 1,
-        justifyContent: 'center',
-        backgroundColor: 'red'
+        justifyContent: 'center'
     },
     stats: {
         flex: 1,
