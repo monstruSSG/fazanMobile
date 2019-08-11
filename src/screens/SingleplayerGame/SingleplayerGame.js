@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import {
     View, KeyboardAvoidingView, StyleSheet,
-    Image, ScrollView,
-    Button, Modal, Animated,
-    TouchableWithoutFeedback, Easing
+    Image, Button, Animated,
 } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -262,6 +260,22 @@ const styles = StyleSheet.create({
     },
     submitButton: {
         flex: 1
+    },
+    myInputTitle: {
+        flex: 1,
+        justifyContent: "flex-end"
+    },
+    modalViewContainer: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+    },
+    modalDetails: {
+        height: "50%",
+        width: "75%",
+        backgroundColor: "red"
     }
 });
 

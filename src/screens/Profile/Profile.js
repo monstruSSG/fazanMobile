@@ -9,14 +9,17 @@ import GameDetails from '../../components/GameDetails/GameDetails';
 
 class ProfileScreen extends Component {
     static navigationOptions = {
-        header: <Header 
-            title='Xulescu Andrei' 
-            navigate={() => alert('Navigate')}/>,
+        header: null,
     }
 
     render() {
         return (
             <View style={styles.content}>
+                <View style={styles.header}>
+                    <Header
+                        title='Xulescu Andrei'
+                        navigate={() => alert('Navigate')} />
+                </View>
                 <View style={styles.gamesData}>
                     <View style={styles.stats}>
                         <Pie
@@ -62,8 +65,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: CONSTANTS.backgroundColor
     },
-    lastGames: {
+    header: {
         flex: 1,
+    },
+    lastGames: {
+        flex: 4,
         justifyContent: 'center'
     },
     stats: {
@@ -94,7 +100,7 @@ const styles = StyleSheet.create({
         fontFamily: 'bold'
     },
     gamesData: {
-        flex: 1,
+        flex: 4,
         flexDirection: 'row',
         justifyContent: 'center'
     }

@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { View, Button, StyleSheet, Image } from 'react-native';
+import { View, Button, StyleSheet, Image, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import CONSTANTS from '../../utils/constants';
+import MyButton from '../../components/UI/Button/Button'
 import FbButton from '../../components/AuthButtons/FbButton/FbButton';
 
-import Logo from '../../assets/fazanLogo.png';
+import Logo from '../../assets/image.png';
 import Title from '../../assets/fazanTitle.png';
+
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -21,26 +24,25 @@ class HomeScreen extends Component {
         return (
             <View style={styles.homePage}>
                 <View style={styles.logoContainer}>
-                    <Image source={Logo} />
+                    <Image style={styles.log} source={Logo} />
                 </View>
-                <View style={styles.titleContainer}>
-                    <Image source={Title} />
-                </View>
-
                 <View style={styles.content}>
-                    <Button color={CONSTANTS.buttonColor}
-                        title="Singleplayer"
+                    <MyButton color={CONSTANTS.buttonColor}
+
                         width={250}
                         height={45}
-                        onPress={this.navigateSingleplayerScreen}>SINGLE PLAYER</Button>
-                    <Button color={CONSTANTS.buttonColor}
-                        title="Multiplayer"
+                        onPress={this.navigateSingleplayerScreen}>SINGLE PLAYER</MyButton>
+                    <MyButton color={CONSTANTS.buttonColor}
+
                         width={250}
                         height={45}
-                        onPress={this.navigateSearchGameScreen}>SEARCH GAME</Button>
+                        onPress={this.navigateSearchGameScreen}>SEARCH GAME</MyButton>
+
+                    <FbButton />
                 </View>
-                <FbButton />
-                <Button onPress={this.navigateProfileScreen} title="This will be an icon with an user profile" />
+                <View style={styles.details}>
+                    <Icon onPress={this.navigateProfileScreen} name="user" size={30} style={styles.userProfile} />
+                </View>
             </View>
         );
     }
@@ -49,17 +51,31 @@ class HomeScreen extends Component {
 const styles = StyleSheet.create({
     homePage: {
         flex: 1,
-        alignItems: "center",
+        //alignItems: "center",
         justifyContent: "center",
         backgroundColor: CONSTANTS.backgroundColor
     },
     logoContainer: {
-        position: "relative",
-        bottom: "15%"
+        flex: 3,
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center",
     },
-    titleContainer: {
-        position: "relative",
-        bottom: "15%"
+    log: {
+        width: "75%",
+        height: "100%",
+        resizeMode: 'stretch'
+    },
+    content: {
+        flex: 5,
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    details: {
+        alignItems: 'flex-end',
+        paddingRight: 12,
+        paddingBottom: 12
     }
 });
 
