@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Button, StyleSheet, Image, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import CONSTANTS from '../../utils/constants';
 import MyButton from '../../components/UI/Button/Button'
@@ -7,6 +8,7 @@ import FbButton from '../../components/AuthButtons/FbButton/FbButton';
 
 import Logo from '../../assets/image.png';
 import Title from '../../assets/fazanTitle.png';
+
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -35,9 +37,12 @@ class HomeScreen extends Component {
                         width={250}
                         height={45}
                         onPress={this.navigateSearchGameScreen}>SEARCH GAME</MyButton>
+
+                    <FbButton />
                 </View>
-                <FbButton />
-                <Button onPress={this.navigateProfileScreen} title="This will be an icon with an user profile" />
+                <View style={styles.details}>
+                    <Icon onPress={this.navigateProfileScreen} name="user" size={30} style={styles.userProfile} />
+                </View>
             </View>
         );
     }
@@ -46,15 +51,15 @@ class HomeScreen extends Component {
 const styles = StyleSheet.create({
     homePage: {
         flex: 1,
-        alignItems: "center",
+        //alignItems: "center",
         justifyContent: "center",
         backgroundColor: CONSTANTS.backgroundColor
     },
     logoContainer: {
-        flex: 1,
+        flex: 3,
         width: "100%",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
     },
     log: {
         width: "75%",
@@ -62,10 +67,15 @@ const styles = StyleSheet.create({
         resizeMode: 'stretch'
     },
     content: {
-        flex: 1,
+        flex: 5,
         width: "100%",
         justifyContent: "center",
-        alignItems: "center"
+        alignItems: "center",
+    },
+    details: {
+        alignItems: 'flex-end',
+        paddingRight: 12,
+        paddingBottom: 12
     }
 });
 
