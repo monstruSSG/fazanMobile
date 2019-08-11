@@ -10,6 +10,10 @@ import LoginModal from '../../components/Modals/LoginModal';
 import CONSTANTS from '../../utils/constants';
 
 class AccountScreen extends Component {
+    static navigationOptions = {
+        header: null
+    }
+
     state = {
         loginOption: false,
         registerOption: false

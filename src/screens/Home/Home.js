@@ -8,17 +8,14 @@ import Logo from '../../assets/fazanLogo.png';
 import Title from '../../assets/fazanTitle.png';
 
 class HomeScreen extends Component {
-    //Example on how to style React-navigation-topbar
     static navigationOptions = {
-        title: 'Home',
-        headerStyle: {
-            backgroundColor: '#7b5e20'
-        }
+        header: null
     }
 
     navigateSingleplayerScreen = () => this.props.navigation.navigate('Singleplayer');
     navigateAccountScreen = () => this.props.navigation.navigate('Account');
     navigateSearchGameScreen = () => this.props.navigation.navigate('SearchGame');
+    navigateProfileScreen = () => this.props.navigation.navigate('Profile');
 
     render() {
         return (
@@ -43,6 +40,7 @@ class HomeScreen extends Component {
                         onPress={this.navigateSearchGameScreen}>SEARCH GAME</Button>
                 </View>
                 <FbButton />
+                <Button onPress={this.navigateProfileScreen} title="This will be an icon with an user profile" />
             </View>
         );
     }
