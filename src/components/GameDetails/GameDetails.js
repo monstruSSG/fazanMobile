@@ -1,8 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import Logo from '../../assets/fazanLogo.png'
+import Logo from '../../assets/fazanLogo.png';
 
 export default props => (
     <View style={[styles.content, props.style]}>
@@ -20,7 +20,7 @@ export default props => (
             </View>
         </View>
         <View style={styles.resultWrapper}>
-            <Icon name='facebook' size={30} />
+            <Icon name='person' size={30} />
         </View>
     </View>
 );

@@ -9,7 +9,9 @@ import GameDetails from '../../components/GameDetails/GameDetails';
 
 class ProfileScreen extends Component {
     static navigationOptions = {
-        header: <Header title='My custom header' />,
+        header: <Header 
+            title='Xulescu Andrei' 
+            navigate={() => alert('Navigate')}/>,
     }
 
     render() {
