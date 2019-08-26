@@ -1,5 +1,5 @@
 export default {
-    backgroundColor: "#ECEFF1",
+    backgroundColor: "#33691E",
     buttonColor: "#4A154B",
     textColor: "#7b5e20",
     socket: {

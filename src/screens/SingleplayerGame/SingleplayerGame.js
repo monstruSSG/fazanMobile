@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
         width: "100%"
     },
     opLastWordContainer: {
-        backgroundColor: "#33691E",
+        backgroundColor: CONSTANTS.buttonColor,
         borderWidth: 2,
         borderRadius: 10,
         justifyContent: 'center',
