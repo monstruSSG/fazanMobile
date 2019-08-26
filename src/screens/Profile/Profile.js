@@ -12,13 +12,15 @@ class ProfileScreen extends Component {
         header: null,
     }
 
+    navigateHomeScreen = () => this.props.navigation.navigate('Home');
+
     render() {
         return (
             <View style={styles.content}>
                 <View style={styles.header}>
                     <Header
                         title='Xulescu Andrei'
-                        navigate={() => alert('Navigate')} />
+                        navigate={this.navigateHomeScreen} />
                 </View>
                 <View style={styles.gamesData}>
                     <View style={styles.stats}>
