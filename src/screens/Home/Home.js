@@ -41,7 +41,7 @@ class HomeScreen extends Component {
                     <FbButton />
                 </View>
                 <View style={styles.details}>
-                    <Icon onPress={this.navigateProfileScreen} name="user" size={30} style={styles.userProfile} />
+                    <Icon onPress={this.navigateProfileScreen} color={CONSTANTS.buttonColor} name="user" size={30} style={styles.userProfile} />
                 </View>
             </View>
         );

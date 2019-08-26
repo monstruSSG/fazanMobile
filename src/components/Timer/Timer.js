@@ -27,13 +27,19 @@ export default class Timer extends Component {
         const { count } = this.state;
 
         return (
-            <View>
-                <Text>{count}</Text>
+            <View style={styles.counterContainer}>
+                <Text style={styles.counter}>{count}</Text>
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-
+    counterContainer: {
+        padding: 10
+    },
+    counter: {
+        fontSize: 36,
+        fontWeight: 'bold'
+    }
 });

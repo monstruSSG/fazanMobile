@@ -26,8 +26,8 @@ class ProfileScreen extends Component {
                             radius={70}
                             innerRadius={30}
                             series={[60]}
-                            colors={['#f00']}
-                            backgroundColor='#61B329' />
+                            colors={[CONSTANTS.buttonColor]}
+                            backgroundColor='#33691E' />
                     </View>
                     <View style={styles.points}>
                         <View style={styles.textPointWrapper}>
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         backgroundColor: CONSTANTS.backgroundColor
     },
     header: {
-        flex: 1,
+        flex: 1
     },
     lastGames: {
         flex: 4,

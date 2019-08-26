@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
     View, KeyboardAvoidingView, StyleSheet,
-    Image, Button, Animated,
+    Image, Animated, Button
 } from 'react-native';
 import { connect } from 'react-redux';
 
@@ -46,7 +46,7 @@ class SingleplayerGameScreen extends Component {
     }
 
     onTimeExpiredHandler = time => {
-        if (time < 0) return this.setState({ gameFinished: true }, () => alert('Ai pierdut'))
+        if (time < 0) return this.setState({ gameFinished: true }, () => alert('Ai pierdut with word' + this.state.opLastWord))
     }
 
     insertWordHandler = () => {
@@ -54,12 +54,12 @@ class SingleplayerGameScreen extends Component {
 
         return this.checkWordExists(word)
             .then(existsWord => {
-                if (!existsWord || usedWords.includes(word)) return this.setState({ gameFinished: true }, () => alert('Ai pierdut'))
+                if (!existsWord || usedWords.includes(word)) return this.setState({ gameFinished: true }, () => alert('Ai pierdut with word' + this.state.opLastWord))
 
                 return this.checkWordExistsWithPrefix(word)
             })
             .then(existsWordWithPrefix => {
-                if (!existsWordWithPrefix) return this.setState({ gameFinished: true }, () => alert('Ai pierdut'))
+                if (!existsWordWithPrefix) return this.setState({ gameFinished: true }, () => alert('Ai pierdut with word' + this.state.opLastWord))
 
                 // Reset timer
                 this.resetTimer();
@@ -169,40 +169,39 @@ class SingleplayerGameScreen extends Component {
                 style={styles.singlePlayerContainer} >
                 <View style={styles.header}>
                     <View style={styles.cell}>
-                    </View>
-                    <View style={styles.cell}>
-                        <Image
-                            style={styles.logo}
-                            resizeMode='contain'
-                            source={Logo} />
+                        <Text>Silviu MSR</Text>
                     </View>
                     <View style={styles.cell}>
                         {!this.state.gameFinished && this.state.showTimer && <Timer
-                            count={5}
+                            count={20}
                             onTimeExpired={this.onTimeExpiredHandler}
                         />}
                     </View>
+                    <View style={styles.cell}>
+                        <Text>Bogdan Smecherul</Text>
+                    </View>
                 </View>
-                <Animated.View
-                    style={[styles.oponentInput, animatedStyle]}>
-                    <Text style={styles.currentWord}>{this.state.lastWord}</Text>
-                </Animated.View>
                 <View style={styles.lastWords}>
-                    <Animated.View style={[styles.cell, yourWordAnimationStyle]}>
-                        <Text style={styles.center}>{this.state.yourLastWord}</Text>
+                    <Animated.View
+                        style={[styles.oponentInput, styles.currentWordContainer, animatedStyle]}>
+                        <Text color="black" style={styles.currentWord}>Cuvantul curent este: {this.state.lastWord}</Text>
                     </Animated.View>
-                    <Animated.View style={[styles.cell, opWordAnimationStyle]}>
-                        <Text style={styles.center}>{this.state.opLastWord}</Text>
+                    <Animated.View style={[styles.yourLastWordContainer, yourWordAnimationStyle]}>
+                        <Text color="white" style={[styles.center, styles.yourLastWord]}>{this.state.yourLastWord}</Text>
+                    </Animated.View>
+                    <Animated.View style={[styles.opLastWordContainer, opWordAnimationStyle]}>
+                        <Text color="white" style={[styles.center, styles.opLastWord]}>{this.state.opLastWord}</Text>
                     </Animated.View>
                 </View>
                 <View style={styles.myInput}>
                     <View style={styles.submitForm}>
                         <Input
+                            style={styles.inputText}
                             value={this.state.word}
                             onChangeText={word => this.onWordChangeHandler(word)}
                             placeholder='Introdu un cuvant...'
                         />
-                        <Button title='SALVEAZA' onPress={this.insertWordHandler} />
+                        <Button style={styles.submitButton} onPress={this.insertWordHandler} color={CONSTANTS.buttonColor} title="TRIMITE">TRIMITE</Button>
                     </View>
                 </View>
             </KeyboardAvoidingView>
@@ -221,28 +220,67 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     oponentInput: {
-        height: '15%',
         width: '80%',
-        alignItems: 'center'
+        alignItems: 'center',
+        fontSize: 20,
+        color: CONSTANTS.buttonColor
     },
     center: {
         textAlign: 'left'
     },
+    yourLastWordContainer: {
+        backgroundColor: CONSTANTS.buttonColor,
+        borderWidth: 2,
+        borderRadius: 10,
+        marginBottom: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: "30%",
+        width: "100%"
+    },
+    opLastWordContainer: {
+        backgroundColor: "#33691E",
+        borderWidth: 2,
+        borderRadius: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: "30%",
+        width: "100%"
+    },
+    currentWordContainer: {
+        borderWidth: 2,
+        borderRadius: 10,
+        marginBottom: 10,
+        padding: 8,
+        justifyContent: "center",
+        alignItems: "center",
+        height: '30%',
+        width: "100%"
+    },
+    yourLastWord: {
+        fontSize: 20
+    },
+    opLastWord: {
+        fontSize: 20
+    },
     lastWords: {
         flex: 1,
-        width: '80%'
+        width: '80%',
+        alignItems: "center",
+        justifyContent: "flex-end"
     },
     currentWord: {
+        fontSize: 20
     },
     header: {
+        flex: 1,
         height: '15%',
-        flexDirection: 'row',
-        backgroundColor: CONSTANTS.buttonColor
+        flexDirection: 'row'
     },
     cell: {
         flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     myInput: {
         flex: 1,
@@ -250,16 +288,28 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center"
     },
+    inputText: {
+        borderColor: CONSTANTS.textColor,
+        borderWidth: 0,
+        padding: 0,
+        marginTop: 0,
+        marginBottom: 0,
+    },
     submitForm: {
-        flex: 1,
-        flexDirection: "row",
-        alignItems: "center",
+        borderWidth: 2,
+        borderRadius: 10,
+        flexDirection: 'row'
     },
     textInput: {
         paddingRight: 6
     },
     submitButton: {
-        flex: 1
+        padding: 0,
+        margin: 0,
+        marginBottom: 0,
+        marginTop: 0,
+        borderRadius: 0,
+        borderColor: "black"
     },
     myInputTitle: {
         flex: 1,
