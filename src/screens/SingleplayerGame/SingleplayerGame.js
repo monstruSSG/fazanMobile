@@ -184,7 +184,7 @@ class SingleplayerGameScreen extends Component {
                 <View style={styles.lastWords}>
                     <Animated.View
                         style={[styles.oponentInput, styles.currentWordContainer, animatedStyle]}>
-                        <Text color="black" style={styles.currentWord}>Cuvantul curent este: {this.state.lastWord}</Text>
+                        <Text color="black" style={styles.currentWord}>{this.state.lastWord}</Text>
                     </Animated.View>
                     <Animated.View style={[styles.yourLastWordContainer, yourWordAnimationStyle]}>
                         <Text color="white" style={[styles.center, styles.yourLastWord]}>{this.state.yourLastWord}</Text>
@@ -201,7 +201,7 @@ class SingleplayerGameScreen extends Component {
                             onChangeText={word => this.onWordChangeHandler(word)}
                             placeholder='Introdu un cuvant...'
                         />
-                        <Button style={styles.submitButton} onPress={this.insertWordHandler} color={CONSTANTS.buttonColor} title="TRIMITE">TRIMITE</Button>
+                        <Button style={styles.submitButton} onPress={this.insertWordHandler} color={CONSTANTS.buttonColor} title="TRIMITE" />
                     </View>
                 </View>
             </KeyboardAvoidingView>
@@ -239,7 +239,7 @@ const styles = StyleSheet.create({
         width: "100%"
     },
     opLastWordContainer: {
-        backgroundColor: CONSTANTS.buttonColor,
+        backgroundColor: CONSTANTS.secondaryColor,
         borderWidth: 2,
         borderRadius: 10,
         justifyContent: 'center',
@@ -255,7 +255,8 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         height: '30%',
-        width: "100%"
+        width: "100%",
+        backgroundColor: CONSTANTS.thirdColor
     },
     yourLastWord: {
         fontSize: 20

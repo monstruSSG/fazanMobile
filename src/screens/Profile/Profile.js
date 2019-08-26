@@ -27,7 +27,7 @@ class ProfileScreen extends Component {
                             innerRadius={30}
                             series={[60]}
                             colors={[CONSTANTS.buttonColor]}
-                            backgroundColor='#33691E' />
+                            backgroundColor={CONSTANTS.secondaryColor} />
                     </View>
                     <View style={styles.points}>
                         <View style={styles.textPointWrapper}>
