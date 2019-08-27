@@ -7,9 +7,12 @@ import { connect } from 'react-redux';
 
 import * as WORDS from '../../store/actions/words'
 import CONSTANTS from '../../utils/constants';
+import Logo from '../../assets/fazanLogo.png';
+import LoseTitle from '../../assets/loseTitle3.png';
 import Text from '../../components/UI/Text/Text';
 import Input from '../../components/UI/DefaultInput/DefaultInput';
 import Timer from '../../components/Timer/Timer';
+import LoseModal from '../../components/Modals/LoseModal';
 
 class SingleplayerGameScreen extends Component {
     static navigationOptions = {
@@ -27,17 +30,22 @@ class SingleplayerGameScreen extends Component {
         opLastWord: '',
         yourLastWord: '',
         gameFinished: false,
-        showTimer: true
+        showTimer: true,
+        loseModal: false
     }
 
     componentDidMount() {
         this.props.connectToDb()
-            .then(this.props.generateStartWord)
+            .then(this.generateStartWord)
             .then(startWord => this.setState({
                 lastWord: startWord,
                 word: startWord.slice(-2)
             }))
     }
+
+    generateStartWord = () => this.props.generateStartWord();
+
+    navigateHomeScreen = () => this.props.navigation.navigate('Home');
 
     generateWord = word => this.props.generateWord(word)
 
@@ -50,7 +58,7 @@ class SingleplayerGameScreen extends Component {
     }
 
     onTimeExpiredHandler = time => {
-        if (time < 0) return this.setState({ gameFinished: true }, () => alert('Ai pierdut with word' + this.state.opLastWord))
+        if (time < 0) return this.setState({ gameFinished: true, loseModal: true })
     }
 
     insertWordHandler = () => {
@@ -58,13 +66,13 @@ class SingleplayerGameScreen extends Component {
 
         return this.checkWordExists(word)
             .then(existsWord => {
-                if (!existsWord) return Promise.reject({ message: 'Cuvantul nu exista' })
-                if (usedWords.includes(word)) return Promise.reject({ message: 'Cuvantul a fost introdus deja' })
+                if (!existsWord) return Promise.reject({ message: 'WORD_NOT_EXISTS' });
+                if (usedWords.includes(word)) return Promise.reject({ message: 'WORD_ALREADY_USED' });
 
                 return this.checkWordExistsWithPrefix(word)
             })
             .then(existsWordWithPrefix => {
-                if (!existsWordWithPrefix) return this.setState({ gameFinished: true }, () => alert('Felicitari, ai castigat'))
+                if (!existsWordWithPrefix) return Promise.reject({ message: 'GAME_FINISHED_WIN' })
 
                 // Reset timer
                 this.resetTimer();
@@ -76,8 +84,8 @@ class SingleplayerGameScreen extends Component {
             })
             .then(nextWord => {
 
-                if (nextWord.length < 1) return this.setState({ gameFinished: true }, () => alert('Ai pierdut'))
-                if (usedWords.includes(nextWord)) return alert('Cuvantul a mai fost folosit')
+                if (nextWord.length < 1) return Promise.reject({ message: 'GAME_FINISHED_LOSE' })
+                if (usedWords.includes(nextWord)) return Promise.reject({ message: 'GAME_FINISHED_WIN' })
 
                 // Reset timer
                 this.resetTimer();
@@ -91,12 +99,25 @@ class SingleplayerGameScreen extends Component {
                     words: prevState.words.concat([prevState.word, nextWord])
                 }), () => this.startCurrentWordAnimation(word))
             })
-            .catch(err => console.log(err.message))
+            .catch(err => {
+                if (err.message === 'GAME_FINISHED_WIN') return alert('YOU WIN');
+                if (err.message === 'GAME_FINISHED_LOSE') return this.setState({ loseModal: true, gameFinished: true });
+            })
     }
 
     onWordChangeHandler = word => this.setState({ word })
 
-    newGame = () => this.setState({ words: [], word: '', gameFinished: false })
+    newGame = () => this.generateStartWord()
+        .then(firstWord => this.setState({
+            usedWords: [],
+            words: [],
+            word: firstWord.slice(-2),
+            lastWord: firstWord,
+            opLastWord: '',
+            yourLastWord: '',
+            gameFinished: false,
+            loseModal: false
+        }))
 
     startCurrentWordAnimation = word => {
         Animated.timing(this.state.animation, {
@@ -208,6 +229,13 @@ class SingleplayerGameScreen extends Component {
                         <Button style={styles.submitButton} onPress={this.insertWordHandler} color={CONSTANTS.buttonColor} title="TRIMITE" />
                     </View>
                 </View>
+                <LoseModal
+                    isVisible={this.state.loseModal}
+                    onClose={() => this.setState({ loseModal: false })}
+                    title={LoseTitle}
+                    playAgain={() => this.newGame()}
+                    exitGame={() => this.navigateHomeScreen()}
+                />
             </KeyboardAvoidingView>
         );
     }
@@ -331,6 +359,10 @@ const styles = StyleSheet.create({
         height: "50%",
         width: "75%",
         backgroundColor: "red"
+    },
+    loseModal: {
+        width: 50,
+        height: 50
     }
 });
 
