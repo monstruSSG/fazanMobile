@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 
 import * as WORDS from '../../store/actions/words'
 import CONSTANTS from '../../utils/constants';
-import Logo from '../../assets/fazanLogo.png';
 import Text from '../../components/UI/Text/Text';
 import Input from '../../components/UI/DefaultInput/DefaultInput';
 import Timer from '../../components/Timer/Timer';
@@ -33,6 +32,8 @@ class SingleplayerGameScreen extends Component {
 
     componentDidMount() {
         this.props.connectToDb()
+            .then(this.props.generateStartWord)
+            .then(startWord => this.setState({ lastWord: startWord, word: startWord.slice(-2) }))
     }
 
     generateWord = word => this.props.generateWord(word)
@@ -339,7 +340,8 @@ const mapDispatchToProps = dispatch => ({
     closeDbConnection: () => dispatch(WORDS.closeDbConnection()),
     checkWordExists: word => dispatch(WORDS.checkWordExists(word)),
     checkWordExistsWithPrefix: prefix => dispatch(WORDS.checkWordExistsWithPrefix(prefix)),
-    generateWord: word => dispatch(WORDS.generateWord(word))
+    generateWord: word => dispatch(WORDS.generateWord(word)),
+    generateStartWord: () => dispatch(WORDS.generateStartWord())
 })
 
 export default connect(
