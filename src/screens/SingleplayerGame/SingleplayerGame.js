@@ -33,7 +33,10 @@ class SingleplayerGameScreen extends Component {
     componentDidMount() {
         this.props.connectToDb()
             .then(this.props.generateStartWord)
-            .then(startWord => this.setState({ lastWord: startWord, word: startWord.slice(-2) }))
+            .then(startWord => this.setState({
+                lastWord: startWord,
+                word: startWord.slice(-2)
+            }))
     }
 
     generateWord = word => this.props.generateWord(word)
@@ -89,10 +92,8 @@ class SingleplayerGameScreen extends Component {
             })
     }
 
-    onWordChangeHandler = word => {
-        this.setState({ word })
-    }
-
+    onWordChangeHandler = word => this.setState({ word })
+    
     newGame = () => this.setState({ words: [], word: '', gameFinished: false })
 
     startCurrentWordAnimation = word => {

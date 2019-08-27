@@ -35,6 +35,8 @@ export const checkWordExists = word => (dispatch, getState) =>
     new Promise((resolve, reject) => {
         const { db } = getState().words;
 
+        word = word.toLowerCase();
+
         return db.transaction(tx =>
             tx.executeSql(`${GET_WORDS} WHERE word=?`, [word], (tx, res) => resolve((res.rows.length > 0)),
                 err => reject(err.message)),
@@ -47,6 +49,8 @@ export const checkWordExists = word => (dispatch, getState) =>
 export const checkWordExistsWithPrefix = prefix => (dispatch, getState) =>
     new Promise((resolve, reject) => {
         const { db } = getState().words;
+
+        prefix = prefix.toLowerCase();
 
         return db.transaction(tx =>
             tx.executeSql(`${GET_WORDS} WHERE word LIKE '${prefix}%'`, [], (tx, res) => {
@@ -61,6 +65,8 @@ export const checkWordExistsWithPrefix = prefix => (dispatch, getState) =>
 export const generateWord = word => (dispatch, getState) =>
     new Promise((resolve, reject) => {
         const { db } = getState().words;
+
+        word = word.toLowerCase();
 
         return db.transaction(tx =>
             tx.executeSql(`${GET_WORDS} WHERE word LIKE '${word.slice(-2)}%'`, [], (tx, res) => {
