@@ -8,9 +8,11 @@ import { connect } from 'react-redux';
 import * as WORDS from '../../store/actions/words'
 import CONSTANTS from '../../utils/constants';
 import Logo from '../../assets/fazanLogo.png';
+import LoseTitle from '../../assets/loseTitle3.png';
 import Text from '../../components/UI/Text/Text';
 import Input from '../../components/UI/DefaultInput/DefaultInput';
 import Timer from '../../components/Timer/Timer';
+import LoseModal from '../../components/Modals/LoseModal';
 
 class SingleplayerGameScreen extends Component {
     static navigationOptions = {
@@ -28,12 +30,15 @@ class SingleplayerGameScreen extends Component {
         opLastWord: '',
         yourLastWord: '',
         gameFinished: false,
-        showTimer: true
+        showTimer: true,
+        loseModal: false
     }
 
     componentDidMount() {
         this.props.connectToDb()
     }
+
+    navigateHomeScreen = () => this.props.navigation.navigate('Home');
 
     generateWord = word => this.props.generateWord(word)
 
@@ -46,7 +51,7 @@ class SingleplayerGameScreen extends Component {
     }
 
     onTimeExpiredHandler = time => {
-        if (time < 0) return this.setState({ gameFinished: true }, () => alert('Ai pierdut with word' + this.state.opLastWord))
+        if (time < 0) return this.setState({ gameFinished: true, loseModal: true })
     }
 
     insertWordHandler = () => {
@@ -54,12 +59,12 @@ class SingleplayerGameScreen extends Component {
 
         return this.checkWordExists(word)
             .then(existsWord => {
-                if (!existsWord || usedWords.includes(word)) return this.setState({ gameFinished: true }, () => alert('Ai pierdut with word' + this.state.opLastWord))
+                if (!existsWord || usedWords.includes(word)) return this.setState({ gameFinished: true, loseModal: true })
 
                 return this.checkWordExistsWithPrefix(word)
             })
             .then(existsWordWithPrefix => {
-                if (!existsWordWithPrefix) return this.setState({ gameFinished: true }, () => alert('Ai pierdut with word' + this.state.opLastWord))
+                if (!existsWordWithPrefix) return this.setState({ gameFinished: true, loseModal: true })
 
                 // Reset timer
                 this.resetTimer();
@@ -71,7 +76,7 @@ class SingleplayerGameScreen extends Component {
             })
             .then(nextWord => {
 
-                if (nextWord.length < 1) return this.setState({ gameFinished: true }, () => alert('Ai pierdut'))
+                if (nextWord.length < 1) return this.setState({ gameFinished: true, loseModal: true })
                 if (usedWords.includes(nextWord)) return alert('Cuvantul a mai fost folosit')
 
                 // Reset timer
@@ -92,7 +97,7 @@ class SingleplayerGameScreen extends Component {
         this.setState({ word })
     }
 
-    newGame = () => this.setState({ words: [], word: '', gameFinished: false })
+    newGame = () => this.setState({ words: [], word: '', gameFinished: false, loseModal: false })
 
     startCurrentWordAnimation = word => {
         Animated.timing(this.state.animation, {
@@ -204,6 +209,13 @@ class SingleplayerGameScreen extends Component {
                         <Button style={styles.submitButton} onPress={this.insertWordHandler} color={CONSTANTS.buttonColor} title="TRIMITE" />
                     </View>
                 </View>
+                <LoseModal
+                    isVisible={this.state.loseModal}
+                    onClose={() => this.setState({ loseModal: false })}
+                    title={LoseTitle}
+                    playAgain={() => this.newGame()}
+                    exitGame={() => this.navigateHomeScreen()}
+                />
             </KeyboardAvoidingView>
         );
     }
@@ -327,6 +339,10 @@ const styles = StyleSheet.create({
         height: "50%",
         width: "75%",
         backgroundColor: "red"
+    },
+    loseModal: {
+        width: 50,
+        height: 50
     }
 });
 
