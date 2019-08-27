@@ -12,13 +12,15 @@ class ProfileScreen extends Component {
         header: null,
     }
 
+    navigateHomeScreen = () => this.props.navigation.navigate('Home');
+
     render() {
         return (
             <View style={styles.content}>
                 <View style={styles.header}>
                     <Header
                         title='Xulescu Andrei'
-                        navigate={() => alert('Navigate')} />
+                        navigate={this.navigateHomeScreen} />
                 </View>
                 <View style={styles.gamesData}>
                     <View style={styles.stats}>
@@ -26,8 +28,8 @@ class ProfileScreen extends Component {
                             radius={70}
                             innerRadius={30}
                             series={[60]}
-                            colors={['#f00']}
-                            backgroundColor='#61B329' />
+                            colors={[CONSTANTS.buttonColor]}
+                            backgroundColor={CONSTANTS.secondaryColor} />
                     </View>
                     <View style={styles.points}>
                         <View style={styles.textPointWrapper}>
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
         backgroundColor: CONSTANTS.backgroundColor
     },
     header: {
-        flex: 1,
+        flex: 1
     },
     lastGames: {
         flex: 4,

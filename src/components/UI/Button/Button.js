@@ -5,13 +5,13 @@ import Text from '../Text/Text';
 
 const button = props => {
     const content = (
-        <View style={[styles.button, { backgroundColor: props.color, width: props.width, height: props.height }]}>
+        <View style={[styles.button, { backgroundColor: props.color, width: props.width, height: props.height }, props.style]}>
           <Text color="white">{props.children}</Text>
         </View>
       );
       if (Platform.OS === "android") {
         return (
-          <TouchableNativeFeedback style={[styles.button, { backgroundColor: props.color, width: props.width, height: props.height }]} onPress={props.onPress}>
+          <TouchableNativeFeedback style={[styles.button, { backgroundColor: props.color, width: props.width, height: props.height }, props.style]} onPress={props.onPress}>
             {content}
           </TouchableNativeFeedback>
         );
