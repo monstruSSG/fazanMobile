@@ -58,12 +58,13 @@ class SingleplayerGameScreen extends Component {
 
         return this.checkWordExists(word)
             .then(existsWord => {
-                if (!existsWord || usedWords.includes(word)) return this.setState({ gameFinished: true }, () => alert('Ai pierdut with word' + this.state.opLastWord))
+                if (!existsWord) return Promise.reject({ message: 'Cuvantul nu exista' })
+                if (usedWords.includes(word)) return Promise.reject({ message: 'Cuvantul a fost introdus deja' })
 
                 return this.checkWordExistsWithPrefix(word)
             })
             .then(existsWordWithPrefix => {
-                if (!existsWordWithPrefix) return this.setState({ gameFinished: true }, () => alert('Ai pierdut with word' + this.state.opLastWord))
+                if (!existsWordWithPrefix) return this.setState({ gameFinished: true }, () => alert('Felicitari, ai castigat'))
 
                 // Reset timer
                 this.resetTimer();
@@ -90,10 +91,11 @@ class SingleplayerGameScreen extends Component {
                     words: prevState.words.concat([prevState.word, nextWord])
                 }), () => this.startCurrentWordAnimation(word))
             })
+            .catch(err => console.log(err.message))
     }
 
     onWordChangeHandler = word => this.setState({ word })
-    
+
     newGame = () => this.setState({ words: [], word: '', gameFinished: false })
 
     startCurrentWordAnimation = word => {
