@@ -36,7 +36,14 @@ class SingleplayerGameScreen extends Component {
 
     componentDidMount() {
         this.props.connectToDb()
+            .then(this.generateStartWord)
+            .then(startWord => this.setState({
+                lastWord: startWord,
+                word: startWord.slice(-2)
+            }))
     }
+
+    generateStartWord = () => this.props.generateStartWord();
 
     navigateHomeScreen = () => this.props.navigation.navigate('Home');
 
@@ -59,12 +66,13 @@ class SingleplayerGameScreen extends Component {
 
         return this.checkWordExists(word)
             .then(existsWord => {
-                if (!existsWord || usedWords.includes(word)) return this.setState({ gameFinished: true, loseModal: true })
+                if (!existsWord) return Promise.reject({ message: 'WORD_NOT_EXISTS' });
+                if (usedWords.includes(word)) return Promise.reject({ message: 'WORD_ALREADY_USED' });
 
                 return this.checkWordExistsWithPrefix(word)
             })
             .then(existsWordWithPrefix => {
-                if (!existsWordWithPrefix) return this.setState({ gameFinished: true, loseModal: true })
+                if (!existsWordWithPrefix) return Promise.reject({ message: 'GAME_FINISHED_WIN' })
 
                 // Reset timer
                 this.resetTimer();
@@ -76,8 +84,8 @@ class SingleplayerGameScreen extends Component {
             })
             .then(nextWord => {
 
-                if (nextWord.length < 1) return this.setState({ gameFinished: true, loseModal: true })
-                if (usedWords.includes(nextWord)) return alert('Cuvantul a mai fost folosit')
+                if (nextWord.length < 1) return Promise.reject({ message: 'GAME_FINISHED_LOSE' })
+                if (usedWords.includes(nextWord)) return Promise.reject({ message: 'GAME_FINISHED_WIN' })
 
                 // Reset timer
                 this.resetTimer();
@@ -91,13 +99,25 @@ class SingleplayerGameScreen extends Component {
                     words: prevState.words.concat([prevState.word, nextWord])
                 }), () => this.startCurrentWordAnimation(word))
             })
+            .catch(err => {
+                if (err.message === 'GAME_FINISHED_WIN') return alert('YOU WIN');
+                if (err.message === 'GAME_FINISHED_LOSE') return this.setState({ loseModal: true, gameFinished: true });
+            })
     }
 
-    onWordChangeHandler = word => {
-        this.setState({ word })
-    }
+    onWordChangeHandler = word => this.setState({ word })
 
-    newGame = () => this.setState({ words: [], word: '', gameFinished: false, loseModal: false })
+    newGame = () => this.generateStartWord()
+        .then(firstWord => this.setState({
+            usedWords: [],
+            words: [],
+            word: firstWord.slice(-2),
+            lastWord: firstWord,
+            opLastWord: '',
+            yourLastWord: '',
+            gameFinished: false,
+            loseModal: false
+        }))
 
     startCurrentWordAnimation = word => {
         Animated.timing(this.state.animation, {
@@ -355,7 +375,8 @@ const mapDispatchToProps = dispatch => ({
     closeDbConnection: () => dispatch(WORDS.closeDbConnection()),
     checkWordExists: word => dispatch(WORDS.checkWordExists(word)),
     checkWordExistsWithPrefix: prefix => dispatch(WORDS.checkWordExistsWithPrefix(prefix)),
-    generateWord: word => dispatch(WORDS.generateWord(word))
+    generateWord: word => dispatch(WORDS.generateWord(word)),
+    generateStartWord: () => dispatch(WORDS.generateStartWord())
 })
 
 export default connect(

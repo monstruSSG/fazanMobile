@@ -4,6 +4,8 @@ import { CONNECT_DB, CLOSE_DB } from './actionTypes';
 import { GET_WORDS } from '../../utils/querys';
 import CONSTANTS from '../../utils/constants';
 
+const wordsNumber = 40000;
+
 export const connectToDb = () => dispatch => new Promise((resolve, reject) => {
     let db = SQL.openDatabase({
         name: CONSTANTS.db.name,
@@ -18,10 +20,22 @@ export const connectToDb = () => dispatch => new Promise((resolve, reject) => {
     }, reject)
 })
 
+export const generateStartWord = () => (dispatch, getState) => new Promise((resolve, reject) => {
+    const { db } = getState().words;
+    const uniqueNumber = Math.floor(Math.random() * (wordsNumber + 1));
+
+    return db.transaction(tx =>
+        tx.executeSql(`${GET_WORDS} WHERE words.id=?`, [uniqueNumber], (tx, res) => resolve(res.rows.item(0).word),
+            err => reject(err.message)),
+        err => reject(err.message))    
+})
+
 //returns true if word exists in db, false otherwise
 export const checkWordExists = word => (dispatch, getState) =>
     new Promise((resolve, reject) => {
         const { db } = getState().words;
+
+        word = word.toLowerCase();
 
         return db.transaction(tx =>
             tx.executeSql(`${GET_WORDS} WHERE word=?`, [word], (tx, res) => resolve((res.rows.length > 0)),
@@ -36,6 +50,8 @@ export const checkWordExistsWithPrefix = prefix => (dispatch, getState) =>
     new Promise((resolve, reject) => {
         const { db } = getState().words;
 
+        prefix = prefix.toLowerCase();
+
         return db.transaction(tx =>
             tx.executeSql(`${GET_WORDS} WHERE word LIKE '${prefix}%'`, [], (tx, res) => {
                 resolve(res.rows.length > 0)
@@ -49,6 +65,8 @@ export const checkWordExistsWithPrefix = prefix => (dispatch, getState) =>
 export const generateWord = word => (dispatch, getState) =>
     new Promise((resolve, reject) => {
         const { db } = getState().words;
+
+        word = word.toLowerCase();
 
         return db.transaction(tx =>
             tx.executeSql(`${GET_WORDS} WHERE word LIKE '${word.slice(-2)}%'`, [], (tx, res) => {
