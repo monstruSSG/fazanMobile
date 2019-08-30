@@ -13,14 +13,14 @@ export default props => (
         </View>
         <View style={styles.gameDetails}>
             <View style={styles.name}>
-                <Text style={{fontWeight: 'bold', fontSize: 25}}>{props.name}</Text>
+                <Text style={{fontWeight: '600', fontSize: 25}}>{props.name}</Text>
             </View>
             <View style={styles.oponentPointsWrapper}>
                 <View style={styles.resultWrapper}>
-                    <Text style={{fontWeight: 'bold', fontSize: 15}}>W/L: {props.wins}/{props.loses}</Text>
+                    <Text style={{fontWeight: '500', fontSize: 15}}>W/L: {props.wins}/{props.loses}</Text>
                 </View>
                 <View style={styles.points}>
-                    <Text style={{fontWeight: 'bold', fontSize: 15}}>POINTS: {props.points}</Text>
+                    <Text style={{fontWeight: '500', fontSize: 15}}>POINTS: {props.points}</Text>
                 </View>
             </View>
         </View>
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
         marginBottom: 5,
         borderRadius: 10,
-        borderWidth: 4,
+        borderWidth: 2,
         borderColor: CONSTANTS.borderColor
     },
     imageWrapper: {

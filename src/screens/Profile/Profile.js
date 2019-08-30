@@ -26,9 +26,8 @@ class ProfileScreen extends Component {
                     <View style={styles.stats}>
                         <Pie
                             radius={70}
-                            innerRadius={30}
                             series={[60]}
-                            colors={[CONSTANTS.secondaryColor]}
+                            colors={[CONSTANTS.borderColor]}
                             backgroundColor={CONSTANTS.buttonColor} />
                     </View>
                     <View style={styles.points}>
@@ -70,9 +69,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     stats: {
-        flex: 1,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor: 'yellow'
     },
     points: {
         flex: 1,

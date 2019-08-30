@@ -13,7 +13,7 @@ export default props => {
                     onPress={props.navigate}
                     style={[styles.fullAndCenter, styles.backArrow]}>
                     <View>
-                        <Icon name='arrow-left' size={30} color={CONSTANTS.borderColor} />
+                        <Icon name='arrow-left' size={20} color={CONSTANTS.borderColor} />
                     </View>
                 </TouchableOpacity>
             </View>
@@ -37,7 +37,9 @@ const styles = StyleSheet.create({
     content: {
         height: '100%',
         flexDirection: 'row',
-        backgroundColor: CONSTANTS.thirdColor
+        backgroundColor: CONSTANTS.thirdColor,
+        borderBottomColor: CONSTANTS.borderColor,
+        borderBottomWidth: 3
     },
     navigate: {
         width: '15%'
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
     headerText: {
         fontFamily: 'bold',
         fontSize: 25,
-        fontWeight: 'bold',
+        fontWeight: '500',
         color: CONSTANTS.borderColor
     },
     extra: {
