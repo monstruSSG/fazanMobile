@@ -38,7 +38,22 @@ class HomeScreen extends Component {
                         onPress={this.navigateSearchGameScreen}>SEARCH GAME</MyButton>
                 </View>
                 <View style={styles.details}>
-                    <Icon onPress={this.navigateProfileScreen} color='#000000' name="user" size={30} style={styles.userProfile} />
+                    <View style={styles.userLogo}>
+                        <Icon
+                            onPress={this.navigateProfileScreen}
+                            color={CONSTANTS.borderColor}
+                            name="user"
+                            size={30}
+                            style={styles.userProfile} />
+                    </View>
+                    <View style={styles.aboutLogo}>
+                        <Icon
+                            onPress={() => alert('About page or about modal')}
+                            color={CONSTANTS.borderColor}
+                            name="question-circle"
+                            size={30}
+                            style={styles.userProfile} />
+                    </View>
                 </View>
             </View>
         );
@@ -60,7 +75,7 @@ const styles = StyleSheet.create({
     },
     log: {
         width: "75%",
-        height: "100%"  
+        height: "100%"
     },
     content: {
         flex: 5,
@@ -69,9 +84,17 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     details: {
-        alignItems: 'flex-end',
-        paddingRight: 12,
-        paddingBottom: 12
+        flexDirection: 'row',
+        paddingRight: 20,
+        paddingBottom: 12,
+        paddingLeft: 20
+    },
+    userLogo: {
+        flex: 1
+    },
+    aboutLogo: {
+        flex: 1,
+        alignItems: 'flex-end'
     }
 });
 
