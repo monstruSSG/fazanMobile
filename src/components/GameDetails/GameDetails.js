@@ -1,11 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Logo from '../../assets/fazanLogo.png';
+import CONSTANTS from '../../utils/constants';
 
 export default props => (
-    <View style={[styles.content, props.style]}>
+    <View style={[styles.content, props.style, props.win ? { backgroundColor: CONSTANTS.buttonColor } : { backgroundColor: CONSTANTS.secondaryColor }]}>
         <View style={styles.imageWrapper}>
             <Image
                 style={styles.image}
@@ -20,7 +20,7 @@ export default props => (
             </View>
         </View>
         <View style={styles.resultWrapper}>
-            <Icon name='person' size={30} />
+            <Text>{props.wins}/{props.loses}</Text>
         </View>
     </View>
 );
@@ -29,11 +29,16 @@ const styles = StyleSheet.create({
     content: {
         flex: 1,
         flexDirection: 'row',
-        paddingTop: 5,
-        marginLeft: 12,
-        marginRight: 12
+        marginLeft: 10,
+        marginRight: 10,
+        marginBottom: 5,
+        borderRadius: 10,
+        borderWidth: 4,
+        borderColor: CONSTANTS.borderColor
     },
     imageWrapper: {
+        alignContent: 'center',
+        justifyContent: 'center'
     },
     oponentPointsWrapper: {
         flex: 1,
@@ -41,6 +46,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     resultWrapper: {
+        alignContent: 'center',
+        justifyContent: 'center'
     },
     image: {
         width: 30,

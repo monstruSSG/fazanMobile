@@ -41,17 +41,15 @@ class ProfileScreen extends Component {
                     </View>
                 </View>
                 <View style={styles.lastGames}>
-                    <FlatList
-                        data={[
-                            { key: 'a', name: 'Silviu MSR', points: 12312 },
-                            { key: 'b', name: 'Comiati RUPTU', points: 200 },
-                            { key: 'c', name: 'Comiati RUPTU', points: 200 } 
-                        ]}
-                        renderItem={({ item }) => <GameDetails
-                            name={item.name}
-                            points={item.points}
-                        />}
-                    />
+                    <View style={styles.oponent}>
+                        <GameDetails name='Silviu MSR' points={12321} wins={100} loses={20} win/>
+                    </View>
+                    <View style={styles.oponent}>
+                        <GameDetails name='Comiati RUPTU' points={99321} wins={100} loses={20} win/>
+                    </View>
+                    <View style={styles.oponent}>
+                        <GameDetails name='Vali OLT' points={1331} wins={100} loses={20} lose/>
+                    </View>
                 </View>
             </View>
         );
@@ -102,6 +100,9 @@ const styles = StyleSheet.create({
         flex: 4,
         flexDirection: 'row',
         justifyContent: 'center'
+    },
+    oponent: {
+        flex: 1
     }
 
 });
