@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     content: {
         height: '100%',
         flexDirection: 'row',
-        backgroundColor: "#33691E"
+        backgroundColor: CONSTANTS.thirdColor
     },
     navigate: {
         flex: 1

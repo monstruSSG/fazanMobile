@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, TouchableNativeFeedback, TouchableOpacity } from 'react-native';
 
+import CONSTANTS from '../../../utils/constants';
 import Text from '../Text/Text';
 
 const button = props => {
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         borderRadius: 10,
         borderWidth: 4,
-        borderColor: "#434343"
+        borderColor: CONSTANTS.borderColor
       }
 })
 

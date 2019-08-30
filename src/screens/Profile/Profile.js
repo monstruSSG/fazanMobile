@@ -28,8 +28,8 @@ class ProfileScreen extends Component {
                             radius={70}
                             innerRadius={30}
                             series={[60]}
-                            colors={[CONSTANTS.buttonColor]}
-                            backgroundColor={CONSTANTS.secondaryColor} />
+                            colors={[CONSTANTS.secondaryColor]}
+                            backgroundColor={CONSTANTS.buttonColor} />
                     </View>
                     <View style={styles.points}>
                         <View style={styles.textPointWrapper}>
@@ -45,10 +45,7 @@ class ProfileScreen extends Component {
                         data={[
                             { key: 'a', name: 'Silviu MSR', points: 12312 },
                             { key: 'b', name: 'Comiati RUPTU', points: 200 },
-                            { key: 'c', name: 'Comiati RUPTU', points: 200 },
-                            { key: 'd', name: 'Cozloschi', points: 210 },
-                            { key: 'e', name: 'Rapperu xxx', points: 21200 },
-                            { key: 'f', name: 'Unknown', points: 9200 }
+                            { key: 'c', name: 'Comiati RUPTU', points: 200 } 
                         ]}
                         renderItem={({ item }) => <GameDetails
                             name={item.name}

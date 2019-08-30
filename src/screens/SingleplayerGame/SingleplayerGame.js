@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
-import {
-    View, KeyboardAvoidingView, StyleSheet,
-    Image, Animated, Button
-} from 'react-native';
+import { View, KeyboardAvoidingView, StyleSheet, Animated, Button } from 'react-native';
 import { connect } from 'react-redux';
 
-import * as WORDS from '../../store/actions/words'
+import * as WORDS from '../../store/actions/words';
 import CONSTANTS from '../../utils/constants';
-import Logo from '../../assets/fazanLogo.png';
 import LoseTitle from '../../assets/loseTitle3.png';
 import Text from '../../components/UI/Text/Text';
 import Input from '../../components/UI/DefaultInput/DefaultInput';
@@ -105,7 +101,10 @@ class SingleplayerGameScreen extends Component {
             })
     }
 
-    onWordChangeHandler = word => this.setState({ word })
+    onWordChangeHandler = word => {
+        
+        this.setState({ word })
+    }
 
     newGame = () => this.generateStartWord()
         .then(firstWord => this.setState({
