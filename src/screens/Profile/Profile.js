@@ -29,10 +29,14 @@ class ProfileScreen extends Component {
                         <View style={styles.gamesDataStatusWrapper}>
                             <View style={styles.gamesDataStats}>
                                 <Pie
-                                    radius={70}
+                                    radius={50}
+                                    innerRadius={45}
                                     series={[60]}
                                     colors={[CONSTANTS.buttonColor]}
                                     backgroundColor={CONSTANTS.secondaryColor} />
+                                <View style={styles.insidePie}>
+                                    <Text color="azure" style={styles.insidePieText}>60%</Text>
+                                </View>
                             </View>
                             <View style={styles.gamesData}>
                                 <View style={styles.textPointWrapper}>
@@ -85,6 +89,8 @@ const styles = StyleSheet.create({
     },
     gamesDataStats: {
         flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     gamesData: {
         flex: 1,
@@ -115,7 +121,18 @@ const styles = StyleSheet.create({
     resultText: {
         paddingRight: 4,
         fontSize: 36
-    }
+    },
+    insidePie: {
+        position: 'absolute',
+        width: 100,
+        height: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      insidePieText: {
+        backgroundColor: 'transparent',
+        fontSize: 24,
+      },
 });
 
 export default ProfileScreen;

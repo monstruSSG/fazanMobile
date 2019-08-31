@@ -19,7 +19,7 @@ export default props => (
         </View>
         <View style={styles.resultWrapper}>
             <View style={styles.oponentInviteWrapper}>
-                <Text style={[{paddingRight: 12, letterSpacing: 2, fontWeight: "bold", fontSize: 28}, props.status === 'L' ? { color: CONSTANTS.buttonColor } : { color: CONSTANTS.secondaryColor}]}>WIN</Text>
+                <Text style={[{paddingRight: 12, letterSpacing: 2, fontWeight: "bold", fontSize: 22}, props.status === 'L' ? { color: CONSTANTS.buttonColor } : { color: CONSTANTS.secondaryColor}]}>{props.status === 'L' ? 'LOSE' : 'WIN'}</Text>
             </View>
         </View>
     </View>
