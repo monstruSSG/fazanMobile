@@ -136,7 +136,7 @@ class SingleplayerGameScreen extends Component {
             toValue: 1,
             duration: 800
         }).start(() => this.setState({
-            opLastWord: word
+            opLastWord: word.trim()
         }, () => Animated.timing(this.state.animationOpWord, {
             toValue: 0,
             duration: 500
@@ -149,7 +149,7 @@ class SingleplayerGameScreen extends Component {
             duration: 500
         }).start(() => {
             this.setState({
-                yourLastWord: word
+                yourLastWord: word.trim()
             }, () => {
                 Animated.timing(this.state.animationYourWord, {
                     toValue: 0,
@@ -222,7 +222,7 @@ class SingleplayerGameScreen extends Component {
                         <Input
                             style={styles.inputText}
                             value={this.state.word}
-                            onChangeText={word => this.onWordChangeHandler(word)}
+                            onChangeText={word => this.onWordChangeHandler(word.trim())}
                             placeholder='Introdu un cuvant...'
                         />
                         <Button style={styles.submitButton} onPress={this.insertWordHandler} color={CONSTANTS.buttonColor} title="TRIMITE" />
