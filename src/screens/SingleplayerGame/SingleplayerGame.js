@@ -134,7 +134,7 @@ class SingleplayerGameScreen extends Component {
     startOpWordAnimation = word => {
         Animated.timing(this.state.animationOpWord, {
             toValue: 1,
-            duration: 300
+            duration: 800
         }).start(() => this.setState({
             opLastWord: word
         }, () => Animated.timing(this.state.animationOpWord, {
