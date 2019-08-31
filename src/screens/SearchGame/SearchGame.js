@@ -52,9 +52,9 @@ class SearchGameScreen extends Component {
                                 { key: 'c', name: 'Comiati RUPTU Cu nume foarte lung', points: 200 },
                                 { key: 'd', name: 'Cozloschi', points: 210 },
                                 { key: 'e', name: 'Rapperu xxx', points: 21200 },
-                                { key: 'f', name: 'Unknown', points: 9200 },
-                                { key: 'f', name: 'Unknown', points: 9200 },
-                                { key: 'f', name: 'Unknown', points: 9200 }
+                                { key: 'g', name: 'Unknown', points: 9200 },
+                                { key: 'h', name: 'Unknown', points: 9200 },
+                                { key: 'i', name: 'Unknown', points: 9200 }
                             ]}
                             renderItem={({ item }) => <OponentDetails
                                 name={item.name}

@@ -7,7 +7,7 @@ import Text from '../Text/Text';
 const button = props => {
     const content = (
         <View style={[styles.button, { backgroundColor: props.color, width: props.width, height: props.height }, props.style]}>
-          <Text color="white">{props.children}</Text>
+          <Text style={styles.buttonText} color="azure">{props.children}</Text>
         </View>
       );
       if (Platform.OS === "android") {
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         borderRadius: 10,
         borderWidth: 1
-      }
+      },
 })
 
 export default button; 

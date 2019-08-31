@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { View, Button, StyleSheet, Image, Text } from 'react-native';
+import { View, Button, StyleSheet, Image, Text, ImageBackground, TouchableHighlight } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import CONSTANTS from '../../utils/constants';
 import MyButton from '../../components/UI/Button/Button'
 import FbButton from '../../components/AuthButtons/FbButton/FbButton';
 
+import BackgroundImg from '../../assets/back.png';
 import Logo from '../../assets/angryLogo.png';
+import SinglePlayer from '../../assets/singleplayer2.png'
+import SearchGame from '../../assets/searchgame.png'
 
 
 class HomeScreen extends Component {
@@ -21,41 +24,43 @@ class HomeScreen extends Component {
 
     render() {
         return (
-            <View style={styles.homePage}>
-                <View style={styles.logoContainer}>
-                    <Image style={styles.log} source={Logo} />
-                </View>
-                <View style={styles.content}>
-                    <MyButton color={CONSTANTS.buttonColor}
-
-                        width={250}
-                        height={45}
-                        onPress={this.navigateSingleplayerScreen}>SINGLE PLAYER</MyButton>
-                    <MyButton color={CONSTANTS.thirdColor}
-
-                        width={250}
-                        height={45}
-                        onPress={this.navigateSearchGameScreen}>SEARCH GAME</MyButton>
-                </View>
-                <View style={styles.details}>
-                    <View style={styles.userLogo}>
-                        <Icon
-                            onPress={this.navigateProfileScreen}
-                            color={CONSTANTS.borderColor}
-                            name="user"
-                            size={30}
-                            style={styles.userProfile} />
+            <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
+                <View style={styles.homePage}>
+                    <View style={styles.logoContainer}>
+                        <Image style={styles.log} source={Logo} />
                     </View>
-                    <View style={styles.aboutLogo}>
-                        <Icon
-                            onPress={() => alert('About page or about modal')}
-                            color={CONSTANTS.borderColor}
-                            name="question-circle"
-                            size={30}
-                            style={styles.userProfile} />
+                    <View style={styles.content}>
+                        <MyButton color={CONSTANTS.buttonColor}
+
+                            width={250}
+                            height={45}
+                            onPress={this.navigateSingleplayerScreen}>SINGLE PLAYER</MyButton>
+                        <MyButton color={CONSTANTS.secondaryColor}
+
+                            width={250}
+                            height={45}
+                            onPress={this.navigateSearchGameScreen}>SEARCH GAME</MyButton>
+                    </View>
+                    <View style={styles.details}>
+                        <View style={styles.userLogo}>
+                            <Icon
+                                onPress={this.navigateProfileScreen}
+                                color="azure"
+                                name="user"
+                                size={30}
+                                style={styles.userProfile} />
+                        </View>
+                        <View style={styles.aboutLogo}>
+                            <Icon
+                                onPress={() => alert('About page or about modal')}
+                                color="azure"
+                                name="question-circle"
+                                size={30}
+                                style={styles.userProfile} />
+                        </View>
                     </View>
                 </View>
-            </View>
+            </ImageBackground>
         );
     }
 }
@@ -63,8 +68,7 @@ class HomeScreen extends Component {
 const styles = StyleSheet.create({
     homePage: {
         flex: 1,
-        justifyContent: "center",
-        backgroundColor: CONSTANTS.backgroundColor
+        justifyContent: "center"
     },
     logoContainer: {
         flex: 3,
