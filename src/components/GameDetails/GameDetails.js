@@ -1,27 +1,25 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 
-import Logo from '../../assets/s.jpg';
+import Lose from '../../assets/lose.png';
 import CONSTANTS from '../../utils/constants';
+import Button from '../../components/UI/Button/Button';
 
 export default props => (
-    <View style={[styles.content, props.style, props.win ? { backgroundColor: CONSTANTS.buttonColor } : { backgroundColor: CONSTANTS.secondaryColor }]}>
-        <View style={styles.imageWrapper}>
-            <Image
-                style={styles.image}
-                source={Logo} />
-        </View>
-        <View style={styles.gameDetails}>
-            <View style={styles.name}>
-                <Text style={{fontWeight: '600', fontSize: 25}}>{props.name}</Text>
+    <View style={[styles.content, props.style]}>
+        <View style={styles.oponentDetailsWrapper}>
+            <View style={styles.oponentImageWrapper}>
+                <View style={{backgroundColor: props.status === 'W' ? CONSTANTS.secondaryColor : CONSTANTS.buttonColor , width: '80%', height: '70%', borderRadius: 30}} />
             </View>
-            <View style={styles.oponentPointsWrapper}>
-                <View style={styles.resultWrapper}>
-                    <Text style={{fontWeight: '500', fontSize: 15}}>W/L: {props.wins}/{props.loses}</Text>
+            <View style={styles.oponentNameWrapper}>
+                <View>
+                    <Text style={styles.oponentNameText}>{props.oponentName}</Text>
                 </View>
-                <View style={styles.points}>
-                    <Text style={{fontWeight: '500', fontSize: 15}}>POINTS: {props.points}</Text>
-                </View>
+            </View>
+        </View>
+        <View style={styles.resultWrapper}>
+            <View style={styles.oponentInviteWrapper}>
+                <Text style={[{paddingRight: 12, letterSpacing: 2, fontWeight: "bold", fontSize: 28}, props.status === 'L' ? { color: CONSTANTS.buttonColor } : { color: CONSTANTS.secondaryColor}]}>WIN</Text>
             </View>
         </View>
     </View>
@@ -31,51 +29,56 @@ const styles = StyleSheet.create({
     content: {
         flex: 1,
         flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        marginLeft: 10,
-        marginRight: 10,
-        marginBottom: 5,
-        borderRadius: 10,
-        borderWidth: 2,
-        borderColor: CONSTANTS.borderColor
+        borderWidth: 1,
+        borderRadius: 20,
+        marginTop: 12,
+        marginLeft: 12,
+        marginRight: 12,
+        height: 100,
+
     },
-    imageWrapper: {
-        width: '25%',
-        height: '100%',
+    oponentNameWrapper: {
+        flex: 2,
         alignItems: 'center',
         justifyContent: 'center'
     },
-    oponentPointsWrapper: {
-        width: '100%',
-        height: '50%',
+    oponentImageWrapper: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    oponentDetailsWrapper: {
+        flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'center'
+    },
+    oponentInviteWrapper: {
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: "center"
+    },
+    oponentNameText: {
+        fontSize: 16,
+        textAlign: 'center',
+        letterSpacing: 1,
+        fontWeight: 'bold',
+        color: CONSTANTS.textColor
+    },
+    oponentPointsText: {
+        fontSize: 16,
+        textAlign: 'center',
+        letterSpacing: 1,
+        fontWeight: 'bold',
+        color: CONSTANTS.textColor
     },
     resultWrapper: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
+        paddingTop: 4,
+        paddingRight: 4
     },
     image: {
-        width: 60,
-        height: 60,
-        resizeMode: 'cover',
-        borderRadius: 30
-    },
-    gameDetails: {
-        flex: 1,
-        flexDirection: 'column'
-    }, 
-    name: {
-        flex: 1, 
-        justifyContent: 'center', 
-        alignItems: 'center'
-    },
-    points: {
-        flex: 1, 
-        justifyContent: 'center', 
-        alignItems: 'center'
+        width: 75,
+        height: 75,
+        resizeMode: 'cover'
     }
 });

@@ -13,7 +13,7 @@ export default props => {
                     onPress={props.navigate}
                     style={[styles.fullAndCenter, styles.backArrow]}>
                     <View>
-                        <Icon name='arrow-left' size={20} color={CONSTANTS.borderColor} />
+                        <Icon name='arrow-left' size={20} color="azure" />
                     </View>
                 </TouchableOpacity>
             </View>
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
         fontFamily: 'bold',
         fontSize: 25,
         fontWeight: '500',
-        color: CONSTANTS.borderColor
+        color: "azure"
     },
     extra: {
         flex: 1

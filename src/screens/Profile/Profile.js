@@ -26,30 +26,45 @@ class ProfileScreen extends Component {
                             navigate={this.navigateHomeScreen} />
                     </View>
                     <View style={styles.gamesDataWrapper}>
-                        <View style={styles.gamesDataStats}>
-                            <Pie
-                                radius={70}
-                                series={[60]}
-                                colors={[CONSTANTS.borderColor]}
-                                backgroundColor={CONSTANTS.buttonColor} />
-                        </View>
-                        <View style={styles.gamesData}>
-                            <View style={styles.points}>
+                        <View style={styles.gamesDataStatusWrapper}>
+                            <View style={styles.gamesDataStats}>
+                                <Pie
+                                    radius={70}
+                                    series={[60]}
+                                    colors={[CONSTANTS.buttonColor]}
+                                    backgroundColor={CONSTANTS.secondaryColor} />
+                            </View>
+                            <View style={styles.gamesData}>
                                 <View style={styles.textPointWrapper}>
-                                    <Text style={styles.textPoint}>1200223</Text>
+                                    <Text color="azure" style={styles.textPoint}>7543</Text>
                                 </View>
                                 <View style={styles.levelPointWrapper}>
-                                    <Text style={styles.levelPoint}>Level 66</Text>
+                                    <Text color="azure" style={styles.levelPoint}>Level 66</Text>
+                                </View>
+                                <View style={styles.lastGamesStatus}>
+                                    <Text color={CONSTANTS.buttonColor} style={styles.resultText}>L/</Text>
+                                    <Text color={CONSTANTS.secondaryColor} style={styles.resultText}>W/</Text>
+                                    <Text color={CONSTANTS.buttonColor} style={styles.resultText}>L</Text>
                                 </View>
                             </View>
                         </View>
                         <View style={styles.lastGames}>
-
+                            <FlatList
+                                data={[
+                                    { key: 'a', oponentName: 'Silviu MSR', status: 'L' },
+                                    { key: 'b', oponentName: 'Comiati RUPTU', status: 'W' },
+                                    { key: 'c', oponentName: 'Comiati RUPTU Cu nume foarte lung', status: 'L' }
+                                ]}
+                                renderItem={({ item }) => <GameDetails
+                                    oponentName={item.oponentName}
+                                    status={item.status}
+                                />}
+                            />
                         </View>
                     </View>
                 </View>
             </ImageBackground>
-                );
+        );
     }
 }
 
@@ -63,9 +78,44 @@ const styles = StyleSheet.create({
     },
     gamesDataWrapper: {
         flex: 7,
-        
+    },
+    gamesDataStatusWrapper: {
+        flex: 1,
+        flexDirection: 'row',
+    },
+    gamesDataStats: {
+        flex: 1,
+    },
+    gamesData: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        paddingRight: 14
+    },
+    lastGames: {
+        flex: 2,
+    },
+    textPointWrapper: {
+        flex: 1,
+    },
+    levelPointWrapper: {
+        flex: 1,
+    },
+    lastGamesStatus: {
+        flex: 1,
+        flexDirection: 'row'
+    },
+    textPoint: {
+        fontSize: 43
+    },
+    levelPoint: {
+        letterSpacing: 2,
+        fontSize: 16
+    },
+    resultText: {
+        paddingRight: 4,
+        fontSize: 36
     }
-
 });
 
 export default ProfileScreen;
