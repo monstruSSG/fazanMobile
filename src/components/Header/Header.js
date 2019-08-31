@@ -36,10 +36,7 @@ export default props => {
 const styles = StyleSheet.create({
     content: {
         height: '100%',
-        flexDirection: 'row',
-        backgroundColor: CONSTANTS.thirdColor,
-        borderBottomColor: CONSTANTS.borderColor,
-        borderBottomWidth: 3
+        flexDirection: 'row'
     },
     navigate: {
         width: '15%'

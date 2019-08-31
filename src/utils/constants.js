@@ -1,10 +1,13 @@
 export default {
-    backgroundColor: "#f5f5f5",
-    buttonColor: "#E01E5A",
-    textColor: "#7b5e20",
     secondaryColor: '#2EB67D',
     thirdColor: '#4A154B',
     borderColor: '#000000',
+    backgroundColor: "white",
+    buttonColor: "#4A154B",
+    textColor: "azure",
+
+    secondaryColor: '#33691E',
+    thirdColor: '#01579B',
     socket: {
         socketURL: "http://192.168.254.68"
     },

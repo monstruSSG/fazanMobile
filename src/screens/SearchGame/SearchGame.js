@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ScrollView, FlatList } from 'react-native';
+import { View, StyleSheet, Image, ScrollView, FlatList, ImageBackground, Text } from 'react-native';
 import { connect } from 'react-redux'
 
 import CONSTANTS from '../../utils/constants';
@@ -9,6 +9,8 @@ import Button from '../../components/UI/Button/Button'
 import Input from '../../components/UI/DefaultInput/DefaultInput'
 import OponentDetails from '../../components/OponentDetails/OponentDetails';
 import Header from '../../components/Header/HeaderWithInput'
+
+import BackgroundImg from '../../assets/back.png';
 
 class SearchGameScreen extends Component {
 
@@ -37,32 +39,35 @@ class SearchGameScreen extends Component {
 
     render() {
         return (
-            <View style={styles.searchGame}>
-                <View style={styles.inputForm}>
-                    <Header />
+            <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
+                <View style={styles.searchGame}>
+                    <View style={styles.inputForm}>
+                        <Header />
+                    </View>
+                    <View style={styles.oponentList}>
+                        <FlatList
+                            data={[
+                                { key: 'a', name: 'Silviu MSR', points: 12312 },
+                                { key: 'b', name: 'Comiati RUPTU', points: 200 },
+                                { key: 'c', name: 'Comiati RUPTU Cu nume foarte lung', points: 200 },
+                                { key: 'd', name: 'Cozloschi', points: 210 },
+                                { key: 'e', name: 'Rapperu xxx', points: 21200 },
+                                { key: 'f', name: 'Unknown', points: 9200 },
+                                { key: 'f', name: 'Unknown', points: 9200 },
+                                { key: 'f', name: 'Unknown', points: 9200 }
+                            ]}
+                            renderItem={({ item }) => <OponentDetails
+                                name={item.name}
+                                points={item.points}
+                            />}
+                        />
+                    </View>
+                    <View style={styles.playGameButton}>
+                        <Button color={CONSTANTS.secondaryColor} onPress={this.onPlayGameHandler}><Text style={{color: "azure", fontWeight: 'bold'}}>PLAY RANDOM</Text></Button>
+                    </View>
                 </View>
-                <View style={styles.oponentList}>
-                    <FlatList
-                        data={[
-                            { key: 'a', name: 'Silviu MSR', points: 12312 },
-                            { key: 'b', name: 'Comiati RUPTU', points: 200 },
-                            { key: 'c', name: 'Comiati RUPTU', points: 200 },
-                            { key: 'd', name: 'Cozloschi', points: 210 },
-                            { key: 'e', name: 'Rapperu xxx', points: 21200 },
-                            { key: 'f', name: 'Unknown', points: 9200 },
-                            { key: 'f', name: 'Unknown', points: 9200 },
-                            { key: 'f', name: 'Unknown', points: 9200 }
-                        ]}
-                        renderItem={({ item }) => <OponentDetails
-                            name={item.name}
-                            points={item.points}
-                        />}
-                    />
-                </View>
-                <View style={styles.playGameButton}>
-                    <Button color={CONSTANTS.buttonColor} onPress={this.onPlayGameHandler}>PLAY RANDOM</Button>
-                </View>
-            </View>
+            </ImageBackground>
+
         );
     }
 }
