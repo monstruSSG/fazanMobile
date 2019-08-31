@@ -23,7 +23,7 @@ export default props => {
                 </View>
             </View>
             <View style={styles.extra}>
-                <View style={styles.fullAndCenter}>
+                <View style={[styles.fullAndCenter]}>
                     <Image
                         style={styles.image}
                         source={Logo} />
@@ -68,6 +68,8 @@ const styles = StyleSheet.create({
         width: 60,
         height: 60,
         resizeMode: 'cover',
-        borderRadius: 30
+        borderRadius: 30,
+        borderColor: "azure",
+        borderWidth: 1
     }
 });

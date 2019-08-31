@@ -29,12 +29,17 @@ const styles = StyleSheet.create({
     content: {
         flex: 1,
         flexDirection: 'row',
-        borderWidth: 1,
-        borderRadius: 20,
+        borderTopLeftRadius: 40,
+        borderBottomRightRadius: 40,
+        borderBottomLeftRadius: 40,
+        borderTopRightRadius: 40,
+        borderWidth: 2,
+        borderBottomWidth: 2,
+        borderTopWidth: 0,
         marginTop: 12,
         marginLeft: 12,
         marginRight: 12,
-        height: 100,
+        height: 100
 
     },
     oponentNameWrapper: {
