@@ -5,10 +5,12 @@ import { connect } from 'react-redux';
 import * as WORDS from '../../store/actions/words';
 import CONSTANTS from '../../utils/constants';
 import LoseTitle from '../../assets/loseTitle3.png';
+import WinTitle from '../../assets/winmessage.png';
 import Text from '../../components/UI/Text/Text';
 import Input from '../../components/UI/DefaultInput/DefaultInput';
 import Timer from '../../components/Timer/Timer';
 import LoseModal from '../../components/Modals/LoseModal';
+import WinModal from '../../components/Modals/WinModal';
 
 class SingleplayerGameScreen extends Component {
     static navigationOptions = {
@@ -27,7 +29,8 @@ class SingleplayerGameScreen extends Component {
         yourLastWord: '',
         gameFinished: false,
         showTimer: true,
-        loseModal: false
+        loseModal: false,
+        winModal: false
     }
 
     componentDidMount() {
@@ -96,13 +99,13 @@ class SingleplayerGameScreen extends Component {
                 }), () => this.startCurrentWordAnimation(word))
             })
             .catch(err => {
-                if (err.message === 'GAME_FINISHED_WIN') return alert('YOU WIN');
+                if (err.message === 'GAME_FINISHED_WIN') return this.setState({ winModal: true, gameFinished: true })
                 if (err.message === 'GAME_FINISHED_LOSE') return this.setState({ loseModal: true, gameFinished: true });
             })
     }
 
     onWordChangeHandler = word => {
-        
+
         this.setState({ word })
     }
 
@@ -197,7 +200,7 @@ class SingleplayerGameScreen extends Component {
                     </View>
                     <View style={styles.cell}>
                         {!this.state.gameFinished && this.state.showTimer && <Timer
-                            count={20}
+                            count={5}
                             onTimeExpired={this.onTimeExpiredHandler}
                         />}
                     </View>
@@ -235,6 +238,14 @@ class SingleplayerGameScreen extends Component {
                     playAgain={() => this.newGame()}
                     exitGame={() => this.navigateHomeScreen()}
                 />
+                <WinModal
+                    isVisible={this.state.winModal}
+                    onClose={() => this.setState({ winModal: false })}
+                    title={WinTitle}
+                    playAgain={() => this.newGame()}
+                    exitGame={() => this.navigateHomeScreen()}
+                />
+
             </KeyboardAvoidingView>
         );
     }
