@@ -8,8 +8,6 @@ import FbButton from '../../components/AuthButtons/FbButton/FbButton';
 
 import BackgroundImg from '../../assets/back.png';
 import Logo from '../../assets/angryLogo.png';
-import SinglePlayer from '../../assets/singleplayer2.png'
-import SearchGame from '../../assets/searchgame.png'
 
 
 class HomeScreen extends Component {
