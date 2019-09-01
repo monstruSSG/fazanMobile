@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import CONSTANTS from '../../utils/constants';
 import * as SOCKET from '../../store/actions/socket'
-
+import { getUsers } from '../../utils/requests';
 import Button from '../../components/UI/Button/Button'
 import Input from '../../components/UI/DefaultInput/DefaultInput'
 import OponentDetails from '../../components/OponentDetails/OponentDetails';
@@ -16,6 +16,15 @@ class SearchGameScreen extends Component {
 
     static navigationOptions = {
         header: null
+    }
+
+    state = {
+        users: []
+    }
+
+    componentDidMount() {
+        getUsers()
+            .then(users => this.setState({ users }))
     }
 
     navigateMultiplayerScreen = () => this.props.navigation.navigate('Multiplayer');
@@ -46,24 +55,15 @@ class SearchGameScreen extends Component {
                     </View>
                     <View style={styles.oponentList}>
                         <FlatList
-                            data={[
-                                { key: 'a', name: 'Silviu MSR', points: 12312 },
-                                { key: 'b', name: 'Comiati RUPTU', points: 200 },
-                                { key: 'c', name: 'Comiati RUPTU Cu nume foarte lung', points: 200 },
-                                { key: 'd', name: 'Cozloschi', points: 210 },
-                                { key: 'e', name: 'Rapperu xxx', points: 21200 },
-                                { key: 'g', name: 'Unknown', points: 9200 },
-                                { key: 'h', name: 'Unknown', points: 9200 },
-                                { key: 'i', name: 'Unknown', points: 9200 }
-                            ]}
+                            data={this.state.users.map(user => ({ ...user, key: user._id }))}
                             renderItem={({ item }) => <OponentDetails
-                                name={item.name}
-                                points={item.points}
+                                name={item.username}
+                                points={item.score}
                             />}
                         />
                     </View>
                     <View style={styles.playGameButton}>
-                        <Button color={CONSTANTS.secondaryColor} onPress={this.onPlayGameHandler}><Text style={{color: "azure", fontWeight: 'bold'}}>PLAY RANDOM</Text></Button>
+                        <Button color={CONSTANTS.secondaryColor} onPress={this.onPlayGameHandler}><Text style={{ color: "azure", fontWeight: 'bold' }}>PLAY RANDOM</Text></Button>
                     </View>
                 </View>
             </ImageBackground>

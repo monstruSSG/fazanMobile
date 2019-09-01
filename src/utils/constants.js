@@ -5,7 +5,6 @@ export default {
     backgroundColor: "white",
     buttonColor: "#4A154B",
     textColor: "azure",
-
     secondaryColor: '#33691E',
     thirdColor: '#01579B',
     socket: {
@@ -13,5 +12,6 @@ export default {
     },
     db: {
         name: 'fazanWords.db'
-    }
+    },
+    backendUrl: ''
 };

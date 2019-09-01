@@ -1,0 +1,68 @@
+[
+    {
+        "_id": 1,
+        "username": "Andrew",
+        "isActive": true,
+        "isDeleted": false,
+        "status": "busy",
+        "socketId": "randomsocketid",
+        "wins": 12,
+        "loses": 3,
+        "score": 2012
+    },
+    {
+        "_id": 2,
+        "username": "Silviu MSR",
+        "isActive": true,
+        "isDeleted": false,
+        "status": "available",
+        "socketId": "randomsocketid",
+        "wins": 1001,
+        "loses": 3,
+        "score": 300012
+    },
+    {
+        "_id": 3,
+        "username": "ShadowKiller12",
+        "isActive": true,
+        "isDeleted": false,
+        "status": "busy",
+        "socketId": "randomsocketid",
+        "wins": 2,
+        "loses": 12,
+        "score": 101
+    },
+    {
+        "_id": 4,
+        "username": "JohnTheRapperXXNX",
+        "isActive": true,
+        "isDeleted": false,
+        "status": "busy",
+        "socketId": "randomsocketid",
+        "wins": 22,
+        "loses": 9,
+        "score": 999
+    },
+    {
+        "_id": 5,
+        "username": "GhostRider",
+        "isActive": true,
+        "isDeleted": false,
+        "status": "available",
+        "socketId": "randomsocketid",
+        "wins": 1202,
+        "loses": 37,
+        "score": 2012001
+    },
+    {
+        "_id": 6,
+        "username": "GutaTheMusician",
+        "isActive": true,
+        "isDeleted": false,
+        "status": "available",
+        "socketId": "randomsocketid",
+        "wins": 128,
+        "loses": 98,
+        "score": 2012
+    }
+]
