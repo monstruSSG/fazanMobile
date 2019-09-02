@@ -7,6 +7,7 @@ import CONSTANTS from '../../utils/constants';
 import Header from '../../components/Header/Header';
 import GameDetails from '../../components/GameDetails/GameDetails';
 import BackgroundImg from '../../assets/back.png';
+import { getMe } from '../../utils/requests';
 
 class ProfileScreen extends Component {
     static navigationOptions = {
@@ -15,14 +16,21 @@ class ProfileScreen extends Component {
 
     navigateHomeScreen = () => this.props.navigation.navigate('Home');
 
+    state = {
+        me: {}
+    }
+
+    componentDidMount() {
+        getMe().then(me => this.setState({ me }))
+    }
+
     render() {
         return (
-
             <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
                 <View style={styles.content}>
                     <View style={styles.header}>
                         <Header
-                            title='Xulescu Andrei'
+                            title={this.state.me.username}
                             navigate={this.navigateHomeScreen} />
                     </View>
                     <View style={styles.gamesDataWrapper}>
@@ -35,15 +43,15 @@ class ProfileScreen extends Component {
                                     colors={[CONSTANTS.buttonColor]}
                                     backgroundColor={CONSTANTS.secondaryColor} />
                                 <View style={styles.insidePie}>
-                                    <Text color="azure" style={styles.insidePieText}>60%</Text>
+                                    <Text color="azure" style={styles.insidePieText}>{(this.state.me.wins / (this.state.me.loses + this.state.me.wins)) * 100}%</Text>
                                 </View>
                             </View>
                             <View style={styles.gamesData}>
                                 <View style={styles.textPointWrapper}>
-                                    <Text color="azure" style={styles.textPoint}>7543</Text>
+                                    <Text color="azure" style={styles.textPoint}>{this.state.me.score}</Text>
                                 </View>
                                 <View style={styles.levelPointWrapper}>
-                                    <Text color="azure" style={styles.levelPoint}>Level 66</Text>
+                                    <Text color="azure" style={styles.levelPoint}>Level {Math.floor(this.state.me.score / 30)}</Text>
                                 </View>
                                 <View style={styles.lastGamesStatus}>
                                     <Text color={CONSTANTS.buttonColor} style={styles.resultText}>L/</Text>
@@ -128,11 +136,11 @@ const styles = StyleSheet.create({
         height: 100,
         alignItems: 'center',
         justifyContent: 'center',
-      },
-      insidePieText: {
+    },
+    insidePieText: {
         backgroundColor: 'transparent',
         fontSize: 24,
-      },
+    },
 });
 
 export default ProfileScreen;
