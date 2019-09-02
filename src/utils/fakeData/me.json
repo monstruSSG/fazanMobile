@@ -1,0 +1,11 @@
+{
+    "_id": 1,
+    "username": "Andrew",
+    "isActive": true,
+    "isDeleted": false,
+    "status": "busy",
+    "socketId": "randomsocketid",
+    "wins": 12,
+    "loses": 3,
+    "score": 2012
+}
