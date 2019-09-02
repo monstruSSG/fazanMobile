@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import { View, StyleSheet, FlatList, ImageBackground } from 'react-native';
 import Pie from 'react-native-pie';
 
 import Text from '../../components/UI/Text/Text';
 import CONSTANTS from '../../utils/constants';
 import Header from '../../components/Header/Header';
 import GameDetails from '../../components/GameDetails/GameDetails';
+import BackgroundImg from '../../assets/back.png';
 
 class ProfileScreen extends Component {
     static navigationOptions = {
@@ -16,47 +17,57 @@ class ProfileScreen extends Component {
 
     render() {
         return (
-            <View style={styles.content}>
-                <View style={styles.header}>
-                    <Header
-                        title='Xulescu Andrei'
-                        navigate={this.navigateHomeScreen} />
-                </View>
-                <View style={styles.gamesData}>
-                    <View style={styles.stats}>
-                        <Pie
-                            radius={70}
-                            innerRadius={30}
-                            series={[60]}
-                            colors={[CONSTANTS.buttonColor]}
-                            backgroundColor={CONSTANTS.secondaryColor} />
+
+            <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
+                <View style={styles.content}>
+                    <View style={styles.header}>
+                        <Header
+                            title='Xulescu Andrei'
+                            navigate={this.navigateHomeScreen} />
                     </View>
-                    <View style={styles.points}>
-                        <View style={styles.textPointWrapper}>
-                            <Text style={styles.textPoint}>1200223</Text>
+                    <View style={styles.gamesDataWrapper}>
+                        <View style={styles.gamesDataStatusWrapper}>
+                            <View style={styles.gamesDataStats}>
+                                <Pie
+                                    radius={50}
+                                    innerRadius={45}
+                                    series={[60]}
+                                    colors={[CONSTANTS.buttonColor]}
+                                    backgroundColor={CONSTANTS.secondaryColor} />
+                                <View style={styles.insidePie}>
+                                    <Text color="azure" style={styles.insidePieText}>60%</Text>
+                                </View>
+                            </View>
+                            <View style={styles.gamesData}>
+                                <View style={styles.textPointWrapper}>
+                                    <Text color="azure" style={styles.textPoint}>7543</Text>
+                                </View>
+                                <View style={styles.levelPointWrapper}>
+                                    <Text color="azure" style={styles.levelPoint}>Level 66</Text>
+                                </View>
+                                <View style={styles.lastGamesStatus}>
+                                    <Text color={CONSTANTS.buttonColor} style={styles.resultText}>L/</Text>
+                                    <Text color={CONSTANTS.secondaryColor} style={styles.resultText}>W/</Text>
+                                    <Text color={CONSTANTS.buttonColor} style={styles.resultText}>L</Text>
+                                </View>
+                            </View>
                         </View>
-                        <View style={styles.levelPointWrapper}>
-                            <Text style={styles.levelPoint}>Level 66</Text>
+                        <View style={styles.lastGames}>
+                            <FlatList
+                                data={[
+                                    { key: 'a', oponentName: 'Silviu MSR', status: 'L' },
+                                    { key: 'b', oponentName: 'Comiati RUPTU', status: 'W' },
+                                    { key: 'c', oponentName: 'Comiati RUPTU Cu nume foarte lung', status: 'L' }
+                                ]}
+                                renderItem={({ item }) => <GameDetails
+                                    oponentName={item.oponentName}
+                                    status={item.status}
+                                />}
+                            />
                         </View>
                     </View>
                 </View>
-                <View style={styles.lastGames}>
-                    <FlatList
-                        data={[
-                            { key: 'a', name: 'Silviu MSR', points: 12312 },
-                            { key: 'b', name: 'Comiati RUPTU', points: 200 },
-                            { key: 'c', name: 'Comiati RUPTU', points: 200 },
-                            { key: 'd', name: 'Cozloschi', points: 210 },
-                            { key: 'e', name: 'Rapperu xxx', points: 21200 },
-                            { key: 'f', name: 'Unknown', points: 9200 }
-                        ]}
-                        renderItem={({ item }) => <GameDetails
-                            name={item.name}
-                            points={item.points}
-                        />}
-                    />
-                </View>
-            </View>
+            </ImageBackground>
         );
     }
 }
@@ -64,49 +75,64 @@ class ProfileScreen extends Component {
 const styles = StyleSheet.create({
     content: {
         flex: 1,
-        justifyContent: 'center',
-        backgroundColor: CONSTANTS.backgroundColor
+        justifyContent: 'center'
     },
     header: {
         flex: 1
     },
-    lastGames: {
-        flex: 4,
-        justifyContent: 'center'
+    gamesDataWrapper: {
+        flex: 7,
     },
-    stats: {
+    gamesDataStatusWrapper: {
+        flex: 1,
+        flexDirection: 'row',
+    },
+    gamesDataStats: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     },
-    points: {
+    gamesData: {
         flex: 1,
-        justifyContent: 'center'
+        alignItems: "center",
+        justifyContent: "center",
+        paddingRight: 14
+    },
+    lastGames: {
+        flex: 2,
     },
     textPointWrapper: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    textPoint: {
-        fontSize: 30,
-        fontFamily: 'bold'
     },
     levelPointWrapper: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+    },
+    lastGamesStatus: {
+        flex: 1,
+        flexDirection: 'row'
+    },
+    textPoint: {
+        fontSize: 43
     },
     levelPoint: {
-        fontSize: 30,
-        fontFamily: 'bold'
+        letterSpacing: 2,
+        fontSize: 16
     },
-    gamesData: {
-        flex: 4,
-        flexDirection: 'row',
-        justifyContent: 'center'
-    }
-
+    resultText: {
+        paddingRight: 4,
+        fontSize: 36
+    },
+    insidePie: {
+        position: 'absolute',
+        width: 100,
+        height: 100,
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      insidePieText: {
+        backgroundColor: 'transparent',
+        fontSize: 24,
+      },
 });
 
 export default ProfileScreen;

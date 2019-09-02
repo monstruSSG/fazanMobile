@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import CONSTANTS from '../../utils/constants';
-import Logo from '../../assets/fazanLogo.png'
+import Logo from '../../assets/b.jpg'
 
 export default props => {
     return (
@@ -13,7 +13,7 @@ export default props => {
                     onPress={props.navigate}
                     style={[styles.fullAndCenter, styles.backArrow]}>
                     <View>
-                        <Icon name='arrow-left' size={20} color="black" />
+                        <Icon name='arrow-left' size={20} color="azure" />
                     </View>
                 </TouchableOpacity>
             </View>
@@ -23,7 +23,7 @@ export default props => {
                 </View>
             </View>
             <View style={styles.extra}>
-                <View style={styles.fullAndCenter}>
+                <View style={[styles.fullAndCenter]}>
                     <Image
                         style={styles.image}
                         source={Logo} />
@@ -36,14 +36,15 @@ export default props => {
 const styles = StyleSheet.create({
     content: {
         height: '100%',
-        flexDirection: 'row',
-        backgroundColor: "#33691E"
+        flexDirection: 'row'
     },
     navigate: {
-        flex: 1
+        width: '15%'
     },
     title: {
-        flex: 2
+        flex: 2,
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     fullAndCenter: {
         flex: 1,
@@ -52,19 +53,23 @@ const styles = StyleSheet.create({
     },
     headerText: {
         fontFamily: 'bold',
-        fontSize: 20,
-        fontWeight: '700'
+        fontSize: 25,
+        fontWeight: '500',
+        color: "azure"
     },
     extra: {
         flex: 1
     },
     backArrow: {
-        alignItems: undefined,
+        alignItems: 'flex-start',
         paddingLeft: 12
     },
     image: {
-        width: "70%",
-        height: "70%",
-        resizeMode: 'cover'
+        width: 60,
+        height: 60,
+        resizeMode: 'cover',
+        borderRadius: 30,
+        borderColor: "azure",
+        borderWidth: 1
     }
 });

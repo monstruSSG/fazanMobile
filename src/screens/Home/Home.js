@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { View, Button, StyleSheet, Image, Text } from 'react-native';
+import { View, Button, StyleSheet, Image, Text, ImageBackground, TouchableHighlight } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import CONSTANTS from '../../utils/constants';
 import MyButton from '../../components/UI/Button/Button'
 import FbButton from '../../components/AuthButtons/FbButton/FbButton';
 
-import Logo from '../../assets/image.png';
-import Title from '../../assets/fazanTitle.png';
+import BackgroundImg from '../../assets/back.png';
+import Logo from '../../assets/angryLogo.png';
 
 
 class HomeScreen extends Component {
@@ -22,28 +22,43 @@ class HomeScreen extends Component {
 
     render() {
         return (
-            <View style={styles.homePage}>
-                <View style={styles.logoContainer}>
-                    <Image style={styles.log} source={Logo} />
-                </View>
-                <View style={styles.content}>
-                    <MyButton color={CONSTANTS.buttonColor}
+            <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
+                <View style={styles.homePage}>
+                    <View style={styles.logoContainer}>
+                        <Image style={styles.log} source={Logo} />
+                    </View>
+                    <View style={styles.content}>
+                        <MyButton color={CONSTANTS.buttonColor}
 
-                        width={250}
-                        height={45}
-                        onPress={this.navigateSingleplayerScreen}>SINGLE PLAYER</MyButton>
-                    <MyButton color={CONSTANTS.buttonColor}
+                            width={250}
+                            height={45}
+                            onPress={this.navigateSingleplayerScreen}>SINGLE PLAYER</MyButton>
+                        <MyButton color={CONSTANTS.secondaryColor}
 
-                        width={250}
-                        height={45}
-                        onPress={this.navigateSearchGameScreen}>SEARCH GAME</MyButton>
-
-                    <FbButton />
+                            width={250}
+                            height={45}
+                            onPress={this.navigateSearchGameScreen}>SEARCH GAME</MyButton>
+                    </View>
+                    <View style={styles.details}>
+                        <View style={styles.userLogo}>
+                            <Icon
+                                onPress={this.navigateProfileScreen}
+                                color="azure"
+                                name="user"
+                                size={30}
+                                style={styles.userProfile} />
+                        </View>
+                        <View style={styles.aboutLogo}>
+                            <Icon
+                                onPress={() => alert('About page or about modal')}
+                                color="azure"
+                                name="question-circle"
+                                size={30}
+                                style={styles.userProfile} />
+                        </View>
+                    </View>
                 </View>
-                <View style={styles.details}>
-                    <Icon onPress={this.navigateProfileScreen} color={CONSTANTS.buttonColor} name="user" size={30} style={styles.userProfile} />
-                </View>
-            </View>
+            </ImageBackground>
         );
     }
 }
@@ -51,20 +66,18 @@ class HomeScreen extends Component {
 const styles = StyleSheet.create({
     homePage: {
         flex: 1,
-        //alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: CONSTANTS.backgroundColor
+        justifyContent: "center"
     },
     logoContainer: {
         flex: 3,
+        paddingTop: 10,
         width: "100%",
         justifyContent: "center",
         alignItems: "center",
     },
     log: {
         width: "75%",
-        height: "100%",
-        resizeMode: 'stretch'
+        height: "100%"
     },
     content: {
         flex: 5,
@@ -73,9 +86,17 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     details: {
-        alignItems: 'flex-end',
-        paddingRight: 12,
-        paddingBottom: 12
+        flexDirection: 'row',
+        paddingRight: 20,
+        paddingBottom: 12,
+        paddingLeft: 20
+    },
+    userLogo: {
+        flex: 1
+    },
+    aboutLogo: {
+        flex: 1,
+        alignItems: 'flex-end'
     }
 });
 

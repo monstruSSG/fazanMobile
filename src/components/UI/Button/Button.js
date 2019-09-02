@@ -1,12 +1,13 @@
 import React from 'react';
 import { View, StyleSheet, TouchableNativeFeedback, TouchableOpacity } from 'react-native';
 
+import CONSTANTS from '../../../utils/constants';
 import Text from '../Text/Text';
 
 const button = props => {
     const content = (
         <View style={[styles.button, { backgroundColor: props.color, width: props.width, height: props.height }, props.style]}>
-          <Text color="white">{props.children}</Text>
+          <Text style={styles.buttonText} color="azure">{props.children}</Text>
         </View>
       );
       if (Platform.OS === "android") {
@@ -26,9 +27,8 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginTop: 10,
         borderRadius: 10,
-        borderWidth: 4,
-        borderColor: "#434343"
-      }
+        borderWidth: 1
+      },
 })
 
 export default button; 

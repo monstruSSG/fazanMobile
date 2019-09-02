@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import {
-    View, KeyboardAvoidingView, StyleSheet,
-    Image, Animated, Button
-} from 'react-native';
+import { View, KeyboardAvoidingView, StyleSheet, Animated, Button, ImageBackground } from 'react-native';
 import { connect } from 'react-redux';
 
-import * as WORDS from '../../store/actions/words'
+import * as WORDS from '../../store/actions/words';
 import CONSTANTS from '../../utils/constants';
-import Logo from '../../assets/fazanLogo.png';
 import LoseTitle from '../../assets/loseTitle3.png';
+import WinTitle from '../../assets/winmessage.png';
 import Text from '../../components/UI/Text/Text';
 import Input from '../../components/UI/DefaultInput/DefaultInput';
 import Timer from '../../components/Timer/Timer';
 import LoseModal from '../../components/Modals/LoseModal';
+import WinModal from '../../components/Modals/WinModal';
+import BackgroudImage from '../../assets/back.png';
 
 class SingleplayerGameScreen extends Component {
     static navigationOptions = {
@@ -31,7 +30,8 @@ class SingleplayerGameScreen extends Component {
         yourLastWord: '',
         gameFinished: false,
         showTimer: true,
-        loseModal: false
+        loseModal: false,
+        winModal: false
     }
 
     componentDidMount() {
@@ -100,12 +100,15 @@ class SingleplayerGameScreen extends Component {
                 }), () => this.startCurrentWordAnimation(word))
             })
             .catch(err => {
-                if (err.message === 'GAME_FINISHED_WIN') return alert('YOU WIN');
+                if (err.message === 'GAME_FINISHED_WIN') return this.setState({ winModal: true, gameFinished: true })
                 if (err.message === 'GAME_FINISHED_LOSE') return this.setState({ loseModal: true, gameFinished: true });
             })
     }
 
-    onWordChangeHandler = word => this.setState({ word })
+    onWordChangeHandler = word => {
+
+        this.setState({ word })
+    }
 
     newGame = () => this.generateStartWord()
         .then(firstWord => this.setState({
@@ -135,9 +138,9 @@ class SingleplayerGameScreen extends Component {
     startOpWordAnimation = word => {
         Animated.timing(this.state.animationOpWord, {
             toValue: 1,
-            duration: 300
+            duration: 800
         }).start(() => this.setState({
-            opLastWord: word
+            opLastWord: word.trim()
         }, () => Animated.timing(this.state.animationOpWord, {
             toValue: 0,
             duration: 500
@@ -150,7 +153,7 @@ class SingleplayerGameScreen extends Component {
             duration: 500
         }).start(() => {
             this.setState({
-                yourLastWord: word
+                yourLastWord: word.trim()
             }, () => {
                 Animated.timing(this.state.animationYourWord, {
                     toValue: 0,
@@ -190,53 +193,62 @@ class SingleplayerGameScreen extends Component {
         }
 
         return (
-            <KeyboardAvoidingView
-                style={styles.singlePlayerContainer} >
-                <View style={styles.header}>
-                    <View style={styles.cell}>
-                        <Text>Silviu MSR</Text>
+            <ImageBackground source={BackgroudImage} style={{ width: '100%', height: '100%' }}>
+                <KeyboardAvoidingView
+                    style={styles.singlePlayerContainer} >
+                    <View style={styles.header}>
+                        <View style={styles.cell}>
+                            <Text>Silviu MSR</Text>
+                        </View>
+                        <View style={styles.cell}>
+                            {!this.state.gameFinished && this.state.showTimer && <Timer
+                                count={5}
+                                onTimeExpired={this.onTimeExpiredHandler}
+                            />}
+                        </View>
+                        <View style={styles.cell}>
+                            <Text>Bogdan Smecherul</Text>
+                        </View>
                     </View>
-                    <View style={styles.cell}>
-                        {!this.state.gameFinished && this.state.showTimer && <Timer
-                            count={20}
-                            onTimeExpired={this.onTimeExpiredHandler}
-                        />}
+                    <View style={styles.lastWords}>
+                        <Animated.View
+                            style={[styles.oponentInput, styles.currentWordContainer, animatedStyle]}>
+                            <Text color="black" style={styles.currentWord}>{this.state.lastWord}</Text>
+                        </Animated.View>
+                        <Animated.View style={[styles.yourLastWordContainer, yourWordAnimationStyle]}>
+                            <Text color="white" style={[styles.center, styles.yourLastWord]}>{this.state.yourLastWord}</Text>
+                        </Animated.View>
+                        <Animated.View style={[styles.opLastWordContainer, opWordAnimationStyle]}>
+                            <Text color="white" style={[styles.center, styles.opLastWord]}>{this.state.opLastWord}</Text>
+                        </Animated.View>
                     </View>
-                    <View style={styles.cell}>
-                        <Text>Bogdan Smecherul</Text>
+                    <View style={styles.myInput}>
+                        <View style={styles.submitForm}>
+                            <Input
+                                style={styles.inputText}
+                                value={this.state.word}
+                                onChangeText={word => this.onWordChangeHandler(word.trim())}
+                                placeholder='Introdu un cuvant...'
+                            />
+                            <Button style={styles.submitButton} onPress={this.insertWordHandler} color={CONSTANTS.buttonColor} title="TRIMITE" />
+                        </View>
                     </View>
-                </View>
-                <View style={styles.lastWords}>
-                    <Animated.View
-                        style={[styles.oponentInput, styles.currentWordContainer, animatedStyle]}>
-                        <Text color="black" style={styles.currentWord}>{this.state.lastWord}</Text>
-                    </Animated.View>
-                    <Animated.View style={[styles.yourLastWordContainer, yourWordAnimationStyle]}>
-                        <Text color="white" style={[styles.center, styles.yourLastWord]}>{this.state.yourLastWord}</Text>
-                    </Animated.View>
-                    <Animated.View style={[styles.opLastWordContainer, opWordAnimationStyle]}>
-                        <Text color="white" style={[styles.center, styles.opLastWord]}>{this.state.opLastWord}</Text>
-                    </Animated.View>
-                </View>
-                <View style={styles.myInput}>
-                    <View style={styles.submitForm}>
-                        <Input
-                            style={styles.inputText}
-                            value={this.state.word}
-                            onChangeText={word => this.onWordChangeHandler(word)}
-                            placeholder='Introdu un cuvant...'
-                        />
-                        <Button style={styles.submitButton} onPress={this.insertWordHandler} color={CONSTANTS.buttonColor} title="TRIMITE" />
-                    </View>
-                </View>
-                <LoseModal
-                    isVisible={this.state.loseModal}
-                    onClose={() => this.setState({ loseModal: false })}
-                    title={LoseTitle}
-                    playAgain={() => this.newGame()}
-                    exitGame={() => this.navigateHomeScreen()}
-                />
-            </KeyboardAvoidingView>
+                    <LoseModal
+                        isVisible={this.state.loseModal}
+                        onClose={() => this.setState({ loseModal: false })}
+                        title={LoseTitle}
+                        playAgain={() => this.newGame()}
+                        exitGame={() => this.navigateHomeScreen()}
+                    />
+                    <WinModal
+                        isVisible={this.state.winModal}
+                        onClose={() => this.setState({ winModal: false })}
+                        title={WinTitle}
+                        playAgain={() => this.newGame()}
+                        exitGame={() => this.navigateHomeScreen()}
+                    />
+                </KeyboardAvoidingView>
+            </ImageBackground>
         );
     }
 }
@@ -244,7 +256,6 @@ class SingleplayerGameScreen extends Component {
 const styles = StyleSheet.create({
     singlePlayerContainer: {
         flex: 1,
-        backgroundColor: CONSTANTS.backgroundColor,
         alignItems: "center",
     },
     logo: {
@@ -261,34 +272,52 @@ const styles = StyleSheet.create({
         textAlign: 'left'
     },
     yourLastWordContainer: {
-        backgroundColor: CONSTANTS.buttonColor,
+        borderTopLeftRadius: 40,
+        borderBottomRightRadius: 40,
+        borderBottomLeftRadius: 40,
+        borderTopRightRadius: 40,
         borderWidth: 2,
-        borderRadius: 10,
-        marginBottom: 10,
+        borderBottomWidth: 2,
+        borderTopWidth: 0,
+        marginTop: 12,
+        marginLeft: 12,
+        marginRight: 12,
         justifyContent: 'center',
         alignItems: 'center',
         height: "30%",
         width: "100%"
     },
     opLastWordContainer: {
-        backgroundColor: CONSTANTS.secondaryColor,
+        borderTopLeftRadius: 40,
+        borderBottomRightRadius: 40,
+        borderBottomLeftRadius: 40,
+        borderTopRightRadius: 40,
         borderWidth: 2,
-        borderRadius: 10,
+        borderBottomWidth: 2,
+        borderTopWidth: 0,
+        marginTop: 12,
+        marginLeft: 12,
+        marginRight: 12,
         justifyContent: 'center',
         alignItems: 'center',
         height: "30%",
         width: "100%"
     },
     currentWordContainer: {
+        borderTopLeftRadius: 40,
+        borderBottomRightRadius: 40,
+        borderBottomLeftRadius: 40,
+        borderTopRightRadius: 40,
         borderWidth: 2,
-        borderRadius: 10,
-        marginBottom: 10,
-        padding: 8,
+        borderBottomWidth: 2,
+        borderTopWidth: 0,
+        marginTop: 12,
+        marginLeft: 12,
+        marginRight: 12,
         justifyContent: "center",
         alignItems: "center",
         height: '30%',
-        width: "100%",
-        backgroundColor: CONSTANTS.thirdColor
+        width: "100%"
     },
     yourLastWord: {
         fontSize: 20

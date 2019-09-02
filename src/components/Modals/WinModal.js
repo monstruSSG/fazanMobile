@@ -6,7 +6,6 @@ import DefaultInput from '../UI/DefaultInput/DefaultInput';
 import Text from '../UI/Text/Text';
 import Button from '../UI/Button/Button';
 import CONSTANTS from '../../utils/constants';
-import Logo from '../../assets/fazanLogo.png';
 
 const loseModal = props => (
     <Modal visible={props.isVisible} onRequestClose={props.onClose} animationType="slide" transparent={true}>
@@ -20,7 +19,7 @@ const loseModal = props => (
             <View style={{
                 width: 300,
                 height: 400,
-                borderColor: CONSTANTS.buttonColor,
+                borderColor: CONSTANTS.secondaryColor,
                 borderWidth: 5,
                 borderRadius: 30,
                 backgroundColor: 'white',
@@ -60,17 +59,17 @@ const styles = StyleSheet.create({
     loseModal: {
         width: 50,
         height: 50,
-        backgroundColor: CONSTANTS.backgroundColor
+        backgroundColor: CONSTANTS.secondaryColor
     },
     loseModalView: {
         width: 100,
         height: 100,
-        backgroundColor: 'yellow'
+        
     },
     titleContainer: {
         width: "100%",
         alignItems: "center",
-        backgroundColor: CONSTANTS.buttonColor,
+        backgroundColor: CONSTANTS.secondaryColor,
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25
     },
