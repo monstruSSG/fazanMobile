@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, KeyboardAvoidingView, StyleSheet, Animated, Button, ImageBackground } from 'react-native';
+import { View, KeyboardAvoidingView, StyleSheet, Animated, Button, ImageBackground, Image } from 'react-native';
 import { connect } from 'react-redux';
 
 import * as WORDS from '../../store/actions/words';
@@ -12,6 +12,8 @@ import Timer from '../../components/Timer/Timer';
 import LoseModal from '../../components/Modals/LoseModal';
 import WinModal from '../../components/Modals/WinModal';
 import BackgroudImage from '../../assets/back.png';
+import Avatar from '../../assets/b.jpg';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class SingleplayerGameScreen extends Component {
     static navigationOptions = {
@@ -181,14 +183,14 @@ class SingleplayerGameScreen extends Component {
         const yourWordAnimationStyle = {
             left: this.state.animationYourWord.interpolate({
                 inputRange: [0, 1],
-                outputRange: ['-30%', '-100%']
+                outputRange: ['-20%', '-100%']
             })
         }
 
         const opWordAnimationStyle = {
             right: this.state.animationOpWord.interpolate({
                 inputRange: [0, 1],
-                outputRange: ['-30%', '-100%']
+                outputRange: ['-20%', '-100%']
             })
         }
 
@@ -197,29 +199,35 @@ class SingleplayerGameScreen extends Component {
                 <KeyboardAvoidingView
                     style={styles.singlePlayerContainer} >
                     <View style={styles.header}>
-                        <View style={styles.cell}>
-                            <Text>Silviu MSR</Text>
+                        <View style={[styles.cell]}>
+                            <View style={styles.myContainer}>
+                                <Image source={Avatar} style={styles.myAvatar} />
+                                <Text style={styles.myName} color={CONSTANTS.buttonColor}>MSR</Text>
+                            </View>
                         </View>
                         <View style={styles.cell}>
                             {!this.state.gameFinished && this.state.showTimer && <Timer
-                                count={5}
+                                count={300}
                                 onTimeExpired={this.onTimeExpiredHandler}
                             />}
                         </View>
-                        <View style={styles.cell}>
-                            <Text>Bogdan Smecherul</Text>
+                        <View style={[styles.cell]}>
+                            <View style={styles.computerContainer}>
+                                <Text style={styles.computerName} color={CONSTANTS.secondaryColor}>GB</Text>
+                                <Image source={Avatar} style={styles.computerAvatar} />
+                            </View>
                         </View>
                     </View>
                     <View style={styles.lastWords}>
                         <Animated.View
                             style={[styles.oponentInput, styles.currentWordContainer, animatedStyle]}>
-                            <Text color="black" style={styles.currentWord}>{this.state.lastWord}</Text>
+                            <Text color="azure" style={styles.currentWord}>{this.state.lastWord}</Text>
                         </Animated.View>
                         <Animated.View style={[styles.yourLastWordContainer, yourWordAnimationStyle]}>
-                            <Text color="white" style={[styles.center, styles.yourLastWord]}>{this.state.yourLastWord}</Text>
+                            <Text color={CONSTANTS.buttonColor} style={[styles.center, styles.yourLastWord]}>{this.state.yourLastWord}</Text>
                         </Animated.View>
                         <Animated.View style={[styles.opLastWordContainer, opWordAnimationStyle]}>
-                            <Text color="white" style={[styles.center, styles.opLastWord]}>{this.state.opLastWord}</Text>
+                            <Text color={CONSTANTS.secondaryColor} style={[styles.center, styles.opLastWord]}>{this.state.opLastWord}</Text>
                         </Animated.View>
                     </View>
                     <View style={styles.myInput}>
@@ -230,8 +238,12 @@ class SingleplayerGameScreen extends Component {
                                 onChangeText={word => this.onWordChangeHandler(word.trim())}
                                 placeholder='Introdu un cuvant...'
                             />
-                            <Button style={styles.submitButton} onPress={this.insertWordHandler} color={CONSTANTS.buttonColor} title="TRIMITE" />
                         </View>
+                        <TouchableOpacity
+                            style={styles.submitButton}
+                            onPress={this.insertWordHandler}>
+                            <Text color="azure">TRIMITE</Text>
+                        </TouchableOpacity>
                     </View>
                     <LoseModal
                         isVisible={this.state.loseModal}
@@ -280,6 +292,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 2,
         borderTopWidth: 0,
         marginTop: 12,
+        borderColor: CONSTANTS.buttonColor,
         marginLeft: 12,
         marginRight: 12,
         justifyContent: 'center',
@@ -295,6 +308,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderBottomWidth: 2,
         borderTopWidth: 0,
+        borderColor: CONSTANTS.secondaryColor,
         marginTop: 12,
         marginLeft: 12,
         marginRight: 12,
@@ -310,6 +324,7 @@ const styles = StyleSheet.create({
         borderTopRightRadius: 40,
         borderWidth: 2,
         borderBottomWidth: 2,
+        borderColor: "black",
         borderTopWidth: 0,
         marginTop: 12,
         marginLeft: 12,
@@ -320,24 +335,89 @@ const styles = StyleSheet.create({
         width: "100%"
     },
     yourLastWord: {
-        fontSize: 20
+        fontSize: 20,
+        letterSpacing: 6,
+        fontWeight: 'bold',
+        textTransform: 'uppercase'
     },
     opLastWord: {
-        fontSize: 20
+        fontSize: 20,
+        letterSpacing: 6,
+        fontWeight: 'bold',
+        textTransform: 'uppercase'
     },
     lastWords: {
         flex: 1,
+        paddingTop: 58,
         width: '80%',
         alignItems: "center",
         justifyContent: "flex-end"
     },
     currentWord: {
-        fontSize: 20
+        fontSize: 20,
+        letterSpacing: 6,
+        fontWeight: 'bold',
+        textTransform: 'uppercase'
     },
     header: {
-        flex: 1,
         height: '15%',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    myContainer: {
+        borderTopLeftRadius: 40,
+        borderBottomLeftRadius: 50,
+        borderRightWidth: 0,
+        borderWidth: 2,
+        borderBottomWidth: 2,
+        borderTopWidth: 0,
+        borderColor: CONSTANTS.buttonColor,
+        width: 120,
+        height: 70
+    },
+    myAvatar: {
+        width: 65,
+        height: 65,
+        position: 'relative',
+        left: 4,
+        resizeMode: 'cover',
+        borderRadius: 35,
+        borderWidth: 1
+    },
+    myName: {
+        position: 'relative',
+        bottom: 44,
+        left: 38,
+        fontSize: 22
+    },
+    computerContainer: {
+        borderTopRightRadius: 40,
+        borderBottomRightRadius: 50,
+        borderLeftWidth: 0,
+        borderWidth: 2,
+        borderBottomWidth: 2,
+        borderTopWidth: 0,
+        borderColor: CONSTANTS.secondaryColor,
+        width: 120,
+        height: 70
+    },
+    computerAvatar: {
+        width: 65,
+        height: 65,
+        position: 'relative',
+        left: 49,
+        bottom: 29,
+        resizeMode: 'cover',
+        borderRadius: 35,
+        borderWidth: 1
+    },
+    computerName: {
+        position: 'relative',
+        right: 46,
+        top: 21,
+        color: CONSTANTS.secondaryColor,
+        fontSize: 22
     },
     cell: {
         flex: 1,
@@ -346,7 +426,8 @@ const styles = StyleSheet.create({
     },
     myInput: {
         flex: 1,
-        width: "80%",
+        flexDirection: 'row',
+        width: "50%",
         alignItems: "center",
         justifyContent: "center"
     },
@@ -358,20 +439,20 @@ const styles = StyleSheet.create({
         marginBottom: 0,
     },
     submitForm: {
-        borderWidth: 2,
-        borderRadius: 10,
-        flexDirection: 'row'
+        flexDirection: 'row',
+        borderBottomWidth: 1
     },
     textInput: {
         paddingRight: 6
     },
     submitButton: {
-        padding: 0,
-        margin: 0,
-        marginBottom: 0,
-        marginTop: 0,
-        borderRadius: 0,
-        borderColor: "black"
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 70,
+        height: 70,
+        borderRadius: 35,
+        borderWidth: 1,
+        backgroundColor: CONSTANTS.buttonColor
     },
     myInputTitle: {
         flex: 1,
@@ -387,7 +468,6 @@ const styles = StyleSheet.create({
     modalDetails: {
         height: "50%",
         width: "75%",
-        backgroundColor: "red"
     },
     loseModal: {
         width: 50,
