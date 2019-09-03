@@ -213,10 +213,6 @@ class SingleplayerGameScreen extends Component {
     }))
 
     render() {
-        const startGameAnimation = {
-            opacity: this.state.startGameAnimation
-        }
-
         const fadeYou = {
             opacity: this.state.fadeYou
         }
@@ -249,8 +245,8 @@ class SingleplayerGameScreen extends Component {
 
         return (
             <ImageBackground source={BackgroudImage} style={{ width: '100%', height: '100%' }}>
-                <Animated.View
-                    style={[styles.singlePlayerContainer, startGameAnimation]} >
+                <View
+                    style={[styles.singlePlayerContainer]} >
                     <View style={styles.header}>
                         <Animated.View style={[styles.cell, fadeYou]}>
                             <View style={styles.myContainer}>
@@ -292,12 +288,11 @@ class SingleplayerGameScreen extends Component {
                                 placeholder='Introdu un cuvant...'
                             />
                         </View>
-                        {/* <TouchableOpacity
+                        <TouchableOpacity
                             style={styles.submitButton}
                             onPress={() => alert('1')}>
                             <Text color="azure">TRIMITE</Text>
-                        </TouchableOpacity> */}
-                        <Button title="submit" onPress={this.insertWordHandler} />
+                        </TouchableOpacity>
                     </View>
                     <LoseModal
                         isVisible={this.state.loseModal}
@@ -313,7 +308,7 @@ class SingleplayerGameScreen extends Component {
                         playAgain={() => this.newGame()}
                         exitGame={() => this.navigateHomeScreen()}
                     />
-                </Animated.View>
+                </View>
             </ImageBackground>
         );
     }
