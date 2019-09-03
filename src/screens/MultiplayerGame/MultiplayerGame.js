@@ -250,7 +250,7 @@ class MultiplayerGameScreen extends Component {
                     />
                 </View> : <TouchableOpacity onPress={() => this.setState({ selected: true })}>
                         <View style={styles.alphabet}>
-                            <Text style={styles.letter}>A</Text>
+                            <Text style={styles.letter}>{CONSTANTS.letters[this.state.letterIndex]}</Text>
                         </View>
                     </TouchableOpacity>}
             </ImageBackground>
