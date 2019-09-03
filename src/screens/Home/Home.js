@@ -50,7 +50,7 @@ class HomeScreen extends Component {
                         </View>
                         <View style={styles.aboutLogo}>
                             <Icon
-                                onPress={() => alert('About page or about modal')}
+                                onPress={() => this.props.navigation.navigate('Multiplayer')}
                                 color="azure"
                                 name="question-circle"
                                 size={30}

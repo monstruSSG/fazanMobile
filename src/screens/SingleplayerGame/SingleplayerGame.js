@@ -13,7 +13,6 @@ import LoseModal from '../../components/Modals/LoseModal';
 import WinModal from '../../components/Modals/WinModal';
 import BackgroudImage from '../../assets/back.png';
 import Avatar from '../../assets/b.jpg';
-import * as styles from './SingleplayerStyle';
 
 class SingleplayerGameScreen extends Component {
     static navigationOptions = {
@@ -42,14 +41,7 @@ class SingleplayerGameScreen extends Component {
     }
 
     componentDidMount() {
-        this.props.connectToDb()
-            .then(this.generateStartWord)
-            .then(startWord => this.setState({
-                lastWord: startWord,
-                word: startWord.slice(-2)
-            }))
-
-        this.startGameAnimation();
+        this.props.connectToDb();
 
         if (!this.state.selected) this.letterIncrementInterval = setInterval(() => {
             this.setState(
@@ -58,6 +50,8 @@ class SingleplayerGameScreen extends Component {
                 }), () => {
                     if (this.state.selected) {
                         clearImmediate(this.letterIncrementInterval);
+                        this.startGame();
+                        this.setState({ showTimer: true }, this.firstMove);
                     }
                 })
         }, 500);
@@ -79,6 +73,33 @@ class SingleplayerGameScreen extends Component {
 
     onTimeExpiredHandler = time => {
         if (time < 0) return this.setState({ gameFinished: true, loseModal: true })
+    }
+
+    firstMove = () => {
+        let { word, usedWords } = this.state;
+        let interval = Math.floor(Math.random() * (3000 - 1000) + 1000);
+
+        setTimeout(() => {
+            return this.generateWord(word)
+                .then(word => {
+                    if (!word.length) this.setState({ gameFinished: true, winModal: true });
+
+                    this.setState({ lastWord: word, word: word.slice(-2) });
+                    this.startOpWordAnimation(word);
+                    this.resetTimer();
+
+                    return this.checkWordExistsWithPrefix(word)
+                })
+                .then(exists => {
+                    if (!exists) return Promise.reject({ message: 'GAME_FINISHED_LOSE' })
+                    this.fadeYouIn();
+                    this.fadeOponentOut();
+                })
+                .catch(err => {
+                    if (err.message === 'GAME_FINISHED_LOSE')
+                        this.setState({ gameFinished: true, loseModal: true })
+                })
+        }, interval)
     }
 
     insertWordHandler = () => {
@@ -111,13 +132,18 @@ class SingleplayerGameScreen extends Component {
 
                 //Generate interval between 1000 - 3000
                 let interval = Math.floor(Math.random() * (3000 - 1000) + 1000);
-
+                
+                this.startCurrentWordAnimation(word);
+                
                 setTimeout(() => {
                     // Reset timer
                     this.resetTimer();
 
                     // Start animation for AI generated word
                     this.startOpWordAnimation(nextWord);
+
+                    // Start current word animation
+                    this.startCurrentWordAnimation(nextWord);
 
                     this.fadeOponentOut();
                     this.fadeYouIn();
@@ -126,7 +152,7 @@ class SingleplayerGameScreen extends Component {
                         usedWords: prevState.usedWords.concat([prevState.word, nextWord]),
                         word: nextWord.slice(-2),
                         words: prevState.words.concat([prevState.word, nextWord])
-                    }), () => this.startCurrentWordAnimation(word))
+                    }));
                 }, interval);
 
             })
@@ -136,13 +162,9 @@ class SingleplayerGameScreen extends Component {
             })
     }
 
-    startGameAnimation = () => Animated.timing(this.state.startGameAnimation, {
-        toValue: 1,
-        duration: 800
-    }).start(() => this.setState({ showTimer: true }, () => {
-        //On singleplayer you begin every time => oponent has to be faded out first
-        this.fadeOponentOut();
-    }))
+    startGame = () => {
+        this.fadeYouOut();
+    }
 
     onWordChangeHandler = word => this.setState({ word })
 
@@ -285,11 +307,11 @@ class SingleplayerGameScreen extends Component {
                             style={[styles.oponentInput, styles.currentWordContainer, animatedStyle]}>
                             <Text color="azure" style={styles.currentWord}>{this.state.lastWord}</Text>
                         </Animated.View>
-                        <Animated.View style={[styles.yourLastWordContainer, yourWordAnimationStyle]}>
-                            <Text color={CONSTANTS.buttonColor} style={[styles.center, styles.yourLastWord]}>{this.state.yourLastWord}</Text>
-                        </Animated.View>
-                        <Animated.View style={[styles.opLastWordContainer, opWordAnimationStyle]}>
+                        <Animated.View style={[styles.opLastWordContainer, opWordAnimationStyle, fadeOponent]}>
                             <Text color={CONSTANTS.secondaryColor} style={[styles.center, styles.opLastWord]}>{this.state.opLastWord}</Text>
+                        </Animated.View>
+                        <Animated.View style={[styles.yourLastWordContainer, yourWordAnimationStyle, fadeYou]}>
+                            <Text color={CONSTANTS.buttonColor} style={[styles.center, styles.yourLastWord]}>{this.state.yourLastWord}</Text>
                         </Animated.View>
                     </View>
                     <View style={styles.myInput}>
@@ -321,7 +343,7 @@ class SingleplayerGameScreen extends Component {
                         playAgain={() => this.newGame()}
                         exitGame={() => this.navigateHomeScreen()}
                     />
-                </View> : <TouchableOpacity onPress={() => this.setState({ selected: true })}>
+                </View> : <TouchableOpacity onPress={() => this.setState(prevState => ({ selected: true, word: CONSTANTS.letters[prevState.letterIndex] }))}>
                         <View style={styles.alphabet}>
                             <Text style={styles.letter}>{CONSTANTS.letters[this.state.letterIndex]}</Text>
                         </View>
@@ -330,6 +352,225 @@ class SingleplayerGameScreen extends Component {
         );
     }
 }
+
+const styles = StyleSheet.create({
+    alphabet: {
+        width: '100%',
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    letter: {
+        fontSize: 80
+    },
+    singlePlayerContainer: {
+        flex: 1,
+        alignItems: "center",
+    },
+    logo: {
+        width: '100%',
+        height: '100%'
+    },
+    oponentInput: {
+        width: '80%',
+        alignItems: 'center',
+        fontSize: 20,
+        color: CONSTANTS.buttonColor
+    },
+    center: {
+        textAlign: 'left'
+    },
+    yourLastWordContainer: {
+        borderTopLeftRadius: 40,
+        borderBottomRightRadius: 40,
+        borderBottomLeftRadius: 40,
+        borderTopRightRadius: 40,
+        borderWidth: 2,
+        borderBottomWidth: 2,
+        borderTopWidth: 0,
+        marginTop: 12,
+        borderColor: CONSTANTS.buttonColor,
+        marginLeft: 12,
+        marginRight: 12,
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: "30%",
+        width: "100%"
+    },
+    opLastWordContainer: {
+        borderTopLeftRadius: 40,
+        borderBottomRightRadius: 40,
+        borderBottomLeftRadius: 40,
+        borderTopRightRadius: 40,
+        borderWidth: 2,
+        borderBottomWidth: 2,
+        borderTopWidth: 0,
+        borderColor: CONSTANTS.secondaryColor,
+        marginTop: 12,
+        marginLeft: 12,
+        marginRight: 12,
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: "30%",
+        width: "100%"
+    },
+    currentWordContainer: {
+        borderTopLeftRadius: 40,
+        borderBottomRightRadius: 40,
+        borderBottomLeftRadius: 40,
+        borderTopRightRadius: 40,
+        borderWidth: 2,
+        borderBottomWidth: 2,
+        borderColor: "black",
+        borderTopWidth: 0,
+        marginTop: 12,
+        marginLeft: 12,
+        marginRight: 12,
+        justifyContent: "center",
+        alignItems: "center",
+        height: '30%',
+        width: "100%"
+    },
+    yourLastWord: {
+        fontSize: 20,
+        letterSpacing: 6,
+        fontWeight: 'bold',
+        textTransform: 'uppercase'
+    },
+    opLastWord: {
+        fontSize: 20,
+        letterSpacing: 6,
+        fontWeight: 'bold',
+        textTransform: 'uppercase'
+    },
+    lastWords: {
+        flex: 1,
+        paddingTop: 58,
+        width: '80%',
+        alignItems: "center",
+        justifyContent: "flex-end"
+    },
+    currentWord: {
+        fontSize: 20,
+        letterSpacing: 6,
+        fontWeight: 'bold',
+        textTransform: 'uppercase'
+    },
+    header: {
+        height: '15%',
+        flexDirection: 'row',
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    myContainer: {
+        borderTopLeftRadius: 40,
+        borderBottomLeftRadius: 50,
+        borderRightWidth: 0,
+        borderWidth: 2,
+        borderBottomWidth: 2,
+        borderTopWidth: 0,
+        borderColor: CONSTANTS.buttonColor,
+        width: 120,
+        height: 70
+    },
+    myAvatar: {
+        width: 65,
+        height: 65,
+        position: 'relative',
+        left: 4,
+        resizeMode: 'cover',
+        borderRadius: 35,
+        borderWidth: 1
+    },
+    myName: {
+        position: 'relative',
+        bottom: 44,
+        left: 38,
+        fontSize: 22
+    },
+    computerContainer: {
+        borderTopRightRadius: 40,
+        borderBottomRightRadius: 50,
+        borderLeftWidth: 0,
+        borderWidth: 2,
+        borderBottomWidth: 2,
+        borderTopWidth: 0,
+        borderColor: CONSTANTS.secondaryColor,
+        width: 120,
+        height: 70
+    },
+    computerAvatar: {
+        width: 65,
+        height: 65,
+        position: 'relative',
+        left: 49,
+        bottom: 29,
+        resizeMode: 'cover',
+        borderRadius: 35,
+        borderWidth: 1
+    },
+    computerName: {
+        position: 'relative',
+        right: 46,
+        top: 21,
+        color: CONSTANTS.secondaryColor,
+        fontSize: 22
+    },
+    cell: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    myInput: {
+        flex: 1,
+        flexDirection: 'row',
+        width: "50%",
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    inputText: {
+        borderColor: CONSTANTS.textColor,
+        borderWidth: 0,
+        padding: 0,
+        marginTop: 0,
+        marginBottom: 0,
+    },
+    submitForm: {
+        flexDirection: 'row',
+        borderBottomWidth: 1
+    },
+    textInput: {
+        paddingRight: 6
+    },
+    submitButton: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 70,
+        height: 70,
+        borderRadius: 35,
+        borderWidth: 1,
+        backgroundColor: CONSTANTS.buttonColor
+    },
+    myInputTitle: {
+        flex: 1,
+        justifyContent: "flex-end"
+    },
+    modalViewContainer: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+    },
+    modalDetails: {
+        height: "50%",
+        width: "75%",
+    },
+    loseModal: {
+        width: 50,
+        height: 50
+    }
+});
 
 const mapStateToProps = state => ({
     db: state.words.db
