@@ -28,7 +28,7 @@ export default class Timer extends Component {
 
     animation = () => {
         Animated.timing(this.state.animation, {
-            toValue: 2,
+            toValue: 1.5,
             duration: 500
         }).start(() => Animated.timing(this.state.animation, {
             toValue: 1,
@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
     },
     counter: {
         fontSize: 30,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: "azure"
     }
 });
