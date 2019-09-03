@@ -41,10 +41,6 @@ class MultiplayerGameScreen extends Component {
     }
 
     componentDidMount() {
-        this.props.socket.socket.on('startGame', data => {
-            console.log(data, 'DASDADASDSA')
-       });
-
         this.props.socket.socket.on('gotWord', this.onGotWordHandler);
 
         if (!this.state.selected) this.letterIncrementInterval = setInterval(() => {
