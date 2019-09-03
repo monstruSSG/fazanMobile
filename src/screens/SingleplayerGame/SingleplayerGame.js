@@ -35,7 +35,7 @@ class SingleplayerGameScreen extends Component {
         gameFinished: false,
         showTimer: false,
         loseModal: false,
-        winModal: false,
+        winModal: true,
         selected: false,
         letterIndex: 0
     }
@@ -177,7 +177,8 @@ class SingleplayerGameScreen extends Component {
             opLastWord: '',
             yourLastWord: '',
             gameFinished: false,
-            loseModal: false
+            loseModal: false,
+            winModal: true
         }))
 
     startCurrentWordAnimation = word => {
