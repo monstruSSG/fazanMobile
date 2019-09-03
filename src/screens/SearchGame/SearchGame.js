@@ -31,13 +31,21 @@ class SearchGameScreen extends Component {
 
     onPlayGameHandler = () => {
         this.props.createSocketConnection().then(socket => {
-            socket.on('reqConnectedUsers', { name: "Silviu123" })
+            socket.emit('reqConnectedUsers', { name: "Bogdan113" })
+
             socket.on('recConnectedUsers', data => {
-                if (data.users.length) this.socket.emit('invitationSent', { socketId: data.users[0] })
+                if (data.users.length) socket.emit('invitationSent', { socketId: data.users[0] })
             })
+
             socket.on('invitationReceived', data => {
-                socket.emit('invitationAccepted', { socketId: data.socketId })
-                this.navigateMultiplayerScreen()
+                this.props.setOponentSocketId(data.socketId);
+                socket.emit('invitationAccepted', { socketId: data.socketId });
+                this.navigateMultiplayerScreen();
+            });
+
+            socket.on('startGame', data => {
+                this.props.setOponentSocketId(data.socketId)
+                this.navigateMultiplayerScreen();
             })
         })
     }
@@ -55,15 +63,19 @@ class SearchGameScreen extends Component {
                     </View>
                     <View style={styles.oponentList}>
                         <FlatList
-                            data={this.state.users.map(user => ({ ...user, key: user._id }))}
+                            data={this.state.users.map(user => ({ ...user, key: user._id || 'asdasd' }))}
                             renderItem={({ item }) => <OponentDetails
-                                name={item.username}
-                                points={item.score}
+                                name={item.username || 'xulescu'}
+                                points={item.score || 123}
                             />}
                         />
                     </View>
                     <View style={styles.playGameButton}>
-                        <Button color={CONSTANTS.secondaryColor} onPress={this.onPlayGameHandler}><Text style={{ color: "azure", fontWeight: 'bold' }}>PLAY RANDOM</Text></Button>
+                        <Button color={CONSTANTS.secondaryColor} onPress={this.onPlayGameHandler}>
+                            <Text style={{ color: "azure", fontWeight: 'bold' }}>
+                                PLAY RANDOM
+                            </Text>
+                        </Button>
                     </View>
                 </View>
             </ImageBackground>
@@ -106,7 +118,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    createSocketConnection: () => dispatch(SOCKET.createSocketConnection())
+    createSocketConnection: () => dispatch(SOCKET.createSocketConnection()),
+    setOponentSocketId: socketId => dispatch(SOCKET.setOponentSocketId(socketId))
 });
 
 export default connect(

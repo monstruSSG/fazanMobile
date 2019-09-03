@@ -41,9 +41,11 @@ class MultiplayerGameScreen extends Component {
     }
 
     componentDidMount() {
-        // this.props.socket.socket.on('startGame', data => {
-        //     console.log("GAME START", data)
-        // })
+        this.props.socket.socket.on('startGame', data => {
+            console.log(data, 'DASDADASDSA')
+       });
+
+        this.props.socket.socket.on('gotWord', this.onGotWordHandler);
 
         if (!this.state.selected) this.letterIncrementInterval = setInterval(() => {
             this.setState(
@@ -57,6 +59,10 @@ class MultiplayerGameScreen extends Component {
         }, 500);
     }
 
+    onGotWordHandler = word => {
+        console.log(word, 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+    }
+
     navigateSearchGame = () => this.props.navigation.navigate('SearchGame');
 
     exitGame = () => {
@@ -68,7 +74,8 @@ class MultiplayerGameScreen extends Component {
 
     insertWordHandler = () => {
         let { word, usedWords } = this.state;
-        alert(word)
+
+        this.props.socket.socket.emit('sendWord', { word });
     }
 
     onWordChangeHandler = word => this.setState({ word })
