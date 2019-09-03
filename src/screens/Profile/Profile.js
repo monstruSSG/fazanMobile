@@ -25,6 +25,8 @@ class ProfileScreen extends Component {
     }
 
     render() {
+        const losesProcent = (this.state.me.wins / (this.state.me.loses + this.state.me.wins)) * 100
+
         return (
             <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
                 <View style={styles.content}>
@@ -39,7 +41,7 @@ class ProfileScreen extends Component {
                                 <Pie
                                     radius={50}
                                     innerRadius={45}
-                                    series={[60]}
+                                    series={[losesProcent? losesProcent: 100]}
                                     colors={[CONSTANTS.buttonColor]}
                                     backgroundColor={CONSTANTS.secondaryColor} />
                                 <View style={styles.insidePie}>

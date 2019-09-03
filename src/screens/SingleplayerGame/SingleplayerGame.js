@@ -24,6 +24,9 @@ class SingleplayerGameScreen extends Component {
         animation: new Animated.Value(1),
         animationOpWord: new Animated.Value(0),
         animationYourWord: new Animated.Value(0),
+        fadeYou: new Animated.Value(1),
+        fadeOponent: new Animated.Value(1),
+        startGameAnimation: new Animated.Value(0),
         usedWords: [],
         words: [],
         word: '',
@@ -31,7 +34,7 @@ class SingleplayerGameScreen extends Component {
         opLastWord: '',
         yourLastWord: '',
         gameFinished: false,
-        showTimer: true,
+        showTimer: false,
         loseModal: false,
         winModal: false
     }
@@ -43,6 +46,8 @@ class SingleplayerGameScreen extends Component {
                 lastWord: startWord,
                 word: startWord.slice(-2)
             }))
+
+        this.startGameAnimation();
     }
 
     generateStartWord = () => this.props.generateStartWord();
@@ -82,24 +87,35 @@ class SingleplayerGameScreen extends Component {
                 // Start animation for user inserted word
                 this.startYourWordAnimation(word);
 
-                return this.generateWord(word);
+                this.fadeYouOut();
+                this.fadeOponentIn();
+
+                return this.generateStartWord();
             })
             .then(nextWord => {
-
                 if (nextWord.length < 1) return Promise.reject({ message: 'GAME_FINISHED_LOSE' })
                 if (usedWords.includes(nextWord)) return Promise.reject({ message: 'GAME_FINISHED_WIN' })
 
-                // Reset timer
-                this.resetTimer();
+                //Generate interval between 1000 - 3000
+                let interval = Math.floor(Math.random() * (3000 - 1000) + 1000);
 
-                // Start animation for AI generated word
-                this.startOpWordAnimation(nextWord);
+                setTimeout(() => {
+                    // Reset timer
+                    this.resetTimer();
 
-                this.setState(prevState => ({
-                    usedWords: prevState.usedWords.concat([prevState.word, nextWord]),
-                    word: nextWord.slice(-2),
-                    words: prevState.words.concat([prevState.word, nextWord])
-                }), () => this.startCurrentWordAnimation(word))
+                    // Start animation for AI generated word
+                    this.startOpWordAnimation(nextWord);
+
+                    this.fadeOponentOut();
+                    this.fadeYouIn();
+
+                    this.setState(prevState => ({
+                        usedWords: prevState.usedWords.concat([prevState.word, nextWord]),
+                        word: nextWord.slice(-2),
+                        words: prevState.words.concat([prevState.word, nextWord])
+                    }), () => this.startCurrentWordAnimation(word))
+                }, interval);
+
             })
             .catch(err => {
                 if (err.message === 'GAME_FINISHED_WIN') return this.setState({ winModal: true, gameFinished: true })
@@ -107,10 +123,15 @@ class SingleplayerGameScreen extends Component {
             })
     }
 
-    onWordChangeHandler = word => {
+    startGameAnimation = () => Animated.timing(this.state.startGameAnimation, {
+        toValue: 1,
+        duration: 800
+    }).start(() => this.setState({ showTimer: true }, () => {
+        //On singleplayer you begin every time => oponent has to be faded out first
+        this.fadeOponentOut();
+    }))
 
-        this.setState({ word })
-    }
+    onWordChangeHandler = word => this.setState({ word })
 
     newGame = () => this.generateStartWord()
         .then(firstWord => this.setState({
@@ -165,6 +186,26 @@ class SingleplayerGameScreen extends Component {
         })
     }
 
+    fadeYouOut = () => Animated.timing(this.state.fadeYou, {
+        toValue: 0.25,
+        duration: 500
+    }).start()
+
+    fadeYouIn = () => Animated.timing(this.state.fadeYou, {
+        toValue: 1,
+        duration: 300
+    }).start()
+
+    fadeOponentOut = () => Animated.timing(this.state.fadeOponent, {
+        toValue: 0.25,
+        duration: 500
+    }).start()
+
+    fadeOponentIn = () => Animated.timing(this.state.fadeOponent, {
+        toValue: 1,
+        duration: 300
+    }).start()
+
     resetTimer = () => this.setState({
         showTimer: false
     }, () => this.setState({
@@ -172,6 +213,18 @@ class SingleplayerGameScreen extends Component {
     }))
 
     render() {
+        const startGameAnimation = {
+            opacity: this.state.startGameAnimation
+        }
+
+        const fadeYou = {
+            opacity: this.state.fadeYou
+        }
+
+        const fadeOponent = {
+            opacity: this.state.fadeOponent
+        }
+
         const animatedStyle = {
             transform: [
                 {
@@ -196,27 +249,27 @@ class SingleplayerGameScreen extends Component {
 
         return (
             <ImageBackground source={BackgroudImage} style={{ width: '100%', height: '100%' }}>
-                <KeyboardAvoidingView
-                    style={styles.singlePlayerContainer} >
+                <Animated.View
+                    style={[styles.singlePlayerContainer, startGameAnimation]} >
                     <View style={styles.header}>
-                        <View style={[styles.cell]}>
+                        <Animated.View style={[styles.cell, fadeYou]}>
                             <View style={styles.myContainer}>
                                 <Image source={Avatar} style={styles.myAvatar} />
                                 <Text style={styles.myName} color={CONSTANTS.buttonColor}>MSR</Text>
                             </View>
-                        </View>
+                        </Animated.View>
                         <View style={styles.cell}>
                             {!this.state.gameFinished && this.state.showTimer && <Timer
                                 count={300}
                                 onTimeExpired={this.onTimeExpiredHandler}
                             />}
                         </View>
-                        <View style={[styles.cell]}>
+                        <Animated.View style={[styles.cell, fadeOponent]}>
                             <View style={styles.computerContainer}>
                                 <Text style={styles.computerName} color={CONSTANTS.secondaryColor}>GB</Text>
                                 <Image source={Avatar} style={styles.computerAvatar} />
                             </View>
-                        </View>
+                        </Animated.View>
                     </View>
                     <View style={styles.lastWords}>
                         <Animated.View
@@ -239,11 +292,12 @@ class SingleplayerGameScreen extends Component {
                                 placeholder='Introdu un cuvant...'
                             />
                         </View>
-                        <TouchableOpacity
+                        {/* <TouchableOpacity
                             style={styles.submitButton}
-                            onPress={this.insertWordHandler}>
+                            onPress={() => alert('1')}>
                             <Text color="azure">TRIMITE</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
+                        <Button title="submit" onPress={this.insertWordHandler} />
                     </View>
                     <LoseModal
                         isVisible={this.state.loseModal}
@@ -259,7 +313,7 @@ class SingleplayerGameScreen extends Component {
                         playAgain={() => this.newGame()}
                         exitGame={() => this.navigateHomeScreen()}
                     />
-                </KeyboardAvoidingView>
+                </Animated.View>
             </ImageBackground>
         );
     }
