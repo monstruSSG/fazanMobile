@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, KeyboardAvoidingView, StyleSheet, Animated, Button, ImageBackground, Image } from 'react-native';
+import { View, StyleSheet, Animated, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 import * as WORDS from '../../store/actions/words';
@@ -13,7 +13,6 @@ import LoseModal from '../../components/Modals/LoseModal';
 import WinModal from '../../components/Modals/WinModal';
 import BackgroudImage from '../../assets/back.png';
 import Avatar from '../../assets/b.jpg';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 class SingleplayerGameScreen extends Component {
     static navigationOptions = {
@@ -36,7 +35,9 @@ class SingleplayerGameScreen extends Component {
         gameFinished: false,
         showTimer: false,
         loseModal: false,
-        winModal: false
+        winModal: false,
+        selected: false,
+        letterIndex: 0
     }
 
     componentDidMount() {
@@ -48,6 +49,17 @@ class SingleplayerGameScreen extends Component {
             }))
 
         this.startGameAnimation();
+
+        if (!this.state.selected) this.letterIncrementInterval = setInterval(() => {
+            this.setState(
+                prevState => ({
+                    letterIndex: (prevState.letterIndex + 1) % 26
+                }), () => {
+                    if (this.state.selected) {
+                        clearImmediate(this.letterIncrementInterval);
+                    }
+                })
+        }, 500);
     }
 
     generateStartWord = () => this.props.generateStartWord();
@@ -245,7 +257,7 @@ class SingleplayerGameScreen extends Component {
 
         return (
             <ImageBackground source={BackgroudImage} style={{ width: '100%', height: '100%' }}>
-                <View
+                {this.state.selected ? <View
                     style={[styles.singlePlayerContainer]} >
                     <View style={styles.header}>
                         <Animated.View style={[styles.cell, fadeYou]}>
@@ -290,7 +302,7 @@ class SingleplayerGameScreen extends Component {
                         </View>
                         <TouchableOpacity
                             style={styles.submitButton}
-                            onPress={() => alert('1')}>
+                            onPress={this.insertWordHandler}>
                             <Text color="azure">TRIMITE</Text>
                         </TouchableOpacity>
                     </View>
@@ -308,13 +320,26 @@ class SingleplayerGameScreen extends Component {
                         playAgain={() => this.newGame()}
                         exitGame={() => this.navigateHomeScreen()}
                     />
-                </View>
+                </View> : <TouchableOpacity onPress={() => this.setState({ selected: true })}>
+                        <View style={styles.alphabet}>
+                            <Text style={styles.letter}>{CONSTANTS.letters[this.state.letterIndex]}</Text>
+                        </View>
+                    </TouchableOpacity>}
             </ImageBackground>
         );
     }
 }
 
 const styles = StyleSheet.create({
+    alphabet: {
+        width: '100%',
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    letter: {
+        fontSize: 80
+    },  
     singlePlayerContainer: {
         flex: 1,
         alignItems: "center",
