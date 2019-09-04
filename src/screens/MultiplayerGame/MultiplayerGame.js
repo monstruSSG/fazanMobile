@@ -41,8 +41,9 @@ class MultiplayerGameScreen extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props, 'PROPSSS')
-        this.props.socket.on('gotWord', this.onGotWordHandler);
+        this.props.socket.on('gotWord', data => {
+            //Vine verificat
+        });
 
         if (!this.state.selected) this.letterIncrementInterval = setInterval(() => {
             this.setState(
@@ -57,14 +58,13 @@ class MultiplayerGameScreen extends Component {
     }
 
     onGotWordHandler = word => {
-        console.log(word, 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+        alert(word, 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
     }
 
     navigateSearchGame = () => this.props.navigation.navigate('SearchGame');
 
     exitGame = () => {
         this.props.closeSocketConnection().then(() => {
-            console.log(this.props.socket)
             this.navigateSearchGame()
         });
     }
@@ -72,7 +72,7 @@ class MultiplayerGameScreen extends Component {
     insertWordHandler = () => {
         let { word, usedWords } = this.state;
 
-        this.props.socket.emit('sendWord', { word });
+        this.props.socket.emit('sendWord', { word, socketId: this.props.oponentSocketId });
     }
 
     onWordChangeHandler = word => this.setState({ word })
@@ -483,7 +483,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
     socket: state.socket.socket,
-    oponentSocketId: state.oponentSocketId
+    oponentSocketId: state.socket.oponentSocketId
 });
 
 const mapDispatchToProps = dispatch => ({
