@@ -8,11 +8,12 @@ export default {
     secondaryColor: '#33691E',
     thirdColor: '#01579B',
     socket: {
-        socketURL: "http://192.168.254.68"
+        socketURL: "http://192.168.43.241"
     },
     db: {
         name: 'fazanWords.db'
     },
     backendUrl: '',
-    letters: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    letters: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 };

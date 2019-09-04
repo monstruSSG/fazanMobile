@@ -41,14 +41,7 @@ class SingleplayerGameScreen extends Component {
     }
 
     componentDidMount() {
-        this.props.connectToDb()
-            .then(this.generateStartWord)
-            .then(startWord => this.setState({
-                lastWord: startWord,
-                word: startWord.slice(-2)
-            }))
-
-        this.startGameAnimation();
+        this.props.connectToDb();
 
         if (!this.state.selected) this.letterIncrementInterval = setInterval(() => {
             this.setState(
@@ -57,6 +50,8 @@ class SingleplayerGameScreen extends Component {
                 }), () => {
                     if (this.state.selected) {
                         clearImmediate(this.letterIncrementInterval);
+                        this.startGame();
+                        this.setState({ showTimer: true }, this.firstMove);
                     }
                 })
         }, 500);
@@ -78,6 +73,33 @@ class SingleplayerGameScreen extends Component {
 
     onTimeExpiredHandler = time => {
         if (time < 0) return this.setState({ gameFinished: true, loseModal: true })
+    }
+
+    firstMove = () => {
+        let { word, usedWords } = this.state;
+        let interval = Math.floor(Math.random() * (3000 - 1000) + 1000);
+
+        setTimeout(() => {
+            return this.generateWord(word)
+                .then(word => {
+                    if (!word.length) this.setState({ gameFinished: true, winModal: true });
+
+                    this.setState({ lastWord: word, word: word.slice(-2) });
+                    this.startOpWordAnimation(word);
+                    this.resetTimer();
+
+                    return this.checkWordExistsWithPrefix(word)
+                })
+                .then(exists => {
+                    if (!exists) return Promise.reject({ message: 'GAME_FINISHED_LOSE' })
+                    this.fadeYouIn();
+                    this.fadeOponentOut();
+                })
+                .catch(err => {
+                    if (err.message === 'GAME_FINISHED_LOSE')
+                        this.setState({ gameFinished: true, loseModal: true })
+                })
+        }, interval)
     }
 
     insertWordHandler = () => {
@@ -110,13 +132,18 @@ class SingleplayerGameScreen extends Component {
 
                 //Generate interval between 1000 - 3000
                 let interval = Math.floor(Math.random() * (3000 - 1000) + 1000);
-
+                
+                this.startCurrentWordAnimation(word);
+                
                 setTimeout(() => {
                     // Reset timer
                     this.resetTimer();
 
                     // Start animation for AI generated word
                     this.startOpWordAnimation(nextWord);
+
+                    // Start current word animation
+                    this.startCurrentWordAnimation(nextWord);
 
                     this.fadeOponentOut();
                     this.fadeYouIn();
@@ -125,7 +152,7 @@ class SingleplayerGameScreen extends Component {
                         usedWords: prevState.usedWords.concat([prevState.word, nextWord]),
                         word: nextWord.slice(-2),
                         words: prevState.words.concat([prevState.word, nextWord])
-                    }), () => this.startCurrentWordAnimation(word))
+                    }));
                 }, interval);
 
             })
@@ -135,13 +162,9 @@ class SingleplayerGameScreen extends Component {
             })
     }
 
-    startGameAnimation = () => Animated.timing(this.state.startGameAnimation, {
-        toValue: 1,
-        duration: 800
-    }).start(() => this.setState({ showTimer: true }, () => {
-        //On singleplayer you begin every time => oponent has to be faded out first
-        this.fadeOponentOut();
-    }))
+    startGame = () => {
+        this.fadeYouOut();
+    }
 
     onWordChangeHandler = word => this.setState({ word })
 
@@ -284,11 +307,11 @@ class SingleplayerGameScreen extends Component {
                             style={[styles.oponentInput, styles.currentWordContainer, animatedStyle]}>
                             <Text color="azure" style={styles.currentWord}>{this.state.lastWord}</Text>
                         </Animated.View>
-                        <Animated.View style={[styles.yourLastWordContainer, yourWordAnimationStyle]}>
-                            <Text color={CONSTANTS.buttonColor} style={[styles.center, styles.yourLastWord]}>{this.state.yourLastWord}</Text>
-                        </Animated.View>
-                        <Animated.View style={[styles.opLastWordContainer, opWordAnimationStyle]}>
+                        <Animated.View style={[styles.opLastWordContainer, opWordAnimationStyle, fadeOponent]}>
                             <Text color={CONSTANTS.secondaryColor} style={[styles.center, styles.opLastWord]}>{this.state.opLastWord}</Text>
+                        </Animated.View>
+                        <Animated.View style={[styles.yourLastWordContainer, yourWordAnimationStyle, fadeYou]}>
+                            <Text color={CONSTANTS.buttonColor} style={[styles.center, styles.yourLastWord]}>{this.state.yourLastWord}</Text>
                         </Animated.View>
                     </View>
                     <View style={styles.myInput}>
@@ -320,7 +343,7 @@ class SingleplayerGameScreen extends Component {
                         playAgain={() => this.newGame()}
                         exitGame={() => this.navigateHomeScreen()}
                     />
-                </View> : <TouchableOpacity onPress={() => this.setState({ selected: true })}>
+                </View> : <TouchableOpacity onPress={() => this.setState(prevState => ({ selected: true, word: CONSTANTS.letters[prevState.letterIndex] }))}>
                         <View style={styles.alphabet}>
                             <Text style={styles.letter}>{CONSTANTS.letters[this.state.letterIndex]}</Text>
                         </View>
@@ -339,7 +362,7 @@ const styles = StyleSheet.create({
     },
     letter: {
         fontSize: 80
-    },  
+    },
     singlePlayerContainer: {
         flex: 1,
         alignItems: "center",
