@@ -9,6 +9,28 @@ import FbButton from '../../components/AuthButtons/FbButton/FbButton';
 import BackgroundImg from '../../assets/back.png';
 import Logo from '../../assets/angryLogo.png';
 
+import { LoginManager, AccessToken } from 'react-native-fbsdk';
+
+const initUser = (token)  => {
+    fetch('https://graph.facebook.com/v2.5/me?fields=email,name,friends&access_token=' + token)
+    .then((response) => response.json())
+    .then((json) => {
+      // Some user object has been set up somewhere, build that user here
+      user.name = json.name
+      user.id = json.id
+      user.user_friends = json.friends
+      user.email = json.email
+      user.username = json.name
+      user.loading = false
+      user.loggedIn = true
+      user.avatar = setAvatar(json.id)  
+      console.log(json, 'USER')    
+    })
+    .catch(() => {
+      reject('ERROR GETTING DATA FROM FACEBOOK')
+    })
+  }
+  
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -20,6 +42,23 @@ class HomeScreen extends Component {
     navigateSearchGameScreen = () => this.props.navigation.navigate('SearchGame');
     navigateProfileScreen = () => this.props.navigation.navigate('Profile');
 
+    
+
+    async loginHandler() {
+        try {
+            let result = await LoginManager.logInWithPermissions(['public_profile'])
+            if(result.isCancelled) {
+                return alert('Canceled')
+            }
+
+            let token = await AccessToken.getCurrentAccessToken()
+            console.log(token, 'TOKEN')
+            initUser(token.accessToken)
+
+        } catch (e) {
+            console.log('ERROR ' + e)
+        }
+    }
     render() {
         return (
             <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
@@ -56,6 +95,7 @@ class HomeScreen extends Component {
                                 size={30}
                                 style={styles.userProfile} />
                         </View>
+                        <Button title="FACEBOOK LOGIN" onPress={this.loginHandler} />
                     </View>
                 </View>
             </ImageBackground>
