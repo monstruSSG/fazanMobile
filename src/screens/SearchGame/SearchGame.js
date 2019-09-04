@@ -8,10 +8,10 @@ import { getUsers } from '../../utils/requests';
 import Button from '../../components/UI/Button/Button'
 import Input from '../../components/UI/DefaultInput/DefaultInput'
 import OponentDetails from '../../components/OponentDetails/OponentDetails';
-import Header from '../../components/Header/HeaderWithInput'
+import Header from '../../components/Header/HeaderWithInput';
+import SideDrawer from '../../components/Modals/SideDrawer';
 
 import BackgroundImg from '../../assets/back.png';
-
 class SearchGameScreen extends Component {
 
     static navigationOptions = {
@@ -19,7 +19,8 @@ class SearchGameScreen extends Component {
     }
 
     state = {
-        users: []
+        users: [],
+        sideState: false
     }
 
     componentDidMount() {
@@ -54,12 +55,20 @@ class SearchGameScreen extends Component {
         this.socket.disconnect();
     }
 
+    setSideDrawerStateHandler = state => this.setState({ sideState: state })
+    closeSideDrawerHandler = () => {
+        this.setState({ sideState: false }, () => console.log(this.state.sideState))
+    }
+
     render() {
         return (
             <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
                 <View style={styles.searchGame}>
+                    
                     <View style={styles.inputForm}>
-                        <Header />
+                        <Header 
+                            setSideDrawer={() => this.setSideDrawerStateHandler(true)}
+                            />
                     </View>
                     <View style={styles.oponentList}>
                         <FlatList
@@ -77,6 +86,7 @@ class SearchGameScreen extends Component {
                             </Text>
                         </Button>
                     </View>
+                    <SideDrawer isVisible={this.state.sideState} closeSideDrawer={this.closeSideDrawerHandler}/>
                 </View>
             </ImageBackground>
 
@@ -89,6 +99,9 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center"
     },
+    sidedrawerContainer: {
+    },
+
     searchTitle: {
         fontWeight: "bold",
         fontSize: 32

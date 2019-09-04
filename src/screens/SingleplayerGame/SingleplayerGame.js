@@ -177,7 +177,8 @@ class SingleplayerGameScreen extends Component {
             opLastWord: '',
             yourLastWord: '',
             gameFinished: false,
-            loseModal: false
+            loseModal: false,
+            winModal: false
         }))
 
     startCurrentWordAnimation = word => {

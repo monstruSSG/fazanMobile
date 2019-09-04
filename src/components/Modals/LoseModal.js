@@ -20,36 +20,29 @@ const loseModal = props => (
             <View style={{
                 width: 300,
                 height: 400,
-                borderColor: CONSTANTS.buttonColor,
+                borderColor: 'white',
                 borderWidth: 5,
                 borderRadius: 30,
                 backgroundColor: 'white',
                 elevation: 20,
             }}>
                 <View style={styles.titleContainer}>
-                    <Image style={styles.title} source={props.title} />
+                    <Text color="azure" style={styles.titleText}>AI PIERDUT !</Text>
+                    <Text color="azure" style={[styles.titleText, styles.subtitleText]}>STIU CA POTI MAI MULT</Text>
                 </View>
                 <View style={styles.infoAboutYou}>
                     <View style={styles.oponentWord}>
-                        <Text style={styles.infoTitle}>
-                            Cuvantul adversarului
-                    </Text>
-                        <Text>
-                            restaurant
-                    </Text>
+                        <Text style={styles.infoTitle}>Cuvantul adversarului</Text>
+                        <Text>restaurant</Text>
                     </View>
                     <View style={styles.currentPosition}>
-                        <Text style={styles.infoTitle}>
-                            Pozitia curenta
-                    </Text>
-                        <Text>
-                            12
-                    </Text>
+                        <Text style={styles.infoTitle}>Pozitia curenta</Text>
+                        <Text>12</Text>
                     </View>
                 </View>
                 <View style={styles.options}>
-                    <Button onPress={props.playAgain} color={CONSTANTS.buttonColor}>Joaca Dinou</Button>
-                    <Button onPress={props.exitGame} color={CONSTANTS.buttonColor}>Iesi</Button>
+                    <Button onPress={props.playAgain} width={120}   color={CONSTANTS.secondaryColor}>Joaca Dinou</Button>
+                    <Button onPress={props.exitGame}  width={120}  color={CONSTANTS.buttonColor}>Iesi</Button>
                 </View>
             </View>
         </View>
@@ -65,14 +58,26 @@ const styles = StyleSheet.create({
     loseModalView: {
         width: 100,
         height: 100,
-        backgroundColor: 'yellow'
     },
     titleContainer: {
         width: "100%",
+        height: "30%",
         alignItems: "center",
+        justifyContent: "center",
         backgroundColor: CONSTANTS.buttonColor,
         borderTopLeftRadius: 25,
-        borderTopRightRadius: 25
+        borderTopRightRadius: 25,
+        borderBottomLeftRadius: 25,
+        borderBottomRightRadius: 25
+    },
+    titleText: {
+        color: "azure",
+        letterSpacing: 4,
+        fontSize: 34,
+        paddingBottom: 8
+    },
+    subtitleText: {
+        fontSize: 10
     },
     title: {
         width: "100%",
@@ -89,16 +94,26 @@ const styles = StyleSheet.create({
         letterSpacing: 4
     },
     oponentWord: {
-        borderBottomColor: 'black',
-        borderBottomWidth: 1,
+        borderColor: CONSTANTS.buttonColor,
+        borderWidth: 2,
+        borderTopWidth: 0,
+        borderTopLeftRadius: 40,
+        borderBottomRightRadius: 40,
+        borderBottomLeftRadius: 40,
+        borderTopRightRadius: 40,
         width: '75%',
         marginBottom: 24,
         marginTop: 10,
         paddingBottom: 12
     },
     currentPosition: {
-        borderBottomColor: 'black',
-        borderBottomWidth: 1,
+        borderColor: CONSTANTS.buttonColor,
+        borderWidth: 2,
+        borderBottomWidth: 0,
+        borderTopLeftRadius: 40,
+        borderBottomRightRadius: 40,
+        borderBottomLeftRadius: 40,
+        borderTopRightRadius: 40,
         width: '75%',
         paddingBottom: 12
     },

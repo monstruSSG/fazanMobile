@@ -10,7 +10,7 @@ export default props => {
         <View style={[styles.content, props.contentStyles]}>
             <View style={styles.navigate}>
                 <TouchableOpacity
-                    onPress={props.navigate}
+                    onPress={props.setSideDrawer}
                     style={[styles.fullAndCenter, styles.menuIcon]}>
                     <View>
                         <Icon name='navicon' size={30} color={CONSTANTS.textColor} />
