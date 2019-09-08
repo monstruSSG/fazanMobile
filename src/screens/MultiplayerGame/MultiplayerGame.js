@@ -12,6 +12,7 @@ import LoseTitle from '../../assets/loseTitle3.png';
 import WinTitle from '../../assets/winmessage.png';
 import LoseModal from '../../components/Modals/LoseModal';
 import WinModal from '../../components/Modals/WinModal';
+import Timer from '../../components/Timer/Timer';
 
 
 class MultiplayerGameScreen extends Component {
@@ -33,32 +34,33 @@ class MultiplayerGameScreen extends Component {
         opLastWord: '',
         yourLastWord: '',
         gameFinished: false,
-        showTimer: false,
+        showTimer: true,
         loseModal: false,
         winModal: false,
         selected: false,
-        letterIndex: 0
+        letterIndex: 0,
+        turn: false
     }
 
     componentDidMount() {
-        this.props.socket.on('gotWord', data => {
-            //Vine verificat
-        });
+        this.props.socket.on('gotWord', data => this.onGotWordHandler(data.word));
 
-        if (!this.state.selected) this.letterIncrementInterval = setInterval(() => {
-            this.setState(
-                prevState => ({
-                    letterIndex: (prevState.letterIndex + 1) % 26
-                }), () => {
-                    if (this.state.selected) {
-                        clearImmediate(this.letterIncrementInterval);
-                    }
-                })
-        }, 500);
+        this.props.socket.on('wordNotExists', data => this.wordNotExistsHandler(data.exists))
     }
 
     onGotWordHandler = word => {
-        alert(word, 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+        this.startCurrentWordAnimation(word);
+        this.setState({ turn: true, word: word.slice(-2), lastWord: word });
+        this.startOpWordAnimation(word);
+        this.fadeOponentOut();
+        this.fadeYouIn();
+        this.resetTimer();
+    }
+
+    wordNotExistsHandler = exists => {
+        if (!exists) return alert('Here let the user know that the inserted word does not exist');
+        this.resetTimer();
+        return this.startCurrentWordAnimation(this.state.word)
     }
 
     navigateSearchGame = () => this.props.navigation.navigate('SearchGame');
@@ -73,21 +75,17 @@ class MultiplayerGameScreen extends Component {
         let { word, usedWords } = this.state;
 
         this.props.socket.emit('sendWord', { word, socketId: this.props.oponentSocketId });
+
+        this.startYourWordAnimation(word);
+        this.fadeYouOut();
+        this.fadeOponentIn();
+    }
+
+    onTimeExpiredHandler = () => {
+        this.props.socket.emit('youLost', { socketId: this.props.oponentSocketId })
     }
 
     onWordChangeHandler = word => this.setState({ word })
-
-    newGame = () => this.generateStartWord()
-        .then(firstWord => this.setState({
-            usedWords: [],
-            words: [],
-            word: firstWord.slice(-2),
-            lastWord: firstWord,
-            opLastWord: '',
-            yourLastWord: '',
-            gameFinished: false,
-            loseModal: false
-        }))
 
     startCurrentWordAnimation = word => {
         Animated.timing(this.state.animation, {
@@ -189,7 +187,7 @@ class MultiplayerGameScreen extends Component {
 
         return (
             <ImageBackground source={BackgroudImage} style={{ width: '100%', height: '100%' }}>
-                {this.state.selected ? <View
+                <View
                     style={[styles.singlePlayerContainer]} >
                     <View style={styles.header}>
                         <Animated.View style={[styles.cell, fadeYou]}>
@@ -252,11 +250,7 @@ class MultiplayerGameScreen extends Component {
                         playAgain={() => this.newGame()}
                         exitGame={() => this.navigateHomeScreen()}
                     />
-                </View> : <TouchableOpacity onPress={() => this.setState({ selected: true })}>
-                        <View style={styles.alphabet}>
-                            <Text style={styles.letter}>{CONSTANTS.letters[this.state.letterIndex]}</Text>
-                        </View>
-                    </TouchableOpacity>}
+                </View>
             </ImageBackground>
         );
     }
