@@ -32,6 +32,7 @@ class SearchGameScreen extends Component {
 
     onPlayGameHandler = () => {
         this.props.createSocketConnection().then(socket => {
+            console.log("FOR ME", socket)
             socket.emit('reqConnectedUsers', { name: "Bogdan113" })
 
             socket.on('recConnectedUsers', data => {

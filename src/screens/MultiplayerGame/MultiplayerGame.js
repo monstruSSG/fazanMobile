@@ -43,7 +43,16 @@ class MultiplayerGameScreen extends Component {
     componentDidMount() {
         this.props.socket.on('gotWord', data => {
             //Vine verificat
+            this.onGotWordHandler(data.word)
         });
+
+        this.props.socket.on('gameOver', data => {
+            this.setState({ loseModal: true })
+        })
+
+        this.props.socket.on('youWon', data => {
+            this.setState({ winModal: true })
+        })
 
         if (!this.state.selected) this.letterIncrementInterval = setInterval(() => {
             this.setState(
@@ -58,10 +67,11 @@ class MultiplayerGameScreen extends Component {
     }
 
     onGotWordHandler = word => {
-        alert(word, 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
+        this.setState({ opLastWord: word, lastWord: word })
     }
 
     navigateSearchGame = () => this.props.navigation.navigate('SearchGame');
+    navigateHomeScreen = () => this.props.navigation.navigate('Home');
 
     exitGame = () => {
         this.props.closeSocketConnection().then(() => {
@@ -71,7 +81,7 @@ class MultiplayerGameScreen extends Component {
 
     insertWordHandler = () => {
         let { word, usedWords } = this.state;
-
+    
         this.props.socket.emit('sendWord', { word, socketId: this.props.oponentSocketId });
     }
 
