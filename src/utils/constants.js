@@ -8,7 +8,7 @@ export default {
     secondaryColor: '#33691E',
     thirdColor: '#01579B',
     socket: {
-        socketURL: "http://192.168.43.241"
+        socketURL: "http://192.168.1.103"
     },
     db: {
         name: 'fazanWords.db'
