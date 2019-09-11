@@ -60,10 +60,38 @@ class MultiplayerGameScreen extends Component {
     wordNotExistsHandler = exists => {
         if (!exists) return alert('Here let the user know that the inserted word does not exist');
         this.resetTimer();
-        return this.startCurrentWordAnimation(this.state.word)
+  
+        this.props.socket.on('gotWord', data => {
+            //Vine verificat
+            this.onGotWordHandler(data.word)
+        });
+
+        this.props.socket.on('gameOver', data => {
+            this.setState({ loseModal: true })
+        })
+
+        this.props.socket.on('youWon', data => {
+            this.setState({ winModal: true })
+        })
+
+        if (!this.state.selected) this.letterIncrementInterval = setInterval(() => {
+            this.setState(
+                prevState => ({
+                    letterIndex: (prevState.letterIndex + 1) % 26
+                }), () => {
+                    if (this.state.selected) {
+                        clearImmediate(this.letterIncrementInterval);
+                    }
+                })
+        }, 500);
+    }
+
+    onGotWordHandler = word => {
+        this.setState({ opLastWord: word, lastWord: word })
     }
 
     navigateSearchGame = () => this.props.navigation.navigate('SearchGame');
+    navigateHomeScreen = () => this.props.navigation.navigate('Home');
 
     exitGame = () => {
         this.props.closeSocketConnection().then(() => {
@@ -73,7 +101,7 @@ class MultiplayerGameScreen extends Component {
 
     insertWordHandler = () => {
         let { word, usedWords } = this.state;
-
+    
         this.props.socket.emit('sendWord', { word, socketId: this.props.oponentSocketId });
 
         this.startYourWordAnimation(word);

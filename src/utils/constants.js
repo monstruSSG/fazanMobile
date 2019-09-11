@@ -7,6 +7,12 @@ export default {
     textColor: "azure",
     secondaryColor: '#33691E',
     thirdColor: '#01579B',
+<<<<<<< HEAD
+=======
+    socket: {
+        socketURL: "http://192.168.1.103"
+    },
+>>>>>>> d7956bd4cb77ade7dd4ef8e1f1289ed83d531c8a
     db: {
         name: 'fazanWords.db'
     },
