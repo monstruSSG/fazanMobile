@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { View, Button, StyleSheet, Image, Text, ImageBackground, TouchableHighlight } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 
 import CONSTANTS from '../../utils/constants';
 import MyButton from '../../components/UI/Button/Button'
 import FbButton from '../../components/AuthButtons/FbButton/FbButton';
+import RankingModal from '../../components/Modals/RankingModal';
+import { getUsers } from '../../utils/requests';
 
 import BackgroundImg from '../../assets/back.png';
 import Logo from '../../assets/angryLogo.png';
@@ -12,6 +13,15 @@ import Logo from '../../assets/angryLogo.png';
 class HomeScreen extends Component {
     static navigationOptions = {
         header: null
+    }
+
+    state = {
+        users: [],
+        rankingModal: false
+    }
+
+    componentDidMount() {
+        getUsers().then(users => this.setState({ users }))
     }
 
     navigateSingleplayerScreen = () => this.props.navigation.navigate('Singleplayer');
@@ -40,22 +50,28 @@ class HomeScreen extends Component {
                     </View>
                     <View style={styles.details}>
                         <View style={styles.userLogo}>
-                            <Icon
+                            {/* <Icon
                                 onPress={this.navigateProfileScreen}
                                 color="azure"
                                 name="user"
                                 size={30}
-                                style={styles.userProfile} />
+                                style={styles.userProfile} /> */}
                         </View>
                         <View style={styles.aboutLogo}>
-                            <Icon
+                            {/* <Icon
                                 onPress={() => this.props.navigation.navigate('Multiplayer')}
                                 color="azure"
                                 name="question-circle"
                                 size={30}
-                                style={styles.userProfile} />
+                                style={styles.userProfile} /> */}
                         </View>
+                        <Button title="RANKING" onPress={() => this.setState({rankingModal: true})}></Button>
                     </View>
+                    <RankingModal 
+                        isVisible={this.state.rankingModal} 
+                        onClose={() => this.setState({ rankingModal: false })} 
+                        closeModal={() => this.setState({rankingModal: false})}
+                        users={this.state.users} />
                 </View>
             </ImageBackground>
         );

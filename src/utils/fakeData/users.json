@@ -19,7 +19,7 @@
         "socketId": "randomsocketid",
         "wins": 1001,
         "loses": 3,
-        "score": 300012
+        "score": 3000
     },
     {
         "_id": 3,
@@ -34,7 +34,7 @@
     },
     {
         "_id": 4,
-        "username": "JohnTheRapperXXNX",
+        "username": "Nice Name",
         "isActive": true,
         "isDeleted": false,
         "status": "busy",
@@ -52,7 +52,7 @@
         "socketId": "randomsocketid",
         "wins": 1202,
         "loses": 37,
-        "score": 2012001
+        "score": 2000
     },
     {
         "_id": 6,
@@ -63,6 +63,6 @@
         "socketId": "randomsocketid",
         "wins": 128,
         "loses": 98,
-        "score": 2012
+        "score": 2000
     }
 ]
