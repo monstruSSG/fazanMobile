@@ -4,6 +4,6 @@ import CONSTANTS from '../utils/constants'
 
 module.exports = {
     createConnection: () => {
-        return SocketIOClient(CONSTANTS.socket.socketURL);
+        return SocketIOClient(CONSTANTS.backendUrl);
     }   
 }

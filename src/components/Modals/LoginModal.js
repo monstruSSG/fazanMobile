@@ -1,55 +1,96 @@
-import React from 'react';
-import { View, Modal, StyleSheet, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React, { Component } from 'react';
+import { View, Modal, StyleSheet, TouchableOpacity, Button } from 'react-native';
+import { LoginManager, AccessToken } from 'react-native-fbsdk';
+import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
+import { connect } from 'react-redux';
 
-import DefaultInput from '../UI/DefaultInput/DefaultInput';
+import { saveToken, login } from '../../store/actions/user';
 import Text from '../UI/Text/Text';
-import Button from '../UI/Button/Button';
-import * as CONSTANTS from '../../utils/constants';
-import Logo from '../../assets/fazanLogo.png';
 
-const loginModal = props => (
-    <Modal visible={props.isVisible} onRequestClose={props.onClose} animationType="slide" transparent={false}>
-        <View style={styles.navbar}>
-            <Icon name="arrow-left" style={{ padding: 8 }} size={30} color="white" onPress={props.onClose} />
-        </View>
-        <View style={styles.loginModal}>
-            <View style={styles.logo}>
-                <Image source={Logo} />
-            </View>
-            <View style={styles.userInfo}>
-                <Text color={CONSTANTS.textColor}>Username</Text>
-                <DefaultInput placeholder="Username" />
-                <Text color={CONSTANTS.textColor}>Password</Text>
-                <DefaultInput placeholder="Password" />
-                <Text color={CONSTANTS.textColor} style={{ position: "relative", left: "20%" }}>Forgot your password?</Text>
-                <Button color={CONSTANTS.buttonColor} width={"75%"} title="LOGIN" height={45}>LOGIN</Button>
-            </View>
-        </View>
-    </Modal>
-);
+class LoginModal extends Component {
+    loginHandler = () => LoginManager.logInWithPermissions(['public_profile'])
+        .then(result => {
+            if (result.isCancelled) {
+                return alert('Canceled')
+            }
+            return AccessToken.getCurrentAccessToken()
+        })
+        .then(res => login({ fbToken: res.accessToken }))
+        .then(data => this.props.saveToken(data.token))
+
+    render() {
+        return (
+            <Modal visible={this.props.isVisible} onRequestClose={this.props.onClose} animationType="slide" transparent={true}>
+                <View style={{
+                    flex: 1,
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    backgroundColor: 'rgba(0,0,0,0.5)'
+                }}>
+                    <View style={{
+                        width: 300,
+                        height: 400,
+                        borderColor: 'white',
+                        borderWidth: 5,
+                        borderRadius: 30,
+                        backgroundColor: 'white',
+                        elevation: 20,
+                    }}>
+                        <View style={styles.container}>
+                            <View style={styles.headerText}>
+                                <Text>Pentru multiplayer trebuie sa te autentifici</Text>
+                            </View>
+                            <View style={styles.container}>
+                                <Button title="FACEBOOK LOGIN" onPress={this.loginHandler} />
+                            </View>
+                            <View>
+                                <Button title='RENUNTA' onPress={this.props.exitGame} />
+                            </View>
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+        );
+    }
+}
 
 const styles = StyleSheet.create({
-    loginModal: {
+    options: {
         flex: 1,
-        width: "100%",
-        backgroundColor: CONSTANTS.backgroundColor
+        flexDirection: 'row',
+        alignItems: "flex-end",
+        justifyContent: "center"
     },
-    navbar: {
-        width: "100%",
-        height: 50,
-        backgroundColor: "#701b05"
-    },
-    logo: {
-        alignItems: "center",
-        marginTop: 24,
-    },
-    userInfo: {
+    container: {
         flex: 1,
-        alignItems: "center",
-        position: "relative",
-        top: "15%"
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    headerText: {
+        width: '80%',
+        height: '20%',
+        backgroundColor: 'red'
+    },
+    fb: {
+        flex: 1,
+        backgroundColor: 'pink'
+    },
+    google: {
+        flex: 1,
+        backgroundColor: 'green'
     }
 })
 
-export default loginModal; 
+const mapStateToProps = state => ({
+    user: state.user
+})
+
+const mapDispatchToProps = dispatch => ({
+    saveToken: token => dispatch(saveToken(token))
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(LoginModal); 
