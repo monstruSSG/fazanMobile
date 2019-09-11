@@ -21,17 +21,15 @@ class HomeScreen extends Component {
     }
 
     state = {
-        users: [],
-        rankingModal: false
+        users: []
     }
 
     componentDidMount() {
         getUsers().then(users => this.setState({ users }))
     }
 
+    navigateMultiplayerScreen = () => this.props.navigation.navigate('Multiplayer');
     navigateSingleplayerScreen = () => this.props.navigation.navigate('Singleplayer');
-    navigateAccountScreen = () => this.props.navigation.navigate('Account');
-    navigateSearchGameScreen = () => this.props.navigation.navigate('SearchGame');
     navigateProfileScreen = () => this.props.navigation.navigate('Profile');
 
     render() {
@@ -39,19 +37,19 @@ class HomeScreen extends Component {
             <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
                 <View style={styles.homePage}>
                     <View style={styles.logoContainer}>
-                        <View style={{alignItems: 'center'}}>
-                            <View style={[styles.logoWrapper, { }]}>
+                        <View style={{ alignItems: 'center' }}>
+                            <View style={[styles.logoWrapper, {}]}>
                                 <Image style={styles.log} resizeMode="contain" source={Crown} />
                             </View>
-                            <View style={[styles.titleTextWrapper, { }]}>
+                            <View style={[styles.titleTextWrapper, {}]}>
                                 <Text style={styles.titeText}>FAZAN</Text>
                             </View>
                         </View>
                     </View>
-                    <View style={[styles.content, {justifyContent: 'center'}]}>
+                    <View style={[styles.content, { justifyContent: 'center' }]}>
                         <View style={[{ height: '90%', width: '100%' }, {}]}>
                             <View style={styles.singlePlayerContainer}>
-                                <TouchableOpacity style={{ paddingTop: 12,width: "100%", alignItems: "center", justifyContent: "center" }}>
+                                <TouchableOpacity onPress={this.navigateSingleplayerScreen} style={{ paddingTop: 12, width: "100%", alignItems: "center", justifyContent: "center" }}>
                                     <ImageBackground style={styles.singlePlayerButton} source={SinglePlayerTitle} resizeMode="stretch">
                                         <View style={{ alignItems: "center", justifyContent: "center" }}>
                                             <Text style={styles.buttonText}>SINGLEPLAYER</Text>
@@ -60,10 +58,10 @@ class HomeScreen extends Component {
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.mulitplayerContainer}>
-                                <TouchableOpacity style={{ width: "100%", alignItems: "center", justifyContent: "center" }}>
-                                    <ImageBackground style={styles.mulitplayerButton} source={SinglePlayerTitle} resizeMode="stretch">
+                                <TouchableOpacity onPress={this.navigateMultiplayerScreen} style={{ width: "100%", alignItems: "center", justifyContent: "center" }}>
+                                    <ImageBackground style={styles.mulitplayerButton} source={MultiplayerTitle} resizeMode="stretch">
                                         <View style={{ alignItems: "center", justifyContent: "center" }}>
-                                            <Text style={styles.buttonText}>MULTIPLAYER</Text>
+                                            <Text style={[styles.buttonText, { top: '55%', left: undefined, right: '8%' }]}>MULTIPLAYER</Text>
                                         </View>
                                     </ImageBackground>
                                 </TouchableOpacity>
@@ -72,21 +70,21 @@ class HomeScreen extends Component {
                     </View>
                     <View style={styles.details}>
                         <View style={styles.aboutButtonContainer}>
-                            <TouchableOpacity style={{ width: "40%" }}>
+                            <TouchableOpacity onPress={() => alert('ABOUT')} style={{ width: "40%" }}>
                                 <Image style={styles.aboutButton} source={AboutButton} resizeMode="stretch" />
                             </TouchableOpacity>
                         </View>
                         <View style={styles.profileButtonContainer}>
-                            <TouchableOpacity style={{ width: "40%" }}>
+                            <TouchableOpacity onPress={this.navigateProfileScreen} style={{ width: "40%" }}>
                                 <Image style={styles.profileButton} source={ProfileButton} resizeMode="stretch" />
                             </TouchableOpacity>
                         </View>
                     </View>
-                    <RankingModal
+                    {/* <RankingModal
                         isVisible={this.state.rankingModal}
                         onClose={() => this.setState({ rankingModal: false })}
                         closeModal={() => this.setState({ rankingModal: false })}
-                        users={this.state.users} />
+                        users={this.state.users} /> */}
                 </View>
             </ImageBackground>
         );
@@ -132,11 +130,13 @@ const styles = StyleSheet.create({
     },
     singlePlayerButton: {
         width: "100%",
-        height: "90%"
+        height: "95%"
     },
     mulitplayerButton: {
-        width: "100%",
-        height: "90%"
+        width: "85%",
+        height: "80%",
+        position: 'relative',
+        left: '8%'
     },
     details: {
         flexDirection: 'row',
@@ -162,10 +162,11 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         fontFamily: 'Troika',
-        fontSize: 24,
-        paddingLeft: 18,
-        paddingTop: 44,
-        letterSpacing: 2,
+        fontSize: 30,
+        position: 'relative',
+        top: '153%',
+        left: '2%',
+        letterSpacing: undefined,
         color: 'white',
         justifyContent: "center",
         alignItems: "center"
