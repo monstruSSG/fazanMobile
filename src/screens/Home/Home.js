@@ -12,6 +12,8 @@ import Leaf from '../../assets/Stuff/bigLeaf.png';
 import AboutButton from '../../assets/Buttons/about.png';
 import ProfileButton from '../../assets/Buttons/locked.png';
 import Crown from '../../assets/Stuff/1st.png';
+import SinglePlayerTitle from '../../assets/Modals/titleShadow.png';
+import MultiplayerTitle from '../../assets/Stuff/titleBox.png';
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -37,38 +39,48 @@ class HomeScreen extends Component {
             <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
                 <View style={styles.homePage}>
                     <View style={styles.logoContainer}>
-                        <View style={styles.logoWrapper}>
-                            <Image style={styles.log} resizeMode="contain" source={Crown} />
-                        </View>
-                        <View style={styles.titleTextWrapper}>
-                            <Text style={styles.titeText}>FAZAN</Text>
+                        <View style={{alignItems: 'center'}}>
+                            <View style={[styles.logoWrapper, { }]}>
+                                <Image style={styles.log} resizeMode="contain" source={Crown} />
+                            </View>
+                            <View style={[styles.titleTextWrapper, { }]}>
+                                <Text style={styles.titeText}>FAZAN</Text>
+                            </View>
                         </View>
                     </View>
-                    <View style={styles.content}>
-                        <View style={styles.singlePlayerContainer}>
-                            <TouchableOpacity>
-                                <Image style={styles.singlePlayerButton} source={AboutButton} resizeMode="stretch" />
-                            </TouchableOpacity>
-                        </View>
-                        <View style={styles.mulitplayerContainer}>
-                            <TouchableOpacity>
-                                <Image style={styles.mulitplayerButton} source={ProfileButton} resizeMode="stretch" />
-                            </TouchableOpacity>
+                    <View style={[styles.content, {justifyContent: 'center'}]}>
+                        <View style={[{ height: '90%', width: '100%' }, {}]}>
+                            <View style={styles.singlePlayerContainer}>
+                                <TouchableOpacity style={{ paddingTop: 12,width: "100%", alignItems: "center", justifyContent: "center" }}>
+                                    <ImageBackground style={styles.singlePlayerButton} source={SinglePlayerTitle} resizeMode="stretch">
+                                        <View style={{ alignItems: "center", justifyContent: "center" }}>
+                                            <Text style={styles.buttonText}>SINGLEPLAYER</Text>
+                                        </View>
+                                    </ImageBackground>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={styles.mulitplayerContainer}>
+                                <TouchableOpacity style={{ width: "100%", alignItems: "center", justifyContent: "center" }}>
+                                    <ImageBackground style={styles.mulitplayerButton} source={SinglePlayerTitle} resizeMode="stretch">
+                                        <View style={{ alignItems: "center", justifyContent: "center" }}>
+                                            <Text style={styles.buttonText}>MULTIPLAYER</Text>
+                                        </View>
+                                    </ImageBackground>
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     </View>
                     <View style={styles.details}>
                         <View style={styles.aboutButtonContainer}>
-                            <TouchableOpacity  style={{width: "40%"}}>
+                            <TouchableOpacity style={{ width: "40%" }}>
                                 <Image style={styles.aboutButton} source={AboutButton} resizeMode="stretch" />
                             </TouchableOpacity>
                         </View>
                         <View style={styles.profileButtonContainer}>
-                            <TouchableOpacity style={{width: "40%"}}>
+                            <TouchableOpacity style={{ width: "40%" }}>
                                 <Image style={styles.profileButton} source={ProfileButton} resizeMode="stretch" />
                             </TouchableOpacity>
                         </View>
-
-                        {/* <Button title="RANKING" onPress={() => this.setState({ rankingModal: true })}></Button> */}
                     </View>
                     <RankingModal
                         isVisible={this.state.rankingModal}
@@ -87,22 +99,18 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
     logoContainer: {
-        display: "flex",
-        flex: 2,
-        paddingTop: 10,
-        width: "100%",
-        justifyContent: "center",
+        flex: 4,
         alignItems: "center",
+        justifyContent: 'center'
     },
     logoWrapper: {
-        flex: 1,
-        flexDirection: 'row'
+        position: 'relative',
+        top: '13%',
+        justifyContent: "flex-end"
     },
     titleTextWrapper: {
-        flex: 1,
     },
     titeText: {
-        paddingTop: 8,
         fontFamily: 'Troika',
         color: 'white',
         fontSize: 96,
@@ -111,29 +119,29 @@ const styles = StyleSheet.create({
     log: {
     },
     content: {
-        display: "flex",
         flex: 5,
-        width: "100%",
     },
     singlePlayerContainer: {
         flex: 1,
-        backgroundColor: 'red'
+        justifyContent: "flex-end",
+        alignItems: "center",
     },
     mulitplayerContainer: {
         flex: 1,
-        backgroundColor: 'green'
+        alignItems: "center",
     },
     singlePlayerButton: {
-        width: "50%",
-        height: "50%"
+        width: "100%",
+        height: "90%"
     },
     mulitplayerButton: {
-        width: "50%",
-        height: "50%"
+        width: "100%",
+        height: "90%"
     },
     details: {
         flexDirection: 'row',
         flex: 1,
+        height: '1%'
     },
     profileButtonContainer: {
         flex: 1,
@@ -141,8 +149,7 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end'
     },
     aboutButtonContainer: {
-        flex: 1,
-        justifyContent: "center",
+        flex: 1
     },
     profileButton: {
         width: "60%",
@@ -152,6 +159,16 @@ const styles = StyleSheet.create({
         width: "60%",
         height: "80%",
         marginLeft: 30
+    },
+    buttonText: {
+        fontFamily: 'Troika',
+        fontSize: 24,
+        paddingLeft: 18,
+        paddingTop: 44,
+        letterSpacing: 2,
+        color: 'white',
+        justifyContent: "center",
+        alignItems: "center"
     }
 });
 
