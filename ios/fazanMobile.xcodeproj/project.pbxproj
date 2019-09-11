@@ -31,6 +31,8 @@
 		9ECEC0D16D834EDBA55C6C56 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C603C4CE2F64F35911CD18D /* Octicons.ttf */; };
 		C22A57B9B601429E81912521 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF76D82AE4EC4B52AFE5A62F /* SimpleLineIcons.ttf */; };
 		F0D2A17289E04F638D1ECF9B /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4F387E8CDBBB4F4298A00069 /* Zocial.ttf */; };
+		B44C292E0887437EA9044A39 /* Troika.otf in Resources */ = {isa = PBXBuildFile; fileRef = 69744FE1DA834A268243BEE8 /* Troika.otf */; };
+		1B7DF6BED2A941568AC4CBA6 /* Troika.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F89CB088AF4E480587C714A0 /* Troika.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +84,8 @@
 		1C603C4CE2F64F35911CD18D /* Octicons.ttf */ = {isa = PBXFileReference; name = "Octicons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		CF76D82AE4EC4B52AFE5A62F /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; name = "SimpleLineIcons.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		4F387E8CDBBB4F4298A00069 /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		69744FE1DA834A268243BEE8 /* Troika.otf */ = {isa = PBXFileReference; name = "Troika.otf"; path = "../src/assets/fonts/Troika.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F89CB088AF4E480587C714A0 /* Troika.ttf */ = {isa = PBXFileReference; name = "Troika.ttf"; path = "../src/assets/fonts/Troika.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +212,8 @@
 				1C603C4CE2F64F35911CD18D /* Octicons.ttf */,
 				CF76D82AE4EC4B52AFE5A62F /* SimpleLineIcons.ttf */,
 				4F387E8CDBBB4F4298A00069 /* Zocial.ttf */,
+				69744FE1DA834A268243BEE8 /* Troika.otf */,
+				F89CB088AF4E480587C714A0 /* Troika.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -365,6 +371,8 @@
 				9ECEC0D16D834EDBA55C6C56 /* Octicons.ttf in Resources */,
 				C22A57B9B601429E81912521 /* SimpleLineIcons.ttf in Resources */,
 				F0D2A17289E04F638D1ECF9B /* Zocial.ttf in Resources */,
+				B44C292E0887437EA9044A39 /* Troika.otf in Resources */,
+				1B7DF6BED2A941568AC4CBA6 /* Troika.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
