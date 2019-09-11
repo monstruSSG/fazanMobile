@@ -10,6 +10,7 @@ import Input from '../../components/UI/DefaultInput/DefaultInput'
 import OponentDetails from '../../components/OponentDetails/OponentDetails';
 import Header from '../../components/Header/HeaderWithInput';
 import SideDrawer from '../../components/Modals/SideDrawer';
+import LoginModal from '../../components/Modals/LoginModal';
 
 import BackgroundImg from '../../assets/back.png';
 class SearchGameScreen extends Component {
@@ -20,7 +21,8 @@ class SearchGameScreen extends Component {
 
     state = {
         users: [],
-        sideState: false
+        sideState: false,
+        showLogin: true
     }
 
     componentDidMount() {
@@ -63,12 +65,13 @@ class SearchGameScreen extends Component {
     render() {
         return (
             <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
+                {this.state.showLogin && <LoginModal exitGame={() => this.setState({ showLogin: false })} />}
                 <View style={styles.searchGame}>
-                    
+
                     <View style={styles.inputForm}>
-                        <Header 
+                        <Header
                             setSideDrawer={() => this.setSideDrawerStateHandler(true)}
-                            />
+                        />
                     </View>
                     <View style={styles.oponentList}>
                         <FlatList
@@ -86,7 +89,7 @@ class SearchGameScreen extends Component {
                             </Text>
                         </Button>
                     </View>
-                    <SideDrawer isVisible={this.state.sideState} closeSideDrawer={this.closeSideDrawerHandler}/>
+                    <SideDrawer isVisible={this.state.sideState} closeSideDrawer={this.closeSideDrawerHandler} />
                 </View>
             </ImageBackground>
 

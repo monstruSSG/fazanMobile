@@ -6,3 +6,5 @@ export const CLEAR_OPONENT_SOCKETID = 'CLEAR_OP_SOCKETID';
 
 export const CONNECT_DB = 'CONNECT_DB';
 export const CLOSE_DB = 'CLOSE_DB';
+
+export const SAVE_TOKEN = 'SAVE_TOKEN';

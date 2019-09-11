@@ -3,12 +3,14 @@ import thunk from 'redux-thunk'
 
 import socketReducer from './reducers/socket';
 import wordsReducer from './reducers/words';
+import userReducer from './reducers/user';
 
 const middleware = applyMiddleware(thunk)
 
 const rootReducer = combineReducers({
     socket: socketReducer,
-    words: wordsReducer
+    words: wordsReducer,
+    user: userReducer
 });
 
 // let composeEnhacers = compose;
