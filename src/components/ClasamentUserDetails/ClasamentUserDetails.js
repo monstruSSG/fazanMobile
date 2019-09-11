@@ -24,18 +24,18 @@ export default props => {
             <View style={styles.userDetailsContainer}>
                 <View style={styles.positionContainer}>
                     <View style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ color: 'white', fontSize: 16 }}>{props.position}</Text>
+                        <Text style={{ fontFamily: 'Troika',color: 'white', fontSize: 18 }}>{props.position}.</Text>
                     </View>
                     <View style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         {renderPodium(props)}
                     </View>
                 </View>
                 <View style={styles.nameContainer}>
-                    <Text style={{ fontFamily: 'troika', color: 'white', fontSize: 16 }}>{props.name}</Text>
+                    <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 18 }}>{props.name}</Text>
                 </View>
                 <View style={styles.pointsContainer}>
                     <View style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ color: 'white', fontSize: 14 }}>{props.points}</Text>
+                        <Text style={{ fontFamily: 'Troika',color: 'white', fontSize: 17 }}>{props.points}</Text>
                     </View>
                     <View style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                         <Image source={GoldStar} resizeMode="contain" style={{ width: 35, height: 35 }} />

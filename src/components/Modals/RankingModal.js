@@ -40,7 +40,11 @@ const rankingModal = props => (
                                 <ImageBackground style={styles.buttonImage} resizeMode="cover" source={ExitButton}>
                                 </ImageBackground>
                             </TouchableOpacity>
-                            <Image resizeMode="stretch" style={styles.titleImage} source={Title} />
+                            <ImageBackground resizeMode="stretch" style={styles.titleImage} source={Title}>
+                                <View style={styles.titleTextContainer}>
+                                    <Text style={styles.titleText}>CLASAMENT</Text>
+                                </View>
+                            </ImageBackground>
                         </View>
                         <View style={styles.usersContainerWrapper}>
                             <View style={styles.userWrapper}>
@@ -74,7 +78,8 @@ const styles = StyleSheet.create({
         height: "100%",
         width: "95%",
         position: 'relative',
-        bottom: "150%"
+        bottom: "150%",
+        left: 20
     },
     buttonImage: {
         width: "40%",
@@ -92,6 +97,19 @@ const styles = StyleSheet.create({
     },
     userWrapper: {
         width: "100%"
+    },
+    titleTextContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flex: 1
+    },
+    titleText: {
+        fontFamily: 'Troika',
+        color: 'white',
+        fontSize: 26,
+        marginTop: 20,
+        letterSpacing: 2,
     }
 })
 
