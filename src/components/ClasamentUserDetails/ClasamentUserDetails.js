@@ -10,56 +10,70 @@ import Third from '../../assets/Stuff/3rd.png';
 import GoldStar from '../../assets/Stuff/goldStar.png';
 
 const renderPodium = props => {
-    if (props.position == 1) return <Image resizeMode="contain" style={{ width: 35, height: 35 }} source={First} />
-    if (props.position == 2) return <Image resizeMode="contain" style={{ width: 35, height: 35 }} source={Second} />
-    if (props.position == 3) return <Image resizeMode="contain" style={{ width: 35, height: 35 }} source={Third} />
+    if (props.position == 1) return <Image resizeMode="contain" style={styles.maxHeightWidht} source={First} />
+    if (props.position == 2) return <Image resizeMode="contain" style={styles.maxHeightWidht} source={Second} />
+    if (props.position == 3) return <Image resizeMode="contain" style={styles.maxHeightWidht} source={Third} />
 
-    return <View style={{ width: 35, height: 35 }}></View>
+    return <View style={styles.maxHeightWidht}></View>
 }
 
 export default props => {
 
     return (
-        <ImageBackground imageStyle={{ borderRadius: 10 }} style={[styles.content, props.style]} source={NameHolder}>
-            <View style={styles.userDetailsContainer}>
-                <View style={styles.positionContainer}>
-                    <View style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontFamily: 'Troika',color: 'white', fontSize: 20 }}>{props.position}.</Text>
-                    </View>
-                    <View style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        {renderPodium(props)}
+        <View style={[styles.centerContent, { flex: 1, marginRight: '3%', margintop: '15%', marginBottom: '15%'}]}>
+            <ImageBackground imageStyle={{ borderRadius: 10 }} style={[styles.maxHeightWidht, styles.centerContent, styles.modalImage,props.style]} source={NameHolder}>
+                <View style={[styles.content, styles.centerContent]}>
+                    <View style={styles.userDetailsContainer}>
+                        <View style={[styles.positionContainer, styles.centerContent]}>
+                            <View style={[{ display: 'flex', flex: 1 }, styles.centerContent ]}>
+                                <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 20 }}>{props.position}.</Text>
+                            </View>
+                            <View style={[{ display: 'flex', flex: 1 }, styles.centerContent]}>
+                                {renderPodium(props)}
+                            </View>
+                        </View>
+                        <View style={styles.nameContainer}>
+                            <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 20 }}>{props.name}</Text>
+                        </View>
+                        <View style={styles.pointsContainer}>
+                            <View style={[{ display: 'flex', flex: 1 }, styles.centerContent]}>
+                                <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 18 }}>{props.points}</Text>
+                            </View>
+                            <View style={[styles.centerContent, { display: 'flex', flex: 1, paddingRight: '3%'}]}>
+                                <Image source={GoldStar} resizeMode="contain" style={styles.goldStar} />
+                            </View>
+                        </View>
                     </View>
                 </View>
-                <View style={styles.nameContainer}>
-                    <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 18 }}>{props.name}</Text>
-                </View>
-                <View style={styles.pointsContainer}>
-                    <View style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontFamily: 'Troika',color: 'white', fontSize: 15 }}>{props.points}</Text>
-                    </View>
-                    <View style={{ display: 'flex', flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                        <Image source={GoldStar} resizeMode="contain" style={{ width: 35, height: 35 }} />
-                    </View>
-                </View>
-            </View>
-        </ImageBackground>
+            </ImageBackground>
+        </View>
     )
 };
 
 const styles = StyleSheet.create({
+    goldStar: {
+        height: '95%',
+        width: '95%'
+    },
+    modalImage: {
+    },
+    maxHeightWidht: {
+        height: '100%',
+        width: '100%'
+    },
+    centerContent: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     content: {
-        flex: 1,
         flexDirection: 'row',
-        marginTop: 12,
-        marginLeft: 12,
-        marginRight: 12,
-        height: 50,
-
+        flex: 1
     },
     userDetailsContainer: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        alignItems: 'center'
     },
     positionContainer: {
         flex: 1,
