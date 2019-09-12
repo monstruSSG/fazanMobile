@@ -60,7 +60,7 @@ class ProfileScreen extends Component {
                                 <View style={[styles.centerContent, { flex: 2 }]}>
                                     <View style={[styles.centerContent, { flex: 1, width: '100%' }]}>
                                         <View style={[styles.centerContent, styles.maxWidthHeight]}>
-                                            <ImageBackground style={[styles.maxWidthHeight]} source={PointsBackground} resizeMode='stretch'>
+                                            <ImageBackground style={[styles.maxWidthHeight, styles.pointsBackgroundPosition]} source={PointsBackground} resizeMode='stretch'>
                                                 <View style={[styles.centerContent]}>
                                                     <Text style={[styles.text,  styles.pointsPosition, { color: 'white' }]}>288 P</Text>
                                                 </View>
@@ -123,9 +123,14 @@ class ProfileScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-    pointsPosition: {
+    pointsBackgroundPosition: {
         position: 'relative',
         top: '10%'
+    },
+    pointsPosition: {
+        position: 'relative',
+        top: '11%',
+        left: '1%'
     },
     winLosePosition: {
         position: 'relative',
