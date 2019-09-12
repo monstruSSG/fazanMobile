@@ -17,6 +17,7 @@ class LoginModal extends Component {
         })
         .then(res => login({ fbToken: res.accessToken }))
         .then(data => this.props.saveToken(data.token))
+        .catch(console.log)
 
     render() {
         return (

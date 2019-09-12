@@ -26,15 +26,13 @@ class SearchGameScreen extends Component {
     }
 
     componentDidMount() {
-        getUsers()
-            .then(users => this.setState({ users }))
+        getUsers().then(users => this.setState({ users }))
     }
 
     navigateMultiplayerScreen = () => this.props.navigation.navigate('Multiplayer');
 
     onPlayGameHandler = () => {
         this.props.createSocketConnection().then(socket => {
-            console.log("FOR ME", socket)
             socket.emit('reqConnectedUsers', { name: "Bogdan113" })
 
             socket.on('recConnectedUsers', data => {
