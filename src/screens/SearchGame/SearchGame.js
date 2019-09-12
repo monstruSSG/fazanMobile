@@ -74,7 +74,9 @@ class SearchGameScreen extends Component {
                     </View>
                     <View style={styles.oponentList}>
                         <FlatList
-                            data={this.state.users.map(user => ({ ...user, key: user._id || 'asdasd' }))}
+                            data={this.state.users.map(user => {
+                               return ({ ...user, key: user._id || 'asdasd' })
+                            })}
                             renderItem={({ item }) => <OponentDetails
                                 name={item.username || 'xulescu'}
                                 points={item.score || 123}

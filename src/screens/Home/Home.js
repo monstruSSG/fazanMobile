@@ -22,14 +22,14 @@ class HomeScreen extends Component {
 
     state = {
         users: [],
-        rankingModal: true
+        rankingModal: false
     }
 
     componentDidMount() {
         getUsers().then(users => this.setState({ users }))
     }
 
-    navigateMultiplayerScreen = () => this.props.navigation.navigate('Multiplayer');
+    naivgateSearchGameScreen = () => this.props.navigation.navigate('SearchGame');
     navigateSingleplayerScreen = () => this.props.navigation.navigate('Singleplayer');
     navigateProfileScreen = () => this.props.navigation.navigate('Profile');
 
@@ -59,7 +59,7 @@ class HomeScreen extends Component {
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.mulitplayerContainer}>
-                                <TouchableOpacity onPress={this.navigateMultiplayerScreen} style={[styles.multiPlayerButtonPress, styles.center]}>
+                                <TouchableOpacity onPress={this.naivgateSearchGameScreen} style={[styles.multiPlayerButtonPress, styles.center]}>
                                     <ImageBackground style={styles.mulitplayerButton} source={MultiplayerTitle} resizeMode="stretch">
                                         <View style={[styles.center]}>
                                             <Text style={[styles.buttonText, styles.multiPLayerButtonText]}>MULTIPLAYER</Text>
