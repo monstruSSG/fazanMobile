@@ -33,11 +33,13 @@ class LoginModal extends Component {
                     flexDirection: 'column',
                     justifyContent: 'center',
                     alignItems: 'center',
-                    backgroundColor: 'rgba(0,0,0,0.5)'
+                    backgroundColor: 'rgba(0,0,0,0.9)'
                 }}>
                     <View style={{
                         width: "80%",
                         height: "95%",
+                        position: 'relative',
+                        top: '5%',
                         elevation: 20,
                     }}>
                         <View style={styles.container}>
@@ -121,8 +123,8 @@ const styles = StyleSheet.create({
         left: '5%'
     },
     buttonImage: {
-        width: "40%",
-        height: "90%",
+        width: "45%",
+        height: "95%",
         left: '88%',
         bottom: "8%"
     },
