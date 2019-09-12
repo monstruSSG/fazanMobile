@@ -21,8 +21,7 @@ class HomeScreen extends Component {
     }
 
     state = {
-        users: [],
-        rankingModal: false
+        users: []
     }
 
     componentDidMount() {
@@ -81,11 +80,11 @@ class HomeScreen extends Component {
                             </TouchableOpacity>
                         </View>
                     </View>
-                    <RankingModal
+                    {/* <RankingModal
                         isVisible={this.state.rankingModal}
                         onClose={() => this.setState({ rankingModal: false })}
                         closeModal={() => this.setState({ rankingModal: false })}
-                        users={this.state.users} />
+                        users={this.state.users} /> */}
                 </View>
             </ImageBackground>
         );
