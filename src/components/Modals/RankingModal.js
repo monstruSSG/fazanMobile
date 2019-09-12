@@ -22,18 +22,9 @@ const renderUserList = props => {
 const rankingModal = props => (
 
     <Modal visible={props.isVisible} onRequestClose={props.onClose} animationType="slide" transparent={true}>
-        <View style={{
-            flex: 1,
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'rgba(0,0,0,0.5)'
-        }}>
-            <View style={{
-                width: "100%",
-                height: "100%"
-            }}>
-                <View style={styles.container}>
+        <View style={styles.contentWrapper}>
+            <View style={styles.max}>
+                <View style={[styles.max, styles.container]}>
                     <ImageBackground source={RankingModal} resizeMode="stretch" style={styles.backgroundImageContainer}>
                         <View style={styles.titleContainer}>
                             <TouchableOpacity onPress={props.closeModal}>
@@ -41,7 +32,7 @@ const rankingModal = props => (
                                 </ImageBackground>
                             </TouchableOpacity>
                             <ImageBackground resizeMode="stretch" style={styles.titleImage} source={Title}>
-                                <View style={styles.titleTextContainer}>
+                                <View style={[styles.centerItems, styles.max, styles.titleTextContainer]}>
                                     <Text style={styles.titleText}>CLASAMENT</Text>
                                 </View>
                             </ImageBackground>
@@ -59,10 +50,22 @@ const rankingModal = props => (
 );
 
 const styles = StyleSheet.create({
+    contentWrapper: {
+        flex: 1,
+        flexDirection: 'column',
+        backgroundColor: 'rgba(0,0,0,0.5)'
+    },
+    centerItems: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    max: {
+        flex: 1
+    },
     container: {
-        height: "100%",
-        width: "100%",
-        justifyContent: "flex-end"
+        justifyContent: "flex-end",
+        position: 'relative',
+        right: '3%'
     },
     backgroundImageContainer: {
         height: "90%",
@@ -79,13 +82,13 @@ const styles = StyleSheet.create({
         width: "95%",
         position: 'relative',
         bottom: "150%",
-        left: 20
+        left: '5%'
     },
     buttonImage: {
         width: "40%",
         height: "90%",
-        left: '85%',
-        bottom: "20%"
+        left: '88%',
+        bottom: "8%"
     },
     usersContainerWrapper: {
         height: "75%",
@@ -99,16 +102,14 @@ const styles = StyleSheet.create({
         width: "100%"
     },
     titleTextContainer: {
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flex: 1
+        display: 'flex'
     },
     titleText: {
+        position: 'relative',
+        marginTop: '5%',
         fontFamily: 'Troika',
         color: 'white',
         fontSize: 26,
-        marginTop: 20,
         letterSpacing: 2,
     }
 })

@@ -21,7 +21,8 @@ class HomeScreen extends Component {
     }
 
     state = {
-        users: []
+        users: [],
+        rankingModal: true
     }
 
     componentDidMount() {
@@ -80,11 +81,11 @@ class HomeScreen extends Component {
                             </TouchableOpacity>
                         </View>
                     </View>
-                    {/* <RankingModal
+                    <RankingModal
                         isVisible={this.state.rankingModal}
                         onClose={() => this.setState({ rankingModal: false })}
                         closeModal={() => this.setState({ rankingModal: false })}
-                        users={this.state.users} /> */}
+                        users={this.state.users} />
                 </View>
             </ImageBackground>
         );
@@ -140,7 +141,7 @@ const styles = StyleSheet.create({
         height: "95%"
     },
     singlePlayerButtonPress: {
-        width: "100%"   
+        width: "100%"
     },
     mulitplayerButton: {
         width: "85%",
@@ -189,8 +190,8 @@ const styles = StyleSheet.create({
     multiPLayerButtonText: {
         top: '55%',
         //To ovveride left 
-        left: undefined, 
-        right: '8%' 
+        left: undefined,
+        right: '8%'
     }
 });
 
