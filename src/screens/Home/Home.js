@@ -34,34 +34,34 @@ class HomeScreen extends Component {
 
     render() {
         return (
-            <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
-                <View style={styles.homePage}>
-                    <View style={styles.logoContainer}>
+            <ImageBackground source={BackgroundImg} style={[styles.max]}>
+                <View style={[styles.homePage]}>
+                    <View style={[styles.center, styles.logoContainer]}>
                         <View style={{ alignItems: 'center' }}>
-                            <View style={[styles.logoWrapper, {}]}>
-                                <Image style={styles.log} resizeMode="contain" source={Crown} />
+                            <View style={[styles.logoWrapper]}>
+                                <Image resizeMode="contain" source={Crown} />
                             </View>
-                            <View style={[styles.titleTextWrapper, {}]}>
+                            <View style={[styles.titleTextWrapper]}>
                                 <Text style={styles.titeText}>FAZAN</Text>
                             </View>
                         </View>
                     </View>
                     <View style={[styles.content, { justifyContent: 'center' }]}>
-                        <View style={[{ height: '90%', width: '100%' }, {}]}>
+                        <View style={[{ height: '90%', width: '100%' }]}>
                             <View style={styles.singlePlayerContainer}>
-                                <TouchableOpacity onPress={this.navigateSingleplayerScreen} style={{ paddingTop: 12, width: "100%", alignItems: "center", justifyContent: "center" }}>
+                                <TouchableOpacity onPress={this.navigateSingleplayerScreen} style={[styles.singlePlayerButtonPress]}>
                                     <ImageBackground style={styles.singlePlayerButton} source={SinglePlayerTitle} resizeMode="stretch">
-                                        <View style={{ alignItems: "center", justifyContent: "center" }}>
+                                        <View style={[styles.center]}>
                                             <Text style={styles.buttonText}>SINGLEPLAYER</Text>
                                         </View>
                                     </ImageBackground>
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.mulitplayerContainer}>
-                                <TouchableOpacity onPress={this.navigateMultiplayerScreen} style={{ width: "100%", alignItems: "center", justifyContent: "center" }}>
+                                <TouchableOpacity onPress={this.navigateMultiplayerScreen} style={[styles.multiPlayerButtonPress, styles.center]}>
                                     <ImageBackground style={styles.mulitplayerButton} source={MultiplayerTitle} resizeMode="stretch">
-                                        <View style={{ alignItems: "center", justifyContent: "center" }}>
-                                            <Text style={[styles.buttonText, { top: '55%', left: undefined, right: '8%' }]}>MULTIPLAYER</Text>
+                                        <View style={[styles.center]}>
+                                            <Text style={[styles.buttonText, styles.multiPLayerButtonText]}>MULTIPLAYER</Text>
                                         </View>
                                     </ImageBackground>
                                 </TouchableOpacity>
@@ -70,12 +70,12 @@ class HomeScreen extends Component {
                     </View>
                     <View style={styles.details}>
                         <View style={styles.aboutButtonContainer}>
-                            <TouchableOpacity onPress={() => alert('ABOUT')} style={{ width: "40%" }}>
+                            <TouchableOpacity onPress={() => alert('ABOUT')} style={styles.detailsButtonWidth}>
                                 <Image style={styles.aboutButton} source={AboutButton} resizeMode="stretch" />
                             </TouchableOpacity>
                         </View>
                         <View style={styles.profileButtonContainer}>
-                            <TouchableOpacity onPress={this.navigateProfileScreen} style={{ width: "40%" }}>
+                            <TouchableOpacity onPress={this.navigateProfileScreen} style={styles.detailsButtonWidth}>
                                 <Image style={styles.profileButton} source={ProfileButton} resizeMode="stretch" />
                             </TouchableOpacity>
                         </View>
@@ -92,14 +92,22 @@ class HomeScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+    detailsButtonWidth: {
+        width: '40%'
+    },
+    max: {
+        flex: 1
+    },
+    center: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     homePage: {
         flex: 1,
         justifyContent: "center"
     },
     logoContainer: {
-        flex: 4,
-        alignItems: "center",
-        justifyContent: 'center'
+        flex: 4
     },
     logoWrapper: {
         position: 'relative',
@@ -107,14 +115,13 @@ const styles = StyleSheet.create({
         justifyContent: "flex-end"
     },
     titleTextWrapper: {
+
     },
     titeText: {
         fontFamily: 'Troika',
         color: 'white',
         fontSize: 96,
         letterSpacing: 8,
-    },
-    log: {
     },
     content: {
         flex: 5,
@@ -132,21 +139,25 @@ const styles = StyleSheet.create({
         width: "100%",
         height: "95%"
     },
+    singlePlayerButtonPress: {
+        width: "100%"   
+    },
     mulitplayerButton: {
         width: "85%",
         height: "80%",
         position: 'relative',
         left: '8%'
     },
+    multiPlayerButtonPress: {
+        width: "100%"
+    },
     details: {
         flexDirection: 'row',
-        flex: 1,
-        height: '1%'
+        flex: 1
     },
     profileButtonContainer: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: 'flex-end'
+        flexDirection: 'row-reverse'
     },
     aboutButtonContainer: {
         flex: 1
@@ -154,22 +165,32 @@ const styles = StyleSheet.create({
     profileButton: {
         width: "60%",
         height: "80%",
+        position: 'relative',
+        left: '20%',
+        top: '5%'
     },
     aboutButton: {
+        position: 'relative',
+        top: '15%',
+        left: '15%',
         width: "60%",
-        height: "80%",
-        marginLeft: 30
+        height: "85%"
     },
     buttonText: {
         fontFamily: 'Troika',
         fontSize: 30,
         position: 'relative',
-        top: '153%',
+        top: '163%',
         left: '2%',
-        letterSpacing: undefined,
         color: 'white',
         justifyContent: "center",
         alignItems: "center"
+    },
+    multiPLayerButtonText: {
+        top: '55%',
+        //To ovveride left 
+        left: undefined, 
+        right: '8%' 
     }
 });
 
