@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
-import { View, Button, StyleSheet, Image, Text, ImageBackground, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, Text, ImageBackground, TouchableOpacity } from 'react-native';
 
-import CONSTANTS from '../../utils/constants';
-import MyButton from '../../components/UI/Button/Button'
-import FbButton from '../../components/AuthButtons/FbButton/FbButton';
-import RankingModal from '../../components/Modals/RankingModal';
 import { getUsers } from '../../utils/requests';
-
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
-import Leaf from '../../assets/Stuff/bigLeaf.png';
 import AboutButton from '../../assets/Buttons/about.png';
 import ProfileButton from '../../assets/Buttons/locked.png';
 import Crown from '../../assets/Stuff/1st.png';
 import SinglePlayerTitle from '../../assets/Modals/titleShadow.png';
 import MultiplayerTitle from '../../assets/Stuff/titleBox.png';
+import CustomText from '../../components/UI/Text/CustomTitle';
 
 class HomeScreen extends Component {
     static navigationOptions = {
