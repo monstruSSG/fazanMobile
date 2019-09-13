@@ -28,7 +28,7 @@ class ProfileScreen extends Component {
     }
 
     render() {
-        const losesProcent = (this.state.me.wins / (this.state.me.loses + this.state.me.wins)) * 100
+        const losesProcent = ((this.state.me.wins / (this.state.me.loses + this.state.me.wins)) * 100).toFixed(0)
 
         return (
             <ImageBackground source={BackgroundImg} style={{ flex: 1 }}>
@@ -42,14 +42,7 @@ class ProfileScreen extends Component {
                                     </TouchableOpacity>
                                 </View>
                                 <View style={[styles.centerContent, {}]}>
-                                    <View style={[{
-                                        justifyContent: 'center',
-                                        aligItems: 'center',
-                                        height: '60%',
-                                        width: '70%',
-                                        position: 'relative',
-                                        bottom: '14%',
-                                    }]}>
+                                    <View style={[styles.usernameContainer]}>
 
                                         <Text style={[styles.text, {
                                             color: 'white',
@@ -145,6 +138,14 @@ class ProfileScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+    usernameContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '60%',
+        width: '70%',
+        position: 'relative',
+        bottom: '14%'
+    },
     exitButtonContainer: {
         display: 'flex',
         justifyContent: 'center',
