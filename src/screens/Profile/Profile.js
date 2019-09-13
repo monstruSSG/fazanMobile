@@ -8,7 +8,8 @@ import FullStar from '../../assets/Stuff/fullStar.png';
 import BluePanel from '../../assets/Stuff/bluePanel.png';
 import ProfileGameHistory from '../../components/ProfileGameHistory/ProfileGameHistory';
 import PointsBackground from '../../assets/Modals/titleShadow.png';
-import ExitButton from '../../assets/Buttons/back.png'
+import ExitButton from '../../assets/Buttons/back.png';
+import CustomText from '../../components/UI/Text/Text';
 
 import { getMe } from '../../utils/requests';
 
@@ -43,11 +44,7 @@ class ProfileScreen extends Component {
                                 </View>
                                 <View style={[styles.centerContent, {}]}>
                                     <View style={[styles.usernameContainer]}>
-
-                                        <Text style={[styles.text, {
-                                            color: 'white',
-                                            fontSize: 30
-                                        }]}>{this.state.me.username}</Text>
+                                        <CustomText large>{this.state.me.username}</CustomText>
                                     </View>
                                 </View>
                             </View>
@@ -62,11 +59,11 @@ class ProfileScreen extends Component {
                                         <ImageBackground source={BluePanel} style={[styles.bluePanel]} resizeMode='stretch'>
                                             <View style={[styles.centerContent]}>
                                                 <View style={[styles.centerContent, styles.winLosePosition, { top: '10%', bottom: undefined }]}>
-                                                    <Text style={[styles.text, { color: 'white' }]}>W/L</Text>
+                                                    <CustomText extra>W/L</CustomText>
                                                 </View>
                                                 <View style={[styles.centerContent, styles.winLosePosition, { flexDirection: 'row' }]}>
-                                                    <Text style={[styles.text, { color: 'white', fontSize: 50 }]}>{losesProcent}</Text>
-                                                    <Text style={[styles.text, { color: 'white', fontSize: 25 }]}>%</Text>
+                                                    <CustomText extra>{losesProcent}</CustomText>
+                                                    <CustomText normal>%</CustomText>
                                                 </View>
                                             </View>
                                         </ImageBackground>
@@ -77,22 +74,22 @@ class ProfileScreen extends Component {
                                         <View style={[styles.centerContent, styles.maxWidthHeight]}>
                                             <ImageBackground style={[styles.maxWidthHeight, styles.pointsBackgroundPosition]} source={PointsBackground} resizeMode='stretch'>
                                                 <View style={[styles.centerContent]}>
-                                                    <Text style={[styles.text, styles.pointsPosition, { color: 'white' }]}>{this.state.me.score} P</Text>
+                                                    <CustomText large style={styles.pointsPosition}>{this.state.me.score} P</CustomText>
                                                 </View>
                                             </ImageBackground>
                                         </View>
                                     </View>
                                     <View style={[styles.centerContent, { flex: 1 }]}>
-                                        <Text style={{ fontSize: 30, fontFamily: 'Troika', color: 'white' }}>Nivel:
-                                            <Text style={{ fontSize: 55, fontFamily: 'Troika', color: 'white' }}> {Math.floor(this.state.me.score / 10)}</Text>
-                                        </Text>
+                                        <CustomText normal>Nivel:
+                                            <CustomText extra> {Math.floor(this.state.me.score / 10)}</CustomText>
+                                        </CustomText>
                                     </View>
                                     <View style={[styles.centerContent, { flexDirection: 'row' }, { flex: 1 }]}>
                                         <View style={[styles.centerContent, { flex: 1 }]}>
                                             <View style={[styles.centerContent, styles.maxWidthHeight]}>
                                                 <ImageBackground style={[styles.littleStarsWidthHeight, { position: 'relative', left: '15%' }]} source={EmptyStar} resizeMode='contain'>
                                                     <View style={styles.centerContent}>
-                                                        <Text style={styles.text}>L</Text>
+                                                        <CustomText large style={{ color: 'red' }}>L</CustomText>
                                                     </View>
                                                 </ImageBackground>
                                             </View>
@@ -101,7 +98,7 @@ class ProfileScreen extends Component {
                                             <View style={[styles.centerContent, styles.maxWidthHeight]}>
                                                 <ImageBackground style={[styles.maxWidthHeight, { position: 'relative', bottom: '20%' }]} source={FullStar} resizeMode='contain'>
                                                     <View style={[styles.centerContent]}>
-                                                        <Text style={[styles.text, { color: 'green', fontSize: 50 }]}>W</Text>
+                                                        <CustomText large style={{ color: 'green' }}>W</CustomText>
                                                     </View>
                                                 </ImageBackground>
                                             </View>
@@ -110,7 +107,7 @@ class ProfileScreen extends Component {
                                             <View style={[styles.centerContent, styles.maxWidthHeight]}>
                                                 <ImageBackground style={[styles.littleStarsWidthHeight, { position: 'relative', right: '15%' }]} source={EmptyStar} resizeMode='contain'>
                                                     <View style={[styles.centerContent]}>
-                                                        <Text style={styles.text}>L</Text>
+                                                        <CustomText large style={{ color: 'red' }}>L</CustomText>
                                                     </View>
                                                 </ImageBackground>
                                             </View>

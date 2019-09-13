@@ -1,8 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet, ImageBackground, Image } from 'react-native';
+import { View, StyleSheet, ImageBackground, Image } from 'react-native';
 
-import * as CONSTANTS from '../../utils/constants';
-
+import CustomText from '../../components/UI/Text/Text';
 import NameHolder from '../../assets/Stuff/titleBox.png';
 import Avatar from '../../assets/av.png';
 
@@ -16,10 +15,10 @@ export default props => (
                     <Image source={Avatar} style={styles.avatarStyle} />
                 </View>
                 <View style={[styles.centerContent, styles.namePosition, { flex: 3, }]}>
-                    <Text style={[styles.text, { fontSize: 22 }]}>{props.name}</Text>
+                    <CustomText normal>{props.name}</CustomText>
                 </View>
                 <View style={[styles.centerContent, styles.resultPosition, { flex: 1 }]}>
-                    <Text style={[styles.text, { color: props.win ? 'green' : 'red' }]}>{winLose(props)}</Text>
+                    <CustomText large style={{ color: props.win ? 'green' : 'red' }}>{winLose(props)}</CustomText>
                 </View>
             </View>
         </ImageBackground>
@@ -44,11 +43,6 @@ const styles = StyleSheet.create({
         position: 'relative',
         left: '20%',
         top: '1%'
-    },
-    text: {
-        fontFamily: 'Troika',
-        fontSize: 55,
-        color: 'white'
     },
     goldStar: {
         height: '10%',
