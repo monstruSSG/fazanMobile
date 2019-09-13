@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, FlatList, ImageBackground, Text } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, ImageBackground, Text, Image } from 'react-native';
 
-import HeaderBackground from '../../assets/Modals/topPanelBackground.png';
+import HeaderBackground from '../../assets/Stuff/singleplayerHeader.png';
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
-import CONSTANTS from '../../utils/constants';
-import Header from '../../components/Header/Header';
-import GameDetails from '../../components/GameDetails/GameDetails';
-import UserImage from '../../assets/c.jpg'
 import EmptyStar from '../../assets/Stuff/emptyStar.png';
 import FullStar from '../../assets/Stuff/fullStar.png';
 import BluePanel from '../../assets/Stuff/bluePanel.png';
 import ProfileGameHistory from '../../components/ProfileGameHistory/ProfileGameHistory';
 import PointsBackground from '../../assets/Modals/titleShadow.png';
+import ExitButton from '../../assets/Buttons/back.png'
 
 import { getMe } from '../../utils/requests';
 
@@ -37,7 +34,32 @@ class ProfileScreen extends Component {
             <ImageBackground source={BackgroundImg} style={{ flex: 1 }}>
                 <View style={styles.content}>
                     <View style={[styles.centerContent, styles.topPanelContainer]}>
-                        <Text>HEADER</Text>
+                        <ImageBackground source={HeaderBackground} resizeMode='stretch' style={[styles.maxWidthHeight]}>
+                            <View style={[styles.centerContent, { flexDirection: 'row' }]}>
+                                <View style={[{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '18%', height: '80%' }]}>
+                                    <TouchableOpacity style={[styles.centerContent, styles.maxWidthHeight, { backgroundColor: undefined }]} onPress={() => alert('HOME')}>
+                                        <Image source={ExitButton} resizeMode='contain' style={[styles.exitButton]} />
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={[styles.centerContent, {}]}>
+                                    <View style={[{
+                                        justifyContent: 'center',
+                                        aligItems: 'center',
+                                        height: '60%',
+                                        width: '70%',
+                                        position: 'relative',
+                                        bottom: '14%',
+                                    }]}>
+
+                                        <Text style={[styles.text, {
+                                            color: 'white',
+                                            fontSize: 30
+                                        }]}>CozloschiGiurgi</Text>
+                                    </View>
+                                </View>
+                            </View>
+
+                        </ImageBackground>
                     </View>
                     <View style={styles.gamesDataWrapper}>
                         <View style={styles.gamesDataStatusWrapper}>
@@ -62,7 +84,7 @@ class ProfileScreen extends Component {
                                         <View style={[styles.centerContent, styles.maxWidthHeight]}>
                                             <ImageBackground style={[styles.maxWidthHeight, styles.pointsBackgroundPosition]} source={PointsBackground} resizeMode='stretch'>
                                                 <View style={[styles.centerContent]}>
-                                                    <Text style={[styles.text,  styles.pointsPosition, { color: 'white' }]}>288 P</Text>
+                                                    <Text style={[styles.text, styles.pointsPosition, { color: 'white' }]}>288 P</Text>
                                                 </View>
                                             </ImageBackground>
                                         </View>
@@ -123,6 +145,13 @@ class ProfileScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+    exitButton: {
+        width: '70%',
+        height: '70%',
+        position: 'relative',
+        bottom: '14%',
+        right: '8%'
+    },
     pointsBackgroundPosition: {
         position: 'relative',
         top: '20%'
