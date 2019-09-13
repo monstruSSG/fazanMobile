@@ -36,8 +36,8 @@ class ProfileScreen extends Component {
                     <View style={[styles.centerContent, styles.topPanelContainer]}>
                         <ImageBackground source={HeaderBackground} resizeMode='stretch' style={[styles.maxWidthHeight]}>
                             <View style={[styles.centerContent, { flexDirection: 'row' }]}>
-                                <View style={[{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '18%', height: '80%' }]}>
-                                    <TouchableOpacity style={[styles.centerContent, styles.maxWidthHeight, { backgroundColor: undefined }]} onPress={() => alert('HOME')}>
+                                <View style={[styles.exitButtonContainer]}>
+                                    <TouchableOpacity style={[styles.centerContent, styles.maxWidthHeight]} onPress={this.navigateHomeScreen}>
                                         <Image source={ExitButton} resizeMode='contain' style={[styles.exitButton]} />
                                     </TouchableOpacity>
                                 </View>
@@ -54,7 +54,7 @@ class ProfileScreen extends Component {
                                         <Text style={[styles.text, {
                                             color: 'white',
                                             fontSize: 30
-                                        }]}>CozloschiGiurgi</Text>
+                                        }]}>{this.state.me.username}</Text>
                                     </View>
                                 </View>
                             </View>
@@ -72,7 +72,7 @@ class ProfileScreen extends Component {
                                                     <Text style={[styles.text, { color: 'white' }]}>W/L</Text>
                                                 </View>
                                                 <View style={[styles.centerContent, styles.winLosePosition, { flexDirection: 'row' }]}>
-                                                    <Text style={[styles.text, { color: 'white', fontSize: 50 }]}>80</Text>
+                                                    <Text style={[styles.text, { color: 'white', fontSize: 50 }]}>{losesProcent}</Text>
                                                     <Text style={[styles.text, { color: 'white', fontSize: 25 }]}>%</Text>
                                                 </View>
                                             </View>
@@ -84,14 +84,14 @@ class ProfileScreen extends Component {
                                         <View style={[styles.centerContent, styles.maxWidthHeight]}>
                                             <ImageBackground style={[styles.maxWidthHeight, styles.pointsBackgroundPosition]} source={PointsBackground} resizeMode='stretch'>
                                                 <View style={[styles.centerContent]}>
-                                                    <Text style={[styles.text, styles.pointsPosition, { color: 'white' }]}>288 P</Text>
+                                                    <Text style={[styles.text, styles.pointsPosition, { color: 'white' }]}>{this.state.me.score} P</Text>
                                                 </View>
                                             </ImageBackground>
                                         </View>
                                     </View>
                                     <View style={[styles.centerContent, { flex: 1 }]}>
                                         <Text style={{ fontSize: 30, fontFamily: 'Troika', color: 'white' }}>Nivel:
-                                            <Text style={{ fontSize: 55, fontFamily: 'Troika', color: 'white' }}> 66</Text>
+                                            <Text style={{ fontSize: 55, fontFamily: 'Troika', color: 'white' }}> {Math.floor(this.state.me.score / 10)}</Text>
                                         </Text>
                                     </View>
                                     <View style={[styles.centerContent, { flexDirection: 'row' }, { flex: 1 }]}>
@@ -145,6 +145,13 @@ class ProfileScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+    exitButtonContainer: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '18%',
+        height: '80%'
+    },
     exitButton: {
         width: '70%',
         height: '70%',
