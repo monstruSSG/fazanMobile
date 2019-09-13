@@ -125,7 +125,7 @@ class ProfileScreen extends Component {
 const styles = StyleSheet.create({
     pointsBackgroundPosition: {
         position: 'relative',
-        top: '10%'
+        top: '20%'
     },
     pointsPosition: {
         position: 'relative',
