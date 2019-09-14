@@ -66,7 +66,7 @@ class SearchGameScreen extends Component {
     render() {
         return (
             <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
-                {this.state.showLogin && <LoginModal exitGame={() => this.setState({ showLogin: false })} />}
+                {this.state.showLogin && false && <LoginModal exitGame={() => this.setState({ showLogin: false })} />}
                 <View style={styles.searchGame}>
 
                     <View style={styles.inputForm}>
@@ -88,7 +88,7 @@ class SearchGameScreen extends Component {
                     <View style={styles.playGameButton}>
                         <TouchableOpacity style={{alignItems: 'center', justifyContent: 'center', width: '80%'}}>
                             <ImageBackground source={PlayButton} style={{width: '100%', height: '90%' ,position: 'relative', top: '8%'}} resizeMode="stretch">
-                                <Text style={{ color: "white", fontFamily: 'Troika', fontSize: 22, textAlign: 'center', paddingTop: 12 }}>
+                                <Text style={{ color: "white", fontFamily: 'Troika', fontSize: 22, textAlign: 'center', paddingTop: '2%' }}>
                                     PLAY RANDOM
                                 </Text>
                             </ImageBackground>

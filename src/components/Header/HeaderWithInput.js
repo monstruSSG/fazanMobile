@@ -18,7 +18,7 @@ export default props => {
                 </TouchableOpacity>
             </View>
             <View style={styles.searchTitle}>
-                <Text style={{ letterSpacing: 2, color: CONSTANTS.textColor, fontFamily: 'Troika', fontSize: 28 }}>SEARCH OPONENT</Text>
+                <Text style={{ letterSpacing: 2, color: CONSTANTS.textColor, fontFamily: 'Troika', fontSize: 24 }}>SEARCH OPONENT</Text>
             </View>
             <View style={styles.searchIcon}>
                 <Icon name='search' size={25} color={CONSTANTS.textColor} />

@@ -62,11 +62,11 @@ class LoginModal extends Component {
                                     sa va logati.</Text>
                                         <Text color="white" style={styles.infoText}>Urmatoarele optiuni sunt disponibile:</Text>
                                     </View>
-                                    <View style={{ flex: 1, flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
+                                    <View style={{ flex: 1, flexDirection: 'row', width: '100%', alignItems: 'flex-end', justifyContent: 'center' }}>
                                         <TouchableOpacity onPress={this.loginHandler}>
                                             <Image source={FacebookButton} style={{ width: 50, height: 50, marginRight: 18 }} resizeMode="stretch" />
                                         </TouchableOpacity>
-                                        <Text style={[styles.infoText, { marginTop: 0 }]} color="white">SAU</Text>
+                                        <Text style={[styles.infoText, { paddingBottom: 12 }]} color="white">SAU</Text>
                                         <TouchableOpacity onPress={this.loginHandler}>
                                             <Image source={GmailButton} style={{ width: 50, height: 50, marginLeft: 18 }} resizeMode="stretch" />
                                         </TouchableOpacity>
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
         letterSpacing: 2,
     },
     infoText: {
-        marginTop: '20%',
+        paddingTop: 12,
         fontFamily: 'Troika',
         fontSize: 22,
         color: 'white',

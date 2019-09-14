@@ -12,5 +12,9 @@ export default {
     },
     backendUrl: 'http://192.168.43.228/api/v1',
     letters: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
+    firstRow: ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
+    secondRow: ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
+    thirdRow: ['Z', 'X', 'C', 'V', 'B', 'N', 'M']
+
 };

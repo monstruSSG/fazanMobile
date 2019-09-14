@@ -26,7 +26,7 @@ export default props => (
         <View style={styles.resultWrapper}>
             <View style={styles.oponentInviteWrapper}>
                 <TouchableOpacity>
-                    <ImageBackground source={PlayButton} style={{ width: 50,  height: 50, alignItems: 'center', marginRight: 38 }} resizeMode="stretch">
+                    <ImageBackground source={PlayButton} style={{ width: 50,  height: 50, alignItems: 'center', position: 'relative', right: '75%' }} resizeMode="stretch">
                     </ImageBackground>
                 </TouchableOpacity>
             </View>
@@ -41,13 +41,14 @@ const styles = StyleSheet.create({
         marginTop: 18,
         marginLeft: 12,
         marginRight: 12,
-        height: 110,
+        height: "100%",
 
     },
     oponentNameWrapper: {
         flex: 2,
-        alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        paddingRight: "15%",
+        alignItems: 'center'
     },
     oponentImageWrapper: {
         flex: 1,
@@ -67,7 +68,6 @@ const styles = StyleSheet.create({
     oponentNameText: {
         fontFamily: 'Troika',
         fontSize: 20,
-        textAlign: 'center',
         letterSpacing: 1,
         color: CONSTANTS.textColor
     },
@@ -83,9 +83,9 @@ const styles = StyleSheet.create({
         paddingRight: 4
     },
     image: {
-        width: 60,
-        marginLeft: 50,
-        height: 60,
-        resizeMode: 'cover'
+        width: 45,
+        height: 45,
+        marginLeft: '50%',
+        resizeMode: 'cover',
     }
 });

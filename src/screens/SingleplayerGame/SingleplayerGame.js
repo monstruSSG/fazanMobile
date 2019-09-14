@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Animated, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
+import Keyboard from '../../components/UI/Keyboard/Keyboard';
+
 import * as WORDS from '../../store/actions/words';
 import CONSTANTS from '../../utils/constants';
 import LoseTitle from '../../assets/loseTitle3.png';
@@ -316,7 +318,7 @@ class SingleplayerGameScreen extends Component {
                         </Animated.View>
                     </View>
                     <View style={styles.myInput}>
-                        <View style={styles.submitForm}>
+                        {/* <View style={styles.submitForm}>
                             <Input
                                 style={styles.inputText}
                                 value={this.state.word}
@@ -328,7 +330,13 @@ class SingleplayerGameScreen extends Component {
                             style={styles.submitButton}
                             onPress={this.insertWordHandler}>
                             <Text color="azure">TRIMITE</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
+                        <View style={{flex: 1}}>
+
+                        </View>
+                        <View style={{flex: 3}}>
+                            <Keyboard />
+                        </View>
                     </View>
                     <LoseModal
                         isVisible={this.state.loseModal}
@@ -524,10 +532,8 @@ const styles = StyleSheet.create({
     },
     myInput: {
         flex: 1,
-        flexDirection: 'row',
-        width: "50%",
-        alignItems: "center",
-        justifyContent: "center"
+        flexDirection: 'column',
+        width: "100%",
     },
     inputText: {
         borderColor: CONSTANTS.textColor,
