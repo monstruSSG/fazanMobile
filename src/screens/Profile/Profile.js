@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, ImageBackground, Text, Image } from 'react-native';
 
-import HeaderBackground from '../../assets/Stuff/singleplayerHeader.png';
+import HeaderBackground from '../../assets/Stuff/profileGameHeaderBg.png';
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
 import EmptyStar from '../../assets/Stuff/emptyStar.png';
 import FullStar from '../../assets/Stuff/fullStar.png';
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
         paddingRight: 14
     },
     lastGames: {
-        height: '50%'
+        flex: 1
     },
     textPointWrapper: {
         flex: 1,
