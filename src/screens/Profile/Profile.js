@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, ImageBackground, Text, Image } from 'react-native';
 
+import ProfileGameHistory from '../../components/ProfileGameHistory/ProfileGameHistory';
+
 import HeaderBackground from '../../assets/Stuff/profileGameHeaderBg.png';
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
 import EmptyStar from '../../assets/Stuff/emptyStar.png';
 import FullStar from '../../assets/Stuff/fullStar.png';
 import BluePanel from '../../assets/Stuff/bluePanel.png';
-import ProfileGameHistory from '../../components/ProfileGameHistory/ProfileGameHistory';
 import PointsBackground from '../../assets/Modals/titleShadow.png';
 import ExitButton from '../../assets/Buttons/back.png';
 import CustomText from '../../components/UI/Text/Text';

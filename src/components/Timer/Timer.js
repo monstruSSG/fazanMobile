@@ -28,16 +28,18 @@ export default class Timer extends Component {
 
     componentWillUnmount() {
         clearImmediate(this.myInterval);
+        SCALE_VALUE = 1.25;
     }
 
     animation = () => {
         Animated.timing(this.state.animation, {
             toValue: SCALE_VALUE,
-            duration: 500
+            duration: 500,
+            useNativeDriver: true
         }).start(() => Animated.timing(this.state.animation, {
             toValue: 1,
             duration: 500,
-
+            useNativeDriver: true
         }).start())
     }
 

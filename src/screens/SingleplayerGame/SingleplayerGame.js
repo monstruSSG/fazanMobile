@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Animated, ImageBackground, Image, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Animated, Easing, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
 import Keyboard from '../../components/UI/Keyboard/Keyboard';
@@ -12,6 +12,8 @@ import Timer from '../../components/Timer/Timer';
 import Background from '../../assets/Stuff/bg.jpg';
 import HeaderBg from '../../assets/Stuff/singleplayerHeader.png';
 import ExitButton from '../../assets/Buttons/exitButton.png';
+import BluePanel from '../../assets/Stuff/bluePanel.png';
+import LastWordImage from '../../assets/Stuff/titleBox.png';
 
 
 class SingleplayerGameScreen extends Component {
@@ -19,7 +21,48 @@ class SingleplayerGameScreen extends Component {
         header: null
     }
 
+    state = {
+        roundAnimation: new Animated.Value(1),
+        roundNumber: 0,
+        gameFinished: false,
+        lastWord: 'LASTWORD'
+    }
+
+    //Animations
+
+    //Round increment animation
+    roundIncrementAnimation = () => Animated.timing(this.state.roundAnimation, {
+        toValue: 0.95,
+        useNativeDriver: true,
+        duration: 200
+    }).start(() => this.setState(prevState => ({
+        roundNumber: prevState.roundNumber + 1
+    }), () => Animated.timing(this.state.roundAnimation, {
+        toValue: 1,
+        easing: Easing.bounce,
+        useNativeDriver: true,
+        duration: 600
+    }).start()))
+
+
+    navigateHomeHandler = () => this.props.navigation.navigate('Home');
+
+    onTimeExpiredHandler = count => {
+        if (count < 0) this.setState({ gameFinished: true })
+    }
+
     render() {
+        //Animations configuration
+
+        //Scale round increment
+        const roundIncrementScale = {
+            transform: [
+                {
+                    scale: this.state.roundAnimation
+                }
+            ]
+        }
+
         return (
             <ImageBackground source={Background} style={[styles.maxWidthHeight]}>
                 <View style={[styles.maxWidthHeight, { alignItems: 'center' }]}>
@@ -27,25 +70,53 @@ class SingleplayerGameScreen extends Component {
                         <ImageBackground source={HeaderBg} style={styles.maxWidthHeight} resizeMode='stretch'>
                             <View style={[styles.maxWidthHeight, { flexDirection: 'row' }]}>
                                 <View style={[styles.centerContent, { flex: 1 }]}>
-                                    <TouchableOpacity style={[styles.centerContent, styles.exitButtonSize, styles.exitButtonPosition]}>
+                                    <TouchableOpacity style={[styles.centerContent, styles.exitButtonSize, styles.exitButtonPosition]}
+                                        onPress={this.roundIncrementAnimation}>
                                         <Image source={ExitButton} style={[styles.maxWidthHeight]} resizeMode='stretch' />
                                     </TouchableOpacity>
                                 </View>
                                 <View style={[styles.centerContent, { flex: 1 }]}>
-                                    <CustomText large style={[styles.headerText]}>Robot</CustomText>
+                                    <CustomText large style={[styles.headerText]}>ROBOT</CustomText>
                                 </View>
                                 <View style={[styles.centerContent, { flex: 1 }]}>
                                     <View style={[styles.centerContent, { flex: 1 }]}>
                                         <Timer style={styles.counter}
-                                            onTimeExpired={() => { }}
-                                            count={15} />
+                                            onTimeExpired={count => this.onTimeExpiredHandler(count)}
+                                            count={3000} />
                                     </View>
                                 </View>
                             </View>
                         </ImageBackground>
                     </View>
-                    <View style={[{ width: '100%', height: '50%' }, styles.centerContent]}>
-                        <CustomText extra>Some stats, like round, Content</CustomText>
+                    <View style={[styles.centerContent, { width: '100%', height: '50%' }]}>
+                        <View style={[styles.centerContent, { width: '30%', flex: 1, position: 'relative', top: '10%' }]}>
+                            <ImageBackground source={BluePanel}
+                                style={[styles.centerContent, styles.maxWidthHeight]}
+                                resizeMode='stretch'>
+                                <View style={[styles.centerContent, { flex: 1 }]}>
+                                    <View style={[{ flex: 1, justifyContent: 'flex-end' }]}>
+                                        <CustomText small style={styles.roundText}>RUNDA</CustomText>
+                                    </View>
+                                    <Animated.View style={[{ flex: 1 }, roundIncrementScale]}>
+                                        <CustomText large style={styles.roundNumber}>{this.state.roundNumber}</CustomText>
+                                    </Animated.View>
+                                </View>
+                            </ImageBackground>
+                        </View>
+                        <View style={[{ width: '100%', flex: 3, alignItems: 'center' }]}>
+                            <View style={[styles.centerContent, { flex: 1 }]}>
+                                <CustomText normal>ULTIMUL CUVANT</CustomText>
+                            </View>
+                            <View style={[{ height: '30%', width: '90%', position: 'relative', bottom: '25%' }, styles.centerContent]}>
+                                <ImageBackground source={LastWordImage}
+                                    style={[styles.maxWidthHeight]}
+                                    resizeMode='stretch'>
+                                    <View style={[styles.centerContent, { width: '100%', height: '60%' }]}>
+                                        <CustomText large style={styles.lastWord}>{this.state.lastWord}</CustomText>
+                                    </View>
+                                </ImageBackground>
+                            </View>
+                        </View>
                     </View>
                     <View style={[{ flex: 1, backgroundColor: undefined }, styles.centerContent]}>
                         <View style={{ flex: 1, flexDirection: 'row' }}>
@@ -76,6 +147,18 @@ class SingleplayerGameScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+    lastWord: {
+        position: 'relative',
+        top: '32%'
+    },
+    roundNumber: {
+        position: 'relative',
+        bottom: '45%'
+    },
+    roundText: {
+        position: 'relative',
+        bottom: '20%'
+    },
     counter: {
         position: 'relative',
         bottom: '13%',
