@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ScrollView, FlatList, ImageBackground, Text } from 'react-native';
+import { View, StyleSheet, Image, ScrollView, FlatList, ImageBackground, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
 
 import CONSTANTS from '../../utils/constants';
@@ -12,7 +12,9 @@ import Header from '../../components/Header/HeaderWithInput';
 import SideDrawer from '../../components/Modals/SideDrawer';
 import LoginModal from '../../components/Modals/LoginModal';
 
-import BackgroundImg from '../../assets/back.png';
+import BackgroundImg from '../../assets/Stuff/bg.jpg';
+import PlayButton from '../../assets/Buttons/greenLabel.png';
+
 class SearchGameScreen extends Component {
 
     static navigationOptions = {
@@ -64,7 +66,7 @@ class SearchGameScreen extends Component {
     render() {
         return (
             <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
-                {this.state.showLogin && <LoginModal exitGame={() => this.setState({ showLogin: false })} />}
+                {this.state.showLogin && false && <LoginModal exitGame={() => this.setState({ showLogin: false })} />}
                 <View style={styles.searchGame}>
 
                     <View style={styles.inputForm}>
@@ -74,7 +76,9 @@ class SearchGameScreen extends Component {
                     </View>
                     <View style={styles.oponentList}>
                         <FlatList
-                            data={this.state.users.map(user => ({ ...user, key: user._id || 'asdasd' }))}
+                            data={this.state.users.map(user => {
+                                return ({ ...user, key: user._id || 'asdasd' })
+                            })}
                             renderItem={({ item }) => <OponentDetails
                                 name={item.username || 'xulescu'}
                                 points={item.score || 123}
@@ -82,11 +86,13 @@ class SearchGameScreen extends Component {
                         />
                     </View>
                     <View style={styles.playGameButton}>
-                        <Button color={CONSTANTS.secondaryColor} onPress={this.onPlayGameHandler}>
-                            <Text style={{ color: "azure", fontWeight: 'bold' }}>
-                                PLAY RANDOM
-                            </Text>
-                        </Button>
+                        <TouchableOpacity style={{alignItems: 'center', justifyContent: 'center', width: '80%'}}>
+                            <ImageBackground source={PlayButton} style={{width: '100%', height: '90%' ,position: 'relative', top: '8%'}} resizeMode="stretch">
+                                <Text style={{ color: "white", fontFamily: 'Troika', fontSize: 22, textAlign: 'center', paddingTop: '2%' }}>
+                                    PLAY RANDOM
+                                </Text>
+                            </ImageBackground>
+                        </TouchableOpacity>
                     </View>
                     <SideDrawer isVisible={this.state.sideState} closeSideDrawer={this.closeSideDrawerHandler} />
                 </View>
@@ -123,7 +129,8 @@ const styles = StyleSheet.create({
     },
     playGameButton: {
         flex: 1,
-        justifyContent: "center"
+        justifyContent: "center",
+        alignItems: 'center'
     }
 });
 

@@ -23,7 +23,7 @@
     },
     {
         "_id": 3,
-        "username": "ShadowKiller12",
+        "username": "Amazing",
         "isActive": true,
         "isDeleted": false,
         "status": "busy",
@@ -42,7 +42,7 @@
         "loses": 9,
         "score": 999
     },    {
-        "_id": 4,
+        "_id": 99,
         "username": "Nice Name",
         "isActive": true,
         "isDeleted": false,
@@ -52,49 +52,49 @@
         "loses": 9,
         "score": 999
     },    {
-        "_id": 4,
-        "username": "Nice Name",
-        "isActive": true,
-        "isDeleted": false,
-        "status": "busy",
-        "socketId": "randomsocketid",
-        "wins": 22,
-        "loses": 9,
-        "score": 999
-    },    {
-        "_id": 4,
-        "username": "Nice Name",
-        "isActive": true,
-        "isDeleted": false,
-        "status": "busy",
-        "socketId": "randomsocketid",
-        "wins": 22,
-        "loses": 9,
-        "score": 999
-    },    {
-        "_id": 4,
-        "username": "Nice Name",
-        "isActive": true,
-        "isDeleted": false,
-        "status": "busy",
-        "socketId": "randomsocketid",
-        "wins": 22,
-        "loses": 9,
-        "score": 999
-    },
-    {
-        "_id": 4,
-        "username": "Nice Name",
-        "isActive": true,
-        "isDeleted": false,
-        "status": "busy",
-        "socketId": "randomsocketid",
-        "wins": 22,
-        "loses": 9,
-        "score": 999
-    },
-    {
         "_id": 5,
+        "username": "Nice Name",
+        "isActive": true,
+        "isDeleted": false,
+        "status": "busy",
+        "socketId": "randomsocketid",
+        "wins": 22,
+        "loses": 9,
+        "score": 999
+    },    {
+        "_id": 6,
+        "username": "Nice Name",
+        "isActive": true,
+        "isDeleted": false,
+        "status": "busy",
+        "socketId": "randomsocketid",
+        "wins": 22,
+        "loses": 9,
+        "score": 999
+    },    {
+        "_id": 7,
+        "username": "Nice Name",
+        "isActive": true,
+        "isDeleted": false,
+        "status": "busy",
+        "socketId": "randomsocketid",
+        "wins": 22,
+        "loses": 9,
+        "score": 999
+    },
+    {
+        "_id": 12,
+        "username": "Nice Name",
+        "isActive": true,
+        "isDeleted": false,
+        "status": "busy",
+        "socketId": "randomsocketid",
+        "wins": 22,
+        "loses": 9,
+        "score": 999
+    },
+    {
+        "_id": 14,
         "username": "GhostRider",
         "isActive": true,
         "isDeleted": false,
@@ -102,17 +102,6 @@
         "socketId": "randomsocketid",
         "wins": 1202,
         "loses": 37,
-        "score": 2000
-    },
-    {
-        "_id": 6,
-        "username": "GutaTheMusician",
-        "isActive": true,
-        "isDeleted": false,
-        "status": "available",
-        "socketId": "randomsocketid",
-        "wins": 128,
-        "loses": 98,
         "score": 2000
     }
 ]

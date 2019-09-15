@@ -1,13 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Avatar from '../../assets/av.png';
-import Button from '../../components/UI/Button/Button';
+import PlayButton from '../../assets/Buttons/playButton.png';
 import CONSTANTS from '../../utils/constants';
 
+import Label from '../../assets/Stuff/titleBox.png';
+
 export default props => (
-    <View style={[styles.content, props.style]}>
+    <ImageBackground source={Label} style={[styles.content, props.style]}>
         <View style={styles.oponentDetailsWrapper}>
             <View style={styles.oponentImageWrapper}>
                 <Image
@@ -23,34 +25,30 @@ export default props => (
         </View>
         <View style={styles.resultWrapper}>
             <View style={styles.oponentInviteWrapper}>
-                <Button color={CONSTANTS.secondaryColor}><Text style={{ color: "azure" }}>INVITE</Text></Button>
+                <TouchableOpacity>
+                    <ImageBackground source={PlayButton} style={{ width: 50,  height: 50, alignItems: 'center', position: 'relative', right: '75%' }} resizeMode="stretch">
+                    </ImageBackground>
+                </TouchableOpacity>
             </View>
         </View>
-    </View>
+    </ImageBackground>
 );
 
 const styles = StyleSheet.create({
     content: {
         flex: 1,
         flexDirection: 'row',
-        borderWidth: 1,
-        borderTopLeftRadius: 40,
-        borderBottomRightRadius: 40,
-        borderBottomLeftRadius: 40,
-        borderTopRightRadius: 40,
-        borderWidth: 2,
-        borderBottomWidth: 2,
-        borderTopWidth: 0,
-        marginTop: 12,
+        marginTop: 18,
         marginLeft: 12,
         marginRight: 12,
-        height: 100,
+        height: "100%",
 
     },
     oponentNameWrapper: {
         flex: 2,
-        alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        paddingRight: "15%",
+        alignItems: 'center'
     },
     oponentImageWrapper: {
         flex: 1,
@@ -68,17 +66,16 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     oponentNameText: {
-        fontSize: 16,
-        textAlign: 'center',
+        fontFamily: 'Troika',
+        fontSize: 20,
         letterSpacing: 1,
-        fontWeight: 'bold',
         color: CONSTANTS.textColor
     },
     oponentPointsText: {
-        fontSize: 16,
+        fontFamily: 'Troika',
+        fontSize: 18,
         textAlign: 'center',
         letterSpacing: 1,
-        fontWeight: 'bold',
         color: CONSTANTS.textColor
     },
     resultWrapper: {
@@ -86,8 +83,9 @@ const styles = StyleSheet.create({
         paddingRight: 4
     },
     image: {
-        width: 75,
-        height: 75,
-        resizeMode: 'cover'
+        width: 45,
+        height: 45,
+        marginLeft: '50%',
+        resizeMode: 'cover',
     }
 });

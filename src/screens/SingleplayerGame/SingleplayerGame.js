@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Animated, ImageBackground, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 
+import Keyboard from '../../components/UI/Keyboard/Keyboard';
+
 import * as WORDS from '../../store/actions/words';
 import CONSTANTS from '../../utils/constants';
 import LoseTitle from '../../assets/loseTitle3.png';
@@ -13,6 +15,7 @@ import LoseModal from '../../components/Modals/LoseModal';
 import WinModal from '../../components/Modals/WinModal';
 import BackgroudImage from '../../assets/back.png';
 import Avatar from '../../assets/b.jpg';
+
 
 class SingleplayerGameScreen extends Component {
     static navigationOptions = {
@@ -35,7 +38,7 @@ class SingleplayerGameScreen extends Component {
         gameFinished: false,
         showTimer: false,
         loseModal: false,
-        winModal: false,
+        winModal: true,
         selected: false,
         letterIndex: 0
     }
@@ -132,9 +135,9 @@ class SingleplayerGameScreen extends Component {
 
                 //Generate interval between 1000 - 3000
                 let interval = Math.floor(Math.random() * (3000 - 1000) + 1000);
-                
+
                 this.startCurrentWordAnimation(word);
-                
+
                 setTimeout(() => {
                     // Reset timer
                     this.resetTimer();
@@ -248,6 +251,18 @@ class SingleplayerGameScreen extends Component {
         showTimer: true
     }))
 
+    letterPressedHandler = letter => {
+        this.setState((prevState) => ({
+            word: prevState.word.concat(letter)
+        }))
+    }
+
+    deleteLastLetterHandler = () => {
+        this.setState((prevState) => ({
+            word: prevState.word.slice(0, -1)
+        }))
+    }
+
     render() {
         const fadeYou = {
             opacity: this.state.fadeYou
@@ -316,19 +331,25 @@ class SingleplayerGameScreen extends Component {
                         </Animated.View>
                     </View>
                     <View style={styles.myInput}>
-                        <View style={styles.submitForm}>
-                            <Input
-                                style={styles.inputText}
-                                value={this.state.word}
-                                onChangeText={word => this.onWordChangeHandler(word.trim())}
-                                placeholder='Introdu un cuvant...'
-                            />
+                        <View style={{ flex: 1, flexDirection: 'row' }}>
+                            <View style={{ flex: 2 }}>
+                                <View style={{ width: '80%', height: '90%', borderWidth: 1, borderRadius: 10 }}>
+                                    <Text>{this.state.word}</Text>
+                                </View>
+                            </View>
+                            <View style={{ flex: 1 }}>
+                                <TouchableOpacity
+                                    style={styles.submitButton}
+                                    onPress={this.insertWordHandler}>
+                                    <Text color="azure">TRIMITE</Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
-                        <TouchableOpacity
-                            style={styles.submitButton}
-                            onPress={this.insertWordHandler}>
-                            <Text color="azure">TRIMITE</Text>
-                        </TouchableOpacity>
+                        <View style={{ flex: 3 }}>
+                            <Keyboard
+                                letterPressed={letter => this.letterPressedHandler(letter)}
+                                deleteLastLetter={() => this.deleteLastLetterHandler()} />
+                        </View>
                     </View>
                     <LoseModal
                         isVisible={this.state.loseModal}
@@ -524,10 +545,8 @@ const styles = StyleSheet.create({
     },
     myInput: {
         flex: 1,
-        flexDirection: 'row',
-        width: "50%",
-        alignItems: "center",
-        justifyContent: "center"
+        flexDirection: 'column',
+        width: "100%",
     },
     inputText: {
         borderColor: CONSTANTS.textColor,
