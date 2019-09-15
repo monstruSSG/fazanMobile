@@ -9,7 +9,7 @@ import CONSTANTS from '../../utils/constants';
 import Label from '../../assets/Stuff/titleBox.png';
 
 export default props => (
-    <ImageBackground source={Label} style={[styles.content, props.style]}>
+    <ImageBackground source={Label} style={[styles.content, props.style]} resizeMode="stretch">
         <View style={styles.oponentDetailsWrapper}>
             <View style={styles.oponentImageWrapper}>
                 <Image
@@ -26,7 +26,9 @@ export default props => (
         <View style={styles.resultWrapper}>
             <View style={styles.oponentInviteWrapper}>
                 <TouchableOpacity>
-                    <ImageBackground source={PlayButton} style={{ width: 50,  height: 50, alignItems: 'center', position: 'relative', right: '75%' }} resizeMode="stretch">
+                    <ImageBackground source={PlayButton} 
+                        style={{ width: 50,  height: 50, alignItems: 'center', position: 'relative', right: '75%' }} 
+                        resizeMode="contain">
                     </ImageBackground>
                 </TouchableOpacity>
             </View>
@@ -42,7 +44,6 @@ const styles = StyleSheet.create({
         marginLeft: 12,
         marginRight: 12,
         height: "100%",
-
     },
     oponentNameWrapper: {
         flex: 2,

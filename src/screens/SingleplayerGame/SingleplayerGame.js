@@ -25,11 +25,11 @@ class SingleplayerGameScreen extends Component {
         roundAnimation: new Animated.Value(1),
         roundNumber: 0,
         gameFinished: false,
-        lastWord: 'LASTWORD'
+        lastWord: 'LASTWORD',
+        word: ''
     }
 
     //Animations
-
     //Round increment animation
     roundIncrementAnimation = () => Animated.timing(this.state.roundAnimation, {
         toValue: 0.97,
@@ -51,10 +51,20 @@ class SingleplayerGameScreen extends Component {
         if (count < 0) this.setState({ gameFinished: true })
     }
 
+    letterPressedHandler = letter => {
+        this.setState((prevState) => ({
+            word: prevState.word.concat(letter)
+        }))
+    }
+
+    deleteLastLetterHandler = () => {
+        this.setState((prevState) => ({
+            word: prevState.word.slice(0, -1)
+        }))
+    }
+
     render() {
         //Animations configuration
-
-        //Scale round increment
         const roundIncrementScale = {
             transform: [
                 {
@@ -118,18 +128,18 @@ class SingleplayerGameScreen extends Component {
                             </View>
                         </View>
                     </View>
-                    <View style={[{ flex: 1, backgroundColor: undefined }, styles.centerContent]}>
+                    <View style={[{ flex: 1 }, styles.centerContent]}>
                         <View style={{ flex: 1, flexDirection: 'row' }}>
                             <View style={{ flex: 2 }}>
                                 <View style={{ width: '80%', height: '90%', borderWidth: 1, borderRadius: 10 }}>
-                                    <Text>{this.state.word}</Text>
+                                    <CustomText>{this.state.word}</CustomText>
                                 </View>
                             </View>
                             <View style={{ flex: 1 }}>
                                 <TouchableOpacity
                                     style={styles.submitButton}
                                     onPress={this.insertWordHandler}>
-                                    <Text color="azure">TRIMITE</Text>
+                                    <CustomText color="azure">TRIMITE</CustomText>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -174,18 +184,8 @@ const styles = StyleSheet.create({
     },
     exitButtonPosition: {
         position: 'relative',
-        left: 49,
-        bottom: 29,
-        resizeMode: 'cover',
-        borderRadius: 35,
-        borderWidth: 1
-    },
-    computerName: {
-        position: 'relative',
-        right: 46,
-        top: 21,
-        color: CONSTANTS.secondaryColor,
-        fontSize: 22
+        right: '27%',
+        bottom: '3%'
     },
     cell: {
         flex: 1,
