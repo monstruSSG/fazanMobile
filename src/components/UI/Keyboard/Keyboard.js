@@ -24,7 +24,7 @@ const keyboard = props => {
 
     let firstRow = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P']
     let secondRow = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L']
-    let thirdRow = ['Z', 'X', 'C', 'V', 'B', 'N', 'M', '']
+    let thirdRow = ['Z', 'X', 'C', 'V', 'B', 'N', 'M', 'DEL']
 
 
     return (
@@ -35,7 +35,7 @@ const keyboard = props => {
                     {
                         firstRow.map(letter => (
                             <ImageBackground source={LetterHolder} style={{ width: 35, height: 35 }}>
-                                <TouchableOpacity style={{ width: '100%', height: '100%', flex: 1, marginLeft: 3 }}>
+                                <TouchableOpacity onPress={() => props.letterPressed(letter.trim().toLowerCase())} style={{ width: '100%', height: '100%', flex: 1, marginLeft: 3 }}>
                                     <View>
                                         <Text style={{ color: 'white', fontFamily: 'Troika', fontSize: 24, position: 'relative', left: '20%' }}>{letter}</Text>
                                     </View>
@@ -49,7 +49,7 @@ const keyboard = props => {
 
                         secondRow.map(letter => (
                             <ImageBackground source={LetterHolder} style={{ width: 35, height: 35 }}>
-                                <TouchableOpacity style={{ width: '100%', height: '100%', flex: 1, marginLeft: 3 }}>
+                                <TouchableOpacity onPress={() => props.letterPressed(letter.trim().toLowerCase())} style={{ width: '100%', height: '100%', flex: 1, marginLeft: 3 }}>
                                     <View>
                                         <Text style={{ color: 'white', fontFamily: 'Troika', fontSize: 24, position: 'relative', left: '20%' }}>{letter}</Text>
                                     </View>
@@ -61,15 +61,28 @@ const keyboard = props => {
                 <View style={{ flex: 1, flexDirection: 'row', width: '90%', justifyContent: 'center' }}>
                     {
 
-                        thirdRow.map(letter => (
-                            <ImageBackground source={LetterHolder} style={{ width: 35, height: 35 }}>
-                                <TouchableOpacity style={{ width: '100%', height: '100%', flex: 1, marginLeft: 3 }}>
-                                    <View>
-                                        <Text style={{ color: 'white', fontFamily: 'Troika', fontSize: 24, position: 'relative', left: '20%' }}>{letter}</Text>
-                                    </View>
-                                </TouchableOpacity>
-                            </ImageBackground>
-                        ))
+                        thirdRow.map(letter => {
+                            return letter === 'DEL' ?
+                                (
+                                    <ImageBackground source={LetterHolder} style={{ width: 50, height: 35 }}>
+                                        <TouchableOpacity onPress={props.deleteLastLetter} style={{ width: '100%', height: '100%', flex: 1, marginLeft: 3 }}>
+                                            <View>
+                                                <Text style={{ color: 'white', fontFamily: 'Troika', fontSize: 18, position: 'relative', left: '15%', top: '20%' }}>{letter}</Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                    </ImageBackground>
+                                )
+                                :
+                                (
+                                    <ImageBackground source={LetterHolder} style={{ width: 35, height: 35 }}>
+                                        <TouchableOpacity onPress={() => props.letterPressed(letter.trim().toLowerCase())} style={{ width: '100%', height: '100%', flex: 1, marginLeft: 3 }}>
+                                            <View>
+                                                <Text style={{ color: 'white', fontFamily: 'Troika', fontSize: 24, position: 'relative', left: '20%' }}>{letter}</Text>
+                                            </View>
+                                        </TouchableOpacity>
+                                    </ImageBackground>
+                                )
+                        })
                     }
                 </View>
             </View>
