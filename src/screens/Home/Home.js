@@ -1,19 +1,14 @@
 import React, { Component } from 'react';
-import { View, Button, StyleSheet, Image, Text, ImageBackground, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, Text, ImageBackground, TouchableOpacity } from 'react-native';
 
-import CONSTANTS from '../../utils/constants';
-import MyButton from '../../components/UI/Button/Button'
-import FbButton from '../../components/AuthButtons/FbButton/FbButton';
-import RankingModal from '../../components/Modals/RankingModal';
 import { getUsers } from '../../utils/requests';
-
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
-import Leaf from '../../assets/Stuff/bigLeaf.png';
 import AboutButton from '../../assets/Buttons/about.png';
 import ProfileButton from '../../assets/Buttons/locked.png';
 import Crown from '../../assets/Stuff/1st.png';
 import SinglePlayerTitle from '../../assets/Modals/titleShadow.png';
 import MultiplayerTitle from '../../assets/Stuff/titleBox.png';
+import CustomText from '../../components/UI/Text/CustomTitle';
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -21,8 +16,7 @@ class HomeScreen extends Component {
     }
 
     state = {
-        users: [],
-        rankingModal: false
+        users: []
     }
 
     componentDidMount() {
@@ -70,22 +64,26 @@ class HomeScreen extends Component {
                         </View>
                     </View>
                     <View style={styles.details}>
-                        <View style={styles.aboutButtonContainer}>
-                            <TouchableOpacity onPress={() => alert('ABOUT')} style={styles.detailsButtonWidth}>
-                                <Image style={styles.aboutButton} source={AboutButton} resizeMode="stretch" />
-                            </TouchableOpacity>
+                        <View style={[styles.aboutButtonContainer]}>
+                            <View style={[{ justifyContent: 'flex-start' }]}>
+                                <TouchableOpacity onPress={() => alert('ABOUT')} style={styles.detailsButtonWidth}>
+                                    <Image style={styles.aboutButton} source={AboutButton} resizeMode="stretch" />
+                                </TouchableOpacity>
+                            </View>
                         </View>
                         <View style={styles.profileButtonContainer}>
-                            <TouchableOpacity onPress={this.navigateProfileScreen} style={styles.detailsButtonWidth}>
-                                <Image style={styles.profileButton} source={ProfileButton} resizeMode="stretch" />
-                            </TouchableOpacity>
+                            <View style={{ flex: 1, flexDirection: 'row-reverse' }}>
+                                <TouchableOpacity onPress={this.navigateProfileScreen} style={[styles.detailsButtonWidth]}>
+                                    <Image style={styles.profileButton} source={ProfileButton} resizeMode="stretch" />
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     </View>
-                    <RankingModal
+                    {/* <RankingModal
                         isVisible={this.state.rankingModal}
                         onClose={() => this.setState({ rankingModal: false })}
                         closeModal={() => this.setState({ rankingModal: false })}
-                        users={this.state.users} />
+                        users={this.state.users} /> */}
                 </View>
             </ImageBackground>
         );
@@ -94,7 +92,8 @@ class HomeScreen extends Component {
 
 const styles = StyleSheet.create({
     detailsButtonWidth: {
-        width: '40%'
+        width: '40%',
+        height: '80%'
     },
     max: {
         flex: 1
@@ -167,7 +166,7 @@ const styles = StyleSheet.create({
         width: "60%",
         height: "80%",
         position: 'relative',
-        left: '20%',
+        left: '25%',
         top: '5%'
     },
     aboutButton: {
@@ -175,7 +174,7 @@ const styles = StyleSheet.create({
         top: '15%',
         left: '15%',
         width: "60%",
-        height: "85%"
+        height: "100%"
     },
     buttonText: {
         fontFamily: 'Troika',

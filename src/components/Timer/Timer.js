@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Animated } from 'react-native';
+import { StyleSheet, Animated } from 'react-native';
+
+import CustomText from '../../components/UI/Text/Text';
+
+let SCALE_VALUE = 1.25;
 
 export default class Timer extends Component {
     constructor(props) {
@@ -24,16 +28,18 @@ export default class Timer extends Component {
 
     componentWillUnmount() {
         clearImmediate(this.myInterval);
+        SCALE_VALUE = 1.25;
     }
 
     animation = () => {
         Animated.timing(this.state.animation, {
-            toValue: 1.5,
-            duration: 500
+            toValue: SCALE_VALUE,
+            duration: 500,
+            useNativeDriver: true
         }).start(() => Animated.timing(this.state.animation, {
             toValue: 1,
             duration: 500,
-
+            useNativeDriver: true
         }).start())
     }
 
@@ -48,25 +54,15 @@ export default class Timer extends Component {
             ]
         }
 
-        const counterStyle = { ...styles.counter }
-
-        if(count <= 5) counterStyle.color = 'red';
+        if (count <= 6) SCALE_VALUE = 2;
 
         return (
-            <Animated.View style={[styles.counterContainer, timerAnimationStyle]}>
-                <Text style={counterStyle}>{count}</Text>
+            <Animated.View style={[this.props.style, timerAnimationStyle]}>
+                <CustomText normal color={count <= 5 ? 'red' : undefined}>{count}</CustomText>
             </Animated.View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    counterContainer: {
-        padding: 10
-    },
-    counter: {
-        fontSize: 30,
-        fontWeight: 'bold',
-        color: "azure"
-    }
 });
