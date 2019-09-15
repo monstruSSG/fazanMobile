@@ -16,6 +16,7 @@ import WinModal from '../../components/Modals/WinModal';
 import BackgroudImage from '../../assets/back.png';
 import Avatar from '../../assets/b.jpg';
 
+
 class SingleplayerGameScreen extends Component {
     static navigationOptions = {
         header: null
@@ -36,8 +37,8 @@ class SingleplayerGameScreen extends Component {
         yourLastWord: '',
         gameFinished: false,
         showTimer: false,
-        loseModal: true,
-        winModal: false,
+        loseModal: false,
+        winModal: true,
         selected: false,
         letterIndex: 0
     }

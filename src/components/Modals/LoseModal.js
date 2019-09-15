@@ -11,7 +11,7 @@ import EmptyStar from '../../assets/Stuff/emptyStar.png';
 import RetryButton from '../../assets/Buttons/retry.png';
 import MenuButton from '../../assets/Buttons/yellowHolder.png';
 
-const rankingModal = props => (
+const loseModal = props => (
 
     <Modal visible={props.isVisible} onRequestClose={props.onClose} animationType="slide" transparent={true}>
         <View style={styles.contentWrapper}>
@@ -25,7 +25,7 @@ const rankingModal = props => (
                             </TouchableOpacity>
                             <ImageBackground resizeMode="stretch" style={styles.titleImage} source={Title}>
                                 <View style={[styles.centerItems, styles.max, styles.titleTextContainer]}>
-                                    <Text style={styles.titleText}>INFRANGERE!</Text>
+                                    <Text style={styles.titleText}>AI PIERDUT!</Text>
                                 </View>
                             </ImageBackground>
                         </View>
@@ -43,9 +43,9 @@ const rankingModal = props => (
                                     </View>
                                 </View>
                                 <View style={{ flex: 2 }}>
-                                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                        <Text style={{}}>Ai pierdut! Data viitoare poti mai mult</Text>
-                                        <Text>Punctaj: 233</Text>
+                                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 8 }}>
+                                        <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 18, textAlign: 'center' }}>Adversarul te-a inchis folosind cuvantul restaurant</Text>
+                                        <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 18, textAlign: 'center' }}>Punctaj: 233</Text>
                                     </View>
                                     <View style={{ flex: 1, flexDirection: 'row' }}>
                                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -54,8 +54,10 @@ const rankingModal = props => (
                                             </TouchableOpacity>
                                         </View>
                                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                            <TouchableOpacity style={{width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center'}}>
-                                                <ImageBackground resizeMode="stretch" imageStyle={{ width: '100%', height: '100%' }} source={MenuButton} style={{ width: '80%', height: '60%' }} />
+                                            <TouchableOpacity style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+                                                <ImageBackground resizeMode="stretch" imageStyle={{ width: '100%', height: '100%' }} source={MenuButton} style={{ width: '80%', height: '60%' }}>
+                                                    <Text style={{color: 'white', fontFamily: 'Troika', position: 'relative', textAlign: 'center', top: '20%', fontSize: 22}}>MENIU</Text>
+                                                </ImageBackground>
                                             </TouchableOpacity>
 
                                         </View>
@@ -101,15 +103,15 @@ const styles = StyleSheet.create({
         height: "15%",
     },
     titleImage: {
-        height: "100%",
+        height: "130%",
         width: "95%",
         position: 'relative',
-        bottom: "150%",
+        bottom: "180%",
         left: '7%'
     },
     buttonImage: {
         width: "40%",
-        height: "90%",
+        height: "100%",
         left: '88%',
         bottom: "8%"
     },
@@ -128,12 +130,12 @@ const styles = StyleSheet.create({
     },
     titleText: {
         position: 'relative',
-        top: '20%',
+        top: '40%',
         fontFamily: 'Troika',
         color: 'white',
-        fontSize: 24,
+        fontSize: 29,
         letterSpacing: 1,
     }
 })
 
-export default rankingModal; 
+export default loseModal; 

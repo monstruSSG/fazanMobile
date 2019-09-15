@@ -1,47 +1,73 @@
 import React from 'react';
-import { View, Modal, StyleSheet, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { View, Modal, StyleSheet, Image, TouchableOpacity, FlatList, ImageBackground, Text, Button } from 'react-native';
 
-import DefaultInput from '../UI/DefaultInput/DefaultInput';
-import Text from '../UI/Text/Text';
-import Button from '../UI/Button/Button';
-import CONSTANTS from '../../utils/constants';
+import ClasamentUserDetails from '../ClasamentUserDetails/ClasamentUserDetails';
 
-const loseModal = props => (
+import RankingModal from '../../assets/Modals/clasamentModal.png';
+import Title from '../../assets/Modals/titleShadow.png';
+import ExitButton from '../../assets/Buttons/exitButton.png';
+import Holder from '../../assets/Modals/loseHolder.png';
+import GoldStar from '../../assets/Stuff/goldStar.png';
+import RetryButton from '../../assets/Buttons/retry.png';
+import MenuButton from '../../assets/Buttons/yellowHolder.png';
+import Stars from '../../assets/Stuff/winStars.png';
+
+const winModal = props => (
+
     <Modal visible={props.isVisible} onRequestClose={props.onClose} animationType="slide" transparent={true}>
-        <View style={{
-            flex: 1,
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: 'rgba(0,0,0,0.5)'
-        }}>
-            <View style={{
-                width: 300,
-                height: 400,
-                borderColor: "white",
-                borderWidth: 5,
-                borderRadius: 30,
-                backgroundColor: 'white',
-                elevation: 20,
-            }}>
-                <View style={styles.titleContainer}>
-                    <Text color="azure" style={styles.titleText}>AI CASTIGAT !</Text>
-                    <Text color="azure" style={[styles.titleText, styles.subtitleText]}>AI UN VOCABULAR DEZVOLTAT</Text>
-                </View>
-                <View style={styles.infoAboutYou}>
-                    <View style={styles.oponentWord}>
-                        <Text style={styles.infoTitle}>Ai inchis cu cuvantul:</Text>
-                        <Text>restaurant</Text>
-                    </View>
-                    <View style={styles.currentPosition}>
-                        <Text style={styles.infoTitle}>Pozitia curenta</Text>
-                        <Text>12</Text>
-                    </View>
-                </View>
-                <View style={styles.options}>
-                    <Button onPress={props.playAgain} width={120} color={CONSTANTS.secondaryColor}>Joaca Dinou</Button>
-                    <Button onPress={props.exitGame} width={120} color={CONSTANTS.buttonColor}>Iesi</Button>
+        <View style={styles.contentWrapper}>
+            <View style={styles.max}>
+                <View style={[styles.max, styles.container]}>
+                    <ImageBackground source={RankingModal} resizeMode="stretch" style={styles.backgroundImageContainer}>
+                        <View style={styles.titleContainer}>
+                            <TouchableOpacity onPress={props.onClose}>
+                                <ImageBackground style={styles.buttonImage} resizeMode="cover" source={ExitButton}>
+                                </ImageBackground>
+                            </TouchableOpacity>
+                            <ImageBackground resizeMode="stretch" style={styles.titleImage} source={Title}>
+                                <View style={[styles.centerItems, styles.max, styles.titleTextContainer]}>
+                                    <Text style={styles.titleText}>AI CASTIGAT!</Text>
+                                </View>
+                            </ImageBackground>
+                        </View>
+                        <View style={styles.usersContainerWrapper}>
+                            <Image resizeMode="stretch" source={Stars} style={{ width: '100%', height: '100%', position: 'absolute', bottom: "35%"}} />
+                            <ImageBackground source={Holder} style={{ width: '100%', height: '100%' }}>
+                                <View style={{ flex: 1, flexDirection: 'row' }}>
+                                    <View style={{ flex: 1 }}>
+                                        <Image source={GoldStar} style={{ width: '80%', height: '70%', position: 'relative', top: '40%', left: '30%' }} />
+                                    </View>
+                                    <View style={{ flex: 1 }}>
+                                        <Image source={GoldStar} style={{ width: '100%', height: '100%', position: 'relative', top: '5%' }} />
+                                    </View>
+                                    <View style={{ flex: 1 }}>
+                                        <Image source={GoldStar} style={{ width: '80%', height: '70%', position: 'relative', top: '40%', right: '5%' }} />
+                                    </View>
+                                </View>
+                                <View style={{ flex: 2 }}>
+                                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 8 }}>
+                                        <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 18, textAlign: 'center' }}>Ai inchis folosind cuvantul restaurant</Text>
+                                        <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 18, textAlign: 'center' }}>Punctaj: 233</Text>
+                                    </View>
+                                    <View style={{ flex: 1, flexDirection: 'row' }}>
+                                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                            <TouchableOpacity style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+                                                <Image resizeMode="stretch" source={RetryButton} style={{ width: '70%', height: '70%' }} />
+                                            </TouchableOpacity>
+                                        </View>
+                                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                            <TouchableOpacity style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+                                                <ImageBackground resizeMode="stretch" imageStyle={{ width: '100%', height: '100%' }} source={MenuButton} style={{ width: '80%', height: '60%' }}>
+                                                    <Text style={{ color: 'white', fontFamily: 'Troika', position: 'relative', textAlign: 'center', top: '20%', fontSize: 22 }}>MENIU</Text>
+                                                </ImageBackground>
+                                            </TouchableOpacity>
+
+                                        </View>
+                                    </View>
+                                </View>
+                            </ImageBackground>
+                        </View>
+                    </ImageBackground>
                 </View>
             </View>
         </View>
@@ -49,80 +75,69 @@ const loseModal = props => (
 );
 
 const styles = StyleSheet.create({
-    loseModal: {
-        width: 50,
-        height: 50,
-        backgroundColor: CONSTANTS.secondaryColor
+    contentWrapper: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        backgroundColor: 'rgba(0,0,0,0.5)'
     },
-    loseModalView: {
-        width: 100,
-        height: 100,
-
+    centerItems: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    max: {
+        width: '100%',
+        height: '85%'
+    },
+    container: {
+        justifyContent: "flex-end",
+        position: 'relative',
+        right: '3%'
+    },
+    backgroundImageContainer: {
+        height: "90%",
+        width: "100%",
+        justifyContent: 'flex-start',
+        alignItems: 'center'
     },
     titleContainer: {
         width: "100%",
-        height: "30%",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: CONSTANTS.secondaryColor,
-        borderTopLeftRadius: 25,
-        borderTopRightRadius: 25,
-        borderBottomLeftRadius: 25,
-        borderBottomRightRadius: 25
+        height: "15%",
     },
-    title: {
-        width: "100%",
-        resizeMode: 'stretch'
+    titleImage: {
+        height: "130%",
+        width: "95%",
+        position: 'relative',
+        bottom: "180%",
+        left: '7%'
     },
-    infoAboutYou: {
-        flex: 3,
-        justifyContent: "center",
-        alignItems: "center"
+    buttonImage: {
+        width: "40%",
+        height: "100%",
+        left: '88%',
+        bottom: "8%"
     },
-    infoTitle: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        letterSpacing: 4
+    usersContainerWrapper: {
+        height: "65%",
+        width: "70%",
+        position: 'relative',
+        left: '5%',
+        alignItems: 'center',
+    },
+    userWrapper: {
+        width: "100%"
+    },
+    titleTextContainer: {
+        display: 'flex'
     },
     titleText: {
-        color: "azure",
-        letterSpacing: 4,
-        fontSize: 34,
-        paddingBottom: 8
-    },
-    subtitleText: {
-        fontSize: 10
-    },
-    oponentWord: {
-        borderColor: CONSTANTS.secondaryColor,
-        borderWidth: 2,
-        borderTopWidth: 0,
-        borderTopLeftRadius: 40,
-        borderBottomRightRadius: 40,
-        borderBottomLeftRadius: 40,
-        borderTopRightRadius: 40,
-        width: '75%',
-        marginBottom: 24,
-        marginTop: 10,
-        paddingBottom: 12
-    },
-    currentPosition: {
-        borderColor: CONSTANTS.secondaryColor,
-        borderWidth: 2,
-        borderBottomWidth: 0,
-        borderTopLeftRadius: 40,
-        borderBottomRightRadius: 40,
-        borderBottomLeftRadius: 40,
-        borderTopRightRadius: 40,
-        width: '75%',
-        paddingBottom: 12
-    },
-    options: {
-        flex: 1,
-        flexDirection: 'row',
-        alignItems: "flex-end",
-        justifyContent: "center"
+        position: 'relative',
+        top: '40%',
+        fontFamily: 'Troika',
+        color: 'white',
+        fontSize: 29,
+        letterSpacing: 1,
     }
 })
 
-export default loseModal; 
+export default winModal; 
