@@ -3,4 +3,4 @@ import * as ME from './fakeData/me.json';
 
 export const getUsers = () => new Promise((resolve, reject) => resolve(Object.values(USERS)));
 
-export const getMe = () => new Promise((resolve, reject) => resolve(ME));
+export const getMe = () => new Promise((resolve, reject) => {console.log(ME, 'EUUUUUUUUUUUUUU');return resolve(ME)});

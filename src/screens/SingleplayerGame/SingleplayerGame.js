@@ -32,7 +32,7 @@ class SingleplayerGameScreen extends Component {
 
     //Round increment animation
     roundIncrementAnimation = () => Animated.timing(this.state.roundAnimation, {
-        toValue: 0.95,
+        toValue: 0.97,
         useNativeDriver: true,
         duration: 200
     }).start(() => this.setState(prevState => ({
@@ -82,7 +82,7 @@ class SingleplayerGameScreen extends Component {
                                     <View style={[styles.centerContent, { flex: 1 }]}>
                                         <Timer style={styles.counter}
                                             onTimeExpired={count => this.onTimeExpiredHandler(count)}
-                                            count={3000} />
+                                            count={10} />
                                     </View>
                                 </View>
                             </View>
