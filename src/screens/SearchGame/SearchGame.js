@@ -34,7 +34,8 @@ class SearchGameScreen extends Component {
     navigateMultiplayerScreen = () => this.props.navigation.navigate('Multiplayer');
 
     onPlayGameHandler = () => {
-        this.props.createSocketConnection().then(socket => {
+        console.log(this.props.token , 'TOKEN')
+        this.props.createSocketConnection(this.props.token).then(socket => {
             socket.emit('reqConnectedUsers', { name: "Bogdan113" })
 
             socket.on('recConnectedUsers', data => {
@@ -66,7 +67,7 @@ class SearchGameScreen extends Component {
     render() {
         return (
             <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
-                {this.state.showLogin && false && <LoginModal exitGame={() => this.setState({ showLogin: false })} />}
+                {this.state.showLogin && true && <LoginModal exitGame={() => this.setState({ showLogin: false })} />}
                 <View style={styles.searchGame}>
 
                     <View style={styles.inputForm}>
@@ -86,7 +87,7 @@ class SearchGameScreen extends Component {
                         />
                     </View>
                     <View style={styles.playGameButton}>
-                        <TouchableOpacity style={{alignItems: 'center', justifyContent: 'center', width: '80%'}}>
+                        <TouchableOpacity style={{alignItems: 'center', justifyContent: 'center', width: '80%'}} onPress={this.onPlayGameHandler}>
                             <ImageBackground source={PlayButton} style={{width: '100%', height: '90%' ,position: 'relative', top: '8%'}} resizeMode="stretch">
                                 <Text style={{ color: "white", fontFamily: 'Troika', fontSize: 22, textAlign: 'center', paddingTop: '2%' }}>
                                     PLAY RANDOM
@@ -136,11 +137,12 @@ const styles = StyleSheet.create({
 
 
 const mapStateToProps = state => ({
-    socket: state.socket
+    socket: state.socket,
+    token: state.user.token
 });
 
 const mapDispatchToProps = dispatch => ({
-    createSocketConnection: () => dispatch(SOCKET.createSocketConnection()),
+    createSocketConnection: token => dispatch(SOCKET.createSocketConnection(token)),
     setOponentSocketId: socketId => dispatch(SOCKET.setOponentSocketId(socketId))
 });
 

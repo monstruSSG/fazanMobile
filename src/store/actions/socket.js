@@ -1,8 +1,8 @@
 import { CREATE_CONNECTION, CLOSE_CONNECTION, SET_OPONENT_SOCKETID, CLEAR_OPONENT_SOCKETID } from './actionTypes';
 import { createConnection } from '../../utils/socketConnection' 
 
-export const createSocketConnection = () => dispatch => {
-    const socket = createConnection();
+export const createSocketConnection = token => dispatch => {
+    const socket = createConnection(token);
     dispatch({
         type: CREATE_CONNECTION,
         payload: socket
