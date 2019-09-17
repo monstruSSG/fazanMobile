@@ -8,6 +8,8 @@ import * as WORDS from '../../store/actions/words';
 import CONSTANTS from '../../utils/constants';
 import CustomText from '../../components/UI/Text/Text';
 import Timer from '../../components/Timer/Timer';
+import LoseModal from '../../components/Modals/LoseModal';
+import WinModal from '../../components/Modals/WinModal';
 
 import Background from '../../assets/Stuff/bg.jpg';
 import HeaderBg from '../../assets/Stuff/singleplayerHeader.png';
@@ -23,12 +25,16 @@ class SingleplayerGameScreen extends Component {
 
     state = {
         roundAnimation: new Animated.Value(1),
+        lastWordAnimation: new Animated.Value(1),
         roundNumber: 0,
         gameFinished: false,
         lastWord: '',
         word: '',
         usedWords: [],
-        showTimer: false
+        showTimer: false,
+        showWinModal: false,
+        showLoseModal: false
+
     }
 
     componentDidMount() {
@@ -55,26 +61,21 @@ class SingleplayerGameScreen extends Component {
         duration: 600
     }).start()))
 
-    rotateAnimation = () => Animated.timing(this.state.rotateAnimation, {
+    newLatestWordAnimation = () => Animated.timing(this.state.lastWordAnimation, {
+        toValue: 0.97,
+        useNativeDriver: true,
+        duration: 200
+    }).start(() => Animated.timing(this.state.lastWordAnimation, {
         toValue: 1,
-        duration: 2000,
-        easing: Easing.linear,
-        useNativeDriver: true
-    }).start(() => Animated.timing(this.state.rotateAnimation, {
-        toValue: 0,
-        duration: 2000,
-        easing: Easing.linear,
-        useNativeDriver: true
-    }).start(() => {
-        if (!this.state.stopRotateAnimation) this.rotateAnimation();
-    }))
-
-
+        easing: Easing.bounce,
+        useNativeDriver: true,
+        duration: 200
+    }).start())
 
     navigateHomeHandler = () => this.props.navigation.navigate('Home');
 
     onTimeExpiredHandler = count => {
-        if (count < 0) this.setState({ gameFinished: true })
+        if (count < 0) this.setState({ gameFinished: true, showLoseModal: true, showTimer: false })
     }
 
     letterPressedHandler = letter => {
@@ -95,28 +96,34 @@ class SingleplayerGameScreen extends Component {
         //First check if inserted word exists
         this.props.checkWordExists(this.state.word)
             .then(exists => {
-                if (!exists) return alert('Cuvantul nu exista');
+                if (!exists) return Promise.reject({ message: 'WORD_NOT_EXISTS' });
                 this.resetTimer();
 
                 return this.props.generateWord(this.state.word);
             })
             .then(generatedWord => {
-                if (!generatedWord) return alert('You won');
+                if (!generatedWord) return Promise.reject({ message: 'YOU_WON' });
 
-                //Generate random number between 0 and 3 secounds
-                let randomNumber = Math.floor(Math.random() * (3000 + 1000))
-
-                setTimeout(() => {
-                    //Aici vine animatia de asteapta
-                    console.log('Celalalt jucator muta')
-
-                    //Here the 'AI' generates a word
-                    this.setState({ lastWord: generatedWord, word: generatedWord.slice(-2) });
-                    this.resetTimer();
-                    this.roundIncrementAnimation();
-                }, randomNumber)
+                //Here the 'AI' generates a word
+                this.setState({ lastWord: generatedWord, word: generatedWord.slice(-2) }, this.newLatestWordAnimation);
+                this.resetTimer();
+                this.roundIncrementAnimation();
+                return this.props.checkWordExistsWithPrefix(generatedWord)
             })
-            .catch(console.log)
+            .then(exists => {
+                if (!exists) return Promise.reject({ message: 'YOU_LOST' });
+            })
+            .catch(e => {
+                if (!e.message) return console.log(e);
+
+                if (e.message === 'YOU_LOST') {
+                    return this.setState({ showLoseModal: true });
+                } else if (e.message === 'YOU_WON') {
+                    return this.setState({ showWinModal: true });
+                } else {
+                    alert('Cuvantul nu exista')
+                }
+            })
     }
 
     render() {
@@ -129,6 +136,14 @@ class SingleplayerGameScreen extends Component {
             ]
         };
 
+        const lastWordScale = {
+            transform: [
+                {
+                    scale: this.state.lastWordAnimation
+                }
+            ]
+        };
+
         return (
             <ImageBackground source={Background} style={[styles.maxWidthHeight]}>
                 <View style={[styles.maxWidthHeight, { alignItems: 'center' }]}>
@@ -137,7 +152,7 @@ class SingleplayerGameScreen extends Component {
                             <View style={[styles.maxWidthHeight, { flexDirection: 'row' }]}>
                                 <View style={[styles.centerContent, { flex: 1 }]}>
                                     <TouchableOpacity style={[styles.centerContent, styles.exitButtonSize, styles.exitButtonPosition]}
-                                        onPress={this.roundIncrementAnimation}>
+                                        onPress={this.newLatestWordAnimation}>
                                         <Image source={ExitButton} style={[styles.maxWidthHeight]} resizeMode='stretch' />
                                     </TouchableOpacity>
                                 </View>
@@ -177,9 +192,9 @@ class SingleplayerGameScreen extends Component {
                                 <ImageBackground source={LastWordImage}
                                     style={[styles.maxWidthHeight]}
                                     resizeMode='stretch'>
-                                    <View style={[styles.centerContent, { width: '100%', height: '60%' }]}>
+                                    <Animated.View style={[styles.centerContent, { width: '100%', height: '60%' }, lastWordScale]}>
                                         <CustomText large style={styles.lastWord}>{this.state.lastWord}</CustomText>
-                                    </View>
+                                    </Animated.View>
                                 </ImageBackground>
                             </View>
                         </View>
@@ -205,7 +220,12 @@ class SingleplayerGameScreen extends Component {
                                 deleteLastLetter={() => this.deleteLastLetterHandler()} />
                         </View>
                     </View>
-
+                    <WinModal isVisible={this.state.showWinModal}
+                        cu={this.state.lastWord}
+                        onClose={() => this.setState({ showWinModal: false })} />
+                    <LoseModal isVisible={this.state.showLoseModal}
+                        cu={this.state.lastWord}
+                        onClose={() => this.setState({ showLoseModal: false })} />
                 </View>
             </ImageBackground>
         );

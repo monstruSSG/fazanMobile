@@ -44,8 +44,8 @@ const loseModal = props => (
                                 </View>
                                 <View style={{ flex: 2 }}>
                                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 8 }}>
-                                        <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 18, textAlign: 'center' }}>Adversarul te-a inchis folosind cuvantul restaurant</Text>
-                                        <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 18, textAlign: 'center' }}>Punctaj: 233</Text>
+                                        <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 18, textAlign: 'center' }}>Adversarul te-a inchis folosind cuvantul {props.cu}</Text>
+                                        {/* <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 18, textAlign: 'center' }}>Punctaj: 233</Text> */}
                                     </View>
                                     <View style={{ flex: 1, flexDirection: 'row' }}>
                                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

@@ -46,7 +46,7 @@ const winModal = props => (
                                 </View>
                                 <View style={{ flex: 2 }}>
                                     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 8 }}>
-                                        <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 18, textAlign: 'center' }}>Ai inchis folosind cuvantul restaurant</Text>
+                                        <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 18, textAlign: 'center' }}>Ai inchis folosind cuvantul {props.cu}</Text>
                                         <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 18, textAlign: 'center' }}>Punctaj: 233</Text>
                                     </View>
                                     <View style={{ flex: 1, flexDirection: 'row' }}>
