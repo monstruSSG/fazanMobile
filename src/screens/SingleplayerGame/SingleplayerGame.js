@@ -25,8 +25,19 @@ class SingleplayerGameScreen extends Component {
         roundAnimation: new Animated.Value(1),
         roundNumber: 0,
         gameFinished: false,
-        lastWord: 'LASTWORD',
-        word: ''
+        lastWord: '',
+        word: '',
+        usedWords: [],
+        showTimer: false
+    }
+
+    componentDidMount() {
+        this.props.connectToDb()
+            .then(() => {
+                this.props.generateStartWord()
+                    .then(word => this.setState({ lastWord: word, word: word.slice(-2), showTimer: true }))
+                    .catch(e => console.log(e))
+            })
     }
 
     //Animations
@@ -44,6 +55,21 @@ class SingleplayerGameScreen extends Component {
         duration: 600
     }).start()))
 
+    rotateAnimation = () => Animated.timing(this.state.rotateAnimation, {
+        toValue: 1,
+        duration: 2000,
+        easing: Easing.linear,
+        useNativeDriver: true
+    }).start(() => Animated.timing(this.state.rotateAnimation, {
+        toValue: 0,
+        duration: 2000,
+        easing: Easing.linear,
+        useNativeDriver: true
+    }).start(() => {
+        if (!this.state.stopRotateAnimation) this.rotateAnimation();
+    }))
+
+
 
     navigateHomeHandler = () => this.props.navigation.navigate('Home');
 
@@ -59,8 +85,38 @@ class SingleplayerGameScreen extends Component {
 
     deleteLastLetterHandler = () => {
         this.setState((prevState) => ({
-            word: prevState.word.slice(0, -1)
+            word: prevState.word.length <= 2 ? prevState.word : prevState.word.slice(0, -1)
         }))
+    }
+
+    resetTimer = () => this.setState({ showTimer: false }, () => this.setState({ showTimer: true }))
+
+    onInserWordHandler = () => {
+        //First check if inserted word exists
+        this.props.checkWordExists(this.state.word)
+            .then(exists => {
+                if (!exists) return alert('Cuvantul nu exista');
+                this.resetTimer();
+
+                return this.props.generateWord(this.state.word);
+            })
+            .then(generatedWord => {
+                if (!generatedWord) return alert('You won');
+
+                //Generate random number between 0 and 3 secounds
+                let randomNumber = Math.floor(Math.random() * (3000 + 1000))
+
+                setTimeout(() => {
+                    //Aici vine animatia de asteapta
+                    console.log('Celalalt jucator muta')
+
+                    //Here the 'AI' generates a word
+                    this.setState({ lastWord: generatedWord, word: generatedWord.slice(-2) });
+                    this.resetTimer();
+                    this.roundIncrementAnimation();
+                }, randomNumber)
+            })
+            .catch(console.log)
     }
 
     render() {
@@ -71,7 +127,7 @@ class SingleplayerGameScreen extends Component {
                     scale: this.state.roundAnimation
                 }
             ]
-        }
+        };
 
         return (
             <ImageBackground source={Background} style={[styles.maxWidthHeight]}>
@@ -90,9 +146,9 @@ class SingleplayerGameScreen extends Component {
                                 </View>
                                 <View style={[styles.centerContent, { flex: 1 }]}>
                                     <View style={[styles.centerContent, { flex: 1 }]}>
-                                        <Timer style={styles.counter}
+                                        {this.state.showTimer ? <Timer style={styles.counter}
                                             onTimeExpired={count => this.onTimeExpiredHandler(count)}
-                                            count={10} />
+                                            count={10} /> : null}
                                     </View>
                                 </View>
                             </View>
@@ -138,7 +194,7 @@ class SingleplayerGameScreen extends Component {
                             <View style={{ flex: 1 }}>
                                 <TouchableOpacity
                                     style={styles.submitButton}
-                                    onPress={this.insertWordHandler}>
+                                    onPress={this.onInserWordHandler}>
                                     <CustomText color="azure">TRIMITE</CustomText>
                                 </TouchableOpacity>
                             </View>
