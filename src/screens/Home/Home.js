@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, ImageBackground, TouchableOpacity } from 'react-native';
 
 import { getUsers } from '../../utils/requests';
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
@@ -8,7 +8,7 @@ import ProfileButton from '../../assets/Buttons/locked.png';
 import Crown from '../../assets/Stuff/1st.png';
 import SinglePlayerTitle from '../../assets/Modals/titleShadow.png';
 import MultiplayerTitle from '../../assets/Stuff/titleBox.png';
-import CustomText from '../../components/UI/Text/CustomTitle';
+import Text from '../../components/UI/Text/Text';
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -47,7 +47,7 @@ class HomeScreen extends Component {
                                 <TouchableOpacity onPress={this.navigateSingleplayerScreen} style={[styles.singlePlayerButtonPress]}>
                                     <ImageBackground style={styles.singlePlayerButton} source={SinglePlayerTitle} resizeMode="stretch">
                                         <View style={[styles.center]}>
-                                            <Text style={styles.buttonText}>SINGLEPLAYER</Text>
+                                            <Text normal style={styles.buttonText}>SINGLEPLAYER</Text>
                                         </View>
                                     </ImageBackground>
                                 </TouchableOpacity>
@@ -56,7 +56,7 @@ class HomeScreen extends Component {
                                 <TouchableOpacity onPress={this.naivgateSearchGameScreen} style={[styles.multiPlayerButtonPress, styles.center]}>
                                     <ImageBackground style={styles.mulitplayerButton} source={MultiplayerTitle} resizeMode="stretch">
                                         <View style={[styles.center]}>
-                                            <Text style={[styles.buttonText, styles.multiPLayerButtonText]}>MULTIPLAYER</Text>
+                                            <Text normal style={[styles.multiPLayerButtonText]}>MULTIPLAYER</Text>
                                         </View>
                                     </ImageBackground>
                                 </TouchableOpacity>
@@ -178,16 +178,16 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         fontFamily: 'Troika',
-        fontSize: 30,
         position: 'relative',
-        top: '163%',
+        top: '200%',
         left: '2%',
         color: 'white',
-        justifyContent: "center",
+        fontSize: 26,
         alignItems: "center"
     },
     multiPLayerButtonText: {
-        top: '55%',
+        fontSize: 26,
+        top: '82%',
         //To ovveride left 
         left: undefined,
         right: '8%'

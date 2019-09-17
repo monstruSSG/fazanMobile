@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ScrollView, FlatList, ImageBackground, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, ScrollView, FlatList, ImageBackground, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
 
 import CONSTANTS from '../../utils/constants';
 import * as SOCKET from '../../store/actions/socket'
 import { getUsers } from '../../utils/requests';
 import Button from '../../components/UI/Button/Button'
+import Text from '../../components/UI/Text/Text'
 import Input from '../../components/UI/DefaultInput/DefaultInput'
 import OponentDetails from '../../components/OponentDetails/OponentDetails';
 import Header from '../../components/Header/HeaderWithInput';
 import SideDrawer from '../../components/Modals/SideDrawer';
 import LoginModal from '../../components/Modals/LoginModal';
+import WaitingModal from '../../components/Modals/WaitingModal';
+import InvitationModal from '../../components/Modals/InvitationModal';
 
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
 import PlayButton from '../../assets/Buttons/greenLabel.png';
@@ -24,7 +27,9 @@ class SearchGameScreen extends Component {
     state = {
         users: [],
         sideState: false,
-        showLogin: true
+        showLogin: true,
+        waitingModal: false,
+        invitationModal: false
     }
 
     componentDidMount() {
@@ -88,13 +93,15 @@ class SearchGameScreen extends Component {
                     <View style={styles.playGameButton}>
                         <TouchableOpacity style={{alignItems: 'center', justifyContent: 'center', width: '80%'}}>
                             <ImageBackground source={PlayButton} style={{width: '100%', height: '90%' ,position: 'relative', top: '8%'}} resizeMode="stretch">
-                                <Text style={{ color: "white", fontFamily: 'Troika', fontSize: 22, textAlign: 'center', paddingTop: '2%' }}>
+                                <Text color="white" normal style={{ fontFamily: 'Troika', textAlign: 'center', paddingTop: '3%' }}>
                                     PLAY RANDOM
                                 </Text>
                             </ImageBackground>
                         </TouchableOpacity>
                     </View>
                     <SideDrawer isVisible={this.state.sideState} closeSideDrawer={this.closeSideDrawerHandler} />
+                    <WaitingModal onClose={() => this.setState({ waitingModal: false })} isVisible={this.state.waitingModal} />
+                    <InvitationModal onClose={() => this.setState({ invitationModal: false })} isVisible={this.state.invitationModal} />
                 </View>
             </ImageBackground>
 

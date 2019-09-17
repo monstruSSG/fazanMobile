@@ -39,7 +39,6 @@ const text = props => {
     }
 
     let fontSize = props.extra ? EXTRA_LARGE_FONT_SIZE : props.large ? LARGE_FONT_SIZE : props.normal ? NORMAL_FONT_SIZE : SMALL_FONT_SIZE;
-
     let color = {}
 
     if (props.color) color.color = props.color
