@@ -49,12 +49,12 @@ const loseModal = props => (
                                     </View>
                                     <View style={{ flex: 1, flexDirection: 'row' }}>
                                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                            <TouchableOpacity style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+                                            <TouchableOpacity style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }} onPress={props.restart}>
                                                 <Image resizeMode="stretch" source={RetryButton} style={{ width: '70%', height: '70%' }} />
                                             </TouchableOpacity>
                                         </View>
                                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                            <TouchableOpacity style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}>
+                                            <TouchableOpacity style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }} onPress={props.home}>
                                                 <ImageBackground resizeMode="stretch" imageStyle={{ width: '100%', height: '100%' }} source={MenuButton} style={{ width: '80%', height: '60%' }}>
                                                     <Text style={{color: 'white', fontFamily: 'Troika', position: 'relative', textAlign: 'center', top: '20%', fontSize: 22}}>MENIU</Text>
                                                 </ImageBackground>

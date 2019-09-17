@@ -90,6 +90,17 @@ class SingleplayerGameScreen extends Component {
         }))
     }
 
+    restartGame = () => this.props.generateStartWord()
+        .then(startWord => {
+            this.setState({ 
+                showLoseModal: false,
+                showWinModal: false,
+                lastWord: startWord, 
+                word: startWord.slice(-2) 
+            }, this.resetTimer);
+        })
+
+
     resetTimer = () => this.setState({ showTimer: false }, () => this.setState({ showTimer: true }))
 
     onInserWordHandler = () => {
@@ -222,9 +233,13 @@ class SingleplayerGameScreen extends Component {
                     </View>
                     <WinModal isVisible={this.state.showWinModal}
                         cu={this.state.lastWord}
+                        restart={this.restartGame}
+                        home={this.navigateHomeHandler}
                         onClose={() => this.setState({ showWinModal: false })} />
                     <LoseModal isVisible={this.state.showLoseModal}
                         cu={this.state.lastWord}
+                        restart={this.restartGame}
+                        home={this.navigateHomeHandler}
                         onClose={() => this.setState({ showLoseModal: false })} />
                 </View>
             </ImageBackground>

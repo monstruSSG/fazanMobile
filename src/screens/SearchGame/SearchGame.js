@@ -34,8 +34,8 @@ class SearchGameScreen extends Component {
     navigateMultiplayerScreen = () => this.props.navigation.navigate('Multiplayer');
 
     onPlayGameHandler = () => {
-        console.log(this.props.token , 'TOKEN')
         this.props.createSocketConnection(this.props.token).then(socket => {
+
             socket.emit('reqConnectedUsers', { name: "Bogdan113" })
 
             socket.on('recConnectedUsers', data => {
