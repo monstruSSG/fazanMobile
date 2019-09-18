@@ -44,7 +44,6 @@ const styles = StyleSheet.create({
     playButton: {
         width: 50,
         height: 50,
-        backgroundColor: 'red', 
         alignItems: 'center'
     },
     content: {
