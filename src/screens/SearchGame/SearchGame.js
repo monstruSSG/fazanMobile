@@ -67,7 +67,7 @@ class SearchGameScreen extends Component {
     render() {
         return (
             <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
-                {this.state.showLogin && true && <LoginModal exitGame={() => this.setState({ showLogin: false })} />}
+                {this.state.showLogin && false && <LoginModal exitGame={() => this.setState({ showLogin: false })} />}
                 <View style={styles.searchGame}>
 
                     <View style={styles.inputForm}>
