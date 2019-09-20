@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text, ImageBackground, TouchableOpacity } from 'react-native';
 
 import { getUsers } from '../../utils/requests';
+import CustomText from '../../components/UI/Text/CustomTitle';
+import AboutModal from '../../components/Modals/AboutModal';
+
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
 import AboutButton from '../../assets/Buttons/about.png';
 import ProfileButton from '../../assets/Buttons/locked.png';
 import Crown from '../../assets/Stuff/1st.png';
 import SinglePlayerTitle from '../../assets/Modals/titleShadow.png';
-import MultiplayerTitle from '../../assets/Stuff/titleBox.png';
-import CustomText from '../../components/UI/Text/CustomTitle';
+import MultiplayerTitle from '../../assets/Stuff/titleBox.png'
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -16,11 +18,7 @@ class HomeScreen extends Component {
     }
 
     state = {
-        users: []
-    }
-
-    componentDidMount() {
-        getUsers().then(users => this.setState({ users }))
+        showAbout: false
     }
 
     naivgateSearchGameScreen = () => this.props.navigation.navigate('SearchGame');
@@ -66,7 +64,7 @@ class HomeScreen extends Component {
                     <View style={styles.details}>
                         <View style={[styles.aboutButtonContainer]}>
                             <View style={[{ justifyContent: 'flex-start' }]}>
-                                <TouchableOpacity onPress={() => alert('ABOUT')} style={styles.detailsButtonWidth}>
+                                <TouchableOpacity onPress={() => this.setState({ showAbout: true })} style={styles.detailsButtonWidth}>
                                     <Image style={styles.aboutButton} source={AboutButton} resizeMode="stretch" />
                                 </TouchableOpacity>
                             </View>
@@ -79,11 +77,9 @@ class HomeScreen extends Component {
                             </View>
                         </View>
                     </View>
-                    {/* <RankingModal
-                        isVisible={this.state.rankingModal}
-                        onClose={() => this.setState({ rankingModal: false })}
-                        closeModal={() => this.setState({ rankingModal: false })}
-                        users={this.state.users} /> */}
+                    <AboutModal 
+                        isVisible={this.state.showAbout} 
+                        close={() => this.setState({ showAbout: false })} />
                 </View>
             </ImageBackground>
         );
