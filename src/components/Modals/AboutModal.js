@@ -7,10 +7,10 @@ import CustomText from '../UI/Text/Text';
 import AboutBackground from '../../assets/Modals/about.png';
 
 const about = props => (
-    <ModalTemplate background={AboutBackground} isVisible={props.isVisible}>
+    <ModalTemplate background={AboutBackground} isVisible={props.isVisible} onClose={props.onClose}>
         <View style={[{ width: '55%', height: '55%' }, styles.center]}>
             <View style={[styles.button]}>
-                <TouchableOpacity style={[styles.max]} onPress={props.close} />
+                <TouchableOpacity style={[styles.max]} onPress={props.onClose} />
             </View>
             <ScrollView style={[{ height: '10%', width: '100%' }]}>
                 <CustomText normal>

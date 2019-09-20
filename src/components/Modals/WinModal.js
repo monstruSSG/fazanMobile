@@ -9,7 +9,7 @@ import RetryButton from '../../assets/Buttons/retry.png';
 import MenuButton from '../../assets/Buttons/yellowHolder.png';
 
 const winModal = props => (
-    <ModalTemplate background={WinBackground} isVisible={props.isVisible}>
+    <ModalTemplate background={WinBackground} isVisible={props.isVisible} onClose={props.onClose}>
         <View style={[styles.max, styles.center]}>
             <View style={[styles.exitButton]}>
                 <TouchableOpacity style={styles.max} onPress={props.onClose} />

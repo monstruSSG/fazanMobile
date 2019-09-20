@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text, ImageBackground, TouchableOpacity } from 'react-native';
 
-import { getUsers } from '../../utils/requests';
-import CustomText from '../../components/UI/Text/CustomTitle';
+import CustomText from '../../components/UI/Text/Text';
 import AboutModal from '../../components/Modals/AboutModal';
-import WinModal from '../../components/Modals/WinModal'
 
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
 import AboutButton from '../../assets/Buttons/about.png';
@@ -46,7 +44,7 @@ class HomeScreen extends Component {
                                 <TouchableOpacity onPress={this.navigateSingleplayerScreen} style={[styles.singlePlayerButtonPress]}>
                                     <ImageBackground style={styles.singlePlayerButton} source={SinglePlayerTitle} resizeMode="stretch">
                                         <View style={[styles.center]}>
-                                            <Text style={styles.buttonText}>SINGLEPLAYER</Text>
+                                            <CustomText normal style={styles.singlePlayerButtonText}>SINGLEPLAYER</CustomText>
                                         </View>
                                     </ImageBackground>
                                 </TouchableOpacity>
@@ -55,7 +53,7 @@ class HomeScreen extends Component {
                                 <TouchableOpacity onPress={this.naivgateSearchGameScreen} style={[styles.multiPlayerButtonPress, styles.center]}>
                                     <ImageBackground style={styles.mulitplayerButton} source={MultiplayerTitle} resizeMode="stretch">
                                         <View style={[styles.center]}>
-                                            <Text style={[styles.buttonText, styles.multiPLayerButtonText]}>SEARCH GAME</Text>
+                                            <CustomText normal style={[styles.multiPLayerButtonText]}>JOACA ONLINE</CustomText>
                                         </View>
                                     </ImageBackground>
                                 </TouchableOpacity>
@@ -65,7 +63,7 @@ class HomeScreen extends Component {
                     <View style={styles.details}>
                         <View style={[styles.aboutButtonContainer]}>
                             <View style={[{ justifyContent: 'flex-start' }]}>
-                                <TouchableOpacity onPress={() => this.setState({ showWin: true })} style={styles.detailsButtonWidth}>
+                                <TouchableOpacity onPress={() => this.setState({ showAbout: true })} style={styles.detailsButtonWidth}>
                                     <Image style={styles.aboutButton} source={AboutButton} resizeMode="stretch" />
                                 </TouchableOpacity>
                             </View>
@@ -80,7 +78,7 @@ class HomeScreen extends Component {
                     </View>
                     <AboutModal
                         isVisible={this.state.showAbout}
-                        close={() => this.setState({ showAbout: false })} />
+                        onClose={() => this.setState({ showAbout: false })} />
                 </View>
             </ImageBackground>
         );
@@ -184,10 +182,14 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     multiPLayerButtonText: {
-        top: '55%',
-        //To ovveride left 
-        left: undefined,
-        right: '8%'
+        position: 'relative',
+        right: '8%',
+        top: '72%'
+    },
+    singlePlayerButtonText: {
+        position: 'relative',
+        top: '210%',
+        left: '1%'
     }
 });
 
