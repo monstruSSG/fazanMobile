@@ -4,6 +4,7 @@ import { View, StyleSheet, Image, Text, ImageBackground, TouchableOpacity } from
 import { getUsers } from '../../utils/requests';
 import CustomText from '../../components/UI/Text/CustomTitle';
 import AboutModal from '../../components/Modals/AboutModal';
+import WinModal from '../../components/Modals/WinModal'
 
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
 import AboutButton from '../../assets/Buttons/about.png';
@@ -64,7 +65,7 @@ class HomeScreen extends Component {
                     <View style={styles.details}>
                         <View style={[styles.aboutButtonContainer]}>
                             <View style={[{ justifyContent: 'flex-start' }]}>
-                                <TouchableOpacity onPress={() => this.setState({ showAbout: true })} style={styles.detailsButtonWidth}>
+                                <TouchableOpacity onPress={() => this.setState({ showWin: true })} style={styles.detailsButtonWidth}>
                                     <Image style={styles.aboutButton} source={AboutButton} resizeMode="stretch" />
                                 </TouchableOpacity>
                             </View>
@@ -77,8 +78,8 @@ class HomeScreen extends Component {
                             </View>
                         </View>
                     </View>
-                    <AboutModal 
-                        isVisible={this.state.showAbout} 
+                    <AboutModal
+                        isVisible={this.state.showAbout}
                         close={() => this.setState({ showAbout: false })} />
                 </View>
             </ImageBackground>

@@ -1,12 +1,12 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, Modal, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native';
 
 import ModalTemplate from './ModalTemplate';
 import CustomText from '../UI/Text/Text';
 
 import AboutBackground from '../../assets/Modals/about.png';
 
-const about = props => (
+const atention = props => (
     <ModalTemplate background={AboutBackground} isVisible={props.isVisible}>
         <View style={[{ width: '55%', height: '55%' }, styles.center]}>
             <View style={[styles.button]}>
@@ -14,8 +14,10 @@ const about = props => (
             </View>
             <ScrollView style={[{ height: '10%', width: '100%' }]}>
                 <CustomText normal>
-                    Fazanul este un joc de cuvinte al copilariei, descirere ...
-                        </CustomText>
+                    ATENTIE !!! {'\n\n'}
+                    
+                    Daca iesi pierzi meciul...
+                </CustomText>
             </ScrollView>
         </View>
     </ModalTemplate>
@@ -46,4 +48,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default about;
+export default atention;
