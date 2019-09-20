@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import CONSTANTS from '../../utils/constants';
-import CustomInput from '../../components/UI/DefaultInput/DefaultInput'
+import CustomInput from '../../components/UI/DefaultInput/DefaultInput';
 
 export default props => {
     return (
@@ -18,7 +18,7 @@ export default props => {
                 </TouchableOpacity>
             </View>
             <View style={styles.searchTitle}>
-                <Text style={{ letterSpacing: 2, color: CONSTANTS.textColor, fontFamily: 'Troika', fontSize: 24 }}>SEARCH OPONENT</Text>
+                <CustomInput placeholder='Exemplu: George Popescu' />
             </View>
             <View style={styles.searchIcon}>
                 <Icon name='search' size={25} color={CONSTANTS.textColor} />

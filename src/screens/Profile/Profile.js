@@ -26,10 +26,11 @@ class ProfileScreen extends Component {
     }
 
     componentDidMount() {
-        getMe().then(me => this.setState({ me }))
+        getMe().then(me => this.setState({ me }, () => console.log(this.state.me.history[0])))
     }
 
     render() {
+        let { me } = this.state;
         const losesProcent = ((this.state.me.wins / (this.state.me.loses + this.state.me.wins)) * 100).toFixed(0)
 
         return (

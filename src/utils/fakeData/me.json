@@ -1,10 +1,6 @@
 {
     "_id": 1,
     "username": "Andrew",
-    "isActive": true,
-    "isDeleted": false,
-    "status": "busy",
-    "socketId": "randomsocketid",
     "wins": 300,
     "loses": 3,
     "score": 2012,

@@ -8,6 +8,8 @@ import * as WORDS from '../../store/actions/words';
 import CONSTANTS from '../../utils/constants';
 import CustomText from '../../components/UI/Text/Text';
 import Timer from '../../components/Timer/Timer';
+import LoseModal from '../../components/Modals/LoseModal';
+import WinModal from '../../components/Modals/WinModal';
 
 import Background from '../../assets/Stuff/bg.jpg';
 import HeaderBg from '../../assets/Stuff/singleplayerHeader.png';
@@ -23,10 +25,25 @@ class SingleplayerGameScreen extends Component {
 
     state = {
         roundAnimation: new Animated.Value(1),
+        lastWordAnimation: new Animated.Value(1),
         roundNumber: 0,
         gameFinished: false,
-        lastWord: 'LASTWORD',
-        word: ''
+        lastWord: '',
+        word: '',
+        usedWords: [],
+        showTimer: false,
+        showWinModal: false,
+        showLoseModal: false
+
+    }
+
+    componentDidMount() {
+        this.props.connectToDb()
+            .then(() => {
+                this.props.generateStartWord()
+                    .then(word => this.setState({ lastWord: word, word: word.slice(-2), showTimer: true }))
+                    .catch(e => console.log(e))
+            })
     }
 
     //Animations
@@ -44,11 +61,21 @@ class SingleplayerGameScreen extends Component {
         duration: 600
     }).start()))
 
+    newLatestWordAnimation = () => Animated.timing(this.state.lastWordAnimation, {
+        toValue: 0.97,
+        useNativeDriver: true,
+        duration: 200
+    }).start(() => Animated.timing(this.state.lastWordAnimation, {
+        toValue: 1,
+        easing: Easing.bounce,
+        useNativeDriver: true,
+        duration: 200
+    }).start())
 
     navigateHomeHandler = () => this.props.navigation.navigate('Home');
 
     onTimeExpiredHandler = count => {
-        if (count < 0) this.setState({ gameFinished: true })
+        if (count < 0) this.setState({ gameFinished: true, showLoseModal: true, showTimer: false })
     }
 
     letterPressedHandler = letter => {
@@ -59,8 +86,55 @@ class SingleplayerGameScreen extends Component {
 
     deleteLastLetterHandler = () => {
         this.setState((prevState) => ({
-            word: prevState.word.slice(0, -1)
+            word: prevState.word.length <= 2 ? prevState.word : prevState.word.slice(0, -1)
         }))
+    }
+
+    restartGame = () => this.props.generateStartWord()
+        .then(startWord => {
+            this.setState({ 
+                showLoseModal: false,
+                showWinModal: false,
+                lastWord: startWord, 
+                word: startWord.slice(-2) 
+            }, this.resetTimer);
+        })
+
+
+    resetTimer = () => this.setState({ showTimer: false }, () => this.setState({ showTimer: true }))
+
+    onInserWordHandler = () => {
+        //First check if inserted word exists
+        this.props.checkWordExists(this.state.word)
+            .then(exists => {
+                if (!exists) return Promise.reject({ message: 'WORD_NOT_EXISTS' });
+                this.resetTimer();
+
+                return this.props.generateWord(this.state.word);
+            })
+            .then(generatedWord => {
+                if (!generatedWord) return Promise.reject({ message: 'YOU_WON' });
+
+                //Here the 'AI' generates a word
+                this.setState({ lastWord: generatedWord, word: generatedWord.slice(-2) }, this.newLatestWordAnimation);
+                this.resetTimer();
+                this.roundIncrementAnimation();
+                return this.props.checkWordExistsWithPrefix(generatedWord)
+            })
+            .then(exists => {
+                if (!exists) return Promise.reject({ message: 'YOU_LOST' });
+            })
+            .catch(e => {
+                if (!e.message) return console.log(e);
+
+                if (e.message === 'YOU_LOST') {
+                    return this.setState({ showLoseModal: true });
+                } else if (e.message === 'YOU_WON') {
+                    return this.setState({ showWinModal: true });
+                } else {
+                    alert('Cuvantul nu exista')
+                }
+            })
     }
 
     render() {
@@ -71,7 +145,15 @@ class SingleplayerGameScreen extends Component {
                     scale: this.state.roundAnimation
                 }
             ]
-        }
+        };
+
+        const lastWordScale = {
+            transform: [
+                {
+                    scale: this.state.lastWordAnimation
+                }
+            ]
+        };
 
         return (
             <ImageBackground source={Background} style={[styles.maxWidthHeight]}>
@@ -81,7 +163,7 @@ class SingleplayerGameScreen extends Component {
                             <View style={[styles.maxWidthHeight, { flexDirection: 'row' }]}>
                                 <View style={[styles.centerContent, { flex: 1 }]}>
                                     <TouchableOpacity style={[styles.centerContent, styles.exitButtonSize, styles.exitButtonPosition]}
-                                        onPress={this.roundIncrementAnimation}>
+                                        onPress={this.navigateHomeHandler}>
                                         <Image source={ExitButton} style={[styles.maxWidthHeight]} resizeMode='stretch' />
                                     </TouchableOpacity>
                                 </View>
@@ -90,9 +172,9 @@ class SingleplayerGameScreen extends Component {
                                 </View>
                                 <View style={[styles.centerContent, { flex: 1 }]}>
                                     <View style={[styles.centerContent, { flex: 1 }]}>
-                                        <Timer style={styles.counter}
+                                        {this.state.showTimer ? <Timer style={styles.counter}
                                             onTimeExpired={count => this.onTimeExpiredHandler(count)}
-                                            count={10} />
+                                            count={20} /> : null}
                                     </View>
                                 </View>
                             </View>
@@ -121,9 +203,9 @@ class SingleplayerGameScreen extends Component {
                                 <ImageBackground source={LastWordImage}
                                     style={[styles.maxWidthHeight]}
                                     resizeMode='stretch'>
-                                    <View style={[styles.centerContent, { width: '100%', height: '60%' }]}>
+                                    <Animated.View style={[styles.centerContent, { width: '100%', height: '60%' }, lastWordScale]}>
                                         <CustomText large style={styles.lastWord}>{this.state.lastWord}</CustomText>
-                                    </View>
+                                    </Animated.View>
                                 </ImageBackground>
                             </View>
                         </View>
@@ -138,7 +220,7 @@ class SingleplayerGameScreen extends Component {
                             <View style={{ flex: 1 }}>
                                 <TouchableOpacity
                                     style={styles.submitButton}
-                                    onPress={this.insertWordHandler}>
+                                    onPress={this.onInserWordHandler}>
                                     <CustomText color="azure">TRIMITE</CustomText>
                                 </TouchableOpacity>
                             </View>
@@ -149,7 +231,16 @@ class SingleplayerGameScreen extends Component {
                                 deleteLastLetter={() => this.deleteLastLetterHandler()} />
                         </View>
                     </View>
-
+                    <WinModal isVisible={this.state.showWinModal}
+                        cu={this.state.lastWord}
+                        restart={this.restartGame}
+                        home={this.navigateHomeHandler}
+                        onClose={() => this.setState({ showWinModal: false })} />
+                    <LoseModal isVisible={this.state.showLoseModal}
+                        cu={this.state.lastWord}
+                        restart={this.restartGame}
+                        home={this.navigateHomeHandler}
+                        onClose={() => this.setState({ showLoseModal: false })} />
                 </View>
             </ImageBackground>
         );

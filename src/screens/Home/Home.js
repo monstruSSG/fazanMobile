@@ -56,7 +56,7 @@ class HomeScreen extends Component {
                                 <TouchableOpacity onPress={this.naivgateSearchGameScreen} style={[styles.multiPlayerButtonPress, styles.center]}>
                                     <ImageBackground style={styles.mulitplayerButton} source={MultiplayerTitle} resizeMode="stretch">
                                         <View style={[styles.center]}>
-                                            <Text style={[styles.buttonText, styles.multiPLayerButtonText]}>MULTIPLAYER</Text>
+                                            <Text style={[styles.buttonText, styles.multiPLayerButtonText]}>SEARCH GAME</Text>
                                         </View>
                                     </ImageBackground>
                                 </TouchableOpacity>

@@ -1,25 +1,25 @@
 import React from "react";
-import { TextInput, StyleSheet } from "react-native";
+import { TextInput, StyleSheet, Text } from "react-native";
 
 import CONSTANTS from '../../../utils/constants'
 
 const defaultInput = props => (
   <TextInput
-    underlineColorAndroid="transparent"
-    {...props}
     style={[styles.input, props.style]}
+    placeholderTextColor='white'
+    {...props}
   />
 );
 
 const styles = StyleSheet.create({
   input: {
-    flex: 1,
-    borderColor: CONSTANTS.textColor,
-    borderWidth: 3,
-    padding: 5,
-    marginTop: 8,
-    marginBottom: 8,
-    textAlign: "center"
+    fontFamily: 'Troika',
+    color: 'white',
+    fontSize: 24,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomColor: 'white'
   }
 });
 
