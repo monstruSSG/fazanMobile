@@ -163,7 +163,7 @@ class SingleplayerGameScreen extends Component {
                             <View style={[styles.maxWidthHeight, { flexDirection: 'row' }]}>
                                 <View style={[styles.centerContent, { flex: 1 }]}>
                                     <TouchableOpacity style={[styles.centerContent, styles.exitButtonSize, styles.exitButtonPosition]}
-                                        onPress={this.newLatestWordAnimation}>
+                                        onPress={this.navigateHomeHandler}>
                                         <Image source={ExitButton} style={[styles.maxWidthHeight]} resizeMode='stretch' />
                                     </TouchableOpacity>
                                 </View>
@@ -174,7 +174,7 @@ class SingleplayerGameScreen extends Component {
                                     <View style={[styles.centerContent, { flex: 1 }]}>
                                         {this.state.showTimer ? <Timer style={styles.counter}
                                             onTimeExpired={count => this.onTimeExpiredHandler(count)}
-                                            count={10} /> : null}
+                                            count={20} /> : null}
                                     </View>
                                 </View>
                             </View>
