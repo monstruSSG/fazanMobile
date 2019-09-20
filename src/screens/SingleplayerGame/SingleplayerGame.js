@@ -10,6 +10,7 @@ import CustomText from '../../components/UI/Text/Text';
 import Timer from '../../components/Timer/Timer';
 import LoseModal from '../../components/Modals/LoseModal';
 import WinModal from '../../components/Modals/WinModal';
+import AtentionModal from '../../components/Modals/AtentionModal';
 
 import Background from '../../assets/Stuff/bg.jpg';
 import HeaderBg from '../../assets/Stuff/singleplayerHeader.png';
@@ -33,8 +34,8 @@ class SingleplayerGameScreen extends Component {
         usedWords: [],
         showTimer: false,
         showWinModal: false,
-        showLoseModal: false
-
+        showLoseModal: false,
+        showAtentionModal: false
     }
 
     componentDidMount() {
@@ -92,11 +93,11 @@ class SingleplayerGameScreen extends Component {
 
     restartGame = () => this.props.generateStartWord()
         .then(startWord => {
-            this.setState({ 
+            this.setState({
                 showLoseModal: false,
                 showWinModal: false,
-                lastWord: startWord, 
-                word: startWord.slice(-2) 
+                lastWord: startWord,
+                word: startWord.slice(-2)
             }, this.resetTimer);
         })
 
@@ -163,7 +164,7 @@ class SingleplayerGameScreen extends Component {
                             <View style={[styles.maxWidthHeight, { flexDirection: 'row' }]}>
                                 <View style={[styles.centerContent, { flex: 1 }]}>
                                     <TouchableOpacity style={[styles.centerContent, styles.exitButtonSize, styles.exitButtonPosition]}
-                                        onPress={this.navigateHomeHandler}>
+                                        onPress={() => this.setState({ showAtentionModal: true })}>
                                         <Image source={ExitButton} style={[styles.maxWidthHeight]} resizeMode='stretch' />
                                     </TouchableOpacity>
                                 </View>
@@ -233,6 +234,8 @@ class SingleplayerGameScreen extends Component {
                     </View>
                     <WinModal isVisible={this.state.showWinModal}
                         cu={this.state.lastWord}
+                        oponent='ROBOT'
+                        rounds={this.state.roundNumber}
                         restart={this.restartGame}
                         home={this.navigateHomeHandler}
                         onClose={() => this.setState({ showWinModal: false })} />
@@ -241,6 +244,10 @@ class SingleplayerGameScreen extends Component {
                         restart={this.restartGame}
                         home={this.navigateHomeHandler}
                         onClose={() => this.setState({ showLoseModal: false })} />
+                    <AtentionModal isVisible={this.state.showAtentionModal}
+                        onClose={() => this.setState({ showAtentionModal: false })}
+                    />
+
                 </View>
             </ImageBackground>
         );

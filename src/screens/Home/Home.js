@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text, ImageBackground, TouchableOpacity } from 'react-native';
 
-import { getUsers } from '../../utils/requests';
+import CustomText from '../../components/UI/Text/Text';
+import AboutModal from '../../components/Modals/AboutModal';
+
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
 import AboutButton from '../../assets/Buttons/about.png';
 import ProfileButton from '../../assets/Buttons/locked.png';
 import Crown from '../../assets/Stuff/1st.png';
 import SinglePlayerTitle from '../../assets/Modals/titleShadow.png';
-import MultiplayerTitle from '../../assets/Stuff/titleBox.png';
-import CustomText from '../../components/UI/Text/CustomTitle';
+import MultiplayerTitle from '../../assets/Stuff/titleBox.png'
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -16,11 +17,7 @@ class HomeScreen extends Component {
     }
 
     state = {
-        users: []
-    }
-
-    componentDidMount() {
-        getUsers().then(users => this.setState({ users }))
+        showAbout: false
     }
 
     naivgateSearchGameScreen = () => this.props.navigation.navigate('SearchGame');
@@ -47,7 +44,7 @@ class HomeScreen extends Component {
                                 <TouchableOpacity onPress={this.navigateSingleplayerScreen} style={[styles.singlePlayerButtonPress]}>
                                     <ImageBackground style={styles.singlePlayerButton} source={SinglePlayerTitle} resizeMode="stretch">
                                         <View style={[styles.center]}>
-                                            <Text style={styles.buttonText}>SINGLEPLAYER</Text>
+                                            <CustomText normal style={styles.singlePlayerButtonText}>SINGLEPLAYER</CustomText>
                                         </View>
                                     </ImageBackground>
                                 </TouchableOpacity>
@@ -56,7 +53,7 @@ class HomeScreen extends Component {
                                 <TouchableOpacity onPress={this.naivgateSearchGameScreen} style={[styles.multiPlayerButtonPress, styles.center]}>
                                     <ImageBackground style={styles.mulitplayerButton} source={MultiplayerTitle} resizeMode="stretch">
                                         <View style={[styles.center]}>
-                                            <Text style={[styles.buttonText, styles.multiPLayerButtonText]}>SEARCH GAME</Text>
+                                            <CustomText normal style={[styles.multiPLayerButtonText]}>JOACA ONLINE</CustomText>
                                         </View>
                                     </ImageBackground>
                                 </TouchableOpacity>
@@ -66,7 +63,7 @@ class HomeScreen extends Component {
                     <View style={styles.details}>
                         <View style={[styles.aboutButtonContainer]}>
                             <View style={[{ justifyContent: 'flex-start' }]}>
-                                <TouchableOpacity onPress={() => alert('ABOUT')} style={styles.detailsButtonWidth}>
+                                <TouchableOpacity onPress={() => this.setState({ showAbout: true })} style={styles.detailsButtonWidth}>
                                     <Image style={styles.aboutButton} source={AboutButton} resizeMode="stretch" />
                                 </TouchableOpacity>
                             </View>
@@ -79,11 +76,9 @@ class HomeScreen extends Component {
                             </View>
                         </View>
                     </View>
-                    {/* <RankingModal
-                        isVisible={this.state.rankingModal}
-                        onClose={() => this.setState({ rankingModal: false })}
-                        closeModal={() => this.setState({ rankingModal: false })}
-                        users={this.state.users} /> */}
+                    <AboutModal
+                        isVisible={this.state.showAbout}
+                        onClose={() => this.setState({ showAbout: false })} />
                 </View>
             </ImageBackground>
         );
@@ -187,10 +182,14 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     multiPLayerButtonText: {
-        top: '55%',
-        //To ovveride left 
-        left: undefined,
-        right: '8%'
+        position: 'relative',
+        right: '8%',
+        top: '72%'
+    },
+    singlePlayerButtonText: {
+        position: 'relative',
+        top: '210%',
+        left: '1%'
     }
 });
 

@@ -1,141 +1,86 @@
 import React from 'react';
-import { View, Modal, StyleSheet, Image, TouchableOpacity, FlatList, ImageBackground, Text, Button } from 'react-native';
+import { View, Modal, StyleSheet, Image, TouchableOpacity, ImageBackground } from 'react-native';
 
-import ClasamentUserDetails from '../ClasamentUserDetails/ClasamentUserDetails';
+import TemplateModal from './ModalTemplate';
+import CustomText from '../UI/Text/Text';
 
-import RankingModal from '../../assets/Modals/clasamentModal.png';
-import Title from '../../assets/Modals/titleShadow.png';
-import ExitButton from '../../assets/Buttons/exitButton.png';
-import Holder from '../../assets/Modals/loseHolder.png';
-import EmptyStar from '../../assets/Stuff/emptyStar.png';
+import LoseBackground from '../../assets/Modals/lose.png';
 import RetryButton from '../../assets/Buttons/retry.png';
 import MenuButton from '../../assets/Buttons/yellowHolder.png';
 
 const loseModal = props => (
-
-    <Modal visible={props.isVisible} onRequestClose={props.onClose} animationType="slide" transparent={true}>
-        <View style={styles.contentWrapper}>
-            <View style={styles.max}>
-                <View style={[styles.max, styles.container]}>
-                    <ImageBackground source={RankingModal} resizeMode="stretch" style={styles.backgroundImageContainer}>
-                        <View style={styles.titleContainer}>
-                            <TouchableOpacity onPress={props.onClose}>
-                                <ImageBackground style={styles.buttonImage} resizeMode="cover" source={ExitButton}>
-                                </ImageBackground>
-                            </TouchableOpacity>
-                            <ImageBackground resizeMode="stretch" style={styles.titleImage} source={Title}>
-                                <View style={[styles.centerItems, styles.max, styles.titleTextContainer]}>
-                                    <Text style={styles.titleText}>AI PIERDUT!</Text>
+    <TemplateModal isVisible={props.isVisible} onClose={props.onClose} background={LoseBackground}>
+        <View style={[styles.max, styles.center]}>
+            <View style={[styles.exitButton]}>
+            <TouchableOpacity style={styles.max} onPress={props.onClose} />
+        </View>
+        <View style={[styles.contentContainer, styles.center]}>
+            <View style={[{ width: '100%', height: '70%' }, styles.center]}>
+                <View styles={[{ height: '40%', width: '100%' }, styles.center]}>
+                    <CustomText large>INFRANT!</CustomText>
+                </View>
+                <View styles={[{ height: '20%', width: '100%' }, styles.center]}>
+                    <CustomText small>Batut de: {props.oponent}</CustomText>
+                </View>
+                <View styles={[{ height: '20%', width: '100%' }, styles.center]}>
+                    <CustomText small>Inchis cu: {props.cu}</CustomText>
+                </View>
+                <View styles={[{ height: '20%', width: '100%' }, styles.center]}>
+                    <CustomText small>In {props.rounds} runde</CustomText>
+                </View>
+            </View>
+            <View style={[{ width: '100%', height: '30%' }, styles.center, { flexDirection: 'row' }]}>
+                <View style={[{ width: '50%', height: '100%' }, styles.center]}>
+                    <View style={[{ width: '100%', height: '90%' }, styles.center]}>
+                        <TouchableOpacity style={[styles.max]} onPress={props.home}>
+                            <ImageBackground source={MenuButton} style={[styles.max]} resizeMode='stretch'>
+                                <View style={[styles.max, styles.center]}>
+                                    <CustomText normal style={styles.menuPosition}>MENU</CustomText>
                                 </View>
                             </ImageBackground>
-                        </View>
-                        <View style={styles.usersContainerWrapper}>
-                            <ImageBackground source={Holder} style={{ width: '100%', height: '100%' }}>
-                                <View style={{ flex: 1, flexDirection: 'row' }}>
-                                    <View style={{ flex: 1 }}>
-                                        <Image source={EmptyStar} style={{ width: '80%', height: '70%', position: 'relative', top: '40%', left: '30%' }} />
-                                    </View>
-                                    <View style={{ flex: 1 }}>
-                                        <Image source={EmptyStar} style={{ width: '100%', height: '100%', position: 'relative', top: '5%' }} />
-                                    </View>
-                                    <View style={{ flex: 1 }}>
-                                        <Image source={EmptyStar} style={{ width: '80%', height: '70%', position: 'relative', top: '40%', right: '5%' }} />
-                                    </View>
-                                </View>
-                                <View style={{ flex: 2 }}>
-                                    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingTop: 8 }}>
-                                        <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 18, textAlign: 'center' }}>Adversarul te-a inchis folosind cuvantul {props.cu}</Text>
-                                        {/* <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 18, textAlign: 'center' }}>Punctaj: 233</Text> */}
-                                    </View>
-                                    <View style={{ flex: 1, flexDirection: 'row' }}>
-                                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                            <TouchableOpacity style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }} onPress={props.restart}>
-                                                <Image resizeMode="stretch" source={RetryButton} style={{ width: '70%', height: '70%' }} />
-                                            </TouchableOpacity>
-                                        </View>
-                                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                            <TouchableOpacity style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }} onPress={props.home}>
-                                                <ImageBackground resizeMode="stretch" imageStyle={{ width: '100%', height: '100%' }} source={MenuButton} style={{ width: '80%', height: '60%' }}>
-                                                    <Text style={{color: 'white', fontFamily: 'Troika', position: 'relative', textAlign: 'center', top: '20%', fontSize: 22}}>MENIU</Text>
-                                                </ImageBackground>
-                                            </TouchableOpacity>
-
-                                        </View>
-                                    </View>
-                                </View>
-                            </ImageBackground>
-                        </View>
-                    </ImageBackground>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <View style={[{ width: '50%', height: '100%' }, styles.center]}>
+                    <View style={[{ width: '60%', height: '90%' }, styles.center]}>
+                        <TouchableOpacity style={[styles.max]} onPress={props.restart}>
+                            <Image source={RetryButton} style={[styles.max]} resizeMode='stretch' />
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         </View>
-    </Modal>
+        </View>
+    </TemplateModal >
 );
 
 const styles = StyleSheet.create({
-    contentWrapper: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        backgroundColor: 'rgba(0,0,0,0.5)'
-    },
-    centerItems: {
+    center: {
         justifyContent: 'center',
         alignItems: 'center'
     },
     max: {
         width: '100%',
-        height: '85%'
+        height: '100%'
     },
-    container: {
-        justifyContent: "flex-end",
+    exitButton: {
+        width: '18%',
+        height: '14%',
         position: 'relative',
-        right: '3%'
+        left: '40%',
+        bottom: '10%'
     },
-    backgroundImageContainer: {
-        height: "90%",
-        width: "100%",
-        justifyContent: 'flex-start',
-        alignItems: 'center'
-    },
-    titleContainer: {
-        width: "100%",
-        height: "15%",
-    },
-    titleImage: {
-        height: "130%",
-        width: "95%",
+    contentContainer: {
+        width: '55%',
+        height: '36%',
         position: 'relative',
-        bottom: "180%",
-        left: '7%'
+        left: '1%',
+        top: '4%'
     },
-    buttonImage: {
-        width: "40%",
-        height: "100%",
-        left: '88%',
-        bottom: "8%"
-    },
-    usersContainerWrapper: {
-        height: "65%",
-        width: "70%",
+    menuPosition: {
         position: 'relative',
-        left: '5%',
-        alignItems: 'center',
-    },
-    userWrapper: {
-        width: "100%"
-    },
-    titleTextContainer: {
-        display: 'flex'
-    },
-    titleText: {
-        position: 'relative',
-        top: '40%',
-        fontFamily: 'Troika',
-        color: 'white',
-        fontSize: 29,
-        letterSpacing: 1,
+        bottom: '8%'
     }
-})
+});
 
 export default loseModal; 
