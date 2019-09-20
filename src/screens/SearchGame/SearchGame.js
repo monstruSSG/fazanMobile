@@ -27,31 +27,36 @@ class SearchGameScreen extends Component {
         showLogin: true
     }
 
+    socket = null
+
     componentDidMount() {
         getUsers().then(users => this.setState({ users }))
+    }
+
+    createSocketConnection(token) {
+        this.props.createSocketConnection(token).then(socket => {
+            this.socket = socket
+        })
     }
 
     navigateMultiplayerScreen = () => this.props.navigation.navigate('Multiplayer');
 
     onPlayGameHandler = () => {
-        this.props.createSocketConnection(this.props.token).then(socket => {
+        this.socket.emit('reqConnectedUsers', {})
 
-            socket.emit('reqConnectedUsers', { name: "Bogdan113" })
+        this.socket.on('recConnectedUsers', data => {
+            if (data.users.length) socket.emit('invitationSent', { socketId: data.users[0] })
+        })
 
-            socket.on('recConnectedUsers', data => {
-                if (data.users.length) socket.emit('invitationSent', { socketId: data.users[0] })
-            })
+        this.socket.on('invitationReceived', data => {
+            this.props.setOponentSocketId(data.socketId);
+            socket.emit('invitationAccepted', { socketId: data.socketId });
+            this.navigateMultiplayerScreen();
+        });
 
-            socket.on('invitationReceived', data => {
-                this.props.setOponentSocketId(data.socketId);
-                socket.emit('invitationAccepted', { socketId: data.socketId });
-                this.navigateMultiplayerScreen();
-            });
-
-            socket.on('startGame', data => {
-                this.props.setOponentSocketId(data.socketId)
-                this.navigateMultiplayerScreen();
-            })
+        this.socket.on('startGame', data => {
+            this.props.setOponentSocketId(data.socketId)
+            this.navigateMultiplayerScreen();
         })
     }
 
@@ -67,7 +72,7 @@ class SearchGameScreen extends Component {
     render() {
         return (
             <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
-                {this.state.showLogin && false && <LoginModal exitGame={() => this.setState({ showLogin: false })} />}
+                {this.state.showLogin && true && <LoginModal onLogin={token => this.createSocketConnection(token)} exitGame={() => this.setState({ showLogin: false })} />}
                 <View style={styles.searchGame}>
 
                     <View style={styles.inputForm}>
@@ -87,8 +92,8 @@ class SearchGameScreen extends Component {
                         />
                     </View>
                     <View style={styles.playGameButton}>
-                        <TouchableOpacity style={{alignItems: 'center', justifyContent: 'center', width: '80%'}} onPress={this.onPlayGameHandler}>
-                            <ImageBackground source={PlayButton} style={{width: '100%', height: '90%' ,position: 'relative', top: '8%'}} resizeMode="stretch">
+                        <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', width: '80%' }} onPress={this.onPlayGameHandler}>
+                            <ImageBackground source={PlayButton} style={{ width: '100%', height: '90%', position: 'relative', top: '8%' }} resizeMode="stretch">
                                 <Text style={{ color: "white", fontFamily: 'Troika', fontSize: 22, textAlign: 'center', paddingTop: '2%' }}>
                                     PLAY RANDOM
                                 </Text>

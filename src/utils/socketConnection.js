@@ -1,11 +1,11 @@
 import SocketIOClient from 'socket.io-client';
 
-import CONSTANTS from '../utils/constants'
+import CONSTANTS from '../utils/constants';
 
 module.exports = {
     createConnection: token => {
-        return SocketIOClient(CONSTANTS.backendUrl, {
+        return SocketIOClient(CONSTANTS.socketsBackendUrl, {
             extraHeaders: { authorisation: `Bearer ${token}` }
-        });
+        })
     }
 }

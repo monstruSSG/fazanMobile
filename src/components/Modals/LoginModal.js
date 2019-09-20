@@ -22,7 +22,10 @@ class LoginModal extends Component {
             return AccessToken.getCurrentAccessToken()
         })
         .then(res => login({ fbToken: res.accessToken }))
-        .then(data => {console.log(data, 'DATAA'); return this.props.saveToken(data.token)})
+        .then(data => {
+            this.props.saveToken(data.token)
+            return this.props.onLogin(data.token)
+        })
         .catch(console.log)
 
     render() {
