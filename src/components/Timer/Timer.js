@@ -16,6 +16,7 @@ export default class Timer extends Component {
     }
 
     componentDidMount() {
+        this.animation();
         this.myInterval = setInterval(() => {
             this.animation()
             this.setState(
