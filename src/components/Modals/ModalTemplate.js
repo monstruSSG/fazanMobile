@@ -4,7 +4,7 @@ import { ImageBackground, StyleSheet, Modal, View } from 'react-native';
 const modalTemplate = props => (
     <Modal visible={props.isVisible} onRequestClose={props.onClose} animationType='slide' transparent>
         <View style={[styles.max, styles.center, styles.container]}>
-            <ImageBackground source={props.background} style={[styles.imageSize, styles.center]} resizeMode='stretch'>
+            <ImageBackground source={props.background} style={[styles.imageSize, styles.center, props.size]} resizeMode='stretch'>
                 {props.children}
             </ImageBackground>
         </View>
