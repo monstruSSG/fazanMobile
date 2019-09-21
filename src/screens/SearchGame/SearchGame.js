@@ -100,7 +100,7 @@ class SearchGameScreen extends Component {
                             </ImageBackground>
                         </TouchableOpacity>
                     </View>
-                    <SideDrawer isVisible={this.state.sideState} closeSideDrawer={this.closeSideDrawerHandler} />
+                    <SideDrawer isVisible={this.state.sideState} onClose={this.closeSideDrawerHandler} />
                 </View>
             </ImageBackground>
 
