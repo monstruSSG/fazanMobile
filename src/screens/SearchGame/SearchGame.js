@@ -24,7 +24,8 @@ class SearchGameScreen extends Component {
     state = {
         users: [],
         sideState: false,
-        showLogin: true
+        showLogin: true,
+        showClasament: false
     }
 
     socket = null
@@ -40,6 +41,8 @@ class SearchGameScreen extends Component {
     }
 
     navigateMultiplayerScreen = () => this.props.navigation.navigate('Multiplayer');
+    navigateHomeScreen = () => this.props.navigation.navigate('Home');
+    navigateProfileScreen = () => this.props.navigation.navigate('Profile');
 
     onPlayGameHandler = () => {
         this.socket.emit('reqConnectedUsers', {})
@@ -100,7 +103,12 @@ class SearchGameScreen extends Component {
                             </ImageBackground>
                         </TouchableOpacity>
                     </View>
-                    <SideDrawer isVisible={this.state.sideState} onClose={this.closeSideDrawerHandler} />
+                    <SideDrawer
+                        goToClasament={() => this.setState({ sideState: false, showClasament: true })}
+                        goToHome={() => this.setState({ sideState: false }, this.navigateHomeScreen)}
+                        goToProfile={() => this.setState({ sideState: false }, this.navigateProfileScreen)}
+                        isVisible={this.state.sideState}
+                        onClose={this.closeSideDrawerHandler} />
                 </View>
             </ImageBackground>
 
