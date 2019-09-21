@@ -56,7 +56,7 @@ const text = props => {
 const styles = StyleSheet.create({
     text: {
         fontFamily: 'Troika',
-        color: 'white'
+        color: '#FBFFB7'
     }
 });
 

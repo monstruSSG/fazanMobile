@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     },
     titeText: {
         fontFamily: 'Troika',
-        color: 'white',
+        color: '#FBFFB7',
         fontSize: 96,
         letterSpacing: 8,
     },
