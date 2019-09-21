@@ -11,6 +11,7 @@ import Timer from '../../components/Timer/Timer';
 import LoseModal from '../../components/Modals/LoseModal';
 import WinModal from '../../components/Modals/WinModal';
 import AtentionModal from '../../components/Modals/AtentionModal';
+import NotExistsModal from '../../components/Modals/NotExist';
 
 import Background from '../../assets/Stuff/bg.jpg';
 import HeaderBg from '../../assets/Stuff/singleplayerHeader.png';
@@ -35,7 +36,8 @@ class SingleplayerGameScreen extends Component {
         showTimer: false,
         showWinModal: false,
         showLoseModal: false,
-        showAtentionModal: false
+        showAtentionModal: false,
+        showNotExistsModal: false
     }
 
     componentDidMount() {
@@ -132,8 +134,12 @@ class SingleplayerGameScreen extends Component {
                     return this.setState({ showLoseModal: true });
                 } else if (e.message === 'YOU_WON') {
                     return this.setState({ showWinModal: true });
+                } else if (e.message === 'WORD_NOT_EXISTS') {
+                    this.setState({ showNotExistsModal: true });
+                    //close after 2 second
+                    setTimeout(() => this.setState({ showNotExistsModal: false }), 2000);
                 } else {
-                    alert('Cuvantul nu exista')
+                    console.log('INVALID_ERROR_MESSAGE');
                 }
             })
     }
@@ -238,17 +244,20 @@ class SingleplayerGameScreen extends Component {
                         rounds={this.state.roundNumber}
                         restart={this.restartGame}
                         home={this.navigateHomeHandler}
-                        onClose={this.navigateHomeHandler} />
+                        onClose={() => this.setState({ showWinModal: false }, this.navigateHomeHandler)} />
                     <LoseModal isVisible={this.state.showLoseModal}
                         cu={this.state.lastWord}
                         oponent='ROBOT'
                         rounds={this.state.roundNumber}
                         restart={this.restartGame}
                         home={this.navigateHomeHandler}
-                        onClose={this.navigateHomeHandler} />
+                        onClose={() => this.setState({ showLoseModal: false }, this.navigateHomeHandler)} />
                     <AtentionModal isVisible={this.state.showAtentionModal}
                         onClose={() => this.setState({ showAtentionModal: false })}
                     />
+                    <NotExistsModal isVisible={this.state.showNotExistsModal}
+                        word={this.state.word}
+                        onClose={() => this.setState({ showNotExistsModal: false })} />
 
                 </View>
             </ImageBackground>
