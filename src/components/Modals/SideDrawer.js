@@ -1,121 +1,130 @@
 import React from 'react';
-import { View, Modal, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { View, Modal, StyleSheet, ImageBackground, Image, TouchableOpacity } from 'react-native';
 
-import DefaultInput from '../UI/DefaultInput/DefaultInput';
-import Text from '../UI/Text/Text';
-import Button from '../UI/Button/Button';
-import CONSTANTS from '../../utils/constants';
+import CustomText from '../UI/Text/Text';
+
 import Avatar from '../../assets/av.png';
+import Background from '../../assets/Modals/warningBack.png';
+import YellowButton from '../../assets/Buttons/yellowHolder.png';
+import GreenButton from '../../assets/Buttons/greenLabel.png';
+
 
 const sideDrawer = props => (
     <Modal visible={props.isVisible} onRequestClose={props.onClose} animationType="fade" transparent={true}>
-        <View style={{
-            flex: 1,
-            flexDirection: 'column',
-            backgroundColor: 'rgba(0,0,0,0.5)',
-        }}>
-            <View style={{
-                width: "75%",
-                height: "100%",
-                backgroundColor: "azure",
-                elevation: 20,
-                borderTopRightRadius: 15,
-                borderBottomRightRadius: 15,
-            }}>
-                <View style={styles.imageContainer}>
-                    <TouchableOpacity style={styles.backIcon}  onPress={props.closeSideDrawer}>
-                        <View style={styles.backIcon}>
-                            <Icon name='arrow-left' size={25} color="black" />
+        <View style={[styles.max, styles.container]}>
+            <ImageBackground source={Background} style={[styles.background]}>
+                <View style={[styles.max]}>
+                    <View style={[styles.head, styles.center]}>
+                        <View style={[styles.centerAndEnd, styles.half, styles.avatarPosition]}>
+                            <Image source={Avatar} style={{ width: 60, height: 60, borderRadius: 30 }} />
                         </View>
-                    </TouchableOpacity>
-                    <View style={styles.userDetailsContainer}>
-                        <Image style={styles.logo} source={Avatar} />
-                        <Text style={styles.userName}>Silviu Profile</Text>
+                        <View style={[styles.centerAndEnd, styles.half]}>
+                            <CustomText normal>XULUESCU</CustomText>
+                        </View>
+                    </View>
+                    <View style={[styles.middle, styles.center]}>
+                        <View style={[styles.contentButtons, styles.centerAndEnd]}>
+                            <TouchableOpacity style={[styles.max]} onPress={props.goToClasament}>
+                                <ImageBackground style={[styles.max, styles.center]} source={YellowButton} resizeMode='stretch'>
+                                    <CustomText normal style={[styles.textPosition]}>CLASAMENT</CustomText>
+                                </ImageBackground>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={[styles.contentButtons, styles.center]}>
+                            <TouchableOpacity style={[styles.max]} onPress={props.goToProfile}>
+                                <ImageBackground style={[styles.max, styles.center]} source={YellowButton} resizeMode='stretch'>
+                                    <CustomText normal style={[styles.textPosition]}>PROFILE</CustomText>
+                                </ImageBackground>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={[styles.contentButtons, styles.center]}>
+                            <TouchableOpacity style={[styles.max]} onPress={props.goToHome}>
+                                <ImageBackground style={[styles.max, styles.center]} source={YellowButton} resizeMode='stretch'>
+                                    <CustomText normal style={[styles.textPosition]}>ACASA</CustomText>
+                                </ImageBackground>
+                            </TouchableOpacity>
+                        </View>
+                        <View style={[styles.contentButtons, styles.centerAndStart]}>
+                            <TouchableOpacity style={[styles.max]} onPress={props.onClose}>
+                                <ImageBackground style={[styles.max, styles.center]} source={GreenButton} resizeMode='stretch'>
+                                    <CustomText normal style={[styles.textPosition]}>INCHIDE</CustomText>
+                                </ImageBackground>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    <View style={[styles.bottom, styles.centerAndEnd]}>
+                        <View style={[styles.contentButtons, { height: '50%' }, styles.centerAndStart]}>
+                            <TouchableOpacity style={[styles.max]} onPress={props.onLogout}>
+                                <ImageBackground style={[styles.max, styles.center]} source={GreenButton} resizeMode='stretch'>
+                                    <CustomText normal style={[styles.textPosition]}>LOGOUT</CustomText>
+                                </ImageBackground>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
-                <View style={styles.optionsContainer}>
-                    <View style={styles.option}>
-                        <Icon style={styles.optionIcon} name='arrow-left' size={25} color="black" />
-                        <Text style={styles.optionName}>Single player mode</Text>
-                    </View>
-                    <View style={styles.option}>
-                        <Icon style={styles.optionIcon} name='arrow-left' size={25} color="black" />
-                        <Text style={styles.optionName}>Clasament</Text>
-                    </View>
-                    <View style={styles.option}>
-                        <Icon style={styles.optionIcon} name='arrow-left' size={25} color="black" />
-                        <Text style={styles.optionName}>Profil</Text>
-                    </View>
-                </View>
-                <View style={styles.exitContainer}>
-                    <Text style={styles.exitName}>Logout</Text>
-                </View>
-            </View>
+            </ImageBackground>
         </View>
     </Modal>
 );
 
 const styles = StyleSheet.create({
+    avatarPosition: {
+        position: 'relative',
+        top: '20%'
+    },
+    textPosition: {
+        position: 'relative',
+        bottom: '10%'
+    },
+    contentButtons: {
+        height: '20%',
+        width: '100%'
+    },
+    centerAndStart: {
+        alignItems: 'center'
+    },
+    centerAndEnd: {
+        justifyContent: 'flex-end',
+        alignItems: 'center'
+    },
+    half: {
+        height: '50%',
+        width: '100%'
+    },
+    head: {
+        width: '100%',
+        height: '20%'
+    },
+    middle: {
+        width: '100%',
+        height: '50%'
+    },
+    bottom: {
+        width: '100%',
+        height: '20%'
+    },
+    center: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    max: {
+        width: '100%',
+        height: '100%'
+    },
+    background: {
+        width: '40%',
+        height: '100%'
+    },
+    container: {
+        flexDirection: 'column',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+    },
     imageContainer: {
         width: "100%",
         height: "20%",
         borderBottomWidth: 1,
         borderBottomColor: 'black'
-    },
-    logo: {
-        width: "50%",
-        height: "80%",
-    },
-    userName: {
-        width: "100%",
-        height: "100%",
-        letterSpacing: 3,
-    },
-    backIcon: {
-        width: "30%",
-        height: "30%",
-        paddingLeft: 4,
-        paddingTop: 2
-    },
-    userDetailsContainer: {
-        width: "100%",
-        height: "70%",
-        alignItems: "center"
-    },
-    optionsContainer: {
-        width: "100%",
-        height: "70%",
-        alignItems: "center",
-        paddingTop: 12,
-        borderBottomWidth: 1,
-        borderBottomColor: 'black'
-    },
-    option: {
-        display: "flex",
-        marginTop: 20,
-        height: 50,
-        flexDirection: 'row',
-    },
-    optionIcon: {
-        flex: 1,
-        textAlign: "center",
-    },
-    optionName: {
-        flex: 4,
-        textAlign: 'left',
-        fontSize: 16,
-    },
-    exitContainer: {
-        width: "100%",
-        height: "10%",
-        alignItems: "center"
-    },
-    exitName: {
-        paddingTop: 12,
-        textTransform: 'uppercase',
-        fontSize: 16
     }
-})
+});
 
-export default sideDrawer; 
+export default sideDrawer;
