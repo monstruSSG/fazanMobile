@@ -40,20 +40,20 @@ class HomeScreen extends Component {
                     </View>
                     <View style={[styles.content, { justifyContent: 'center' }]}>
                         <View style={[{ height: '90%', width: '100%' }]}>
-                            <View style={styles.singlePlayerContainer}>
-                                <TouchableOpacity onPress={this.navigateSingleplayerScreen} style={[styles.singlePlayerButtonPress]}>
-                                    <ImageBackground style={styles.singlePlayerButton} source={SinglePlayerTitle} resizeMode="stretch">
-                                        <View style={[styles.center]}>
-                                            <CustomText normal style={styles.singlePlayerButtonText}>SINGLEPLAYER</CustomText>
+                            <View style={[styles.singlePlayerContainer]}>
+                                <TouchableOpacity onPress={this.navigateSingleplayerScreen} style={[styles.singlePlayerButtonPress, styles.center]}>
+                                    <ImageBackground style={[styles.singlePlayerButton, styles.center]} source={SinglePlayerTitle} resizeMode="stretch">
+                                        <View style={[styles.center, styles.singleplayerTextPosition]}>
+                                            <CustomText large>NORMAL</CustomText>
                                         </View>
                                     </ImageBackground>
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.mulitplayerContainer}>
                                 <TouchableOpacity onPress={this.naivgateSearchGameScreen} style={[styles.multiPlayerButtonPress, styles.center]}>
-                                    <ImageBackground style={styles.mulitplayerButton} source={MultiplayerTitle} resizeMode="stretch">
+                                    <ImageBackground style={[styles.mulitplayerButton, styles.center]} source={MultiplayerTitle} resizeMode="stretch">
                                         <View style={[styles.center]}>
-                                            <CustomText normal style={[styles.multiPLayerButtonText]}>JOACA ONLINE</CustomText>
+                                            <CustomText large style={[styles.multiPLayerButtonText]}>JOACA ONLINE</CustomText>
                                         </View>
                                     </ImageBackground>
                                 </TouchableOpacity>
@@ -144,6 +144,8 @@ const styles = StyleSheet.create({
         left: '8%'
     },
     multiPlayerButtonPress: {
+        position: 'relative',
+        right: '7%',
         width: "100%"
     },
     details: {
@@ -181,14 +183,9 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     },
-    multiPLayerButtonText: {
+    singleplayerTextPosition: {
         position: 'relative',
-        right: '8%',
-        top: '72%'
-    },
-    singlePlayerButtonText: {
-        position: 'relative',
-        top: '210%',
+        top: '10%',
         left: '1%'
     }
 });

@@ -140,7 +140,7 @@ class SingleplayerGameScreen extends Component {
                 } else if (e.message === 'WORD_NOT_EXISTS') {
                     this.setState({ showNotExistsModal: true });
                     //close after 2 second
-                    setTimeout(() => this.setState({ showNotExistsModal: false }), 2000);
+                    setTimeout(() => this.setState({ showNotExistsModal: false }), 1500);
                 } else {
                     console.log('INVALID_ERROR_MESSAGE');
                 }
