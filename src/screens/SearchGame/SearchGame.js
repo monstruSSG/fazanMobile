@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, ScrollView, FlatList, ImageBackground, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, FlatList, ImageBackground, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
 
-import CONSTANTS from '../../utils/constants';
 import * as SOCKET from '../../store/actions/socket'
 import { getUsers } from '../../utils/requests';
-import Button from '../../components/UI/Button/Button'
-import Input from '../../components/UI/DefaultInput/DefaultInput'
 import OponentDetails from '../../components/OponentDetails/OponentDetails';
 import Header from '../../components/Header/HeaderWithInput';
 import SideDrawer from '../../components/Modals/SideDrawer';
 import LoginModal from '../../components/Modals/LoginModal';
+import RankingModal from '../../components/Modals/RankingModal';
 
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
 import PlayButton from '../../assets/Buttons/greenLabel.png';
@@ -25,7 +23,8 @@ class SearchGameScreen extends Component {
         users: [],
         sideState: false,
         showLogin: true,
-        showClasament: false
+        showClasament: false,
+        showRanking: false
     }
 
     socket = null
@@ -104,12 +103,16 @@ class SearchGameScreen extends Component {
                         </TouchableOpacity>
                     </View>
                     <SideDrawer
-                        goToClasament={() => this.setState({ sideState: false, showClasament: true })}
+                        goToClasament={() => this.setState({ sideState: false, showRanking: true })}
                         goToHome={() => this.setState({ sideState: false }, this.navigateHomeScreen)}
                         goToProfile={() => this.setState({ sideState: false }, this.navigateProfileScreen)}
                         isVisible={this.state.sideState}
                         onClose={this.closeSideDrawerHandler} />
                 </View>
+                <RankingModal
+                    isVisible={this.state.showRanking}
+                    users={this.state.users}
+                    close={() => this.setState({ showRanking: false })} />
             </ImageBackground>
 
         );

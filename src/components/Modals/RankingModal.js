@@ -27,7 +27,7 @@ const rankingModal = props => (
                 <View style={[styles.max, styles.container]}>
                     <ImageBackground source={RankingModal} resizeMode="stretch" style={styles.backgroundImageContainer}>
                         <View style={styles.titleContainer}>
-                            <TouchableOpacity onPress={props.closeModal}>
+                            <TouchableOpacity onPress={props.close}>
                                 <ImageBackground style={styles.buttonImage} resizeMode="cover" source={ExitButton}>
                                 </ImageBackground>
                             </TouchableOpacity>
