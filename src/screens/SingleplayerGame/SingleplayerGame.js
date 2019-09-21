@@ -238,12 +238,14 @@ class SingleplayerGameScreen extends Component {
                         rounds={this.state.roundNumber}
                         restart={this.restartGame}
                         home={this.navigateHomeHandler}
-                        onClose={() => this.setState({ showWinModal: false })} />
+                        onClose={this.navigateHomeHandler} />
                     <LoseModal isVisible={this.state.showLoseModal}
                         cu={this.state.lastWord}
+                        oponent='ROBOT'
+                        rounds={this.state.roundNumber}
                         restart={this.restartGame}
                         home={this.navigateHomeHandler}
-                        onClose={() => this.setState({ showLoseModal: false })} />
+                        onClose={this.navigateHomeHandler} />
                     <AtentionModal isVisible={this.state.showAtentionModal}
                         onClose={() => this.setState({ showAtentionModal: false })}
                     />
