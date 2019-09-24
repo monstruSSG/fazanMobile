@@ -24,6 +24,10 @@ class HomeScreen extends Component {
     navigateSingleplayerScreen = () => this.props.navigation.navigate('Singleplayer');
     navigateProfileScreen = () => this.props.navigation.navigate('Profile');
 
+    componentDidMount() {
+
+    }
+
     render() {
         return (
             <ImageBackground source={BackgroundImg} style={[styles.max]}>
