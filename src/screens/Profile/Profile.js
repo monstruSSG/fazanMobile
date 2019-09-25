@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, ImageBackground, Text, Image } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, ImageBackground, Image } from 'react-native';
+import { connect } from 'react-redux';
 
 import ProfileGameHistory from '../../components/ProfileGameHistory/ProfileGameHistory';
+import { isLogged, getMe } from '../../utils/requests';
+import LoginModal from '../../components/Modals/LoginModal';
 
 import HeaderBackground from '../../assets/Stuff/profileGameHeaderBg.png';
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
@@ -12,8 +15,6 @@ import PointsBackground from '../../assets/Modals/titleShadow.png';
 import ExitButton from '../../assets/Buttons/back.png';
 import CustomText from '../../components/UI/Text/Text';
 
-import { getMe } from '../../utils/requests';
-
 class ProfileScreen extends Component {
     static navigationOptions = {
         header: null,
@@ -22,19 +23,22 @@ class ProfileScreen extends Component {
     navigateHomeScreen = () => this.props.navigation.navigate('Home');
 
     state = {
-        me: {}
+        me: {},
+        logged: false
     }
 
     componentDidMount() {
-        getMe().then(me => this.setState({ me }, () => console.log(this.state.me.history[0])))
+        getMe(this.props.token)
+            .then(user => this.setState({ me: user }))
     }
 
     render() {
         let { me } = this.state;
-        const losesProcent = ((this.state.me.wins / (this.state.me.loses + this.state.me.wins)) * 100).toFixed(0)
+        const losesProcent = ((me.wins / (me.loses + me.wins + 1)) * 100).toFixed(0)
 
         return (
             <ImageBackground source={BackgroundImg} style={{ flex: 1 }}>
+
                 <View style={styles.content}>
                     <View style={[styles.centerContent, styles.topPanelContainer]}>
                         <ImageBackground source={HeaderBackground} resizeMode='stretch' style={[styles.maxWidthHeight]}>
@@ -46,7 +50,7 @@ class ProfileScreen extends Component {
                                 </View>
                                 <View style={[styles.centerContent, {}]}>
                                     <View style={[styles.usernameContainer]}>
-                                        <CustomText large>{this.state.me.username}</CustomText>
+                                        <CustomText large>{me.shortName}</CustomText>
                                     </View>
                                 </View>
                             </View>
@@ -278,4 +282,13 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ProfileScreen;
+const mapStateToProps = state => ({
+    token: state.user.token
+});
+
+const mapDispatchToProps = dispatch => ({});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ProfileScreen);

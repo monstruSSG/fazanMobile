@@ -10,8 +10,8 @@ export default {
     db: {
         name: 'fazanWords.db'
     },
-    backendUrl: 'http://localhost:9000/v1',
-    socketsBackendUrl: 'http://localhost:9000',
+    backendUrl: 'http://192.168.43.228/api/v1',
+    socketsBackendUrl: 'http://192.168.43.228',
     letters: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
         'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
     firstRow: ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],

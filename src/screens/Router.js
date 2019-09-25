@@ -5,8 +5,9 @@ import SingleplayerScreen from './SingleplayerGame/SingleplayerGame';
 import MultiplayerScreen from './MultiplayerGame/MultiplayerGame';
 import SearchGameScreen from './SearchGame/SearchGame';
 import ProfileScreen from './Profile/Profile';
+import LoginScreen from './Login/Login';
 
-const stackNavigator = createStackNavigator({
+const ApplicationStack = createStackNavigator({
     Home: {
         screen: HomeScreen
     },
@@ -21,9 +22,12 @@ const stackNavigator = createStackNavigator({
     },
     Profile: {
         screen: ProfileScreen
+    },
+    Login: {
+        screen: LoginScreen
     }
 }, {
-        initialRouteName: 'Home'
-    });
+    initialRouteName: 'Home'
+});
 
-export default createAppContainer(stackNavigator);
+export default createAppContainer(ApplicationStack);
