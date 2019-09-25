@@ -34,7 +34,7 @@ class SearchGameScreen extends Component {
         getUsers().then(users => this.setState({ users }))
     }
 
-    createSocketConnection(token) {
+    createSocketConnection = token => {
         this.props.createSocketConnection(token).then(socket => {
             this.socket = socket
         })

@@ -27,9 +27,14 @@ class ProfileScreen extends Component {
         logged: false
     }
 
+    componentDidMount() {
+        getMe(this.props.token)
+            .then(user => this.setState({ me: user }))
+    }
+
     render() {
         let { me } = this.state;
-        const losesProcent = ((this.state.me.wins / (this.state.me.loses + this.state.me.wins)) * 100).toFixed(0)
+        const losesProcent = ((me.wins / (me.loses + me.wins + 1)) * 100).toFixed(0)
 
         return (
             <ImageBackground source={BackgroundImg} style={{ flex: 1 }}>
@@ -45,7 +50,7 @@ class ProfileScreen extends Component {
                                 </View>
                                 <View style={[styles.centerContent, {}]}>
                                     <View style={[styles.usernameContainer]}>
-                                        <CustomText large>{this.state.me.username}</CustomText>
+                                        <CustomText large>{me.shortName}</CustomText>
                                     </View>
                                 </View>
                             </View>
