@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text, ImageBackground, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, Text, ImageBackground, TouchableOpacity, AsyncStorage } from 'react-native';
+import { connect } from 'react-redux';
 
 import CustomText from '../../components/UI/Text/Text';
 import AboutModal from '../../components/Modals/AboutModal';
+import { saveToken } from '../../store/actions/user';
 
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
 import AboutButton from '../../assets/Buttons/about.png';
 import ProfileButton from '../../assets/Buttons/locked.png';
 import Crown from '../../assets/Stuff/1st.png';
 import SinglePlayerTitle from '../../assets/Modals/titleShadow.png';
-import MultiplayerTitle from '../../assets/Stuff/titleBox.png'
+import MultiplayerTitle from '../../assets/Stuff/titleBox.png';
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -20,12 +22,18 @@ class HomeScreen extends Component {
         showAbout: false
     }
 
-    naivgateSearchGameScreen = () => this.props.navigation.navigate('SearchGame');
+    naivgateSearchGameScreen = () => this.props.token ? this.props.navigation.navigate('SearchGame'): this.props.navigation.navigate('Login');
     navigateSingleplayerScreen = () => this.props.navigation.navigate('Singleplayer');
-    navigateProfileScreen = () => this.props.navigation.navigate('Profile');
+    navigateProfileScreen = () => this.props.token ? this.props.navigation.navigate('Profile'): this.props.navigation.navigate('Login');
+
+    readToken = () => AsyncStorage.getItem('token')
+        .then(token => {
+            this.props.navigation.navigate('Auth');
+            return this.props.saveToken(token);
+        }); 
 
     componentDidMount() {
-
+        this.readToken();
     }
 
     render() {
@@ -194,4 +202,15 @@ const styles = StyleSheet.create({
     }
 });
 
-export default HomeScreen;
+const mapStateToProps = state => ({
+    token: state.user.token
+})
+
+const mapDispatchToProps = dispatch => ({
+    saveToken: token => dispatch(saveToken(token))
+})
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(HomeScreen); 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Modal, StyleSheet, TouchableOpacity, Image, ImageBackground } from 'react-native';
+import { View, Modal, StyleSheet, TouchableOpacity, Image, ImageBackground, AsyncStorage } from 'react-native';
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
 import { connect } from 'react-redux';
@@ -12,7 +12,8 @@ import Title from '../../assets/Modals/titleShadow.png';
 import ExitButton from '../../assets/Buttons/exitButton.png';
 import Background from '../../assets/Stuff/bg.jpg';
 
-import { saveToken, login } from '../../store/actions/user';
+import { saveToken } from '../../store/actions/user';
+import { login } from '../../utils/requests';
 import CustomText from '../../components/UI/Text/Text';
 
 class Login extends Component {
@@ -28,8 +29,11 @@ class Login extends Component {
             return AccessToken.getCurrentAccessToken()
         })
         .then(res => login({ fbToken: res.accessToken }))
-        .then(data => this.props.saveToken(data.token))
-        .then(() => this.props.navigation.navigate('Auth'))
+        .then(data => Promise.all([
+            this.props.saveToken(data.token),
+            AsyncStorage.setItem('token', data.token)
+        ]))
+        .then(() => this.props.navigation.navigate('SearchGame'))
         .catch(console.log)
 
     render() {

@@ -1,4 +1,4 @@
-import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 import HomeScreen from './Home/Home';
 import SingleplayerScreen from './SingleplayerGame/SingleplayerGame';
@@ -7,28 +7,7 @@ import SearchGameScreen from './SearchGame/SearchGame';
 import ProfileScreen from './Profile/Profile';
 import LoginScreen from './Login/Login';
 
-
-const UnauthorisedStack = createStackNavigator({
-    Home: {
-        screen: HomeScreen
-    },
-    Singleplayer: {
-        screen: SingleplayerScreen
-    },
-    Multiplayer: {
-        screen: LoginScreen
-    },
-    SearchGame: {
-        screen: LoginScreen
-    },
-    Profile: {
-        screen: LoginScreen
-    }
-}, {
-    initialRouteName: 'Home'
-});
-
-const AuthorisedStack = createStackNavigator({
+const ApplicationStack = createStackNavigator({
     Home: {
         screen: HomeScreen
     },
@@ -43,16 +22,12 @@ const AuthorisedStack = createStackNavigator({
     },
     Profile: {
         screen: ProfileScreen
+    },
+    LoginScreen: {
+        screen: LoginScreen
     }
 }, {
-    initialRouteName: 'SearchGame'
+    initialRouteName: 'Home'
 });
 
-export default createAppContainer(
-    createSwitchNavigator({
-        Auth: AuthorisedStack,
-        Unauth: UnauthorisedStack
-    }, {
-        initialRouteName: 'Unauth'
-    })
-);
+export default createAppContainer(ApplicationStack);
