@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, FlatList, ImageBackground, Text, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, FlatList, ImageBackground, Text, TouchableOpacity, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux'
 
 import * as SOCKET from '../../store/actions/socket'
@@ -9,6 +9,7 @@ import Header from '../../components/Header/HeaderWithInput';
 import SideDrawer from '../../components/Modals/SideDrawer';
 import LoginModal from '../../components/Modals/LoginModal';
 import RankingModal from '../../components/Modals/RankingModal';
+import * as USER from '../../store/actions/user';
 
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
 import PlayButton from '../../assets/Buttons/greenLabel.png';
@@ -74,8 +75,6 @@ class SearchGameScreen extends Component {
     render() {
         return (
             <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
-
-
                 <View style={styles.searchGame}>
 
                     <View style={styles.inputForm}>
@@ -107,6 +106,10 @@ class SearchGameScreen extends Component {
                         goToClasament={() => this.setState({ sideState: false, showRanking: true })}
                         goToHome={() => this.setState({ sideState: false }, this.navigateHomeScreen)}
                         goToProfile={() => this.setState({ sideState: false }, this.navigateProfileScreen)}
+                        onLogout={() => AsyncStorage.removeItem('token').then(() => {
+                            this.props.deleteToken();
+                            this.navigateHomeScreen();
+                        })}
                         isVisible={this.state.sideState}
                         onClose={this.closeSideDrawerHandler} />
                 </View>
@@ -154,13 +157,13 @@ const styles = StyleSheet.create({
 
 
 const mapStateToProps = state => ({
-    socket: state.socket,
-    token: state.user.token
+    socket: state.socket
 });
 
 const mapDispatchToProps = dispatch => ({
     createSocketConnection: token => dispatch(SOCKET.createSocketConnection(token)),
-    setOponentSocketId: socketId => dispatch(SOCKET.setOponentSocketId(socketId))
+    setOponentSocketId: socketId => dispatch(SOCKET.setOponentSocketId(socketId)),
+    deleteToken: () => dispatch(USER.deleteToken())
 });
 
 export default connect(

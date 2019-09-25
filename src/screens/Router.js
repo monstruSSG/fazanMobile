@@ -23,7 +23,7 @@ const ApplicationStack = createStackNavigator({
     Profile: {
         screen: ProfileScreen
     },
-    LoginScreen: {
+    Login: {
         screen: LoginScreen
     }
 }, {
