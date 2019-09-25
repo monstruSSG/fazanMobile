@@ -28,16 +28,17 @@ class Login extends Component {
             return AccessToken.getCurrentAccessToken()
         })
         .then(res => login({ fbToken: res.accessToken }))
-        .then(data => {
-            this.props.saveToken(data.token)
-            return this.props.onLogin(data.token)
-        })
+        .then(data => this.props.saveToken(data.token))
+        .then(() => this.props.navigation.navigate('Auth'))
         .catch(console.log)
 
     render() {
         return (
             <ImageBackground source={Background} style={styles.max}>
                 <CustomText large>LOGEAHZA-TE</CustomText>
+                <TouchableOpacity onPress={this.loginHandler}>
+                    <Image source={FacebookButton} size={50} />
+                </TouchableOpacity>
             </ImageBackground>
         );
     }

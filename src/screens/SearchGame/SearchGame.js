@@ -30,9 +30,6 @@ class SearchGameScreen extends Component {
     socket = null
 
     componentDidMount() {
-        isLogged(this.props.token)
-            .then(() => this.setState({ logged: true }))
-            .catch(() => this.setState({ logged: false }));
         getUsers().then(users => this.setState({ users }))
     }
 
@@ -71,57 +68,48 @@ class SearchGameScreen extends Component {
 
     setSideDrawerStateHandler = state => this.setState({ sideState: state })
     closeSideDrawerHandler = () => {
-        this.setState({ sideState: false }, () => console.log(this.state.sideState))
-    }
-
-    onLogin = token => {
-        this.createSocketConnection(this.props.token);
-
-        isLogged(this.props.token)
-            .then(() => this.setState({ logged: true }));
+        this.setState({ sideState: false });
     }
 
     render() {
         return (
             <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
-                {!this.state.logged ? <LoginModal
-                    onLogin={this.onLogin}
-                    exitGame={() => this.setState({ showLogin: false })} /> :
 
-                    <View style={styles.searchGame}>
 
-                        <View style={styles.inputForm}>
-                            <Header
-                                setSideDrawer={() => this.setSideDrawerStateHandler(true)}
-                            />
-                        </View>
-                        <View style={styles.oponentList}>
-                            <FlatList
-                                data={this.state.users.map(user => {
-                                    return ({ ...user, key: user._id || 'asdasd' })
-                                })}
-                                renderItem={({ item }) => <OponentDetails
-                                    name={item.username || 'xulescu'}
-                                    points={item.score || 123}
-                                />}
-                            />
-                        </View>
-                        <View style={styles.playGameButton}>
-                            <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', width: '80%' }} onPress={this.onPlayGameHandler}>
-                                <ImageBackground source={PlayButton} style={{ width: '100%', height: '90%', position: 'relative', top: '8%' }} resizeMode="stretch">
-                                    <Text style={{ color: "white", fontFamily: 'Troika', fontSize: 22, textAlign: 'center', paddingTop: '2%' }}>
-                                        PLAY RANDOM
+                <View style={styles.searchGame}>
+
+                    <View style={styles.inputForm}>
+                        <Header
+                            setSideDrawer={() => this.setSideDrawerStateHandler(true)}
+                        />
+                    </View>
+                    <View style={styles.oponentList}>
+                        <FlatList
+                            data={this.state.users.map(user => {
+                                return ({ ...user, key: user._id || 'asdasd' })
+                            })}
+                            renderItem={({ item }) => <OponentDetails
+                                name={item.username || 'xulescu'}
+                                points={item.score || 123}
+                            />}
+                        />
+                    </View>
+                    <View style={styles.playGameButton}>
+                        <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', width: '80%' }} onPress={this.onPlayGameHandler}>
+                            <ImageBackground source={PlayButton} style={{ width: '100%', height: '90%', position: 'relative', top: '8%' }} resizeMode="stretch">
+                                <Text style={{ color: "white", fontFamily: 'Troika', fontSize: 22, textAlign: 'center', paddingTop: '2%' }}>
+                                    PLAY RANDOM
                                 </Text>
-                                </ImageBackground>
-                            </TouchableOpacity>
-                        </View>
-                        <SideDrawer
-                            goToClasament={() => this.setState({ sideState: false, showRanking: true })}
-                            goToHome={() => this.setState({ sideState: false }, this.navigateHomeScreen)}
-                            goToProfile={() => this.setState({ sideState: false }, this.navigateProfileScreen)}
-                            isVisible={this.state.sideState}
-                            onClose={this.closeSideDrawerHandler} />
-                    </View>}
+                            </ImageBackground>
+                        </TouchableOpacity>
+                    </View>
+                    <SideDrawer
+                        goToClasament={() => this.setState({ sideState: false, showRanking: true })}
+                        goToHome={() => this.setState({ sideState: false }, this.navigateHomeScreen)}
+                        goToProfile={() => this.setState({ sideState: false }, this.navigateProfileScreen)}
+                        isVisible={this.state.sideState}
+                        onClose={this.closeSideDrawerHandler} />
+                </View>
                 <RankingModal
                     isVisible={this.state.showRanking}
                     users={this.state.users}
