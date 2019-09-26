@@ -60,7 +60,7 @@ class MultiplayerGameScreen extends Component {
     wordNotExistsHandler = exists => {
         if (!exists) return alert('Here let the user know that the inserted word does not exist');
         this.resetTimer();
-  
+
         this.props.socket.on('gotWord', data => {
             //Vine verificat
             this.onGotWordHandler(data.word)
@@ -101,7 +101,7 @@ class MultiplayerGameScreen extends Component {
 
     insertWordHandler = () => {
         let { word, usedWords } = this.state;
-    
+
         this.props.socket.emit('sendWord', { word, socketId: this.props.oponentSocketId });
 
         this.startYourWordAnimation(word);
