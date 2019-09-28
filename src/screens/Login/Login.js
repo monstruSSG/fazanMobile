@@ -24,9 +24,9 @@ class Login extends Component {
     loginHandler = () => LoginManager.logInWithPermissions(['public_profile'])
         .then(result => {
             if (result.isCancelled) {
-                return alert('Canceled')
+                return alert('Canceled');
             }
-            return AccessToken.getCurrentAccessToken()
+            return AccessToken.getCurrentAccessToken();
         })
         .then(res => login({ fbToken: res.accessToken }))
         .then(data => Promise.all([
@@ -39,10 +39,17 @@ class Login extends Component {
     render() {
         return (
             <ImageBackground source={Background} style={styles.max}>
-                <CustomText large>LOGEAHZA-TE</CustomText>
-                <TouchableOpacity onPress={this.loginHandler}>
-                    <Image source={FacebookButton} size={50} />
-                </TouchableOpacity>
+                <View style={[styles.max, styles.center]}>
+                    <View style={[{ alignItems: 'center', justifyContent: 'flex-end', width: '100%', height: '25%' }]}>
+                        <CustomText extra>LOGHEAZA-TE</CustomText>
+
+                    </View>
+                    <View style={[{ alignItems: 'center', width: '100%', height: '75%' }]}>
+                        <TouchableOpacity onPress={this.loginHandler} style={{ height: '50%', width: '50%' }}>
+                            <Image source={FacebookButton} style={styles.max} resizeMode='contain' />
+                        </TouchableOpacity>
+                    </View>
+                </View>
             </ImageBackground>
         );
     }
@@ -52,6 +59,10 @@ const styles = StyleSheet.create({
     max: {
         width: '100%',
         height: '100%'
+    },
+    center: {
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 })
 

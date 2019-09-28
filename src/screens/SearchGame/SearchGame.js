@@ -3,7 +3,7 @@ import { View, StyleSheet, FlatList, ImageBackground, Text, TouchableOpacity, As
 import { connect } from 'react-redux'
 
 import * as SOCKET from '../../store/actions/socket'
-import { getUsers, isLogged } from '../../utils/requests';
+import { getUserss, isLogged } from '../../utils/requests';
 import OponentDetails from '../../components/OponentDetails/OponentDetails';
 import Header from '../../components/Header/HeaderWithInput';
 import SideDrawer from '../../components/Modals/SideDrawer';
@@ -31,7 +31,13 @@ class SearchGameScreen extends Component {
     socket = null
 
     componentDidMount() {
-        getUsers().then(users => this.setState({ users }))
+        getUserss(this.props.token).then(result => this.setState({
+            users: result.map(user => ({
+                username: user.shortName,
+                score: user.score,
+                _id: user._id
+            }))
+        }))
     }
 
     createSocketConnection = token => {
@@ -157,7 +163,8 @@ const styles = StyleSheet.create({
 
 
 const mapStateToProps = state => ({
-    socket: state.socket
+    socket: state.socket,
+    token: state.user.token
 });
 
 const mapDispatchToProps = dispatch => ({
