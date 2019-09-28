@@ -12,6 +12,7 @@ import ProfileButton from '../../assets/Buttons/locked.png';
 import Crown from '../../assets/Stuff/1st.png';
 import SinglePlayerTitle from '../../assets/Modals/titleShadow.png';
 import MultiplayerTitle from '../../assets/Stuff/titleBox.png';
+import LoadingModal from '../../components/Modals/LoadingModal';
 
 class HomeScreen extends Component {
     static navigationOptions = {

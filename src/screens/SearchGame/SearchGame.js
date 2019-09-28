@@ -7,15 +7,14 @@ import { getUsers } from '../../utils/requests';
 import OponentDetails from '../../components/OponentDetails/OponentDetails';
 import Header from '../../components/Header/HeaderWithInput';
 import SideDrawer from '../../components/Modals/SideDrawer';
-import LoginModal from '../../components/Modals/LoginModal';
 import RankingModal from '../../components/Modals/RankingModal';
 import * as USER from '../../store/actions/user';
+import LoadingModal from '../../components/Modals/LoadingModal';
 
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
 import PlayButton from '../../assets/Buttons/greenLabel.png';
 
 class SearchGameScreen extends Component {
-
     static navigationOptions = {
         header: null
     }
@@ -25,7 +24,8 @@ class SearchGameScreen extends Component {
         sideState: false,
         logged: false,
         showClasament: false,
-        showRanking: false
+        showRanking: false,
+        loading: false
     }
 
     from = 0;
@@ -58,6 +58,8 @@ class SearchGameScreen extends Component {
     navigateProfileScreen = () => this.props.navigation.navigate('Profile');
 
     onPlayGameHandler = () => {
+        this.setState({ loading: true })
+
         this.socket.emit('reqConnectedUsers', {})
 
         this.socket.on('recConnectedUsers', data => {
@@ -71,7 +73,8 @@ class SearchGameScreen extends Component {
         });
 
         this.socket.on('startGame', data => {
-            this.props.setOponentSocketId(data.socketId)
+            this.setState({ loading: false });
+            this.props.setOponentSocketId(data.socketId);
             this.navigateMultiplayerScreen();
         })
     }
@@ -107,7 +110,7 @@ class SearchGameScreen extends Component {
                             onEndReached={() => {
                                 this.from += 10;
                                 this.limit += 10;
-                                if(this.limit <= this.usersCount) this.getUsersHandler();
+                                if (this.limit <= this.usersCount) this.getUsersHandler();
                             }}
                         />
                     </View>
@@ -135,6 +138,7 @@ class SearchGameScreen extends Component {
                     isVisible={this.state.showRanking}
                     users={this.state.users}
                     close={() => this.setState({ showRanking: false })} />
+                <LoadingModal isVisible={this.state.loading} />
             </ImageBackground>
 
         );
