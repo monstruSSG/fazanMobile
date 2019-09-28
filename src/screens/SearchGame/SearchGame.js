@@ -3,7 +3,7 @@ import { View, StyleSheet, FlatList, ImageBackground, Text, TouchableOpacity, As
 import { connect } from 'react-redux'
 
 import * as SOCKET from '../../store/actions/socket'
-import { getUserss, isLogged } from '../../utils/requests';
+import { getUsers } from '../../utils/requests';
 import OponentDetails from '../../components/OponentDetails/OponentDetails';
 import Header from '../../components/Header/HeaderWithInput';
 import SideDrawer from '../../components/Modals/SideDrawer';
@@ -28,17 +28,24 @@ class SearchGameScreen extends Component {
         showRanking: false
     }
 
-    socket = null
+    from = 0;
+    limit = 10;
+    usersCount = 40;
+    socket = null;
 
     componentDidMount() {
-        getUserss(this.props.token).then(result => this.setState({
-            users: result.map(user => ({
-                username: user.shortName,
-                score: user.score,
-                _id: user._id
-            }))
-        }))
+        this.getUsersHandler();
     }
+
+    getUsersHandler = () => getUsers(this.props.token, this.from, this.limit)
+        .then(result => this.setState(prevState => ({
+            users: prevState.users.concat(
+                result.map(user => ({
+                    username: user.shortName,
+                    score: user.score,
+                    _id: user._id
+                })))
+        })))
 
     createSocketConnection = token => {
         this.props.createSocketConnection(token).then(socket => {
@@ -97,6 +104,11 @@ class SearchGameScreen extends Component {
                                 name={item.username || 'xulescu'}
                                 points={item.score || 123}
                             />}
+                            onEndReached={() => {
+                                this.from += 10;
+                                this.limit += 10;
+                                if(this.limit <= this.usersCount) this.getUsersHandler();
+                            }}
                         />
                     </View>
                     <View style={styles.playGameButton}>
