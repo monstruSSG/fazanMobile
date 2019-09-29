@@ -25,8 +25,6 @@ class HomeScreen extends Component {
         showAbout: false
     }
 
-    logged = false;
-
     naivgateSearchGameScreen = () => this.logged ? this.props.navigation.navigate('SearchGame') : this.props.navigation.navigate('Login');
     navigateSingleplayerScreen = () => this.props.navigation.navigate('Singleplayer');
     navigateProfileScreen = () => this.logged ? this.props.navigation.navigate('Profile') : this.props.navigation.navigate('Login');
@@ -37,9 +35,11 @@ class HomeScreen extends Component {
                 this.logged = true;
                 this.createSocketConnection(token);
                 return this.props.saveToken(token);
-            }));
+            }))
+            .catch(() => this.logged = false);
 
     componentDidMount() {
+        this.logged = false;
         this.readToken();
     }
 
