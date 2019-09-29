@@ -12,6 +12,8 @@ import Title from '../../assets/Modals/titleShadow.png';
 import ExitButton from '../../assets/Buttons/exitButton.png';
 import Background from '../../assets/Stuff/bg.jpg';
 
+
+import * as SOCKET from '../../store/actions/socket';
 import { saveToken } from '../../store/actions/user';
 import { login } from '../../utils/requests';
 import CustomText from '../../components/UI/Text/Text';
@@ -31,10 +33,13 @@ class Login extends Component {
         .then(res => login({ fbToken: res.accessToken }))
         .then(data => Promise.all([
             this.props.saveToken(data.token),
-            AsyncStorage.setItem('token', data.token)
+            AsyncStorage.setItem('token', data.token),
+            this.createSocketConnection(data.token)
         ]))
         .then(() => this.props.navigation.navigate('SearchGame'))
         .catch(console.log)
+
+    createSocketConnection = token => this.props.createSocketConnection(token);
 
     render() {
         return (
@@ -71,7 +76,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    saveToken: token => dispatch(saveToken(token))
+    saveToken: token => dispatch(saveToken(token)),
+    createSocketConnection: token => dispatch(SOCKET.createSocketConnection(token))
 })
 
 export default connect(

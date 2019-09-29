@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import CustomText from '../../components/UI/Text/Text';
 import AboutModal from '../../components/Modals/AboutModal';
 import { saveToken } from '../../store/actions/user';
+import * as SOCKET from '../../store/actions/socket';
+import { isLogged } from '../../utils/requests';
 
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
 import AboutButton from '../../assets/Buttons/about.png';
@@ -23,19 +25,25 @@ class HomeScreen extends Component {
         showAbout: false
     }
 
-    naivgateSearchGameScreen = () => this.props.token ? this.props.navigation.navigate('SearchGame'): this.props.navigation.navigate('Login');
+    logged = false;
+
+    naivgateSearchGameScreen = () => this.logged ? this.props.navigation.navigate('SearchGame') : this.props.navigation.navigate('Login');
     navigateSingleplayerScreen = () => this.props.navigation.navigate('Singleplayer');
-    navigateProfileScreen = () => this.props.token ? this.props.navigation.navigate('Profile'): this.props.navigation.navigate('Login');
+    navigateProfileScreen = () => this.logged ? this.props.navigation.navigate('Profile') : this.props.navigation.navigate('Login');
 
     readToken = () => AsyncStorage.getItem('token')
-        .then(token => {
-            this.props.navigation.navigate('Auth');
-            return this.props.saveToken(token);
-        }); 
+        .then(token => isLogged(token)
+            .then(() => {
+                this.logged = true;
+                this.createSocketConnection(token);
+                return this.props.saveToken(token);
+            }));
 
     componentDidMount() {
         this.readToken();
     }
+
+    createSocketConnection = token => this.props.createSocketConnection(token)
 
     render() {
         return (
@@ -208,7 +216,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    saveToken: token => dispatch(saveToken(token))
+    saveToken: token => dispatch(saveToken(token)),
+    createSocketConnection: token => dispatch(SOCKET.createSocketConnection(token))
 })
 
 export default connect(

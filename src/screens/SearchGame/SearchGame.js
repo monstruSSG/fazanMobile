@@ -47,12 +47,6 @@ class SearchGameScreen extends Component {
                 })))
         })))
 
-    createSocketConnection = token => {
-        this.props.createSocketConnection(token).then(socket => {
-            this.socket = socket
-        })
-    }
-
     navigateMultiplayerScreen = () => this.props.navigation.navigate('Multiplayer');
     navigateHomeScreen = () => this.props.navigation.navigate('Home');
     navigateProfileScreen = () => this.props.navigation.navigate('Profile');
@@ -60,19 +54,19 @@ class SearchGameScreen extends Component {
     onPlayGameHandler = () => {
         this.setState({ loading: true })
 
-        this.socket.emit('reqConnectedUsers', {})
+        this.props.socket.emit('reqConnectedUsers', {})
 
-        this.socket.on('recConnectedUsers', data => {
+        this.props.socket.on('recConnectedUsers', data => {
             if (data.users.length) socket.emit('invitationSent', { socketId: data.users[0] })
         })
 
-        this.socket.on('invitationReceived', data => {
+        this.props.socket.on('invitationReceived', data => {
             this.props.setOponentSocketId(data.socketId);
             socket.emit('invitationAccepted', { socketId: data.socketId });
             this.navigateMultiplayerScreen();
         });
 
-        this.socket.on('startGame', data => {
+        this.props.socket.on('startGame', data => {
             this.setState({ loading: false });
             this.props.setOponentSocketId(data.socketId);
             this.navigateMultiplayerScreen();
@@ -80,7 +74,7 @@ class SearchGameScreen extends Component {
     }
 
     onExitGameHandler = () => {
-        this.socket.disconnect();
+        this.props.socket.disconnect();
     }
 
     setSideDrawerStateHandler = state => this.setState({ sideState: state })
@@ -179,12 +173,11 @@ const styles = StyleSheet.create({
 
 
 const mapStateToProps = state => ({
-    socket: state.socket,
+    socket: state.socket.socket,
     token: state.user.token
 });
 
 const mapDispatchToProps = dispatch => ({
-    createSocketConnection: token => dispatch(SOCKET.createSocketConnection(token)),
     setOponentSocketId: socketId => dispatch(SOCKET.setOponentSocketId(socketId)),
     deleteToken: () => dispatch(USER.deleteToken())
 });
