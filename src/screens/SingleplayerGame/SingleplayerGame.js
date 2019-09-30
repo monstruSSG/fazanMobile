@@ -19,6 +19,7 @@ import HeaderBg from '../../assets/Stuff/singleplayerHeader.png';
 import ExitButton from '../../assets/Buttons/exitButton.png';
 import BluePanel from '../../assets/Stuff/bluePanel.png';
 import LastWordImage from '../../assets/Stuff/titleBox.png';
+import BrownLabel from '../../assets/Buttons/brownLabel.png';
 
 
 class SingleplayerGameScreen extends Component {
@@ -213,14 +214,14 @@ class SingleplayerGameScreen extends Component {
                             </View>
                             <View style={[{ width: '100%', flex: 3, alignItems: 'center' }]}>
                                 <View style={[styles.centerContent, { flex: 1 }]}>
-                                    <CustomText normal>ULTIMUL CUVANT</CustomText>
+                                    <CustomText>ULTIMUL CUVANT</CustomText>
                                 </View>
                                 <View style={[{ height: '30%', width: '90%', position: 'relative', bottom: '25%' }, styles.centerContent]}>
                                     <ImageBackground source={LastWordImage}
                                         style={[styles.maxWidthHeight]}
                                         resizeMode='stretch'>
                                         <Animated.View style={[styles.centerContent, { width: '100%', height: '60%' }, lastWordScale]}>
-                                            <CustomText large style={styles.lastWord}>{this.state.lastWord}</CustomText>
+                                            <CustomText normal style={styles.lastWord}>{this.state.lastWord}</CustomText>
                                         </Animated.View>
                                     </ImageBackground>
                                 </View>
@@ -228,16 +229,16 @@ class SingleplayerGameScreen extends Component {
                         </View>
                         <View style={[{ flex: 1 }, styles.centerContent]}>
                             <View style={{ flex: 1, flexDirection: 'row' }}>
-                                <View style={{ flex: 2 }}>
-                                    <View style={{ width: '80%', height: '90%', borderWidth: 1, borderRadius: 10 }}>
-                                        <CustomText>{this.state.word}</CustomText>
+                                <ImageBackground resizeMode="stretch" source={BrownLabel} style={{ flex: 2, justifyContent: 'center', alignItems: 'center', marginLeft: '7%'}}>
+                                    <View style={{ width: '100%', height: '90%', justifyContent: 'center' }}>
+                                        <CustomText style={{textAlign: 'center', fontSize: 26}}>{this.state.word}</CustomText>
                                     </View>
-                                </View>
+                                </ImageBackground>
                                 <View style={{ flex: 1 }}>
                                     <TouchableOpacity
                                         style={styles.submitButton}
                                         onPress={this.onInserWordHandler}>
-                                        <CustomText color="azure">TRIMITE</CustomText>
+                                        <CustomText color="azure" style={styles.submitButtonText}>TRIMITE</CustomText>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -332,6 +333,17 @@ const styles = StyleSheet.create({
     centerContent: {
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    submitButton: {
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        height: '100%',
+        width: '100%'
+    },
+    submitButtonText: {
+        fontFamily: 'Troika',
+        fontSize: 24,
+        paddingLeft: '10%'
     }
 });
 
