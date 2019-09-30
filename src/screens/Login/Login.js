@@ -12,7 +12,6 @@ import Title from '../../assets/Modals/titleShadow.png';
 import ExitButton from '../../assets/Buttons/exitButton.png';
 import Background from '../../assets/Stuff/bg.jpg';
 
-
 import * as SOCKET from '../../store/actions/socket';
 import { saveToken } from '../../store/actions/user';
 import { login } from '../../utils/requests';

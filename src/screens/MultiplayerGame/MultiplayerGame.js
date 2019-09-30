@@ -43,6 +43,20 @@ class MultiplayerGameScreen extends Component {
     }
 
     componentDidMount() {
+        this.props.socket.on('gotWord', data => {
+            console.log(data, 'CUVANT')
+            //Vine verificat
+            this.onGotWordHandler(data.word)
+        });
+
+        this.props.socket.on('gameOver', data => {
+            this.setState({ loseModal: true })
+        })
+
+        this.props.socket.on('youWon', data => {
+            this.setState({ winModal: true })
+        })
+
         this.props.socket.on('gotWord', data => this.onGotWordHandler(data.word));
 
         this.props.socket.on('wordNotExists', data => this.wordNotExistsHandler(data.exists))
@@ -58,21 +72,9 @@ class MultiplayerGameScreen extends Component {
     }
 
     wordNotExistsHandler = exists => {
+        alert('NOT EXISTS')
         if (!exists) return alert('Here let the user know that the inserted word does not exist');
         this.resetTimer();
-  
-        this.props.socket.on('gotWord', data => {
-            //Vine verificat
-            this.onGotWordHandler(data.word)
-        });
-
-        this.props.socket.on('gameOver', data => {
-            this.setState({ loseModal: true })
-        })
-
-        this.props.socket.on('youWon', data => {
-            this.setState({ winModal: true })
-        })
 
         if (!this.state.selected) this.letterIncrementInterval = setInterval(() => {
             this.setState(

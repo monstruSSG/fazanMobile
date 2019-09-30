@@ -63,7 +63,6 @@ class SearchGameScreen extends Component {
         //this.props.socket.emit('')
 
         this.props.socket.on('invitationReceived', data => {
-            console.log(data, 'DATA')
             this.props.setOponentSocketId(data.socketId);
             this.props.socket.emit('invitationAccepted', { socketId: data.socketId });
             this.navigateMultiplayerScreen();

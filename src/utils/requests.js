@@ -23,4 +23,4 @@ export const getMe = token => axios.get(`${CONSTANTS.backendUrl}/user/profile`, 
     headers: {
         Authorisation: `Bearer ${token}`
     }
-}).then(response => Promise.resolve(response.data.user));
+}).then(response => Promise.resolve({ user: response.data.user, history: response.data.gamesHistory }));
