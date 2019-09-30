@@ -22,10 +22,12 @@ class Login extends Component {
         header: null
     }
 
+    navigateHomeHandler = () => this.props.navigation.navigate('Home');
+
     loginHandler = () => LoginManager.logInWithPermissions(['public_profile'])
         .then(result => {
             if (result.isCancelled) {
-                return alert('Canceled');
+                return this.navigateHomeHandler();
             }
             return AccessToken.getCurrentAccessToken();
         })
@@ -36,7 +38,6 @@ class Login extends Component {
             this.createSocketConnection(data.token)
         ]))
         .then(() => this.props.navigation.navigate('SearchGame'))
-        .catch(console.log)
 
     createSocketConnection = token => this.props.createSocketConnection(token);
 
