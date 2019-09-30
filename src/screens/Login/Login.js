@@ -47,7 +47,6 @@ class Login extends Component {
                 <View style={[styles.max, styles.center]}>
                     <View style={[{ alignItems: 'center', justifyContent: 'flex-end', width: '100%', height: '25%' }]}>
                         <CustomText extra>LOGHEAZA-TE</CustomText>
-
                     </View>
                     <View style={[{ alignItems: 'center', width: '100%', height: '75%' }]}>
                         <TouchableOpacity onPress={this.loginHandler} style={{ height: '50%', width: '50%' }}>
