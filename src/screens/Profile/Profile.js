@@ -24,17 +24,19 @@ class ProfileScreen extends Component {
 
     state = {
         me: {},
+        history: [],
         logged: false
     }
 
     componentDidMount() {
         getMe(this.props.token)
-            .then(user => this.setState({ me: user }))
+            .then(user => this.setState({ me: user.user, history: user.history }))
     }
 
     render() {
-        let { me } = this.state;
-        const losesProcent = ((me.wins / (me.loses + me.wins + 1)) * 100).toFixed(0)
+        let { me, history } = this.state;
+        
+        const losesProcent = ((me.wins / (me.loses + 1)) * 100).toFixed(0)
 
         return (
             <ImageBackground source={BackgroundImg} style={{ flex: 1 }}>

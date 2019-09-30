@@ -7,11 +7,11 @@ import CONSTANTS from './constants';
 export const login = data => axios.post(`${CONSTANTS.backendUrl}/auth/login`, data)
     .then(res => Promise.resolve({ ...res.data.user }))
 
-export const getUserss = (from, limit) => axios.get(`${CONSTANTS.backendUrl}/user?from=${from}&limit=${limit}`)
-    .then(response => {
-        console.log(response, 'RESPONSE')
-    })
-    .catch(err => console.log(err));
+export const getUsers = (token, from, limit) => axios.get(`${CONSTANTS.backendUrl}/user?from=${from}&limit=${limit}`, {
+    headers: {
+        Authorisation: `Bearer ${token}`
+    }
+}).then(result => Promise.resolve(result.data))
 
 export const isLogged = token => axios.get(`${CONSTANTS.backendUrl}/isLogged`, {
     headers: {
@@ -19,10 +19,8 @@ export const isLogged = token => axios.get(`${CONSTANTS.backendUrl}/isLogged`, {
     }
 });
 
-export const getUsers = () => new Promise((resolve, reject) => resolve([]))
-
 export const getMe = token => axios.get(`${CONSTANTS.backendUrl}/user/profile`, {
     headers: {
         Authorisation: `Bearer ${token}`
     }
-}).then(response => Promise.resolve(response.data.user));
+}).then(response => Promise.resolve({ user: response.data.user, history: response.data.gamesHistory }));
