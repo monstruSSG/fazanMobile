@@ -21,12 +21,7 @@ class Login extends Component {
     navigateHomeHandler = () => this.props.navigation.navigate('Home');
 
     loginHandler = () => LoginManager.logInWithPermissions(['public_profile'])
-        .then(result => {
-            if (result.isCancelled) {
-                return this.navigateHomeHandler();
-            }
-            return AccessToken.getCurrentAccessToken();
-        })
+        .then(() => AccessToken.getCurrentAccessToken())
         .then(res => login({ fbToken: res.accessToken }))
         .then(data => Promise.all([
             this.props.saveToken(data.token),
@@ -54,8 +49,10 @@ class Login extends Component {
                                 online a jocului trebuie sa te autentifici</CustomText>
                                 </View>
                             </View>
-                            <View style={[styles.center, { width: '100%', height: '20%' }, styles.fbButtonPosition]}>
-                                <Image source={FacebookButton} style={styles.max} resizeMode='contain' />
+                            <View style={[styles.center, { width: '40%', height: '20%' }, styles.fbButtonPosition]}>
+                                <TouchableOpacity style={[styles.center, styles.max]} onPress={this.loginHandler}>
+                                    <Image source={FacebookButton} style={styles.max} resizeMode='contain' />
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </ImageBackground>
