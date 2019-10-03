@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import { View, Modal, StyleSheet, TouchableOpacity, Image, ImageBackground, AsyncStorage } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Image, ImageBackground, AsyncStorage } from 'react-native';
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
-import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
 import { connect } from 'react-redux';
 
 import FacebookButton from '../../assets/Buttons/fbButton.png';
-import GmailButton from '../../assets/Buttons/gmailButton.png';
-import SimpleButton from '../../assets/Buttons/simpleButton.png';
-import WarningBackground from '../../assets/Modals/warningBack.png';
-import Title from '../../assets/Modals/titleShadow.png';
-import ExitButton from '../../assets/Buttons/exitButton.png';
 import Background from '../../assets/Stuff/bg.jpg';
+import ContentBackground from '../../assets/Modals/mission.png';
+import WarningBackground from '../../assets/Modals/warningBack.png';
 
 import * as SOCKET from '../../store/actions/socket';
 import { saveToken } from '../../store/actions/user';
@@ -44,15 +40,25 @@ class Login extends Component {
     render() {
         return (
             <ImageBackground source={Background} style={styles.max}>
-                <View style={[styles.max, styles.center]}>
-                    <View style={[{ alignItems: 'center', justifyContent: 'flex-end', width: '100%', height: '25%' }]}>
-                        <CustomText extra>LOGHEAZA-TE</CustomText>
-                    </View>
-                    <View style={[{ alignItems: 'center', width: '100%', height: '75%' }]}>
-                        <TouchableOpacity onPress={this.loginHandler} style={{ height: '50%', width: '50%' }}>
-                            <Image source={FacebookButton} style={styles.max} resizeMode='contain' />
-                        </TouchableOpacity>
-                    </View>
+                <View style={[styles.center, styles.max]}>
+                    <ImageBackground source={ContentBackground} style={[styles.center, styles.max]} resizeMode='stretch'>
+                        <View style={[styles.contentSize, styles.center]}>
+                            <View style={[styles.center, { flex: 1 }]}>
+                                <View style={[styles.center, styles.headerTextPosition]}>
+                                    <CustomText large>LOGIN</CustomText>
+                                </View>
+                            </View>
+                            <View style={[styles.center, { flex: 1 }, styles.textPosition]}>
+                                <View style={[styles.center, { width: '90%', height: '100%' }]}>
+                                    <CustomText normal>Pentru a accesa partea de
+                                online a jocului trebuie sa te autentifici</CustomText>
+                                </View>
+                            </View>
+                            <View style={[styles.center, { width: '100%', height: '20%' }, styles.fbButtonPosition]}>
+                                <Image source={FacebookButton} style={styles.max} resizeMode='contain' />
+                            </View>
+                        </View>
+                    </ImageBackground>
                 </View>
             </ImageBackground>
         );
@@ -60,6 +66,22 @@ class Login extends Component {
 }
 
 const styles = StyleSheet.create({
+    textPosition: {
+        position: 'relative',
+        bottom: '18%'
+    },
+    fbButtonPosition: {
+        position: 'relative',
+        bottom: '22%'
+    },
+    headerTextPosition: {
+        position: 'relative',
+        bottom: '18%'
+    },
+    contentSize: {
+        height: '75%',
+        width: '60%'
+    },
     max: {
         width: '100%',
         height: '100%'
