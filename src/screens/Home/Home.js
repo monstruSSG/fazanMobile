@@ -22,27 +22,32 @@ class HomeScreen extends Component {
     }
 
     state = {
-        showAbout: false
+        showAbout: false,
+        logged: false
     }
 
-    logged = false;
-
-    naivgateSearchGameScreen = () => this.logged ? this.props.navigation.navigate('SearchGame') : this.props.navigation.navigate('Login');
     navigateSingleplayerScreen = () => this.props.navigation.navigate('Singleplayer');
-    navigateProfileScreen = () => this.logged ? this.props.navigation.navigate('Profile') : this.props.navigation.navigate('Login');
 
     readToken = () => AsyncStorage.getItem('token')
         .then(token => isLogged(token)
             .then(() => {
-                this.logged = true
+                this.setState({ logged: true });
                 this.createSocketConnection(token);
                 return this.props.saveToken(token);
             })
-            .catch(() => this.logged = false));
+            .catch(() => this.setState({ logged: false })));
 
     componentDidMount() {
-        this.logged = false;
         this.readToken();
+        this.didBlurSubscription = this.props.navigation.addListener(
+            'didFocus',
+            () => this.readToken()
+        );
+
+    }
+
+    componentWillUnmount() {
+        this.didBlurSubscription.remove();
     }
 
     createSocketConnection = token => this.props.createSocketConnection(token)
@@ -73,7 +78,8 @@ class HomeScreen extends Component {
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.mulitplayerContainer}>
-                                <TouchableOpacity onPress={this.naivgateSearchGameScreen} style={[styles.multiPlayerButtonPress, styles.center]}>
+                                <TouchableOpacity onPress={() => this.state.logged ? this.props.navigation.navigate('SearchGame') :
+                                    this.props.navigation.navigate('Login')} style={[styles.multiPlayerButtonPress, styles.center]}>
                                     <ImageBackground style={[styles.mulitplayerButton, styles.center]} source={MultiplayerTitle} resizeMode="stretch">
                                         <View style={[styles.center]}>
                                             <CustomText large style={[styles.multiPLayerButtonText]}>JOACA ONLINE</CustomText>
@@ -93,7 +99,8 @@ class HomeScreen extends Component {
                         </View>
                         <View style={styles.profileButtonContainer}>
                             <View style={{ flex: 1, flexDirection: 'row-reverse' }}>
-                                <TouchableOpacity onPress={this.navigateProfileScreen} style={[styles.detailsButtonWidth]}>
+                                <TouchableOpacity onPress={() => this.state.logged ? this.props.navigation.navigate('Profile') :
+                                    this.props.navigation.navigate('Login')} style={[styles.detailsButtonWidth]}>
                                     <Image style={styles.profileButton} source={ProfileButton} resizeMode="stretch" />
                                 </TouchableOpacity>
                             </View>
