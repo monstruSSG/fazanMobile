@@ -49,7 +49,7 @@ class Login extends Component {
                             <View style={[styles.center, { flex: 1 }]}>
                                 <View style={[styles.center, { width: '100%', height: '100%' }]}>
                                     <View style={[styles.center, { width: '100%', height: '20%' }]}>
-                                        <CustomText large style={{ color: 'white' }}>Logare!</CustomText>
+                                        <CustomText large>Logare!</CustomText>
                                     </View>
                                     <View style={[styles.center, { width: '60%', height: '80%' }]}>
                                         <CustomText>Salut, pentru a accesa partea online a jocului treuie sa fii autentificat</CustomText>
