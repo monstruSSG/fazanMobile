@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, Image, ImageBackground, AsyncStorage } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
 import { connect } from 'react-redux';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import FacebookButton from '../../assets/Buttons/fbButton.png';
 import Background from '../../assets/Stuff/bg.jpg';

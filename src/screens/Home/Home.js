@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, Text, ImageBackground, TouchableOpacity, AsyncStorage } from 'react-native';
+import { View, StyleSheet, Image, Text, ImageBackground, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import CustomText from '../../components/UI/Text/Text';
 import AboutModal from '../../components/Modals/AboutModal';
@@ -14,7 +15,6 @@ import ProfileButton from '../../assets/Buttons/locked.png';
 import Crown from '../../assets/Stuff/1st.png';
 import SinglePlayerTitle from '../../assets/Modals/titleShadow.png';
 import MultiplayerTitle from '../../assets/Stuff/titleBox.png';
-import LoadingModal from '../../components/Modals/LoadingModal';
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -22,25 +22,26 @@ class HomeScreen extends Component {
     }
 
     state = {
-        showAbout: false,
-        logged: false
+        showAbout: false
     }
 
-    naivgateSearchGameScreen = () => this.state.logged ? this.props.navigation.navigate('SearchGame') : this.props.navigation.navigate('Login');
+    logged = false;
+
+    naivgateSearchGameScreen = () => this.logged ? this.props.navigation.navigate('SearchGame') : this.props.navigation.navigate('Login');
     navigateSingleplayerScreen = () => this.props.navigation.navigate('Singleplayer');
-    navigateProfileScreen = () => this.state.logged ? this.props.navigation.navigate('Profile') : this.props.navigation.navigate('Login');
+    navigateProfileScreen = () => this.logged ? this.props.navigation.navigate('Profile') : this.props.navigation.navigate('Login');
 
     readToken = () => AsyncStorage.getItem('token')
         .then(token => isLogged(token)
             .then(() => {
-                this.setState({ logged: true });
+                this.logged = true
                 this.createSocketConnection(token);
                 return this.props.saveToken(token);
             })
-            .catch(() => this.setState({ logged: false })));
+            .catch(() => this.logged = false));
 
     componentDidMount() {
-        this.setState({ logged: false });
+        this.logged = false;
         this.readToken();
     }
 

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { Platform, BackHandler, View, StyleSheet, FlatList, ImageBackground, Text, TouchableOpacity, AsyncStorage } from 'react-native';
+import { Platform, BackHandler, View, StyleSheet, FlatList, ImageBackground, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import * as SOCKET from '../../store/actions/socket'
 import { getUsers } from '../../utils/requests';
