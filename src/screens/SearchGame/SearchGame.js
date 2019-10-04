@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, FlatList, ImageBackground, Text, TouchableOpacity, AsyncStorage } from 'react-native';
-import { connect } from 'react-redux'
+import { Platform, BackHandler, View, StyleSheet, FlatList, ImageBackground, Text, TouchableOpacity, AsyncStorage } from 'react-native';
+import { connect } from 'react-redux';
+import { withNavigation } from 'react-navigation';
 
 import * as SOCKET from '../../store/actions/socket'
 import { getUsers } from '../../utils/requests';
@@ -19,6 +20,14 @@ class SearchGameScreen extends Component {
         header: null
     }
 
+    constructor(props) {
+        super(props);
+
+        if (Platform.OS === 'android') this.didFocus = props.navigation.addListener("didFocus", () =>
+            BackHandler.addEventListener("hardwareBackPress", this.onBack),
+        );
+    }
+
     state = {
         users: [],
         sideState: false,
@@ -34,8 +43,23 @@ class SearchGameScreen extends Component {
     socket = null;
 
     componentDidMount() {
+        //For overriding default backButton behaviour
+        if (Platform.OS === 'android') this.willBlur = this.props.navigation.addListener("willBlur", () =>
+            BackHandler.removeEventListener("hardwareBackPress", this.onBack),
+        );
+
         this.getUsersHandler();
     }
+
+    componentWillUnmount() {
+        if (Platform.OS === 'android') {
+            this.didFocus.remove();
+            this.willBlur.remove();
+            BackHandler.removeEventListener("hardwareBackPress", this.onBack);
+        }
+    }
+
+    onBack = () => this.navigateHomeScreen();
 
     getUsersHandler = () => getUsers(this.props.token, this.from, this.limit)
         .then(result => this.setState(prevState => ({
@@ -57,7 +81,7 @@ class SearchGameScreen extends Component {
         this.props.socket.emit('reqConnectedUsers', {})
 
         this.props.socket.on('recConnectedUsers', data => {
-            console.log(data.users,' uSERS')
+            console.log(data.users, ' uSERS')
             if (data.users.length) this.props.socket.emit('invitationSent', { socketId: data.users[0].socketId })
         })
         //this.props.socket.emit('')
@@ -187,4 +211,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(SearchGameScreen);
+)(withNavigation(SearchGameScreen));
