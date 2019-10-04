@@ -22,24 +22,25 @@ class HomeScreen extends Component {
     }
 
     state = {
-        showAbout: false
+        showAbout: false,
+        logged: false
     }
 
-    naivgateSearchGameScreen = () => this.logged ? this.props.navigation.navigate('SearchGame') : this.props.navigation.navigate('Login');
+    naivgateSearchGameScreen = () => this.state.logged ? this.props.navigation.navigate('SearchGame') : this.props.navigation.navigate('Login');
     navigateSingleplayerScreen = () => this.props.navigation.navigate('Singleplayer');
-    navigateProfileScreen = () => this.logged ? this.props.navigation.navigate('Profile') : this.props.navigation.navigate('Login');
+    navigateProfileScreen = () => this.state.logged ? this.props.navigation.navigate('Profile') : this.props.navigation.navigate('Login');
 
     readToken = () => AsyncStorage.getItem('token')
         .then(token => isLogged(token)
             .then(() => {
-                this.logged = true;
+                this.setState({ logged: true });
                 this.createSocketConnection(token);
                 return this.props.saveToken(token);
-            }))
-            .catch(() => this.logged = false);
+            })
+            .catch(() => this.setState({ logged: false })));
 
     componentDidMount() {
-        this.logged = false;
+        this.setState({ logged: false });
         this.readToken();
     }
 
