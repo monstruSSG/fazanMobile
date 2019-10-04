@@ -71,30 +71,6 @@ class Login extends Component {
     }
 }
 
-/* 
-    <View style={[styles.contentSize, styles.center]}>
-                            <View style={[styles.center, { flex: 1, flexDirection: 'row' }]}>
-                                <View style={[styles.center, styles.headerTextPosition]}>
-                                    <CustomText large>LOGIN</CustomText>
-                                </View>
-                                <View style={styles.center, { width: '30%', height: '30%', backgroundColor: 'white' }, styles.backPosition}>
-                                    <CustomText normal> C</CustomText>
-                                </View>
-                            </View>
-                            <View style={[styles.center, { flex: 1 }, styles.textPosition]}>
-                                <View style={[styles.center, { width: '90%', height: '100%' }]}>
-                                    <CustomText normal>Pentru a accesa partea de
-                                online a jocului trebuie sa te autentifici</CustomText>
-                                </View>
-                            </View>
-                            <View style={[styles.center, { width: '40%', height: '20%' }, styles.fbButtonPosition]}>
-                                <TouchableOpacity style={[styles.center, styles.max]} onPress={this.loginHandler}>
-                                    <Image source={FacebookButton} style={styles.max} resizeMode='contain' />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-*/
-
 const styles = StyleSheet.create({
     buttonPosition: {
         position: 'relative',
