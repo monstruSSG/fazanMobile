@@ -38,9 +38,47 @@ class Login extends Component {
                 <View style={[styles.center, styles.max]}>
                     <ImageBackground source={ContentBackground} style={[styles.center, styles.max]} resizeMode='stretch'>
                         <View style={[styles.contentSize, styles.center]}>
+                            <View style={[styles.center, { flex: 1, flexDirection: 'row' }]}>
+                                <View style={[styles.center, { width: '80%', height: '50%' }]}>
+                                    <CustomText large style={[styles.headerTextPosition]}>Login</CustomText>
+                                </View>
+                                <View style={[styles.center, { width: '20%', height: '50%' }]}>
+                                    <TouchableOpacity style={styles.max} onPress={this.navigateHomeHandler} />
+                                </View>
+                            </View>
                             <View style={[styles.center, { flex: 1 }]}>
+                                <View style={[styles.center, { width: '100%', height: '100%' }]}>
+                                    <View style={[styles.center, { width: '100%', height: '20%' }]}>
+                                        <CustomText large style={{ color: 'white' }}>Logare!</CustomText>
+                                    </View>
+                                    <View style={[styles.center, { width: '60%', height: '80%' }]}>
+                                        <CustomText>Salut, pentru a accesa partea online a jocului treuie sa fii autentificat</CustomText>
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={[styles.center, { width: '100%', height: '40%' }]}>
+                                <View style={[styles.center, { width: '40%', height: '40%' }, styles.buttonPosition]}>
+                                    <TouchableOpacity style={[styles.max, styles.center]} onPress={this.loginHandler}>
+                                        <Image source={FacebookButton} style={styles.max} resizeMode='contain' />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    </ImageBackground>
+                </View>
+            </ImageBackground>
+        );
+    }
+}
+
+/* 
+    <View style={[styles.contentSize, styles.center]}>
+                            <View style={[styles.center, { flex: 1, flexDirection: 'row' }]}>
                                 <View style={[styles.center, styles.headerTextPosition]}>
                                     <CustomText large>LOGIN</CustomText>
+                                </View>
+                                <View style={styles.center, { width: '30%', height: '30%', backgroundColor: 'white' }, styles.backPosition}>
+                                    <CustomText normal> C</CustomText>
                                 </View>
                             </View>
                             <View style={[styles.center, { flex: 1 }, styles.textPosition]}>
@@ -55,29 +93,20 @@ class Login extends Component {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                    </ImageBackground>
-                </View>
-            </ImageBackground>
-        );
-    }
-}
+*/
 
 const styles = StyleSheet.create({
-    textPosition: {
+    buttonPosition: {
         position: 'relative',
-        bottom: '18%'
-    },
-    fbButtonPosition: {
-        position: 'relative',
-        bottom: '22%'
+        bottom: '30%'
     },
     headerTextPosition: {
         position: 'relative',
-        bottom: '18%'
+        left: '14%'
     },
     contentSize: {
-        height: '75%',
-        width: '60%'
+        width: '90%',
+        height: '80%'
     },
     max: {
         width: '100%',
