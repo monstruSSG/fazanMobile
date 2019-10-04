@@ -27,6 +27,8 @@ class HomeScreen extends Component {
     }
 
     navigateSingleplayerScreen = () => this.props.navigation.navigate('Singleplayer');
+    navigateProfileScreen = () => this.state.logged ? this.props.navigation.navigate('Profile') : this.props.navigation.navigate('Login');
+    navigateSearchGameScreen = () => this.state.logged ? this.props.navigation.navigate('SearchGame') : this.props.navigation.navigate('Login');
 
     readToken = () => AsyncStorage.getItem('token')
         .then(token => isLogged(token)
@@ -78,8 +80,7 @@ class HomeScreen extends Component {
                                 </TouchableOpacity>
                             </View>
                             <View style={styles.mulitplayerContainer}>
-                                <TouchableOpacity onPress={() => this.state.logged ? this.props.navigation.navigate('SearchGame') :
-                                    this.props.navigation.navigate('Login')} style={[styles.multiPlayerButtonPress, styles.center]}>
+                                <TouchableOpacity onPress={this.navigateSearchGameScreen} style={[styles.multiPlayerButtonPress, styles.center]}>
                                     <ImageBackground style={[styles.mulitplayerButton, styles.center]} source={MultiplayerTitle} resizeMode="stretch">
                                         <View style={[styles.center]}>
                                             <CustomText large style={[styles.multiPLayerButtonText]}>JOACA ONLINE</CustomText>
@@ -99,8 +100,7 @@ class HomeScreen extends Component {
                         </View>
                         <View style={styles.profileButtonContainer}>
                             <View style={{ flex: 1, flexDirection: 'row-reverse' }}>
-                                <TouchableOpacity onPress={() => this.state.logged ? this.props.navigation.navigate('Profile') :
-                                    this.props.navigation.navigate('Login')} style={[styles.detailsButtonWidth]}>
+                                <TouchableOpacity onPress={this.navigateProfileScreen} style={[styles.detailsButtonWidth]}>
                                     <Image style={styles.profileButton} source={ProfileButton} resizeMode="stretch" />
                                 </TouchableOpacity>
                             </View>
