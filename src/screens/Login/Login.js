@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
-import { View, Modal, StyleSheet, TouchableOpacity, Image, ImageBackground, AsyncStorage } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Image, ImageBackground, AsyncStorage } from 'react-native';
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
-import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
 import { connect } from 'react-redux';
 
 import FacebookButton from '../../assets/Buttons/fbButton.png';
-import GmailButton from '../../assets/Buttons/gmailButton.png';
-import SimpleButton from '../../assets/Buttons/simpleButton.png';
-import WarningBackground from '../../assets/Modals/warningBack.png';
-import Title from '../../assets/Modals/titleShadow.png';
-import ExitButton from '../../assets/Buttons/exitButton.png';
 import Background from '../../assets/Stuff/bg.jpg';
+import ContentBackground from '../../assets/Modals/mission.png';
+import WarningBackground from '../../assets/Modals/warningBack.png';
 
 import * as SOCKET from '../../store/actions/socket';
 import { saveToken } from '../../store/actions/user';
@@ -25,12 +21,7 @@ class Login extends Component {
     navigateHomeHandler = () => this.props.navigation.navigate('Home');
 
     loginHandler = () => LoginManager.logInWithPermissions(['public_profile'])
-        .then(result => {
-            if (result.isCancelled) {
-                return this.navigateHomeHandler();
-            }
-            return AccessToken.getCurrentAccessToken();
-        })
+        .then(() => AccessToken.getCurrentAccessToken())
         .then(res => login({ fbToken: res.accessToken }))
         .then(data => Promise.all([
             this.props.saveToken(data.token),
@@ -44,22 +35,79 @@ class Login extends Component {
     render() {
         return (
             <ImageBackground source={Background} style={styles.max}>
-                <View style={[styles.max, styles.center]}>
-                    <View style={[{ alignItems: 'center', justifyContent: 'flex-end', width: '100%', height: '25%' }]}>
-                        <CustomText extra>LOGHEAZA-TE</CustomText>
-                    </View>
-                    <View style={[{ alignItems: 'center', width: '100%', height: '75%' }]}>
-                        <TouchableOpacity onPress={this.loginHandler} style={{ height: '50%', width: '50%' }}>
-                            <Image source={FacebookButton} style={styles.max} resizeMode='contain' />
-                        </TouchableOpacity>
-                    </View>
+                <View style={[styles.center, styles.max]}>
+                    <ImageBackground source={ContentBackground} style={[styles.center, styles.max]} resizeMode='stretch'>
+                        <View style={[styles.contentSize, styles.center]}>
+                            <View style={[styles.center, { flex: 1, flexDirection: 'row' }]}>
+                                <View style={[styles.center, { width: '80%', height: '50%' }]}>
+                                    <CustomText large style={[styles.headerTextPosition]}>Login</CustomText>
+                                </View>
+                                <View style={[styles.center, { width: '20%', height: '50%' }]}>
+                                    <TouchableOpacity style={styles.max} onPress={this.navigateHomeHandler} />
+                                </View>
+                            </View>
+                            <View style={[styles.center, { flex: 1 }]}>
+                                <View style={[styles.center, { width: '100%', height: '100%' }]}>
+                                    <View style={[styles.center, { width: '100%', height: '20%' }]}>
+                                        <CustomText large style={{ color: 'white' }}>Logare!</CustomText>
+                                    </View>
+                                    <View style={[styles.center, { width: '60%', height: '80%' }]}>
+                                        <CustomText>Salut, pentru a accesa partea online a jocului treuie sa fii autentificat</CustomText>
+                                    </View>
+                                </View>
+                            </View>
+                            <View style={[styles.center, { width: '100%', height: '40%' }]}>
+                                <View style={[styles.center, { width: '40%', height: '40%' }, styles.buttonPosition]}>
+                                    <TouchableOpacity style={[styles.max, styles.center]} onPress={this.loginHandler}>
+                                        <Image source={FacebookButton} style={styles.max} resizeMode='contain' />
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                        </View>
+                    </ImageBackground>
                 </View>
             </ImageBackground>
         );
     }
 }
 
+/* 
+    <View style={[styles.contentSize, styles.center]}>
+                            <View style={[styles.center, { flex: 1, flexDirection: 'row' }]}>
+                                <View style={[styles.center, styles.headerTextPosition]}>
+                                    <CustomText large>LOGIN</CustomText>
+                                </View>
+                                <View style={styles.center, { width: '30%', height: '30%', backgroundColor: 'white' }, styles.backPosition}>
+                                    <CustomText normal> C</CustomText>
+                                </View>
+                            </View>
+                            <View style={[styles.center, { flex: 1 }, styles.textPosition]}>
+                                <View style={[styles.center, { width: '90%', height: '100%' }]}>
+                                    <CustomText normal>Pentru a accesa partea de
+                                online a jocului trebuie sa te autentifici</CustomText>
+                                </View>
+                            </View>
+                            <View style={[styles.center, { width: '40%', height: '20%' }, styles.fbButtonPosition]}>
+                                <TouchableOpacity style={[styles.center, styles.max]} onPress={this.loginHandler}>
+                                    <Image source={FacebookButton} style={styles.max} resizeMode='contain' />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+*/
+
 const styles = StyleSheet.create({
+    buttonPosition: {
+        position: 'relative',
+        bottom: '30%'
+    },
+    headerTextPosition: {
+        position: 'relative',
+        left: '14%'
+    },
+    contentSize: {
+        width: '90%',
+        height: '80%'
+    },
     max: {
         width: '100%',
         height: '100%'
