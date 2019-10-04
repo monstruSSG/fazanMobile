@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import FacebookButton from '../../assets/Buttons/fbButton.png';
 import Background from '../../assets/Stuff/bg.jpg';
 import ContentBackground from '../../assets/Modals/mission.png';
-import WarningBackground from '../../assets/Modals/warningBack.png';
 
 import * as SOCKET from '../../store/actions/socket';
 import { saveToken } from '../../store/actions/user';
@@ -52,7 +51,7 @@ class Login extends Component {
                                         <CustomText large>Logare!</CustomText>
                                     </View>
                                     <View style={[styles.center, { width: '60%', height: '80%' }]}>
-                                        <CustomText>Salut, pentru a accesa partea online a jocului treuie sa fii autentificat</CustomText>
+                                        <CustomText>Pentru a accesa partea online a jocului treuie sa fii autentificat</CustomText>
                                     </View>
                                 </View>
                             </View>
