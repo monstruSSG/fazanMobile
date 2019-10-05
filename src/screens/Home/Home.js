@@ -41,11 +41,7 @@ class HomeScreen extends Component {
 
     componentDidMount() {
         this.readToken();
-        this.didBlurSubscription = this.props.navigation.addListener(
-            'didFocus',
-            () => this.readToken()
-        );
-
+        this.didBlurSubscription = this.props.navigation.addListener('didFocus',() => this.readToken());
     }
 
     componentWillUnmount() {
