@@ -10,11 +10,11 @@ import ExitButton from '../../assets/Buttons/exitButton.png';
 const renderUserList = props => {
 
     return <FlatList
-        data={props.users.map((user, index) => ({ ...user, key: index || '1' }))}
+        data={props.users.map((user, index) => ({ ...user, key: user._id, index: index + 1 }))}
         renderItem={({ item }) => <ClasamentUserDetails
             name={item.username}
             points={item.score || 123}
-            position={item.key}
+            position={item.index}
         />}
     />
 }

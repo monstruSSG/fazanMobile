@@ -1,80 +1,126 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, FlatList, ImageBackground, Text, TouchableOpacity } from 'react-native';
-import { connect } from 'react-redux'
+import { Platform, BackHandler, View, StyleSheet, FlatList, ImageBackground, Text, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+import { withNavigation } from 'react-navigation';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import * as SOCKET from '../../store/actions/socket'
 import { getUsers } from '../../utils/requests';
 import OponentDetails from '../../components/OponentDetails/OponentDetails';
 import Header from '../../components/Header/HeaderWithInput';
 import SideDrawer from '../../components/Modals/SideDrawer';
-import LoginModal from '../../components/Modals/LoginModal';
 import RankingModal from '../../components/Modals/RankingModal';
+import * as USER from '../../store/actions/user';
+import LoadingModal from '../../components/Modals/LoadingModal';
 
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
 import PlayButton from '../../assets/Buttons/greenLabel.png';
 
 class SearchGameScreen extends Component {
-
     static navigationOptions = {
         header: null
+    }
+
+    constructor(props) {
+        super(props);
+
+        if (Platform.OS === 'android') this.didFocus = props.navigation.addListener("didFocus", () =>
+            BackHandler.addEventListener("hardwareBackPress", this.onBack),
+        );
     }
 
     state = {
         users: [],
         sideState: false,
-        showLogin: true,
+        logged: false,
         showClasament: false,
-        showRanking: false
+        showRanking: false,
+        loading: false
     }
 
-    socket = null
+    from = 0;
+    limit = 10;
+    usersCount = 40;
+    socket = null;
 
     componentDidMount() {
-        getUsers().then(users => this.setState({ users }))
+        //For overriding default backButton behaviour
+        if (Platform.OS === 'android') this.willBlur = this.props.navigation.addListener("willBlur", () =>
+            BackHandler.removeEventListener("hardwareBackPress", this.onBack),
+        );
+
+        this.getUsersHandler();
     }
 
-    createSocketConnection(token) {
-        this.props.createSocketConnection(token).then(socket => {
-            this.socket = socket
-        })
+    componentWillUnmount() {
+        if (Platform.OS === 'android') {
+            this.didFocus.remove();
+            this.willBlur.remove();
+            BackHandler.removeEventListener("hardwareBackPress", this.onBack);
+        }
     }
+
+    onBack = () => this.navigateHomeScreen();
+
+    getUsersHandler = () => getUsers(this.props.token, this.from, this.limit)
+        .then(result => this.setState(prevState => ({
+            users: prevState.users.concat(
+                result.map(user => ({
+                    username: user.shortName,
+                    score: user.score,
+                    _id: user._id
+                })))
+        })))
 
     navigateMultiplayerScreen = () => this.props.navigation.navigate('Multiplayer');
     navigateHomeScreen = () => this.props.navigation.navigate('Home');
     navigateProfileScreen = () => this.props.navigation.navigate('Profile');
 
     onPlayGameHandler = () => {
-        this.socket.emit('reqConnectedUsers', {})
+        this.setState({ loading: true })
 
+        this.props.socket.emit('reqConnectedUsers', {})
+
+<<<<<<< HEAD
         this.socket.on('recConnectedUsers', data => {
             if (data.users.length) this.socket.emit('invitationSent', { socketId: data.users[0].socketId })
+=======
+        this.props.socket.on('recConnectedUsers', data => {
+            console.log(data.users, ' uSERS')
+            if (data.users.length) this.props.socket.emit('invitationSent', { socketId: data.users[0].socketId })
+>>>>>>> 837021a1cab8174d157c5f1cc8562b9740d7e661
         })
+        //this.props.socket.emit('')
 
-        this.socket.on('invitationReceived', data => {
+        this.props.socket.on('invitationReceived', data => {
             this.props.setOponentSocketId(data.socketId);
+<<<<<<< HEAD
             this.socket.emit('invitationAccepted', { socketId: data.socketId });
+=======
+            this.props.socket.emit('invitationAccepted', { socketId: data.socketId });
+>>>>>>> 837021a1cab8174d157c5f1cc8562b9740d7e661
             this.navigateMultiplayerScreen();
         });
 
-        this.socket.on('startGame', data => {
-            this.props.setOponentSocketId(data.socketId)
+        this.props.socket.on('startGame', data => {
+            this.setState({ loading: false });
+            this.props.setOponentSocketId(data.socketId);
             this.navigateMultiplayerScreen();
         })
     }
 
     onExitGameHandler = () => {
-        this.socket.disconnect();
+        this.props.socket.disconnect();
     }
 
     setSideDrawerStateHandler = state => this.setState({ sideState: state })
     closeSideDrawerHandler = () => {
-        this.setState({ sideState: false }, () => console.log(this.state.sideState))
+        this.setState({ sideState: false });
     }
 
     render() {
         return (
             <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
-                {this.state.showLogin && true && <LoginModal onLogin={token => this.createSocketConnection(token)} exitGame={() => this.setState({ showLogin: false })} />}
                 <View style={styles.searchGame}>
 
                     <View style={styles.inputForm}>
@@ -91,6 +137,11 @@ class SearchGameScreen extends Component {
                                 name={item.username || 'xulescu'}
                                 points={item.score || 123}
                             />}
+                            onEndReached={() => {
+                                this.from += 10;
+                                this.limit += 10;
+                                if (this.limit <= this.usersCount) this.getUsersHandler();
+                            }}
                         />
                     </View>
                     <View style={styles.playGameButton}>
@@ -106,6 +157,10 @@ class SearchGameScreen extends Component {
                         goToClasament={() => this.setState({ sideState: false, showRanking: true })}
                         goToHome={() => this.setState({ sideState: false }, this.navigateHomeScreen)}
                         goToProfile={() => this.setState({ sideState: false }, this.navigateProfileScreen)}
+                        onLogout={() => AsyncStorage.removeItem('token').then(() => {
+                            this.props.deleteToken();
+                            this.navigateHomeScreen();
+                        })}
                         isVisible={this.state.sideState}
                         onClose={this.closeSideDrawerHandler} />
                 </View>
@@ -113,6 +168,7 @@ class SearchGameScreen extends Component {
                     isVisible={this.state.showRanking}
                     users={this.state.users}
                     close={() => this.setState({ showRanking: false })} />
+                <LoadingModal isVisible={this.state.loading} />
             </ImageBackground>
 
         );
@@ -153,16 +209,16 @@ const styles = StyleSheet.create({
 
 
 const mapStateToProps = state => ({
-    socket: state.socket,
+    socket: state.socket.socket,
     token: state.user.token
 });
 
 const mapDispatchToProps = dispatch => ({
-    createSocketConnection: token => dispatch(SOCKET.createSocketConnection(token)),
-    setOponentSocketId: socketId => dispatch(SOCKET.setOponentSocketId(socketId))
+    setOponentSocketId: socketId => dispatch(SOCKET.setOponentSocketId(socketId)),
+    deleteToken: () => dispatch(USER.deleteToken())
 });
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(SearchGameScreen);
+)(withNavigation(SearchGameScreen));

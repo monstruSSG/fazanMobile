@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, ImageBackground, Text, Image } from 'react-native';
+import { BackHandler, View, StyleSheet, TouchableOpacity, ImageBackground, Image, Platform } from 'react-native';
+import { connect } from 'react-redux';
+import { withNavigation } from 'react-navigation';
 
 import ProfileGameHistory from '../../components/ProfileGameHistory/ProfileGameHistory';
+import { getMe } from '../../utils/requests';
 
 import HeaderBackground from '../../assets/Stuff/profileGameHeaderBg.png';
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
@@ -12,29 +15,53 @@ import PointsBackground from '../../assets/Modals/titleShadow.png';
 import ExitButton from '../../assets/Buttons/back.png';
 import CustomText from '../../components/UI/Text/Text';
 
-import { getMe } from '../../utils/requests';
-
 class ProfileScreen extends Component {
     static navigationOptions = {
         header: null,
     }
 
+    constructor(props) {
+        super(props);
+        if (Platform.OS === 'android') this.didFocus = props.navigation.addListener("didFocus", () =>
+            BackHandler.addEventListener("hardwareBackPress", this.onBack),
+        );
+    }
+
     navigateHomeScreen = () => this.props.navigation.navigate('Home');
 
     state = {
-        me: {}
+        me: {},
+        history: [],
+        logged: false
     }
 
     componentDidMount() {
-        getMe().then(me => this.setState({ me }, () => console.log(this.state.me.history[0])))
+        //For overriding default backButton behaviour
+        if (Platform.OS === 'android') this.willBlur = this.props.navigation.addListener("willBlur", () =>
+            BackHandler.removeEventListener("hardwareBackPress", this.onBack),
+        );
+        getMe(this.props.token)
+            .then(user => this.setState({ me: user.user, history: user.history }))
     }
 
+    componentWillUnmount() {
+        if (Platform.OS === 'android') {
+            this.didFocus.remove();
+            this.willBlur.remove();
+            BackHandler.removeEventListener("hardwareBackPress", this.onBack);
+        }
+    }
+
+    onBack = () => this.navigateHomeScreen();
+
     render() {
-        let { me } = this.state;
-        const losesProcent = ((this.state.me.wins / (this.state.me.loses + this.state.me.wins)) * 100).toFixed(0)
+        let { me, history } = this.state;
+
+        const losesProcent = ((me.wins / (me.loses + 1)) * 100).toFixed(0)
 
         return (
             <ImageBackground source={BackgroundImg} style={{ flex: 1 }}>
+
                 <View style={styles.content}>
                     <View style={[styles.centerContent, styles.topPanelContainer]}>
                         <ImageBackground source={HeaderBackground} resizeMode='stretch' style={[styles.maxWidthHeight]}>
@@ -46,7 +73,7 @@ class ProfileScreen extends Component {
                                 </View>
                                 <View style={[styles.centerContent, {}]}>
                                     <View style={[styles.usernameContainer]}>
-                                        <CustomText large>{this.state.me.username}</CustomText>
+                                        <CustomText large>{me.shortName}</CustomText>
                                     </View>
                                 </View>
                             </View>
@@ -278,4 +305,13 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ProfileScreen;
+const mapStateToProps = state => ({
+    token: state.user.token
+});
+
+const mapDispatchToProps = dispatch => ({});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withNavigation(ProfileScreen));

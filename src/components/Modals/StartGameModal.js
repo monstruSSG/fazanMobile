@@ -25,7 +25,7 @@ class StartGameModal extends Component {
                     count: prevState.count - 1
                 }), () => this.props.onTimeExpired(this.state.count)
             )
-        }, 1000);
+        }, 300);
     }
 
     componentWillUnmount() {
@@ -36,11 +36,11 @@ class StartGameModal extends Component {
     makeAnimation = () => {
         Animated.timing(this.animation, {
             toValue: SCALE_VALUE,
-            duration: 500,
+            duration: 150,
             useNativeDriver: true
         }).start(() => Animated.timing(this.animation, {
             toValue: 1,
-            duration: 500,
+            duration: 150,
             useNativeDriver: true
         }).start())
     }

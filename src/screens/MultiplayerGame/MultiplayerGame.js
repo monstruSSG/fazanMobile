@@ -21,47 +21,57 @@ class MultiplayerGameScreen extends Component {
     }
 
     state = {
-        animation: new Animated.Value(1),
-        animationOpWord: new Animated.Value(0),
-        animationYourWord: new Animated.Value(0),
-        fadeYou: new Animated.Value(1),
-        fadeOponent: new Animated.Value(1),
-        startGameAnimation: new Animated.Value(0),
-        usedWords: [],
-        words: [],
-        word: '',
-        lastWord: '',
-        opLastWord: '',
-        yourLastWord: '',
+        roundAnimation: new Animated.Value(1),
+        lastWordAnimation: new Animated.Value(1),
+        roundNumber: 0,
         gameFinished: false,
-        showTimer: true,
-        loseModal: false,
-        winModal: false,
-        selected: false,
-        letterIndex: 0,
-        turn: false
+        lastWord: '',
+        word: '',
+        usedWords: [],
+        showTimer: false,
+        showWinModal: false,
+        showLoseModal: false,
+        showAtentionModal: false,
+        showNotExistsModal: false,
+        showCountModal: true
     }
 
-    componentDidMount() {
-        this.props.socket.on('gotWord', data => this.onGotWordHandler(data.word));
+    //Animations
+    //Round increment animation
+    roundIncrementAnimation = () => Animated.timing(this.state.roundAnimation, {
+        toValue: 0.97,
+        useNativeDriver: true,
+        duration: 200
+    }).start(() => this.setState(prevState => ({
+        roundNumber: prevState.roundNumber + 1
+    }), () => Animated.timing(this.state.roundAnimation, {
+        toValue: 1,
+        easing: Easing.bounce,
+        useNativeDriver: true,
+        duration: 600
+    }).start()))
 
-        this.props.socket.on('wordNotExists', data => this.wordNotExistsHandler(data.exists))
-    }
+    newLatestWordAnimation = () => Animated.timing(this.state.lastWordAnimation, {
+        toValue: 0.97,
+        useNativeDriver: true,
+        duration: 200
+    }).start(() => Animated.timing(this.state.lastWordAnimation, {
+        toValue: 1,
+        easing: Easing.bounce,
+        useNativeDriver: true,
+        duration: 200
+    }).start())
 
-    onGotWordHandler = word => {
-        this.startCurrentWordAnimation(word);
-        this.setState({ turn: true, word: word.slice(-2), lastWord: word });
-        this.startOpWordAnimation(word);
-        this.fadeOponentOut();
-        this.fadeYouIn();
-        this.resetTimer();
-    }
-
+<<<<<<< HEAD
     wordNotExistsHandler = exists => {
         if (!exists) return alert('Here let the user know that the inserted word does not exist');
         this.resetTimer();
 
+=======
+    componentDidMount() {
+>>>>>>> 837021a1cab8174d157c5f1cc8562b9740d7e661
         this.props.socket.on('gotWord', data => {
+            console.log(data, 'CUVANT')
             //Vine verificat
             this.onGotWordHandler(data.word)
         });
@@ -74,20 +84,9 @@ class MultiplayerGameScreen extends Component {
             this.setState({ winModal: true })
         })
 
-        if (!this.state.selected) this.letterIncrementInterval = setInterval(() => {
-            this.setState(
-                prevState => ({
-                    letterIndex: (prevState.letterIndex + 1) % 26
-                }), () => {
-                    if (this.state.selected) {
-                        clearImmediate(this.letterIncrementInterval);
-                    }
-                })
-        }, 500);
-    }
+        this.props.socket.on('gotWord', data => this.onGotWordHandler(data.word));
 
-    onGotWordHandler = word => {
-        this.setState({ opLastWord: word, lastWord: word })
+        this.props.socket.on('wordNotExists', data => this.wordNotExistsHandler(data.exists))
     }
 
     navigateSearchGame = () => this.props.navigation.navigate('SearchGame');
@@ -99,6 +98,7 @@ class MultiplayerGameScreen extends Component {
         });
     }
 
+<<<<<<< HEAD
     insertWordHandler = () => {
         let { word, usedWords } = this.state;
 
@@ -109,72 +109,11 @@ class MultiplayerGameScreen extends Component {
         this.fadeOponentIn();
     }
 
+=======
+>>>>>>> 837021a1cab8174d157c5f1cc8562b9740d7e661
     onTimeExpiredHandler = () => {
         this.props.socket.emit('youLost', { socketId: this.props.oponentSocketId })
     }
-
-    onWordChangeHandler = word => this.setState({ word })
-
-    startCurrentWordAnimation = word => {
-        Animated.timing(this.state.animation, {
-            toValue: 0,
-            duration: 200
-        }).start(() =>
-            this.setState({ lastWord: word }, () => {
-                Animated.timing(this.state.animation, {
-                    toValue: 1,
-                    duration: 200
-                }).start()
-            }))
-    }
-
-    startOpWordAnimation = word => {
-        Animated.timing(this.state.animationOpWord, {
-            toValue: 1,
-            duration: 800
-        }).start(() => this.setState({
-            opLastWord: word.trim()
-        }, () => Animated.timing(this.state.animationOpWord, {
-            toValue: 0,
-            duration: 500
-        }).start()))
-    }
-
-    startYourWordAnimation = word => {
-        Animated.timing(this.state.animationYourWord, {
-            toValue: 1,
-            duration: 500
-        }).start(() => {
-            this.setState({
-                yourLastWord: word.trim()
-            }, () => {
-                Animated.timing(this.state.animationYourWord, {
-                    toValue: 0,
-                    duration: 300
-                }).start()
-            })
-        })
-    }
-
-    fadeYouOut = () => Animated.timing(this.state.fadeYou, {
-        toValue: 0.25,
-        duration: 500
-    }).start()
-
-    fadeYouIn = () => Animated.timing(this.state.fadeYou, {
-        toValue: 1,
-        duration: 300
-    }).start()
-
-    fadeOponentOut = () => Animated.timing(this.state.fadeOponent, {
-        toValue: 0.25,
-        duration: 500
-    }).start()
-
-    fadeOponentIn = () => Animated.timing(this.state.fadeOponent, {
-        toValue: 1,
-        duration: 300
-    }).start()
 
     resetTimer = () => this.setState({
         showTimer: false
@@ -183,269 +122,160 @@ class MultiplayerGameScreen extends Component {
     }))
 
     render() {
-        const fadeYou = {
-            opacity: this.state.fadeYou
-        }
-
-        const fadeOponent = {
-            opacity: this.state.fadeOponent
-        }
-
-        const animatedStyle = {
+        //Animations configuration
+        const roundIncrementScale = {
             transform: [
                 {
-                    scaleX: this.state.animation
+                    scale: this.state.roundAnimation
                 }
             ]
         };
 
-        const yourWordAnimationStyle = {
-            left: this.state.animationYourWord.interpolate({
-                inputRange: [0, 1],
-                outputRange: ['-20%', '-100%']
-            })
-        }
-
-        const opWordAnimationStyle = {
-            right: this.state.animationOpWord.interpolate({
-                inputRange: [0, 1],
-                outputRange: ['-20%', '-100%']
-            })
-        }
+        const lastWordScale = {
+            transform: [
+                {
+                    scale: this.state.lastWordAnimation
+                }
+            ]
+        };
 
         return (
-            <ImageBackground source={BackgroudImage} style={{ width: '100%', height: '100%' }}>
-                <View
-                    style={[styles.singlePlayerContainer]} >
-                    <View style={styles.header}>
-                        <Animated.View style={[styles.cell, fadeYou]}>
-                            <View style={styles.myContainer}>
-                                <Image source={Avatar} style={styles.myAvatar} />
-                                <Text style={styles.myName} color={CONSTANTS.buttonColor}>MSR</Text>
-                            </View>
-                        </Animated.View>
-                        <View style={styles.cell}>
-                            {!this.state.gameFinished && this.state.showTimer && <Timer
-                                count={300}
-                                onTimeExpired={this.onTimeExpiredHandler}
-                            />}
+            <ImageBackground source={Background} style={[styles.maxWidthHeight]}>
+                {this.state.showCountModal ?
+                    <Count count={3} onTimeExpired={this.onCountTimeExiredHandler} /> :
+                    <View style={[styles.maxWidthHeight, { alignItems: 'center' }]}>
+                        <View style={[{ width: '100%', height: '14%' }]}>
+                            <ImageBackground source={HeaderBg} style={styles.maxWidthHeight} resizeMode='stretch'>
+                                <View style={[styles.maxWidthHeight, { flexDirection: 'row' }]}>
+                                    <View style={[styles.centerContent, { flex: 1 }]}>
+                                        <TouchableOpacity style={[styles.centerContent, styles.exitButtonSize, styles.exitButtonPosition]}
+                                            onPress={() => this.setState({ showAtentionModal: true })}>
+                                            <Image source={ExitButton} style={[styles.maxWidthHeight]} resizeMode='stretch' />
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View style={[styles.centerContent, { flex: 1 }]}>
+                                        <CustomText large style={[styles.headerText]}>ROBOT</CustomText>
+                                    </View>
+                                    <View style={[styles.centerContent, { flex: 1 }]}>
+                                        <View style={[styles.centerContent, { flex: 1 }]}>
+                                            {this.state.showTimer ? <Timer style={styles.counter}
+                                                onTimeExpired={count => this.onTimeExpiredHandler(count)}
+                                                count={20} /> : null}
+                                        </View>
+                                    </View>
+                                </View>
+                            </ImageBackground>
                         </View>
-                        <Animated.View style={[styles.cell, fadeOponent]}>
-                            <View style={styles.computerContainer}>
-                                <Text style={styles.computerName} color={CONSTANTS.secondaryColor}>GB</Text>
-                                <Image source={Avatar} style={styles.computerAvatar} />
+                        <View style={[styles.centerContent, { width: '100%', height: '50%' }]}>
+                            <View style={[styles.centerContent, { width: '30%', flex: 1, position: 'relative', top: '10%' }]}>
+                                <ImageBackground source={BluePanel}
+                                    style={[styles.centerContent, styles.maxWidthHeight]}
+                                    resizeMode='stretch'>
+                                    <View style={[styles.centerContent, { flex: 1 }]}>
+                                        <View style={[{ flex: 1, justifyContent: 'flex-end' }]}>
+                                            <CustomText small style={styles.roundText}>RUNDA</CustomText>
+                                        </View>
+                                        <Animated.View style={[{ flex: 1 }, roundIncrementScale]}>
+                                            <CustomText large style={styles.roundNumber}>{this.state.roundNumber}</CustomText>
+                                        </Animated.View>
+                                    </View>
+                                </ImageBackground>
                             </View>
-                        </Animated.View>
-                    </View>
-                    <View style={styles.lastWords}>
-                        <Animated.View
-                            style={[styles.oponentInput, styles.currentWordContainer, animatedStyle]}>
-                            <Text color="azure" style={styles.currentWord}>{this.state.lastWord}</Text>
-                        </Animated.View>
-                        <Animated.View style={[styles.yourLastWordContainer, yourWordAnimationStyle]}>
-                            <Text color={CONSTANTS.buttonColor} style={[styles.center, styles.yourLastWord]}>{this.state.yourLastWord}</Text>
-                        </Animated.View>
-                        <Animated.View style={[styles.opLastWordContainer, opWordAnimationStyle]}>
-                            <Text color={CONSTANTS.secondaryColor} style={[styles.center, styles.opLastWord]}>{this.state.opLastWord}</Text>
-                        </Animated.View>
-                    </View>
-                    <View style={styles.myInput}>
-                        <View style={styles.submitForm}>
-                            <Input
-                                style={styles.inputText}
-                                value={this.state.word}
-                                onChangeText={word => this.onWordChangeHandler(word.trim())}
-                                placeholder='Introdu un cuvant...'
-                            />
+                            <View style={[{ width: '100%', flex: 3, alignItems: 'center' }]}>
+                                <View style={[styles.centerContent, { flex: 1 }]}>
+                                    <CustomText normal>ULTIMUL CUVANT</CustomText>
+                                </View>
+                                <View style={[{ height: '30%', width: '90%', position: 'relative', bottom: '25%' }, styles.centerContent]}>
+                                    <ImageBackground source={LastWordImage}
+                                        style={[styles.maxWidthHeight]}
+                                        resizeMode='stretch'>
+                                        <Animated.View style={[styles.centerContent, { width: '100%', height: '60%' }, lastWordScale]}>
+                                            <CustomText large style={styles.lastWord}>{this.state.lastWord}</CustomText>
+                                        </Animated.View>
+                                    </ImageBackground>
+                                </View>
+                            </View>
                         </View>
-                        <TouchableOpacity
-                            style={styles.submitButton}
-                            onPress={this.insertWordHandler}>
-                            <Text color="azure">TRIMITE</Text>
-                        </TouchableOpacity>
+                        <View style={[{ flex: 1 }, styles.centerContent]}>
+                            <View style={{ flex: 1, flexDirection: 'row' }}>
+                                <View style={{ flex: 2 }}>
+                                    <View style={{ width: '80%', height: '90%', borderWidth: 1, borderRadius: 10 }}>
+                                        <CustomText>{this.state.word}</CustomText>
+                                    </View>
+                                </View>
+                                <View style={{ flex: 1 }}>
+                                    <TouchableOpacity
+                                        style={styles.submitButton}
+                                        onPress={this.onInserWordHandler}>
+                                        <CustomText color="azure">TRIMITE</CustomText>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
+                            <View style={{ flex: 3 }}>
+                                <Keyboard
+                                    letterPressed={letter => this.letterPressedHandler(letter)}
+                                    deleteLastLetter={() => this.deleteLastLetterHandler()} />
+                            </View>
+                        </View>
+                        <WinModal isVisible={this.state.showWinModal}
+                            cu={this.state.lastWord}
+                            oponent='ROBOT'
+                            rounds={this.state.roundNumber}
+                            restart={this.restartGame}
+                            home={this.navigateHomeHandler}
+                            onClose={this.navigateHomeHandler} />
+                        <LoseModal isVisible={this.state.showLoseModal}
+                            cu={this.state.lastWord}
+                            oponent='ROBOT'
+                            rounds={this.state.roundNumber}
+                            restart={this.restartGame}
+                            home={this.navigateHomeHandler}
+                            onClose={this.navigateHomeHandler} />
+                        <AtentionModal isVisible={this.state.showAtentionModal}
+                            onContinue={() => this.setState({ showAtentionModal: false })}
+                            onClose={this.navigateHomeHandler}
+                        />
+                        <NotExistsModal isVisible={this.state.showNotExistsModal}
+                            word={this.state.word}
+                            onClose={() => this.setState({ showNotExistsModal: false })} />
+
                     </View>
-                    <LoseModal
-                        isVisible={this.state.loseModal}
-                        onClose={() => this.setState({ loseModal: false })}
-                        title={LoseTitle}
-                        playAgain={() => this.newGame()}
-                        exitGame={() => this.navigateHomeScreen()}
-                    />
-                    <WinModal
-                        isVisible={this.state.winModal}
-                        onClose={() => this.setState({ winModal: false })}
-                        title={WinTitle}
-                        playAgain={() => this.newGame()}
-                        exitGame={() => this.navigateHomeScreen()}
-                    />
-                </View>
+                }
             </ImageBackground>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    alphabet: {
-        width: '100%',
-        height: '100%',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    letter: {
-        fontSize: 80
-    },
-    singlePlayerContainer: {
-        flex: 1,
-        alignItems: "center",
-    },
-    logo: {
-        width: '100%',
-        height: '100%'
-    },
-    oponentInput: {
-        width: '80%',
-        alignItems: 'center',
-        fontSize: 20,
-        color: CONSTANTS.buttonColor
-    },
-    center: {
-        textAlign: 'left'
-    },
-    yourLastWordContainer: {
-        borderTopLeftRadius: 40,
-        borderBottomRightRadius: 40,
-        borderBottomLeftRadius: 40,
-        borderTopRightRadius: 40,
-        borderWidth: 2,
-        borderBottomWidth: 2,
-        borderTopWidth: 0,
-        marginTop: 12,
-        borderColor: CONSTANTS.buttonColor,
-        marginLeft: 12,
-        marginRight: 12,
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: "30%",
-        width: "100%"
-    },
-    opLastWordContainer: {
-        borderTopLeftRadius: 40,
-        borderBottomRightRadius: 40,
-        borderBottomLeftRadius: 40,
-        borderTopRightRadius: 40,
-        borderWidth: 2,
-        borderBottomWidth: 2,
-        borderTopWidth: 0,
-        borderColor: CONSTANTS.secondaryColor,
-        marginTop: 12,
-        marginLeft: 12,
-        marginRight: 12,
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: "30%",
-        width: "100%"
-    },
-    currentWordContainer: {
-        borderTopLeftRadius: 40,
-        borderBottomRightRadius: 40,
-        borderBottomLeftRadius: 40,
-        borderTopRightRadius: 40,
-        borderWidth: 2,
-        borderBottomWidth: 2,
-        borderColor: "black",
-        borderTopWidth: 0,
-        marginTop: 12,
-        marginLeft: 12,
-        marginRight: 12,
-        justifyContent: "center",
-        alignItems: "center",
-        height: '30%',
-        width: "100%"
-    },
-    yourLastWord: {
-        fontSize: 20,
-        letterSpacing: 6,
-        fontWeight: 'bold',
-        textTransform: 'uppercase'
-    },
-    opLastWord: {
-        fontSize: 20,
-        letterSpacing: 6,
-        fontWeight: 'bold',
-        textTransform: 'uppercase'
-    },
-    lastWords: {
-        flex: 1,
-        paddingTop: 58,
-        width: '80%',
-        alignItems: "center",
-        justifyContent: "flex-end"
-    },
-    currentWord: {
-        fontSize: 20,
-        letterSpacing: 6,
-        fontWeight: 'bold',
-        textTransform: 'uppercase'
-    },
-    header: {
-        height: '15%',
-        flexDirection: 'row',
-        justifyContent: "center",
-        alignItems: "center",
-    },
-    myContainer: {
-        borderTopLeftRadius: 40,
-        borderBottomLeftRadius: 50,
-        borderRightWidth: 0,
-        borderWidth: 2,
-        borderBottomWidth: 2,
-        borderTopWidth: 0,
-        borderColor: CONSTANTS.buttonColor,
-        width: 120,
-        height: 70
-    },
-    myAvatar: {
-        width: 65,
-        height: 65,
+    lastWord: {
         position: 'relative',
-        left: 4,
-        resizeMode: 'cover',
-        borderRadius: 35,
-        borderWidth: 1
+        top: '32%'
     },
-    myName: {
+    roundNumber: {
         position: 'relative',
-        bottom: 44,
-        left: 38,
-        fontSize: 22
+        bottom: '45%'
     },
-    computerContainer: {
-        borderTopRightRadius: 40,
-        borderBottomRightRadius: 50,
-        borderLeftWidth: 0,
-        borderWidth: 2,
-        borderBottomWidth: 2,
-        borderTopWidth: 0,
-        borderColor: CONSTANTS.secondaryColor,
-        width: 120,
-        height: 70
-    },
-    computerAvatar: {
-        width: 65,
-        height: 65,
+    roundText: {
         position: 'relative',
-        left: 49,
-        bottom: 29,
-        resizeMode: 'cover',
-        borderRadius: 35,
-        borderWidth: 1
+        bottom: '20%'
     },
-    computerName: {
+    counter: {
         position: 'relative',
-        right: 46,
-        top: 21,
-        color: CONSTANTS.secondaryColor,
-        fontSize: 22
+        bottom: '13%',
+        right: '13%'
+    },
+    headerText: {
+        position: 'relative',
+        bottom: '13%'
+    },
+    exitButtonSize: {
+        width: '40%',
+        height: '70%'
+    },
+    exitButtonPosition: {
+        position: 'relative',
+        right: '27%',
+        bottom: '3%'
     },
     cell: {
         flex: 1,
@@ -454,10 +284,8 @@ const styles = StyleSheet.create({
     },
     myInput: {
         flex: 1,
-        flexDirection: 'row',
-        width: "50%",
-        alignItems: "center",
-        justifyContent: "center"
+        flexDirection: 'column',
+        width: "100%",
     },
     inputText: {
         borderColor: CONSTANTS.textColor,
@@ -465,41 +293,16 @@ const styles = StyleSheet.create({
         padding: 0,
         marginTop: 0,
         marginBottom: 0,
+        right: '28%',
+        bottom: '5%'
     },
-    submitForm: {
-        flexDirection: 'row',
-        borderBottomWidth: 1
+    maxWidthHeight: {
+        width: '100%',
+        height: '100%'
     },
-    textInput: {
-        paddingRight: 6
-    },
-    submitButton: {
-        alignItems: 'center',
+    centerContent: {
         justifyContent: 'center',
-        width: 70,
-        height: 70,
-        borderRadius: 35,
-        borderWidth: 1,
-        backgroundColor: CONSTANTS.buttonColor
-    },
-    myInputTitle: {
-        flex: 1,
-        justifyContent: "flex-end"
-    },
-    modalViewContainer: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'rgba(0,0,0,0.5)',
-    },
-    modalDetails: {
-        height: "50%",
-        width: "75%",
-    },
-    loseModal: {
-        width: 50,
-        height: 50
+        alignItems: 'center'
     }
 });
 
