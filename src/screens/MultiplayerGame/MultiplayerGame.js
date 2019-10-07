@@ -62,7 +62,14 @@ class MultiplayerGameScreen extends Component {
         duration: 200
     }).start())
 
+<<<<<<< HEAD
+    wordNotExistsHandler = exists => {
+        if (!exists) return alert('Here let the user know that the inserted word does not exist');
+        this.resetTimer();
+
+=======
     componentDidMount() {
+>>>>>>> 837021a1cab8174d157c5f1cc8562b9740d7e661
         this.props.socket.on('gotWord', data => {
             console.log(data, 'CUVANT')
             //Vine verificat
@@ -91,6 +98,19 @@ class MultiplayerGameScreen extends Component {
         });
     }
 
+<<<<<<< HEAD
+    insertWordHandler = () => {
+        let { word, usedWords } = this.state;
+
+        this.props.socket.emit('sendWord', { word, socketId: this.props.oponentSocketId });
+
+        this.startYourWordAnimation(word);
+        this.fadeYouOut();
+        this.fadeOponentIn();
+    }
+
+=======
+>>>>>>> 837021a1cab8174d157c5f1cc8562b9740d7e661
     onTimeExpiredHandler = () => {
         this.props.socket.emit('youLost', { socketId: this.props.oponentSocketId })
     }
