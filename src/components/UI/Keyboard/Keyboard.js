@@ -64,7 +64,7 @@ const keyboard = props => {
                         thirdRow.map(letter => {
                             return letter === 'DEL' ?
                                 (
-                                    <ImageBackground source={LetterHolder} style={{ width: 50, height: 35 }}>
+                                    <ImageBackground source={LetterHolder} style={{ width: 50, height: 30 }}>
                                         <TouchableOpacity onPress={props.deleteLastLetter} style={{ width: '100%', height: '100%', flex: 1, marginLeft: 3 }}>
                                             <View>
                                                 <Text style={{ color: 'white', fontFamily: 'Troika', fontSize: 18, position: 'relative', left: '15%', top: '20%' }}>{letter}</Text>
