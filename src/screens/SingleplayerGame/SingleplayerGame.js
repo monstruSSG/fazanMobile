@@ -19,7 +19,7 @@ import HeaderBg from '../../assets/Stuff/singleplayerHeader.png';
 import ExitButton from '../../assets/Buttons/exitButton.png';
 import BluePanel from '../../assets/Stuff/bluePanel.png';
 import LastWordImage from '../../assets/Stuff/titleBox.png';
-import BrownLabel from '../../assets/Buttons/brownLabel.png';
+import SendWord from '../../assets/Buttons/sendWord.png';
 
 class SingleplayerGameScreen extends Component {
     static navigationOptions = {
@@ -228,16 +228,15 @@ class SingleplayerGameScreen extends Component {
                         </View>
                         <View style={[{ flex: 1 }, styles.centerContent]}>
                             <View style={{ flex: 1, flexDirection: 'row' }}>
-                                <ImageBackground resizeMode="stretch" source={BrownLabel} style={{ flex: 2, justifyContent: 'center', alignItems: 'center', marginLeft: '7%'}}>
-                                    <View style={{ width: '100%', height: '90%', justifyContent: 'center' }}>
-                                        <CustomText style={{textAlign: 'center', fontSize: 26}}>{this.state.word}</CustomText>
+                                <View style={{ width: '80%', flexDirection: 'row', justifyContent: 'center', borderBottomColor: '#FBFFB7', borderBottomWidth: 5 }}>
+                                    <View style={{ width: '60%', height: '90%', justifyContent: 'center' }}>
+                                        <CustomText style={{ fontSize: 26 }}>{this.state.word}</CustomText>
                                     </View>
-                                </ImageBackground>
-                                <View style={{ flex: 1 }}>
                                     <TouchableOpacity
                                         style={styles.submitButton}
-                                        onPress={this.onInserWordHandler}>
-                                        <CustomText color="azure" style={styles.submitButtonText}>TRIMITE</CustomText>
+                                        onPress={this.onInserWordHandler}
+                                        style={{width: '25%', height: '90%', justifyContent: 'center'}}>
+                                        <ImageBackground imageStyle={{height: 50, width: 50, position: 'relative', bottom: '8%'}} source={SendWord} resizeMode="center" style={styles.submitButtonText} />
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -342,8 +341,7 @@ const styles = StyleSheet.create({
     },
     submitButtonText: {
         fontFamily: 'Troika',
-        fontSize: 24,
-        paddingLeft: '10%'
+        alignItems: 'flex-end'
     }
 });
 
