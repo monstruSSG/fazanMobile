@@ -14,7 +14,7 @@ export default props => (
             <View style={styles.oponentImageWrapper}>
                 <Image
                     style={styles.image}
-                    source={Avatar} />
+                    source={props.picture ? { uri: props.picture } : Avatar} />
             </View>
             <View style={styles.oponentNameWrapper}>
                 <View>

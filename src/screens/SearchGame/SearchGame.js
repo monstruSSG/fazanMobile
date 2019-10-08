@@ -5,7 +5,7 @@ import { withNavigation } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import * as SOCKET from '../../store/actions/socket'
-import { getUsers } from '../../utils/requests';
+import { getUsers, getMe } from '../../utils/requests';
 import OponentDetails from '../../components/OponentDetails/OponentDetails';
 import Header from '../../components/Header/HeaderWithInput';
 import SideDrawer from '../../components/Modals/SideDrawer';
@@ -35,7 +35,8 @@ class SearchGameScreen extends Component {
         logged: false,
         showClasament: false,
         showRanking: false,
-        loading: false
+        loading: true,
+        user: null
     }
 
     from = 0;
@@ -50,6 +51,8 @@ class SearchGameScreen extends Component {
         );
 
         this.getUsersHandler();
+        getMe(this.props.token)
+            .then(user => this.setState({ user: user.user, loading: false }, () => console.log(this.state.user)));
     }
 
     componentWillUnmount() {
@@ -68,6 +71,7 @@ class SearchGameScreen extends Component {
                 result.map(user => ({
                     username: user.shortName,
                     score: user.score,
+                    picture: user.pictureUrl,
                     _id: user._id
                 })))
         })))
@@ -111,53 +115,61 @@ class SearchGameScreen extends Component {
     render() {
         return (
             <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
-                <View style={styles.searchGame}>
+                {!this.state.loading ?
+                    (
+                        <>
+                            <View style={styles.searchGame}>
 
-                    <View style={styles.inputForm}>
-                        <Header
-                            setSideDrawer={() => this.setSideDrawerStateHandler(true)}
-                        />
-                    </View>
-                    <View style={styles.oponentList}>
-                        <FlatList
-                            data={this.state.users.map(user => {
-                                return ({ ...user, key: user._id || 'asdasd' })
-                            })}
-                            renderItem={({ item }) => <OponentDetails
-                                name={item.username || 'xulescu'}
-                                points={item.score || 123}
-                            />}
-                            onEndReached={() => {
-                                this.from += 10;
-                                this.limit += 10;
-                                if (this.limit <= this.usersCount) this.getUsersHandler();
-                            }}
-                        />
-                    </View>
-                    <View style={styles.playGameButton}>
-                        <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', width: '80%' }} onPress={this.onPlayGameHandler}>
-                            <ImageBackground source={PlayButton} style={{ width: '100%', height: '90%', position: 'relative', top: '8%' }} resizeMode="stretch">
-                                <Text style={{ color: "white", fontFamily: 'Troika', fontSize: 22, textAlign: 'center', paddingTop: '2%' }}>
-                                    PLAY RANDOM
-                                </Text>
-                            </ImageBackground>
-                        </TouchableOpacity>
-                    </View>
-                    <SideDrawer
-                        goToClasament={() => this.setState({ sideState: false, showRanking: true })}
-                        goToHome={() => this.setState({ sideState: false }, this.navigateHomeScreen)}
-                        goToProfile={() => this.setState({ sideState: false }, this.navigateProfileScreen)}
-                        onLogout={() => AsyncStorage.removeItem('token').then(() => {
-                            this.props.deleteToken();
-                            this.navigateHomeScreen();
-                        })}
-                        isVisible={this.state.sideState}
-                        onClose={this.closeSideDrawerHandler} />
-                </View>
-                <RankingModal
-                    isVisible={this.state.showRanking}
-                    users={this.state.users}
-                    close={() => this.setState({ showRanking: false })} />
+                                <View style={styles.inputForm}>
+                                    <Header
+                                        setSideDrawer={() => this.setSideDrawerStateHandler(true)}
+                                    />
+                                </View>
+                                <View style={styles.oponentList}>
+                                    <FlatList
+                                        data={this.state.users.map(user => {
+                                            return ({ ...user, key: user._id || 'asdasd' })
+                                        })}
+                                        renderItem={({ item }) => <OponentDetails
+                                            name={item.username || 'xulescu'}
+                                            points={item.score || 123}
+                                            picture={item.picture || false}
+                                        />}
+                                        onEndReached={() => {
+                                            this.from += 10;
+                                            this.limit += 10;
+                                            if (this.limit <= this.usersCount) this.getUsersHandler();
+                                        }}
+                                    />
+                                </View>
+                                <View style={styles.playGameButton}>
+                                    <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', width: '80%' }} onPress={this.onPlayGameHandler}>
+                                        <ImageBackground source={PlayButton} style={{ width: '100%', height: '90%', position: 'relative', top: '8%' }} resizeMode="stretch">
+                                            <Text style={{ color: "white", fontFamily: 'Troika', fontSize: 22, textAlign: 'center', paddingTop: '2%' }}>
+                                                PLAY RANDOM
+                                            </Text>
+                                        </ImageBackground>
+                                    </TouchableOpacity>
+                                </View>
+                                <SideDrawer
+                                    pictureUrl={this.state.user.pictureUrl}
+                                    username={this.state.user.shortName}
+                                    goToClasament={() => this.setState({ sideState: false, showRanking: true })}
+                                    goToHome={() => this.setState({ sideState: false }, this.navigateHomeScreen)}
+                                    goToProfile={() => this.setState({ sideState: false }, this.navigateProfileScreen)}
+                                    onLogout={() => AsyncStorage.removeItem('token').then(() => {
+                                        this.props.deleteToken();
+                                        this.navigateHomeScreen();
+                                    })}
+                                    isVisible={this.state.sideState}
+                                    onClose={this.closeSideDrawerHandler} />
+                            </View>
+                            <RankingModal
+                                isVisible={this.state.showRanking}
+                                users={this.state.users}
+                                close={() => this.setState({ showRanking: false })} />
+                        </>
+                    ) : null}
                 <LoadingModal isVisible={this.state.loading} />
             </ImageBackground>
 
