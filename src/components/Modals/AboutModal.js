@@ -13,7 +13,7 @@ const about = props => (
                 <TouchableOpacity style={[styles.max]} onPress={props.onClose} />
             </View>
             <ScrollView style={[{ height: '10%', width: '100%' }]}>
-                <CustomText normal>
+                <CustomText normal style={{textAlign: 'center'}}>
                     Fazan este un joc de cuvinte de abilitate mintală pentru doi sau mai mulți jucători.{'\n'}
 
                     Scopul imediat al jocului este închiderea adversarilor. Căutarea unor cuvinte „închizătoare”,

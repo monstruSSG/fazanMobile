@@ -15,7 +15,7 @@ export default props => (
                     <Image source={Avatar} style={styles.avatarStyle} />
                 </View>
                 <View style={[styles.centerContent, styles.namePosition, { flex: 3, }]}>
-                    <CustomText normal>{props.name}</CustomText>
+                    <CustomText small>{props.name}</CustomText>
                 </View>
                 <View style={[styles.centerContent, styles.resultPosition, { flex: 1 }]}>
                     <CustomText large style={{ color: props.none ? 'white' : props.win ? 'green' : 'red' }}>{winLose(props)}</CustomText>
