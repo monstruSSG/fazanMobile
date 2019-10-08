@@ -81,24 +81,14 @@ class SearchGameScreen extends Component {
 
         this.props.socket.emit('reqConnectedUsers', {})
 
-<<<<<<< HEAD
-        this.socket.on('recConnectedUsers', data => {
-            if (data.users.length) this.socket.emit('invitationSent', { socketId: data.users[0].socketId })
-=======
         this.props.socket.on('recConnectedUsers', data => {
-            console.log(data.users, ' uSERS')
             if (data.users.length) this.props.socket.emit('invitationSent', { socketId: data.users[0].socketId })
->>>>>>> 837021a1cab8174d157c5f1cc8562b9740d7e661
         })
         //this.props.socket.emit('')
 
         this.props.socket.on('invitationReceived', data => {
             this.props.setOponentSocketId(data.socketId);
-<<<<<<< HEAD
-            this.socket.emit('invitationAccepted', { socketId: data.socketId });
-=======
             this.props.socket.emit('invitationAccepted', { socketId: data.socketId });
->>>>>>> 837021a1cab8174d157c5f1cc8562b9740d7e661
             this.navigateMultiplayerScreen();
         });
 

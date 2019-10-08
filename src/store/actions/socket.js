@@ -3,7 +3,6 @@ import { createConnection } from '../../utils/socketConnection'
 
 export const createSocketConnection = token => dispatch => {
     const socket = createConnection(token);
-
     dispatch({
         type: CREATE_CONNECTION,
         payload: socket
