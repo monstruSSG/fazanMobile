@@ -89,7 +89,7 @@ class MultiplayerGameScreen extends Component {
     }
 
     navigateSearchGame = () => this.props.navigation.navigate('SearchGame');
-    navigateHomeScreen = () => this.props.navigation.navigate('Home');
+    navigateHomeHandler = () => this.props.navigation.navigate('Home');
 
     exitGame = () => {
         this.props.closeSocketConnection().then(() => {
