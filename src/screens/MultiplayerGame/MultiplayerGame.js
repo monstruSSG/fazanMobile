@@ -2,18 +2,21 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Animated, ImageBackground, TouchableOpacity, Image } from 'react-native';
 import { connect } from 'react-redux';
 
+import Keyboard from '../../components/UI/Keyboard/Keyboard';
 import * as SOCKET from '../../store/actions/socket';
-import Input from '../../components/UI/DefaultInput/DefaultInput';
-import Text from '../../components/UI/Text/Text';
 import CONSTANTS from '../../utils/constants';
-import BackgroudImage from '../../assets/back.png';
-import Avatar from '../../assets/s.jpg';
-import LoseTitle from '../../assets/loseTitle3.png';
-import WinTitle from '../../assets/winmessage.png';
+import Timer from '../../components/Timer/Timer';
 import LoseModal from '../../components/Modals/LoseModal';
 import WinModal from '../../components/Modals/WinModal';
-import Timer from '../../components/Timer/Timer';
+import AtentionModal from '../../components/Modals/AtentionModal';
+import NotExistsModal from '../../components/Modals/NotExist';
+import Background from '../../assets/Stuff/bg.jpg';
+import CustomText from '../../components/UI/Text/Text';
 
+import HeaderBg from '../../assets/Stuff/singleplayerHeader.png';
+import ExitButton from '../../assets/Buttons/exitButton.png';
+import BluePanel from '../../assets/Stuff/bluePanel.png';
+import LastWordImage from '../../assets/Stuff/titleBox.png';
 
 class MultiplayerGameScreen extends Component {
     static navigationOptions = {
@@ -134,106 +137,103 @@ class MultiplayerGameScreen extends Component {
 
         return (
             <ImageBackground source={Background} style={[styles.maxWidthHeight]}>
-                {this.state.showCountModal ?
-                    <Count count={3} onTimeExpired={this.onCountTimeExiredHandler} /> :
-                    <View style={[styles.maxWidthHeight, { alignItems: 'center' }]}>
-                        <View style={[{ width: '100%', height: '14%' }]}>
-                            <ImageBackground source={HeaderBg} style={styles.maxWidthHeight} resizeMode='stretch'>
-                                <View style={[styles.maxWidthHeight, { flexDirection: 'row' }]}>
+                <View style={[styles.maxWidthHeight, { alignItems: 'center' }]}>
+                    <View style={[{ width: '100%', height: '14%' }]}>
+                        <ImageBackground source={HeaderBg} style={styles.maxWidthHeight} resizeMode='stretch'>
+                            <View style={[styles.maxWidthHeight, { flexDirection: 'row' }]}>
+                                <View style={[styles.centerContent, { flex: 1 }]}>
+                                    <TouchableOpacity style={[styles.centerContent, styles.exitButtonSize, styles.exitButtonPosition]}
+                                        onPress={() => this.setState({ showAtentionModal: true })}>
+                                        <Image source={ExitButton} style={[styles.maxWidthHeight]} resizeMode='stretch' />
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={[styles.centerContent, { flex: 1 }]}>
+                                    <CustomText large style={[styles.headerText]}>ROBOT</CustomText>
+                                </View>
+                                <View style={[styles.centerContent, { flex: 1 }]}>
                                     <View style={[styles.centerContent, { flex: 1 }]}>
-                                        <TouchableOpacity style={[styles.centerContent, styles.exitButtonSize, styles.exitButtonPosition]}
-                                            onPress={() => this.setState({ showAtentionModal: true })}>
-                                            <Image source={ExitButton} style={[styles.maxWidthHeight]} resizeMode='stretch' />
-                                        </TouchableOpacity>
+                                        {this.state.showTimer ? <Timer style={styles.counter}
+                                            onTimeExpired={count => this.onTimeExpiredHandler(count)}
+                                            count={20} /> : null}
                                     </View>
-                                    <View style={[styles.centerContent, { flex: 1 }]}>
-                                        <CustomText large style={[styles.headerText]}>ROBOT</CustomText>
+                                </View>
+                            </View>
+                        </ImageBackground>
+                    </View>
+                    <View style={[styles.centerContent, { width: '100%', height: '50%' }]}>
+                        <View style={[styles.centerContent, { width: '30%', flex: 1, position: 'relative', top: '10%' }]}>
+                            <ImageBackground source={BluePanel}
+                                style={[styles.centerContent, styles.maxWidthHeight]}
+                                resizeMode='stretch'>
+                                <View style={[styles.centerContent, { flex: 1 }]}>
+                                    <View style={[{ flex: 1, justifyContent: 'flex-end' }]}>
+                                        <CustomText small style={styles.roundText}>RUNDA</CustomText>
                                     </View>
-                                    <View style={[styles.centerContent, { flex: 1 }]}>
-                                        <View style={[styles.centerContent, { flex: 1 }]}>
-                                            {this.state.showTimer ? <Timer style={styles.counter}
-                                                onTimeExpired={count => this.onTimeExpiredHandler(count)}
-                                                count={20} /> : null}
-                                        </View>
-                                    </View>
+                                    <Animated.View style={[{ flex: 1 }, roundIncrementScale]}>
+                                        <CustomText large style={styles.roundNumber}>{this.state.roundNumber}</CustomText>
+                                    </Animated.View>
                                 </View>
                             </ImageBackground>
                         </View>
-                        <View style={[styles.centerContent, { width: '100%', height: '50%' }]}>
-                            <View style={[styles.centerContent, { width: '30%', flex: 1, position: 'relative', top: '10%' }]}>
-                                <ImageBackground source={BluePanel}
-                                    style={[styles.centerContent, styles.maxWidthHeight]}
+                        <View style={[{ width: '100%', flex: 3, alignItems: 'center' }]}>
+                            <View style={[styles.centerContent, { flex: 1 }]}>
+                                <CustomText normal>ULTIMUL CUVANT</CustomText>
+                            </View>
+                            <View style={[{ height: '30%', width: '90%', position: 'relative', bottom: '25%' }, styles.centerContent]}>
+                                <ImageBackground source={LastWordImage}
+                                    style={[styles.maxWidthHeight]}
                                     resizeMode='stretch'>
-                                    <View style={[styles.centerContent, { flex: 1 }]}>
-                                        <View style={[{ flex: 1, justifyContent: 'flex-end' }]}>
-                                            <CustomText small style={styles.roundText}>RUNDA</CustomText>
-                                        </View>
-                                        <Animated.View style={[{ flex: 1 }, roundIncrementScale]}>
-                                            <CustomText large style={styles.roundNumber}>{this.state.roundNumber}</CustomText>
-                                        </Animated.View>
-                                    </View>
+                                    <Animated.View style={[styles.centerContent, { width: '100%', height: '60%' }, lastWordScale]}>
+                                        <CustomText large style={styles.lastWord}>{this.state.lastWord}</CustomText>
+                                    </Animated.View>
                                 </ImageBackground>
                             </View>
-                            <View style={[{ width: '100%', flex: 3, alignItems: 'center' }]}>
-                                <View style={[styles.centerContent, { flex: 1 }]}>
-                                    <CustomText normal>ULTIMUL CUVANT</CustomText>
-                                </View>
-                                <View style={[{ height: '30%', width: '90%', position: 'relative', bottom: '25%' }, styles.centerContent]}>
-                                    <ImageBackground source={LastWordImage}
-                                        style={[styles.maxWidthHeight]}
-                                        resizeMode='stretch'>
-                                        <Animated.View style={[styles.centerContent, { width: '100%', height: '60%' }, lastWordScale]}>
-                                            <CustomText large style={styles.lastWord}>{this.state.lastWord}</CustomText>
-                                        </Animated.View>
-                                    </ImageBackground>
-                                </View>
-                            </View>
                         </View>
-                        <View style={[{ flex: 1 }, styles.centerContent]}>
-                            <View style={{ flex: 1, flexDirection: 'row' }}>
-                                <View style={{ flex: 2 }}>
-                                    <View style={{ width: '80%', height: '90%', borderWidth: 1, borderRadius: 10 }}>
-                                        <CustomText>{this.state.word}</CustomText>
-                                    </View>
-                                </View>
-                                <View style={{ flex: 1 }}>
-                                    <TouchableOpacity
-                                        style={styles.submitButton}
-                                        onPress={this.onInserWordHandler}>
-                                        <CustomText color="azure">TRIMITE</CustomText>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                            <View style={{ flex: 3 }}>
-                                <Keyboard
-                                    letterPressed={letter => this.letterPressedHandler(letter)}
-                                    deleteLastLetter={() => this.deleteLastLetterHandler()} />
-                            </View>
-                        </View>
-                        <WinModal isVisible={this.state.showWinModal}
-                            cu={this.state.lastWord}
-                            oponent='ROBOT'
-                            rounds={this.state.roundNumber}
-                            restart={this.restartGame}
-                            home={this.navigateHomeHandler}
-                            onClose={this.navigateHomeHandler} />
-                        <LoseModal isVisible={this.state.showLoseModal}
-                            cu={this.state.lastWord}
-                            oponent='ROBOT'
-                            rounds={this.state.roundNumber}
-                            restart={this.restartGame}
-                            home={this.navigateHomeHandler}
-                            onClose={this.navigateHomeHandler} />
-                        <AtentionModal isVisible={this.state.showAtentionModal}
-                            onContinue={() => this.setState({ showAtentionModal: false })}
-                            onClose={this.navigateHomeHandler}
-                        />
-                        <NotExistsModal isVisible={this.state.showNotExistsModal}
-                            word={this.state.word}
-                            onClose={() => this.setState({ showNotExistsModal: false })} />
-
                     </View>
-                }
+                    <View style={[{ flex: 1 }, styles.centerContent]}>
+                        <View style={{ flex: 1, flexDirection: 'row' }}>
+                            <View style={{ flex: 2 }}>
+                                <View style={{ width: '80%', height: '90%', borderWidth: 1, borderRadius: 10 }}>
+                                    <CustomText>{this.state.word}</CustomText>
+                                </View>
+                            </View>
+                            <View style={{ flex: 1 }}>
+                                <TouchableOpacity
+                                    style={styles.submitButton}
+                                    onPress={this.onInserWordHandler}>
+                                    <CustomText color="azure">TRIMITE</CustomText>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        <View style={{ flex: 3 }}>
+                            <Keyboard
+                                letterPressed={letter => this.letterPressedHandler(letter)}
+                                deleteLastLetter={() => this.deleteLastLetterHandler()} />
+                        </View>
+                    </View>
+                    <WinModal isVisible={this.state.showWinModal}
+                        cu={this.state.lastWord}
+                        oponent='ROBOT'
+                        rounds={this.state.roundNumber}
+                        restart={this.restartGame}
+                        home={this.navigateHomeHandler}
+                        onClose={this.navigateHomeHandler} />
+                    <LoseModal isVisible={this.state.showLoseModal}
+                        cu={this.state.lastWord}
+                        oponent='ROBOT'
+                        rounds={this.state.roundNumber}
+                        restart={this.restartGame}
+                        home={this.navigateHomeHandler}
+                        onClose={this.navigateHomeHandler} />
+                    <AtentionModal isVisible={this.state.showAtentionModal}
+                        onContinue={() => this.setState({ showAtentionModal: false })}
+                        onClose={this.navigateHomeHandler}
+                    />
+                    <NotExistsModal isVisible={this.state.showNotExistsModal}
+                        word={this.state.word}
+                        onClose={() => this.setState({ showNotExistsModal: false })} />
+
+                </View>
             </ImageBackground>
         );
     }
