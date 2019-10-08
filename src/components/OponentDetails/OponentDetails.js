@@ -14,7 +14,7 @@ export default props => (
             <View style={styles.oponentImageWrapper}>
                 <Image
                     style={styles.image}
-                    source={Avatar} />
+                    source={props.picture ? { uri: props.picture } : Avatar} />
             </View>
             <View style={styles.oponentNameWrapper}>
                 <View>
@@ -94,8 +94,9 @@ const styles = StyleSheet.create({
         position: 'relative',
         left: '35%',
         bottom: '2%',
-        height: 55,
-        width: 85,
+        height: 60,
+        width: 60,
+        borderRadius: 30,
         resizeMode: 'stretch',
     }
 });

@@ -5,7 +5,7 @@ import CustomText from '../../components/UI/Text/Text';
 import NameHolder from '../../assets/Stuff/titleBox.png';
 import Avatar from '../../assets/av.png';
 
-const winLose = props => props.win ? 'W' : 'L';
+const winLose = props => props.none ? 'N' : props.win ? 'W' : 'L';
 
 export default props => (
     <View style={[styles.centerContent]}>
@@ -18,7 +18,7 @@ export default props => (
                     <CustomText normal>{props.name}</CustomText>
                 </View>
                 <View style={[styles.centerContent, styles.resultPosition, { flex: 1 }]}>
-                    <CustomText large style={{ color: props.win ? 'green' : 'red' }}>{winLose(props)}</CustomText>
+                    <CustomText large style={{ color: props.none ? 'white' : props.win ? 'green' : 'red' }}>{winLose(props)}</CustomText>
                 </View>
             </View>
         </ImageBackground>

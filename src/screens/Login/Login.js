@@ -12,23 +12,34 @@ import * as SOCKET from '../../store/actions/socket';
 import { saveToken } from '../../store/actions/user';
 import { login } from '../../utils/requests';
 import CustomText from '../../components/UI/Text/Text';
+import LoadingModal from '../../components/Modals/LoadingModal';
 
 class Login extends Component {
     static navigationOptions = {
         header: null
     }
 
+    state = {
+        loading: false
+    }
+
     navigateHomeHandler = () => this.props.navigation.navigate('Home');
 
     loginHandler = () => LoginManager.logInWithPermissions(['public_profile'])
-        .then(() => AccessToken.getCurrentAccessToken())
+        .then(() => {
+            this.setState({ loading: true });
+            return AccessToken.getCurrentAccessToken();
+        })
         .then(res => login({ fbToken: res.accessToken }))
         .then(data => Promise.all([
             this.props.saveToken(data.token),
             AsyncStorage.setItem('token', data.token),
             this.createSocketConnection(data.token)
         ]))
-        .then(() => this.props.navigation.navigate('SearchGame'))
+        .then(() => {
+            this.props.navigation.navigate('SearchGame')
+            this.setState({ loading: false });
+        })
 
     createSocketConnection = token => this.props.createSocketConnection(token);
 
@@ -66,6 +77,7 @@ class Login extends Component {
                         </View>
                     </ImageBackground>
                 </View>
+                {this.state.loading ? <LoadingModal /> : null}
             </ImageBackground>
         );
     }

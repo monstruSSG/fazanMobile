@@ -21,7 +21,6 @@ import BluePanel from '../../assets/Stuff/bluePanel.png';
 import LastWordImage from '../../assets/Stuff/titleBox.png';
 import BrownLabel from '../../assets/Buttons/brownLabel.png';
 
-
 class SingleplayerGameScreen extends Component {
     static navigationOptions = {
         header: null

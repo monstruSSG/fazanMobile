@@ -14,6 +14,7 @@ import BluePanel from '../../assets/Stuff/bluePanel.png';
 import PointsBackground from '../../assets/Modals/titleShadow.png';
 import ExitButton from '../../assets/Buttons/back.png';
 import CustomText from '../../components/UI/Text/Text';
+import LoadingModal from '../../components/Modals/LoadingModal';
 
 class ProfileScreen extends Component {
     static navigationOptions = {
@@ -32,7 +33,8 @@ class ProfileScreen extends Component {
     state = {
         me: {},
         history: [],
-        logged: false
+        logged: false,
+        render: false
     }
 
     componentDidMount() {
@@ -41,7 +43,7 @@ class ProfileScreen extends Component {
             BackHandler.removeEventListener("hardwareBackPress", this.onBack),
         );
         getMe(this.props.token)
-            .then(user => this.setState({ me: user.user, history: user.history }))
+            .then(user => this.setState({ me: user.user, history: user.history, render: true }));
     }
 
     componentWillUnmount() {
@@ -56,108 +58,119 @@ class ProfileScreen extends Component {
 
     render() {
         let { me, history } = this.state;
-
+        let firstGame = history[0];
+        let secoundGame = history[1];
+        let thirdGame = history[2];
+        console.log(history, 'IStoric')
         const losesProcent = ((me.wins / (me.loses + 1)) * 100).toFixed(0)
 
         return (
             <ImageBackground source={BackgroundImg} style={{ flex: 1 }}>
-
-                <View style={styles.content}>
-                    <View style={[styles.centerContent, styles.topPanelContainer]}>
-                        <ImageBackground source={HeaderBackground} resizeMode='stretch' style={[styles.maxWidthHeight]}>
-                            <View style={[styles.centerContent, { flexDirection: 'row' }]}>
-                                <View style={[styles.exitButtonContainer]}>
-                                    <TouchableOpacity style={[styles.centerContent, styles.maxWidthHeight]} onPress={this.navigateHomeScreen}>
-                                        <Image source={ExitButton} resizeMode='contain' style={[styles.exitButton]} />
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={[styles.centerContent, {}]}>
-                                    <View style={[styles.usernameContainer]}>
-                                        <CustomText large>{me.shortName}</CustomText>
+                {!this.state.render ? <LoadingModal /> :
+                    <View style={styles.content}>
+                        <View style={[styles.centerContent, styles.topPanelContainer]}>
+                            <ImageBackground source={HeaderBackground} resizeMode='stretch' style={[styles.maxWidthHeight]}>
+                                <View style={[styles.centerContent, { flexDirection: 'row' }]}>
+                                    <View style={[styles.exitButtonContainer]}>
+                                        <TouchableOpacity style={[styles.centerContent, styles.maxWidthHeight]} onPress={this.navigateHomeScreen}>
+                                            <Image source={ExitButton} resizeMode='contain' style={[styles.exitButton]} />
+                                        </TouchableOpacity>
+                                    </View>
+                                    <View style={[styles.centerContent]}>
+                                        <View style={[styles.usernameContainer]}>
+                                            <CustomText large>{me.shortName}</CustomText>
+                                        </View>
                                     </View>
                                 </View>
-                            </View>
 
-                        </ImageBackground>
-                    </View>
-                    <View style={styles.gamesDataWrapper}>
-                        <View style={styles.gamesDataStatusWrapper}>
-                            <View style={[styles.centerContent, { flexDirection: 'row' }]}>
-                                <View style={[{ flex: 1 }]}>
-                                    <View style={[styles.centerContent, styles.max]}>
-                                        <ImageBackground source={BluePanel} style={[styles.bluePanel]} resizeMode='stretch'>
-                                            <View style={[styles.centerContent]}>
-                                                <View style={[styles.centerContent, styles.winLosePosition, { top: '10%', bottom: undefined }]}>
-                                                    <CustomText extra>W/L</CustomText>
-                                                </View>
-                                                <View style={[styles.centerContent, styles.winLosePosition, { flexDirection: 'row' }]}>
-                                                    <CustomText extra>{losesProcent}</CustomText>
-                                                    <CustomText normal>%</CustomText>
-                                                </View>
-                                            </View>
-                                        </ImageBackground>
-                                    </View>
-                                </View>
-                                <View style={[styles.centerContent, { flex: 2 }]}>
-                                    <View style={[styles.centerContent, { flex: 1, width: '100%' }]}>
-                                        <View style={[styles.centerContent, styles.maxWidthHeight]}>
-                                            <ImageBackground style={[styles.maxWidthHeight, styles.pointsBackgroundPosition]} source={PointsBackground} resizeMode='stretch'>
+                            </ImageBackground>
+                        </View>
+                        <View style={styles.gamesDataWrapper}>
+                            <View style={styles.gamesDataStatusWrapper}>
+                                <View style={[styles.centerContent, { flexDirection: 'row' }]}>
+                                    <View style={[{ flex: 1 }]}>
+                                        <View style={[styles.centerContent, styles.max]}>
+                                            <ImageBackground source={BluePanel} style={[styles.bluePanel]} resizeMode='stretch'>
                                                 <View style={[styles.centerContent]}>
-                                                    <CustomText large style={styles.pointsPosition}>{this.state.me.score} P</CustomText>
+                                                    <View style={[styles.centerContent, styles.winLosePosition, { top: '10%', bottom: undefined }]}>
+                                                        <CustomText extra>W/L</CustomText>
+                                                    </View>
+                                                    <View style={[styles.centerContent, styles.winLosePosition, { flexDirection: 'row' }]}>
+                                                        <CustomText extra>{losesProcent}</CustomText>
+                                                        <CustomText normal>%</CustomText>
+                                                    </View>
                                                 </View>
                                             </ImageBackground>
                                         </View>
                                     </View>
-                                    <View style={[styles.centerContent, { flex: 1 }]}>
-                                        <CustomText normal>Nivel:
+                                    <View style={[styles.centerContent, { flex: 2 }]}>
+                                        <View style={[styles.centerContent, { flex: 1, width: '100%' }]}>
+                                            <View style={[styles.centerContent, styles.maxWidthHeight]}>
+                                                <ImageBackground style={[styles.maxWidthHeight, styles.pointsBackgroundPosition]} source={PointsBackground} resizeMode='stretch'>
+                                                    <View style={[styles.centerContent]}>
+                                                        <CustomText large style={styles.pointsPosition}>{this.state.me.score} P</CustomText>
+                                                    </View>
+                                                </ImageBackground>
+                                            </View>
+                                        </View>
+                                        <View style={[styles.centerContent, { flex: 1 }]}>
+                                            <CustomText normal>Nivel:
                                             <CustomText extra> {Math.floor(this.state.me.score / 10)}</CustomText>
-                                        </CustomText>
-                                    </View>
-                                    <View style={[styles.centerContent, { flexDirection: 'row' }, { flex: 1 }]}>
-                                        <View style={[styles.centerContent, { flex: 1 }]}>
-                                            <View style={[styles.centerContent, styles.maxWidthHeight]}>
-                                                <ImageBackground style={[styles.littleStarsWidthHeight, { position: 'relative', left: '15%' }]} source={EmptyStar} resizeMode='contain'>
-                                                    <View style={styles.centerContent}>
-                                                        <CustomText large style={{ color: 'red' }}>L</CustomText>
-                                                    </View>
-                                                </ImageBackground>
-                                            </View>
+                                            </CustomText>
                                         </View>
-                                        <View style={[styles.centerContent, { flex: 1 }]}>
-                                            <View style={[styles.centerContent, styles.maxWidthHeight]}>
-                                                <ImageBackground style={[styles.maxWidthHeight, { position: 'relative', bottom: '20%' }]} source={FullStar} resizeMode='contain'>
-                                                    <View style={[styles.centerContent]}>
-                                                        <CustomText large style={{ color: 'green' }}>W</CustomText>
-                                                    </View>
-                                                </ImageBackground>
+                                        <View style={[styles.centerContent, { flexDirection: 'row' }, { flex: 1 }]}>
+                                            <View style={[styles.centerContent, { flex: 1 }]}>
+                                                <View style={[styles.centerContent, styles.maxWidthHeight]}>
+                                                    <ImageBackground style={[styles.littleStarsWidthHeight, { position: 'relative', left: '15%' }]}  source={!firstGame ? EmptyStar : firstGame.outcome == 'win' ? FullStar : EmptyStar} resizeMode='contain'>
+                                                        <View style={styles.centerContent}>
+                                                            <CustomText large style={{ color: !firstGame ? 'white' : firstGame.outcome == 'win' ? 'green' : 'red' }}>
+                                                                {!firstGame ? 'N' : firstGame.outcome == 'win' ? 'W' : 'L'}
+                                                            </CustomText>
+                                                        </View>
+                                                    </ImageBackground>
+                                                </View>
                                             </View>
-                                        </View>
-                                        <View style={[styles.centerContent, { flex: 1 }]}>
-                                            <View style={[styles.centerContent, styles.maxWidthHeight]}>
-                                                <ImageBackground style={[styles.littleStarsWidthHeight, { position: 'relative', right: '15%' }]} source={EmptyStar} resizeMode='contain'>
-                                                    <View style={[styles.centerContent]}>
-                                                        <CustomText large style={{ color: 'red' }}>L</CustomText>
-                                                    </View>
-                                                </ImageBackground>
+                                            <View style={[styles.centerContent, { flex: 1 }]}>
+                                                <View style={[styles.centerContent, styles.maxWidthHeight]}>
+                                                    <ImageBackground style={[styles.maxWidthHeight, { position: 'relative', bottom: '20%' }]}  source={!secoundGame ? EmptyStar : secoundGame.outcome == 'win' ? FullStar : EmptyStar} resizeMode='contain'>
+                                                        <View style={styles.centerContent}>
+                                                            <CustomText large style={{ color: !secoundGame ? 'white' : secoundGame.outcome == 'win' ? 'green' : 'red' }}>
+                                                                {!secoundGame ? 'N' : secoundGame.outcome == 'win' ? 'W' : 'L'}
+                                                            </CustomText>
+                                                        </View>
+                                                    </ImageBackground>
+                                                </View>
+                                            </View>
+                                            <View style={[styles.centerContent, { flex: 1 }]}>
+                                                <View style={[styles.centerContent, styles.maxWidthHeight]}>
+                                                    <ImageBackground style={[styles.littleStarsWidthHeight, { position: 'relative', right: '15%' }]} source={!thirdGame ? EmptyStar : thirdGame.outcome == 'win' ? FullStar : EmptyStar} resizeMode='contain'>
+                                                        <View style={[styles.centerContent]}>
+                                                            <CustomText large style={{ color: !thirdGame ? 'white' : thirdGame.outcome == 'win' ? 'green' : 'red' }}>
+                                                                {!thirdGame ? 'N' : thirdGame.outcome == 'win' ? 'W' : 'L'}
+                                                            </CustomText>
+                                                        </View>
+                                                    </ImageBackground>
+                                                </View>
                                             </View>
                                         </View>
                                     </View>
                                 </View>
                             </View>
-                        </View>
-                        <View style={styles.lastGames}>
-                            <View style={[styles.centerContent]}>
-                                <ProfileGameHistory name='Cozloschi Raul' win />
-                            </View>
-                            <View style={[styles.centerContent]}>
-                                <ProfileGameHistory name='Giurgi Smecheru' />
-                            </View>
-                            <View style={[styles.centerContent]}>
-                                <ProfileGameHistory name='Raul Aka BUBU' win />
+                            <View style={styles.lastGames}>
+                                <View style={[styles.centerContent]}>
+                                    <ProfileGameHistory name={firstGame ? firstGame.user.shortName : 'NO HISTORY'} win={firstGame ? firstGame.outcome === 'win' : false} none={firstGame ? false : true} />
+                                </View>
+                                <View style={[styles.centerContent]}>
+                                    <ProfileGameHistory name={secoundGame ? secoundGame.user.shortName : 'NO HISTORY'} win={secoundGame ? secoundGame.outcome === 'win' : false} none={secoundGame ? false : true} />
+                                </View>
+                                <View style={[styles.centerContent]}>
+                                    <ProfileGameHistory name={thirdGame ? thirdGame.user.shortName : 'NO HISTORY'} win={thirdGame ? thirdGame.outcome === 'win' : false} none={thirdGame ? false : true} />
+                                </View>
                             </View>
                         </View>
                     </View>
-                </View>
+                }
+
             </ImageBackground>
         );
     }

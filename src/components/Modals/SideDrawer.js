@@ -3,7 +3,6 @@ import { View, Modal, StyleSheet, ImageBackground, Image, TouchableOpacity } fro
 
 import CustomText from '../UI/Text/Text';
 
-import Avatar from '../../assets/av.png';
 import Background from '../../assets/Modals/warningBack.png';
 import YellowButton from '../../assets/Buttons/yellowHolder.png';
 import GreenButton from '../../assets/Buttons/greenLabel.png';
@@ -16,10 +15,10 @@ const sideDrawer = props => (
                 <View style={[styles.max]}>
                     <View style={[styles.head, styles.center]}>
                         <View style={[styles.centerAndEnd, styles.half, styles.avatarPosition]}>
-                            <Image source={Avatar} style={{ width: 60, height: 60, borderRadius: 30 }} />
+                            <Image source={{ uri: props.pictureUrl }} style={{ width: 60, height: 60, borderRadius: 30 }} />
                         </View>
                         <View style={[styles.centerAndEnd, styles.half]}>
-                            <CustomText normal>XULUESCU</CustomText>
+                            <CustomText normal>{props.username}</CustomText>
                         </View>
                     </View>
                     <View style={[styles.middle, styles.center]}>
