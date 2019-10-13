@@ -7,12 +7,17 @@ import CustomText from '../UI/Text/Text';
 import NoLeafBackground from '../../assets/Modals/noLeaf.png';
 
 const notExists = props => (
-    <ModalTemplate isVisible={props.isVisible} 
-        onRequestClose={props.onClise} 
-        background={NoLeafBackground} 
-        size={{width: '80%', height: '40%'}}>
+    <ModalTemplate isVisible={props.isVisible}
+        onRequestClose={props.onClise}
+        background={NoLeafBackground}
+        size={{ width: '80%', height: '40%' }}>
+        <View style={{alignItems: 'center', position: 'relative', top: '20%'}}>
+        <CustomText normal>Cuvant inexistent!</CustomText>
+        </View>
         <View style={[styles.max, styles.center]}>
-            <CustomText small>NU EXISTA:<CustomText large>{props.word}</CustomText></CustomText>
+            <CustomText normal>Cuvantul</CustomText>
+            <CustomText large>{props.word}</CustomText>
+            <CustomText normal>nu exista!</CustomText>
         </View>
     </ModalTemplate>
 );

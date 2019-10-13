@@ -10,8 +10,8 @@ import OponentDetails from '../../components/OponentDetails/OponentDetails';
 import Header from '../../components/Header/HeaderWithInput';
 import SideDrawer from '../../components/Modals/SideDrawer';
 import RankingModal from '../../components/Modals/RankingModal';
-import * as USER from '../../store/actions/user';
 import LoadingModal from '../../components/Modals/LoadingModal';
+import WaitingModal from '../../components/Modals/WaitingModal';
 
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
 import PlayButton from '../../assets/Buttons/greenLabel.png';
