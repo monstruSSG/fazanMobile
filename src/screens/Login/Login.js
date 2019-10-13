@@ -23,6 +23,7 @@ class Login extends Component {
         loading: false
     }
 
+
     navigateHomeHandler = () => this.props.navigation.navigate('Home');
 
     loginHandler = () => LoginManager.logInWithPermissions(['public_profile'])
