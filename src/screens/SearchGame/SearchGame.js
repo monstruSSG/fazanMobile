@@ -43,6 +43,7 @@ class SearchGameScreen extends Component {
     limit = 10;
     usersCount = 40;
     socket = null;
+    search = ''
 
     componentDidMount() {
         //For overriding default backButton behaviour
@@ -65,16 +66,15 @@ class SearchGameScreen extends Component {
 
     onBack = () => this.navigateHomeScreen();
 
-    getUsersHandler = () => getUsers(this.props.token, this.from, this.limit)
-        .then(result => this.setState(prevState => ({
-            users: prevState.users.concat(
-                result.map(user => ({
+    getUsersHandler = () => getUsers(this.props.token, this.from, this.limit, this.search)
+        .then(result => this.setState({
+            users: result.map(user => ({
                     username: user.shortName,
                     score: user.score,
                     picture: user.pictureUrl,
                     _id: user._id
-                })))
-        })))
+                }))
+        }))
 
     navigateMultiplayerScreen = () => this.props.navigation.navigate('Multiplayer');
     navigateHomeScreen = () => this.props.navigation.navigate('Home');
@@ -88,7 +88,6 @@ class SearchGameScreen extends Component {
         this.props.socket.on('recConnectedUsers', data => {
             if (data.users.length) this.props.socket.emit('invitationSent', { socketId: data.users[0].socketId })
         })
-        //this.props.socket.emit('')
 
         this.props.socket.on('invitationReceived', data => {
             this.props.setOponentSocketId(data.socketId);
@@ -112,6 +111,11 @@ class SearchGameScreen extends Component {
         this.setState({ sideState: false });
     }
 
+    onChangeText = text => {
+        this.search = text;
+        this.getUsersHandler();
+    }
+
     render() {
         return (
             <ImageBackground source={BackgroundImg} style={{ width: '100%', height: '100%' }}>
@@ -123,6 +127,7 @@ class SearchGameScreen extends Component {
                                 <View style={styles.inputForm}>
                                     <Header
                                         setSideDrawer={() => this.setSideDrawerStateHandler(true)}
+                                        onChangeText={this.onChangeText}
                                     />
                                 </View>
                                 <View style={styles.oponentList}>
@@ -135,11 +140,11 @@ class SearchGameScreen extends Component {
                                             points={item.score || 123}
                                             picture={item.picture || false}
                                         />}
-                                        onEndReached={() => {
-                                            this.from += 10;
-                                            this.limit += 10;
-                                            if (this.limit <= this.usersCount) this.getUsersHandler();
-                                        }}
+                                        // onEndReached={() => {
+                                        //     this.from += 10;
+                                        //     this.limit += 10;
+                                        //     if (this.limit <= this.usersCount) this.getUsersHandler();
+                                        // }}
                                     />
                                 </View>
                                 <View style={styles.playGameButton}>

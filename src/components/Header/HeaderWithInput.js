@@ -18,7 +18,7 @@ export default props => {
                 </TouchableOpacity>
             </View>
             <View style={styles.searchTitle}>
-                <CustomInput placeholder='Exemplu: George Popescu' />
+                <CustomInput onChangeText={props.onChangeText} placeholder='Exemplu: George Popescu' />
             </View>
             <View style={styles.searchIcon}>
                 <Icon name='search' size={25} color={CONSTANTS.textColor} />

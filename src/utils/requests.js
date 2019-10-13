@@ -7,11 +7,11 @@ import CONSTANTS from './constants';
 export const login = data => axios.post(`${CONSTANTS.backendUrl}/auth/login`, data)
     .then(res => Promise.resolve({ ...res.data.user }))
 
-export const getUsers = (token, from, limit) => axios.get(`${CONSTANTS.backendUrl}/user?from=${from}&limit=${limit}`, {
+export const getUsers = (token, from, limit, search) => axios.get(`${CONSTANTS.backendUrl}/user?from=${from}&limit=${limit}&search=${search}`, {
     headers: {
         Authorisation: `Bearer ${token}`
     }
-}).then(result => Promise.resolve(result.data))
+}).then(result => Promise.resolve(result.data.users))
 
 export const isLogged = token => axios.get(`${CONSTANTS.backendUrl}/isLogged`, {
     headers: {
