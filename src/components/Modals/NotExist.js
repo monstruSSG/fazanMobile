@@ -6,7 +6,7 @@ import CustomText from '../UI/Text/Text';
 
 import NotExistsBackground from '../../assets/Modals/notExists.png';
 
-const notExists = props => (
+export default props => (
     <ModalTemplate isVisible={props.isVisible}
         onRequestClose={props.onClise}
         background={NotExistsBackground}
@@ -16,7 +16,7 @@ const notExists = props => (
                 <CustomText color='white' small>NU EXISTA</CustomText>
             </View>
             <View style={[styles.word]}>
-                <CustomText color='white' large>castana</CustomText>
+                <CustomText color='white' large>{props.word}</CustomText>
             </View>
         </View>
     </ModalTemplate>
@@ -49,5 +49,3 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     }
 });
-
-export default notExists;
