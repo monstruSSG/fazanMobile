@@ -4,114 +4,68 @@ import { View, Modal, StyleSheet, Image, TouchableOpacity, FlatList, ImageBackgr
 import ClasamentUserDetails from '../ClasamentUserDetails/ClasamentUserDetails';
 
 import RankingModal from '../../assets/Modals/clasamentModal.png';
-import Title from '../../assets/Modals/titleShadow.png';
-import ExitButton from '../../assets/Buttons/exitButton.png';
 
-const renderUserList = props => {
+const renderUserList = props => <FlatList
+    data={props.users.map((user, index) => ({ ...user, key: user._id, index: index + 1 }))}
+    renderItem={({ item }) => <ClasamentUserDetails
+        name={item.username}
+        points={item.score || 123}
+        position={item.index}
+    />}
+/>
 
-    return <FlatList
-        data={props.users.map((user, index) => ({ ...user, key: user._id, index: index + 1 }))}
-        renderItem={({ item }) => <ClasamentUserDetails
-            name={item.username}
-            points={item.score || 123}
-            position={item.index}
-        />}
-    />
-}
-
-const rankingModal = props => (
+export default props => (
 
     <Modal visible={props.isVisible} onRequestClose={props.onClose} animationType="slide" transparent={true}>
-        <View style={styles.contentWrapper}>
-            <View style={styles.max}>
-                <View style={[styles.max, styles.container]}>
-                    <ImageBackground source={RankingModal} resizeMode="stretch" style={styles.backgroundImageContainer}>
-                        <View style={styles.titleContainer}>
-                            <TouchableOpacity onPress={props.close}>
-                                <ImageBackground style={styles.buttonImage} resizeMode="cover" source={ExitButton}>
-                                </ImageBackground>
-                            </TouchableOpacity>
-                            <ImageBackground resizeMode="stretch" style={styles.titleImage} source={Title}>
-                                <View style={[styles.centerItems, styles.max, styles.titleTextContainer]}>
-                                    <Text style={styles.titleText}>CLASAMENT</Text>
-                                </View>
-                            </ImageBackground>
+        <View style={[styles.contentWrapper, styles.max, styles.center]}>
+            <ImageBackground style={[styles.max, styles.center]} source={RankingModal} resizeMode='contain'>
+                <View style={[styles.contentSize, styles.centerItems]}>
+                    <View style={[styles.header]}>
+                        <View style={[styles.exitButton]}>
+                            <TouchableOpacity style={[styles.max]} onPress={props.close} />
                         </View>
-                        <View style={styles.usersContainerWrapper}>
-                            <View style={styles.userWrapper}>
-                                {renderUserList(props)}
-                            </View>
-                        </View>
-                    </ImageBackground>
+                    </View>
+                    <View style={[styles.users, styles.centerItems]}>
+                        {renderUserList(props)}
+                    </View>
                 </View>
-            </View>
+            </ImageBackground>
         </View>
     </Modal>
 );
 
 const styles = StyleSheet.create({
-    contentWrapper: {
-        flex: 1,
-        flexDirection: 'column',
-        backgroundColor: 'rgba(0,0,0,0.5)'
+    users: {
+        width: '70%',
+        height: '73%',  
+        position: 'relative',
+        left: '2%'
     },
-    centerItems: {
+    center: {
         justifyContent: 'center',
         alignItems: 'center'
     },
+    header: {
+        height: '20%',
+        width: '100%',
+        alignItems: 'flex-end'
+    },
+    exitButton: {
+        width: '20%',
+        height: '100%'
+    },
     max: {
-        flex: 1
+        width: '100%',
+        height: '100%'
     },
-    container: {
-        justifyContent: "flex-end",
-        position: 'relative',
-        right: '3%'
+    contentSize: {
+        width: '90%',
+        height: '65%'
     },
-    backgroundImageContainer: {
-        height: "90%",
-        width: "100%",
-        justifyContent: 'flex-start',
+    contentWrapper: {
+        backgroundColor: 'rgba(0,0,0,0.5)'
+    },
+    centerItems: {
         alignItems: 'center'
-    },
-    titleContainer: {
-        width: "100%",
-        height: "15%",
-    },
-    titleImage: {
-        height: "100%",
-        width: "95%",
-        position: 'relative',
-        bottom: "150%",
-        left: '5%'
-    },
-    buttonImage: {
-        width: "40%",
-        height: "90%",
-        left: '88%',
-        bottom: "8%"
-    },
-    usersContainerWrapper: {
-        height: "75%",
-        width: "80%",
-        position: 'absolute',
-        left: "15%",
-        top: "8%",
-        alignItems: 'center',
-    },
-    userWrapper: {
-        width: "100%"
-    },
-    titleTextContainer: {
-        display: 'flex'
-    },
-    titleText: {
-        position: 'relative',
-        marginTop: '5%',
-        fontFamily: 'Troika',
-        color: 'white',
-        fontSize: 26,
-        letterSpacing: 2,
     }
-})
-
-export default rankingModal; 
+});

@@ -13,8 +13,14 @@ const about = props => (
                 <TouchableOpacity style={[styles.max]} onPress={props.onClose} />
             </View>
             <ScrollView style={[{ height: '10%', width: '100%' }]}>
-                <CustomText normal style={{textAlign: 'center'}}>
-                    HERE WILL BE SUDOKU DESCRIPTION
+                <CustomText normal style={{ textAlign: 'center' }}>
+                    Fazan este un joc de cuvinte de abilitate mintală pentru doi sau mai mulți jucători.{'\n'}
+
+                    Scopul imediat al jocului este închiderea adversarilor. Căutarea unor cuvinte „închizătoare”,
+                    deci cu ale căror ultime două litere nu începe niciun cuvânt permis,
+                    este deci o mare parte a strategiei de joc.
+                    Ele pot fi folosite direct pentru a îl încuia pe jucătorul care urmează sau poate fi ales un
+                    cuvânt care permite jucătorului care urmează să folosească la rândul lui un cuvânt închizător.
                 </CustomText>
             </ScrollView>
         </View>

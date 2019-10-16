@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
         height: '100%'
     },
     background: {
-        width: '40%',
+        width: '60%',
         height: '100%'
     },
     container: {

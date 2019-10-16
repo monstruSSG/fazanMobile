@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image } from 'react-native';
 
 import * as CONSTANTS from '../../utils/constants';
+import CustomText from '../../components/UI/Text/Text';
 
 import NameHolder from '../../assets/Stuff/nameHolder.png';
 import First from '../../assets/Stuff/1st.png';
@@ -20,29 +21,17 @@ const renderPodium = props => {
 export default props => {
 
     return (
-        <View style={[styles.centerContent, { flex: 1, marginRight: '3%', margintop: '15%', marginBottom: '15%'}]}>
+        <View style={[styles.centerContent, styles.maxHeightWidht]}>
             <ImageBackground imageStyle={{ borderRadius: 10 }} style={[styles.maxHeightWidht, styles.centerContent, styles.modalImage,props.style]} source={NameHolder}>
-                <View style={[styles.content, styles.centerContent]}>
-                    <View style={styles.userDetailsContainer}>
-                        <View style={[styles.positionContainer, styles.centerContent]}>
-                            <View style={[{ display: 'flex', flex: 1 }, styles.centerContent ]}>
-                                <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 20 }}>{props.position}.</Text>
-                            </View>
-                            <View style={[{ display: 'flex', flex: 1 }, styles.centerContent]}>
-                                {renderPodium(props)}
-                            </View>
-                        </View>
-                        <View style={styles.nameContainer}>
-                            <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 20 }}>{props.name}</Text>
-                        </View>
-                        <View style={styles.pointsContainer}>
-                            <View style={[{ display: 'flex', flex: 1 }, styles.centerContent]}>
-                                <Text style={{ fontFamily: 'Troika', color: 'white', fontSize: 18 }}>{props.points}</Text>
-                            </View>
-                            <View style={[styles.centerContent, { display: 'flex', flex: 1, paddingRight: '3%'}]}>
-                                <Image source={GoldStar} resizeMode="contain" style={styles.goldStar} />
-                            </View>
-                        </View>
+                <View style={[styles.maxHeightWidht]}>
+                    <View style={[{width: '20%', height: '100%', backgroundColor: 'red'}]}>
+                        <CustomText>{props.position}</CustomText>
+                    </View>
+                    <View style={[{width: '60%', height: '100%', backgroundColor: 'red'}]}>
+                        <CustomText>{props.username}</CustomText>
+                    </View>
+                    <View style={[{width: '20%', height: '100%', backgroundColor: 'red'}]}>
+                        <CustomText>{props.score}</CustomText>
                     </View>
                 </View>
             </ImageBackground>
@@ -54,8 +43,6 @@ const styles = StyleSheet.create({
     goldStar: {
         height: '95%',
         width: '95%'
-    },
-    modalImage: {
     },
     maxHeightWidht: {
         height: '100%',
