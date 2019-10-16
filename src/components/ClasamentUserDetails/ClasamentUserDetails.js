@@ -15,31 +15,31 @@ const size = CONSTANTS.screenWidth * 0.6;
 const renderWithTrophy = props => (
     <View style={[styles.trophy]}>
         <View style={[styles.center, styles.trophyImage]}>
-            <Image source={props.position == 1 ? First : props.position == 2 ? Second : Third} resizeMode='contain' style={styles.max} />
+            <Image source={props.position == 1 ? First : props.position == 2 ? Second : Third} resizeMode='stretch' style={styles.max} />
         </View>
         <View style={[styles.center, styles.trophyName]}>
-            <CustomText>{props.name}</CustomText>
+            <CustomText color='white'>{props.name}</CustomText>
         </View>
     </View>
 )
 
-const renderName = props => props.position > 3 ? <CustomText>{props.name}</CustomText> : renderWithTrophy(props);
+const renderName = props => props.position > 3 ? <CustomText color='white'>{props.name}</CustomText> : renderWithTrophy(props);
 
 export default props => {
 
     return (
         <ImageBackground imageStyle={{ borderRadius: 15 }} style={[{ width: size }, styles.image, styles.center, props.style]} source={NameHolder}>
             <View style={[styles.position]}>
-                <CustomText normal>{props.position}</CustomText>
+                <CustomText color='white' normal>{props.position}</CustomText>
             </View>
             <View style={[styles.name]}>
                 {renderName(props)}
             </View>
             <View style={[styles.points]}>
-                <View style={[styles.center, styles.half, { alignItems: 'flex-end' }]}>
-                    <CustomText>{props.points}</CustomText>
+                <View style={[styles.center, styles.half]}>
+                    <CustomText color='white'>{props.points}</CustomText>
                 </View>
-                <View style={[styles.half]}>
+                <View style={[styles.half, { alignItems: 'flex-end' }]}>
                     <Image style={styles.max} source={GoldStar} resizeMode='center' />
                 </View>
             </View>
