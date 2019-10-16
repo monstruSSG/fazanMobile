@@ -15,7 +15,7 @@ class LoadingModal extends Component {
                 duration: 1500,
                 useNativeDriver: true
             })
-        ).start();
+        ).start(() => console.log('JERERE'));
     }
 
     render() {
