@@ -1,27 +1,29 @@
 import React from 'react';
-import { View, StyleSheet, TouchableNativeFeedback, TouchableOpacity, Text, ImageBackground } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, ImageBackground } from 'react-native';
 
 import CONSTANTS from '../../../utils/constants';
+import CustomText from '../../../components/UI/Text/Text';
+
 import LetterHolder from '../../../assets/Stuff/letterHolder.png';
+import DeleteButton from '../../../assets/Buttons/yellowHolder.png';
 
-const renderLetters = () => {
-    CONSTANTS.firstRow.map(letter => (
-        <View style={{ height: 5, width: 5, backgroundColor: 'red' }}>
+const elementSize = Math.floor(CONSTANTS.screenWidth / 10) - 2
+const textSize = Math.floor(elementSize * 2 / 3)
 
-        </View>
-    ))
-}
+const element = (props, letter, isDelete) => (
+    <View style={{ width: elementSize, height: elementSize }}>
+        <TouchableOpacity onPress={isDelete ? props.deleteLastLetter : () => props.letterPressed(letter.trim().toLowerCase())}
+            style={[styles.max, styles.center]}>
+            <ImageBackground source={isDelete ? null : LetterHolder} style={[styles.max, styles.center]}>
+                <View style={[styles.max, styles.center]}>
+                    {isDelete ? <CustomText style={[{ fontSize: textSize }, styles.buttonTextPosition]}>DEL</CustomText> : <CustomText style={[{ fontSize: textSize }, styles.buttonTextPosition]}>{letter}</CustomText>}
+                </View>
+            </ImageBackground>
+        </TouchableOpacity>
+    </View>
+)
 
 const keyboard = props => {
-
-    // CONSTANTS.secondRow.map(letter => (
-    //     <Text style={{ color: 'white', fontSize: 22 }}>{letter}</Text>
-    // ))
-
-    // CONSTANTS.thirdRow.map(letter => (
-    //     <Text style={{ color: 'white', fontSize: 22 }}>{letter}</Text>
-    // ))
-
     let firstRow = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P']
     let secondRow = ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L']
     let thirdRow = ['Z', 'X', 'C', 'V', 'B', 'N', 'M', 'DEL']
@@ -29,71 +31,56 @@ const keyboard = props => {
 
     return (
         <View style={styles.keyboardContainer}>
-            <View style={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                {/* {renderLetters()} */}
-                <View style={{ flex: 1, flexDirection: 'row', alignItems: 'flex-end', paddingBottom: 8 }}>
-                    {
-                        firstRow.map(letter => (
-                            <ImageBackground source={LetterHolder} style={{ width: 35, height: 35 }}>
-                                <TouchableOpacity onPress={() => props.letterPressed(letter.trim().toLowerCase())} style={{ width: '100%', height: '100%', flex: 1, marginLeft: 3 }}>
-                                    <View>
-                                        <Text style={{ color: 'white', fontFamily: 'Troika', fontSize: 24, position: 'relative', left: '20%' }}>{letter}</Text>
-                                    </View>
-                                </TouchableOpacity>
-                            </ImageBackground>
-                        ))
-                    }
-                </View>
-                <View style={{ paddingBottom: 8, flexDirection: 'row', width: '90%', justifyContent: 'center', }}>
-                    {
-
-                        secondRow.map(letter => (
-                            <ImageBackground source={LetterHolder} style={{ width: 35, height: 35 }}>
-                                <TouchableOpacity onPress={() => props.letterPressed(letter.trim().toLowerCase())} style={{ width: '100%', height: '100%', flex: 1, marginLeft: 3 }}>
-                                    <View>
-                                        <Text style={{ color: 'white', fontFamily: 'Troika', fontSize: 24, position: 'relative', left: '20%' }}>{letter}</Text>
-                                    </View>
-                                </TouchableOpacity>
-                            </ImageBackground>
-                        ))
-                    }
-                </View>
-                <View style={{ flex: 1, flexDirection: 'row', width: '90%', justifyContent: 'center' }}>
-                    {
-
-                        thirdRow.map(letter => {
-                            return letter === 'DEL' ?
-                                (
-                                    <ImageBackground source={LetterHolder} style={{ width: 50, height: 30 }}>
-                                        <TouchableOpacity onPress={props.deleteLastLetter} style={{ width: '100%', height: '100%', flex: 1, marginLeft: 3 }}>
-                                            <View>
-                                                <Text style={{ color: 'white', fontFamily: 'Troika', fontSize: 18, position: 'relative', left: '15%', top: '20%' }}>{letter}</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                    </ImageBackground>
-                                )
-                                :
-                                (
-                                    <ImageBackground source={LetterHolder} style={{ width: 35, height: 35 }}>
-                                        <TouchableOpacity onPress={() => props.letterPressed(letter.trim().toLowerCase())} style={{ width: '100%', height: '100%', flex: 1, marginLeft: 3 }}>
-                                            <View>
-                                                <Text style={{ color: 'white', fontFamily: 'Troika', fontSize: 24, position: 'relative', left: '20%' }}>{letter}</Text>
-                                            </View>
-                                        </TouchableOpacity>
-                                    </ImageBackground>
-                                )
-                        })
-                    }
-                </View>
+            <View style={[styles.rowsContent]}>
+                <View style={styles.firstRow}>{firstRow.map(letter => element(props, letter))}</View>
+                <View style={styles.secondRow}>{secondRow.map(letter => element(props, letter))}</View>
+                <View style={styles.thirdRow}>{thirdRow.map(letter => letter === 'DEL' ? element(props, letter, true) : element(props, letter))}</View>
             </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
+    buttonTextPosition: {
+        position: 'relative',
+        bottom: '5%'
+    },
+    max: {
+        width: '100%',
+        height: '100%'
+    },
+    center: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     keyboardContainer: {
         width: "100%",
         height: "100%",
+    },
+    rowsContent: {
+        width: '100%',
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+    },
+    firstRow: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+        paddingBottom: 8
+    },
+    secondRow: {
+        paddingBottom: 8,
+        flexDirection: 'row',
+        width: '90%',
+        justifyContent: 'center'
+    },
+    thirdRow: {
+        flex: 1,
+        flexDirection: 'row',
+        width: '90%',
+        justifyContent: 'center'
     }
 })
 
