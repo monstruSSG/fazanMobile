@@ -14,9 +14,9 @@ const element = (props, letter, isDelete) => (
     <View style={{ width: elementSize, height: elementSize }}>
         <TouchableOpacity onPress={isDelete ? props.deleteLastLetter : () => props.letterPressed(letter.trim().toLowerCase())}
             style={[styles.max, styles.center]}>
-            <ImageBackground source={isDelete ? null : LetterHolder} style={[styles.max, styles.center]}>
+            <ImageBackground source={LetterHolder} style={[styles.max, styles.center]}>
                 <View style={[styles.max, styles.center]}>
-                    {isDelete ? <CustomText style={[{ fontSize: textSize }, styles.buttonTextPosition]}>DEL</CustomText> : <CustomText style={[{ fontSize: textSize }, styles.buttonTextPosition]}>{letter}</CustomText>}
+                    {isDelete ? <CustomText color='black' style={[{ fontSize: textSize }, styles.buttonTextPosition]}>{'-'}</CustomText> : <CustomText style={[{ fontSize: textSize }, styles.buttonTextPosition]}>{letter}</CustomText>}
                 </View>
             </ImageBackground>
         </TouchableOpacity>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image } from 'react-native';
 
-import * as CONSTANTS from '../../utils/constants';
+import CONSTANTS from '../../utils/constants';
 import CustomText from '../../components/UI/Text/Text';
 
 import NameHolder from '../../assets/Stuff/nameHolder.png';
@@ -10,69 +10,100 @@ import Second from '../../assets/Stuff/2nd.png';
 import Third from '../../assets/Stuff/3rd.png';
 import GoldStar from '../../assets/Stuff/goldStar.png';
 
-const renderPodium = props => {
-    if (props.position == 1) return <Image resizeMode="contain" style={styles.maxHeightWidht} source={First} />
-    if (props.position == 2) return <Image resizeMode="contain" style={styles.maxHeightWidht} source={Second} />
-    if (props.position == 3) return <Image resizeMode="contain" style={styles.maxHeightWidht} source={Third} />
+const size = CONSTANTS.screenWidth * 0.6;
 
-    return <View style={styles.maxHeightWidht}></View>
-}
+const renderWithTrophy = props => (
+    <View style={[styles.trophy]}>
+        <View style={[styles.center, styles.trophyImage]}>
+            <Image source={props.position == 1 ? First : props.position == 2 ? Second : Third} resizeMode='contain' style={styles.max} />
+        </View>
+        <View style={[styles.center, styles.trophyName]}>
+            <CustomText>{props.name}</CustomText>
+        </View>
+    </View>
+)
+
+const renderName = props => props.position > 3 ? <CustomText>{props.name}</CustomText> : renderWithTrophy(props);
 
 export default props => {
 
     return (
-        <View style={[styles.centerContent, styles.maxHeightWidht]}>
-            <ImageBackground imageStyle={{ borderRadius: 10 }} style={[styles.maxHeightWidht, styles.centerContent, styles.modalImage,props.style]} source={NameHolder}>
-                <View style={[styles.maxHeightWidht]}>
-                    <View style={[{width: '20%', height: '100%', backgroundColor: 'red'}]}>
-                        <CustomText>{props.position}</CustomText>
-                    </View>
-                    <View style={[{width: '60%', height: '100%', backgroundColor: 'red'}]}>
-                        <CustomText>{props.username}</CustomText>
-                    </View>
-                    <View style={[{width: '20%', height: '100%', backgroundColor: 'red'}]}>
-                        <CustomText>{props.score}</CustomText>
-                    </View>
+        <ImageBackground imageStyle={{ borderRadius: 15 }} style={[{ width: size }, styles.image, styles.center, props.style]} source={NameHolder}>
+            <View style={[styles.position]}>
+                <CustomText normal>{props.position}</CustomText>
+            </View>
+            <View style={[styles.name]}>
+                {renderName(props)}
+            </View>
+            <View style={[styles.points]}>
+                <View style={[styles.center, styles.half, { alignItems: 'flex-end' }]}>
+                    <CustomText>{props.points}</CustomText>
                 </View>
-            </ImageBackground>
-        </View>
+                <View style={[styles.half]}>
+                    <Image style={styles.max} source={GoldStar} resizeMode='center' />
+                </View>
+            </View>
+        </ImageBackground>
     )
 };
 
 const styles = StyleSheet.create({
-    goldStar: {
-        height: '95%',
-        width: '95%'
-    },
-    maxHeightWidht: {
+    trophyName: {
+        width: '80%',
         height: '100%',
-        width: '100%'
+        alignItems: 'center',
+        justifyContent: 'center'
     },
-    centerContent: {
+    trophyImage: {
+        width: '20%',
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'flex-end'
+    },
+    trophy: {
+        width: '100%',
+        height: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    max: {
+        width: '100%',
+        height: '100%'
+    },
+    half: {
+        width: '50%',
+        height: '100%'
+    },
+    image: {
+        height: 60,
+        flexDirection: 'row',
+        paddingBottom: 8,
+        paddingTop: 8
+    },
+    center: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    position: {
+        width: '15%',
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    name: {
+        width: '55%',
+        height: '100%',
         justifyContent: 'center',
         alignItems: 'center'
     },
     content: {
-        flexDirection: 'row',
-        flex: 1
+        width: '100%',
+        height: '100%',
     },
-    userDetailsContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    positionContainer: {
-        flex: 1,
-        flexDirection: 'row'
-    },
-    nameContainer: {
-        display: 'flex',
-        flex: 2,
-        justifyContent: 'center'
-    },
-    pointsContainer: {
-        flex: 1,
+    points: {
+        width: '30%',
+        height: '100%',
         flexDirection: 'row'
     }
 });
