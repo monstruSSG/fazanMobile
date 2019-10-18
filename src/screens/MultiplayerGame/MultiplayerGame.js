@@ -40,27 +40,37 @@ class MultiplayerGameScreen extends Component {
         showCountModal: true
     }
 
+    waitingForOponent = word => {
+
+    }
+
     componentDidMount() {
         this.resetTimer();
 
         this.props.socket.on('gotWord', data => {
-            console.log(data, 'WORRDDDD')
             this.resetTimer()
             this.onGotWordHandler(data.word)
         });
 
         this.props.socket.on('gameOver', data => {
+            console.log(data)
             this.setState({ loseModal: true })
         })
+
+        this.props.socket.on('oponentIsThinking', data => this.watingForOponent(data.word))
 
         this.props.socket.on('youWon', data => {
             this.setState({ winModal: true })
         })
 
-        this.props.socket.on('gotWord', data => this.onGotWordHandler(data.word));
-
         this.props.socket.on('wordNotExists', data => this.wordNotExistsHandler(data.exists))
     }
+
+    componentWillUnmount() {
+        this.props.emit('exitGame', { socketId: this.props.oponentSocketId });
+    }
+
+    onGotWordHandler = word => this.setState({ lastWord: word, word: word.slice(-2) })
 
     //Animations
     //Round increment animation
