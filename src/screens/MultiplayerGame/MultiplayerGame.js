@@ -17,6 +17,7 @@ import HeaderBg from '../../assets/Stuff/singleplayerHeader.png';
 import ExitButton from '../../assets/Buttons/exitButton.png';
 import BluePanel from '../../assets/Stuff/bluePanel.png';
 import LastWordImage from '../../assets/Stuff/titleBox.png';
+import SendWord from '../../assets/Buttons/sendWord.png';
 
 class MultiplayerGameScreen extends Component {
     static navigationOptions = {
@@ -70,8 +71,6 @@ class MultiplayerGameScreen extends Component {
         this.resetTimer();
 
         this.props.socket.on('gotWord', data => {
-            console.log(data, 'CUVANT')
-            //Vine verificat
             this.onGotWordHandler(data.word)
         });
 
@@ -116,6 +115,12 @@ class MultiplayerGameScreen extends Component {
     }, () => this.setState({
         showTimer: true
     }))
+
+    letterPressedHandler = letter => {
+        this.setState((prevState) => ({
+            word: prevState.word.concat(letter)
+        }))
+    }
 
     render() {
         //Animations configuration
@@ -192,16 +197,15 @@ class MultiplayerGameScreen extends Component {
                     </View>
                     <View style={[{ flex: 1 }, styles.centerContent]}>
                         <View style={{ flex: 1, flexDirection: 'row' }}>
-                            <View style={{ flex: 2 }}>
-                                <View style={{ width: '80%', height: '90%', borderWidth: 1, borderRadius: 10 }}>
-                                    <CustomText>{this.state.word}</CustomText>
+                            <View style={{ width: '80%', flexDirection: 'row', justifyContent: 'center', borderBottomColor: '#FBFFB7', borderBottomWidth: 5 }}>
+                                <View style={{ width: '60%', height: '90%', justifyContent: 'center' }}>
+                                    <CustomText style={{ fontSize: 26 }}>{this.state.word}</CustomText>
                                 </View>
-                            </View>
-                            <View style={{ flex: 1 }}>
                                 <TouchableOpacity
                                     style={styles.submitButton}
-                                    onPress={this.onInserWordHandler}>
-                                    <CustomText color="azure">TRIMITE</CustomText>
+                                    onPress={this.insertWordHandler}
+                                    style={{ width: '25%', height: '90%', justifyContent: 'center' }}>
+                                    <ImageBackground imageStyle={{ height: 50, width: 50, position: 'relative', bottom: '8%' }} source={SendWord} resizeMode="center" style={styles.submitButtonText} />
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -296,6 +300,16 @@ const styles = StyleSheet.create({
     centerContent: {
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    submitButton: {
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+        height: '100%',
+        width: '100%'
+    },
+    submitButtonText: {
+        fontFamily: 'Troika',
+        alignItems: 'flex-end'
     }
 });
 

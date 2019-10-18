@@ -4,33 +4,48 @@ import { StyleSheet, View } from 'react-native';
 import ModalTemplate from './ModalTemplate';
 import CustomText from '../UI/Text/Text';
 
-import NoLeafBackground from '../../assets/Modals/noLeaf.png';
+import NotExistsBackground from '../../assets/Modals/notExists.png';
 
-const notExists = props => (
+export default props => (
     <ModalTemplate isVisible={props.isVisible}
         onRequestClose={props.onClise}
-        background={NoLeafBackground}
-        size={{ width: '80%', height: '40%' }}>
-        <View style={{alignItems: 'center', position: 'relative', top: '20%'}}>
-        <CustomText normal>Cuvant inexistent!</CustomText>
-        </View>
-        <View style={[styles.max, styles.center]}>
-            <CustomText normal>Cuvantul</CustomText>
-            <CustomText large>{props.word}</CustomText>
-            <CustomText normal>nu exista!</CustomText>
+        background={NotExistsBackground}
+        size={styles.modal}>
+        <View style={styles.max}>
+            <View style={[styles.header]}>
+                <CustomText color='white' small>NU EXISTA</CustomText>
+            </View>
+            <View style={[styles.word]}>
+                <CustomText color='white' large>{props.word}</CustomText>
+            </View>
         </View>
     </ModalTemplate>
 );
 
 const styles = StyleSheet.create({
-    max: {
+    header: {
         width: '100%',
-        height: '100%'
+        height: '10%',
+        alignItems: 'center',
+        justifyContent: 'flex-end'
+    },
+    word: {
+        width: '100%',
+        height: '10%',
+        alignItems: 'center'
+    },
+    modal: {
+        width: '100%',
+        height: '85%'
+    },
+    max: {
+        width: '54%',
+        height: '20%',
+        position: 'relative',
+        top: '15%'
     },
     center: {
         justifyContent: 'center',
         alignItems: 'center',
     }
 });
-
-export default notExists;

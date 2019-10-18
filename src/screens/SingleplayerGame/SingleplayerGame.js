@@ -213,7 +213,7 @@ class SingleplayerGameScreen extends Component {
                             </View>
                             <View style={[{ width: '100%', flex: 3, alignItems: 'center' }]}>
                                 <View style={[styles.centerContent, { flex: 1 }]}>
-                                    <CustomText>ULTIMUL CUVANT</CustomText>
+                                    <CustomText large>ULTIMUL CUVANT</CustomText>
                                 </View>
                                 <View style={[{ height: '30%', width: '90%', position: 'relative', bottom: '25%' }, styles.centerContent]}>
                                     <ImageBackground source={LastWordImage}

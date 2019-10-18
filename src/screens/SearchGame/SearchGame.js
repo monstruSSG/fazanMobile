@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import * as SOCKET from '../../store/actions/socket'
+import * as SOCKET from '../../store/actions/socket';
+import * as USER from '../../store/actions/user';
 import { getUsers, getMe } from '../../utils/requests';
 import OponentDetails from '../../components/OponentDetails/OponentDetails';
 import Header from '../../components/Header/HeaderWithInput';
@@ -81,22 +82,25 @@ class SearchGameScreen extends Component {
     navigateProfileScreen = () => this.props.navigation.navigate('Profile');
 
     onPlayGameHandler = () => {
-        this.setState({ loading: true })
+        //this.setState({ loading: true })
 
-        this.props.socket.emit('reqConnectedUsers', {})
+        // this.props.socket.emit('reqConnectedUsers', {})
 
-        this.props.socket.on('recConnectedUsers', data => {
-            if (data.users.length) this.props.socket.emit('invitationSent', { socketId: data.users[0].socketId })
-        })
+        // this.props.socket.on('recConnectedUsers', data => {
+        //     if (data.users.length) this.props.socket.emit('invitationSent', { socketId: data.users[0].socketId })
+        // })
 
-        this.props.socket.on('invitationReceived', data => {
-            this.props.setOponentSocketId(data.socketId);
-            this.props.socket.emit('invitationAccepted', { socketId: data.socketId });
-            this.navigateMultiplayerScreen();
-        });
+        // this.props.socket.on('invitationReceived', data => {
+        //     this.props.setOponentSocketId(data.socketId);
+        //     this.props.socket.emit('invitationAccepted', { socketId: data.socketId });
+        //     this.navigateMultiplayerScreen();
+        // });
+
+        this.props.socket.emit('playRandom');
 
         this.props.socket.on('startGame', data => {
-            this.setState({ loading: false });
+            console.log(data, 'USERR')
+            //this.setState({ loading: false });
             this.props.setOponentSocketId(data.socketId);
             this.navigateMultiplayerScreen();
         })
@@ -112,7 +116,7 @@ class SearchGameScreen extends Component {
     }
 
     onChangeText = text => {
-        this.search = text;
+        this.search = text; 
         this.getUsersHandler();
     }
 
