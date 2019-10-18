@@ -105,18 +105,6 @@ class SearchGameScreen extends Component {
     onPlayGameHandler = () => {
         this.setState({ showWaitingModal: true })
 
-        // this.props.socket.emit('reqConnectedUsers', {})
-
-        // this.props.socket.on('recConnectedUsers', data => {
-        //     if (data.users.length) this.props.socket.emit('invitationSent', { socketId: data.users[0].socketId })
-        // })
-
-        // this.props.socket.on('invitationReceived', data => {
-        //     this.props.setOponentSocketId(data.socketId);
-        //     this.props.socket.emit('invitationAccepted', { socketId: data.socketId });
-        //     this.navigateMultiplayerScreen();
-        // });
-
         this.props.socket.emit('playRandom');
 
         this.props.socket.on('startGame', data => {

@@ -16,7 +16,7 @@ import Crown from '../../assets/Stuff/1st.png';
 import SinglePlayerTitle from '../../assets/Modals/titleShadow.png';
 import MultiplayerTitle from '../../assets/Stuff/titleBox.png';
 
-import WaitingModal from '../../components/Modals/WaitingModal'
+import InvitationModal from '../../components/Modals/InvitationModal';
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -107,6 +107,7 @@ class HomeScreen extends Component {
                     <AboutModal
                         isVisible={this.state.showAbout}
                         onClose={() => this.setState({ showAbout: false })} />
+                    <InvitationModal from='colosci' ></InvitationModal>
                 </View>
             </ImageBackground>
         );
