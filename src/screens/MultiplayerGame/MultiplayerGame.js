@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Animated, ImageBackground, TouchableOpacity, Image } from 'react-native';
+import { View, StyleSheet, Animated, ImageBackground, TouchableOpacity, Image, Easing } from 'react-native';
 import { connect } from 'react-redux';
 
 import Keyboard from '../../components/UI/Keyboard/Keyboard';
@@ -31,7 +31,6 @@ class MultiplayerGameScreen extends Component {
         gameFinished: false,
         lastWord: '',
         word: '',
-        usedWords: [],
         showTimer: false,
         showWinModal: false,
         showLoseModal: false,
@@ -52,7 +51,7 @@ class MultiplayerGameScreen extends Component {
         });
 
         this.props.socket.on('gameOver', data => {  
-            this.setState({ loseModal: true })
+            this.setState({ showLoseModal: true, showTimer: false })
         })
 
         this.props.socket.on('oponentIsThinking', data => this.watingForOponent(data.word))
@@ -119,7 +118,10 @@ class MultiplayerGameScreen extends Component {
     }
 
     onTimeExpiredHandler = time => {
-        if(time < 0) return this.props.socket.emit('iLost', { socketId: this.props.oponentSocketId })
+        if(time == 0){
+            console.log(time, 'heree')
+            return this.props.socket.emit('iLost', { socketId: this.props.oponentSocketId })
+        }
     }
 
     resetTimer = () => this.setState({
@@ -171,7 +173,7 @@ class MultiplayerGameScreen extends Component {
                                     <View style={[styles.centerContent, { flex: 1 }]}>
                                         {this.state.showTimer ? <Timer style={styles.counter}
                                             onTimeExpired={count => this.onTimeExpiredHandler(count)}
-                                            count={20} /> : null}
+                                            count={3} /> : null}
                                     </View>
                                 </View>
                             </View>

@@ -58,7 +58,7 @@ class SearchGameScreen extends Component {
     }
 
     componentWillUnmount() {
-        this.props.socket.emit('disconnectedFromGame', {});
+        this.props.socket.emit('disconnectedFromMultiplayer', {});
         if (Platform.OS === 'android') {
             this.didFocus.remove();
             this.willBlur.remove();
