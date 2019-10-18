@@ -18,8 +18,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     width: '100%',
     justifyContent: 'center',
-    alignItems: 'center',
-    borderBottomColor: 'white'
+    alignItems: 'center'
   }
 });
 

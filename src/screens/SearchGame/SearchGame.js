@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, BackHandler, View, StyleSheet, FlatList, ImageBackground, Text, TouchableOpacity } from 'react-native';
+import { Platform, BackHandler, View, StyleSheet, FlatList, ImageBackground, Text, TouchableOpacity, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -13,6 +13,7 @@ import SideDrawer from '../../components/Modals/SideDrawer';
 import RankingModal from '../../components/Modals/RankingModal';
 import LoadingModal from '../../components/Modals/LoadingModal';
 import WaitingModal from '../../components/Modals/WaitingModal';
+import CustomText from '../../components/UI/Text/Text';
 
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
 import PlayButton from '../../assets/Buttons/greenLabel.png';
@@ -37,7 +38,8 @@ class SearchGameScreen extends Component {
         showClasament: false,
         showRanking: false,
         loading: true,
-        user: null
+        user: null,
+        showPlayButton: true
     }
 
     from = 0;
@@ -52,10 +54,24 @@ class SearchGameScreen extends Component {
             BackHandler.removeEventListener("hardwareBackPress", this.onBack),
         );
 
+        //For playbutton
+        this.keyboardDidShowListener = Keyboard.addListener(
+            'keyboardDidShow',
+            this._keyboardDidShow,
+        );
+        this.keyboardDidHideListener = Keyboard.addListener(
+            'keyboardDidHide',
+            this._keyboardDidHide,
+        );
+
         this.getUsersHandler();
         getMe(this.props.token)
             .then(user => this.setState({ user: user.user, loading: false }, () => console.log(this.state.user)));
     }
+
+    _keyboardDidShow = () => this.setState({ showPlayButton: false })
+
+    _keyboardDidHide = () => this.setState({ showPlayButton: true })
 
     componentWillUnmount() {
         this.props.socket.emit('disconnectedFromMultiplayer', {});
@@ -64,6 +80,9 @@ class SearchGameScreen extends Component {
             this.willBlur.remove();
             BackHandler.removeEventListener("hardwareBackPress", this.onBack);
         }
+
+        this.keyboardDidShowListener.remove();
+        this.keyboardDidHideListener.remove();
     }
 
     onBack = () => this.navigateHomeScreen();
@@ -151,15 +170,14 @@ class SearchGameScreen extends Component {
                                     // }}
                                     />
                                 </View>
-                                <View style={styles.playGameButton}>
-                                    <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', width: '80%' }} onPress={this.onPlayGameHandler}>
-                                        <ImageBackground source={PlayButton} style={{ width: '100%', height: '90%', position: 'relative', top: '8%' }} resizeMode="stretch">
-                                            <Text style={{ color: "white", fontFamily: 'Troika', fontSize: 22, textAlign: 'center', paddingTop: '2%' }}>
-                                                PLAY RANDOM
-                                            </Text>
-                                        </ImageBackground>
-                                    </TouchableOpacity>
-                                </View>
+                                {this.state.showPlayButton ?
+                                    <View style={[styles.playGameButton, styles.center]}>
+                                        <TouchableOpacity style={[{ width: '80%' }, styles.center]} onPress={this.onPlayGameHandler}>
+                                            <ImageBackground source={PlayButton} style={[{ width: '80%', height: '100%' }, styles.center]} resizeMode="stretch">
+                                                <CustomText style={styles.playButtonPosition} large>JOACA</CustomText>
+                                            </ImageBackground>
+                                        </TouchableOpacity>
+                                    </View> : null}
                                 <SideDrawer
                                     pictureUrl={this.state.user.pictureUrl}
                                     username={this.state.user.shortName}
@@ -187,6 +205,14 @@ class SearchGameScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+    playButtonPosition: {
+        position: 'relative',
+        bottom: '8%'
+    },
+    center: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     searchGame: {
         flex: 1,
         justifyContent: "center"
