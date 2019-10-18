@@ -3,43 +3,43 @@ import { Image, StyleSheet, Modal, View, Animated } from 'react-native';
 
 import CustomText from '../UI/Text/Text';
 
-import EmptyStar from '../../assets/Stuff/emptyStar.png';
-
 class LoadingModal extends Component {
-    first = new Animated.Value(0);
-    secound = new Animated.Value(0);
-    third = new Animated.Value(0)
+    state = {
+        first: new Animated.Value(0),
+        secound: new Animated.Value(0),
+        third: new Animated.Value(0)
+    }
 
     componentDidMount() {
         Animated.loop(
             Animated.sequence([
-                Animated.timing(this.first, {
+                Animated.timing(this.state.first, {
                     toValue: 1,
                     duration: 300,
                     useNativeDriver: true
                 }),
-                Animated.timing(this.secound, {
+                Animated.timing(this.state.secound, {
                     toValue: 1,
                     duration: 300,
                     useNativeDriver: true
                 }),
-                Animated.timing(this.third, {
+                Animated.timing(this.state.third, {
                     toValue: 1,
                     duration: 300,
                     useNativeDriver: true
                 }),
                 Animated.parallel([
-                    Animated.timing(this.third, {
+                    Animated.timing(this.state.third, {
                         toValue: 0,
                         duration: 100,
                         useNativeDriver: true
                     }),
-                    Animated.timing(this.secound, {
+                    Animated.timing(this.state.secound, {
                         toValue: 0,
                         duration: 100,
                         useNativeDriver: true
                     }),
-                    Animated.timing(this.first, {
+                    Animated.timing(this.state.first, {
                         toValue: 0,
                         duration: 100,
                         useNativeDriver: true
@@ -55,12 +55,12 @@ class LoadingModal extends Component {
                 <View style={[styles.max, styles.center, styles.container]}>
                     <View style={[{ width: '80%', height: '15%', alignItems: 'center' }]}>
                         <View style={[{ height: '50%', width: '100%' }, { alignItems: 'center', justifyContent: 'flex-end' }]}>
-                            <CustomText large>WAITING</CustomText>
+                            <CustomText large>IN ASTEPTARE</CustomText>
                         </View>
                         <Animated.View style={[{ height: '20%', width: '100%' }, { alignItems: 'center', justifyContent: 'center', flexDirection: 'row' }]}>
-                            <Animated.View style={{ opacity: this.first }}><CustomText giant>.</CustomText></Animated.View>
-                            <Animated.View style={{ opacity: this.secound }}><CustomText giant>.</CustomText></Animated.View>
-                            <Animated.View style={{ opacity: this.third }}><CustomText giant>.</CustomText></Animated.View>
+                            <Animated.View style={{ opacity: this.state.first }}><CustomText giant>.</CustomText></Animated.View>
+                            <Animated.View style={{ opacity: this.state.secound }}><CustomText giant>.</CustomText></Animated.View>
+                            <Animated.View style={{ opacity: this.state.third }}><CustomText giant>.</CustomText></Animated.View>
                         </Animated.View>
                     </View>
                 </View>

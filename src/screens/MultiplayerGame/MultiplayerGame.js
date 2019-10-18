@@ -36,8 +36,7 @@ class MultiplayerGameScreen extends Component {
         showWinModal: false,
         showLoseModal: false,
         showAtentionModal: false,
-        showNotExistsModal: false,
-        showCountModal: true
+        showNotExistsModal: false
     }
 
     waitingForOponent = word => {
@@ -59,8 +58,8 @@ class MultiplayerGameScreen extends Component {
         this.props.socket.on('oponentIsThinking', data => this.watingForOponent(data.word))
 
         this.props.socket.on('youWon', data => {
-            console.log(data, 'WON')
-            this.setState({ winModal: true })
+            //oponentDisconnected timeExipired
+            this.setState({ showWinModal: true })
         })
 
         this.props.socket.on('wordNotExists', data => this.wordNotExistsHandler(data.exists))
@@ -70,7 +69,7 @@ class MultiplayerGameScreen extends Component {
         this.props.socket.emit('exitGame', { socketId: this.props.oponentSocketId });
     }
 
-    onGotWordHandler = word => this.setState({ lastWord: word, word: word.slice(-2) })
+    onGotWordHandler = word => this.setState({ lastWord: word, word: word.slice(-2), showTimer: true }, this.newLatestWordAnimation)
 
     //Animations
     //Round increment animation
@@ -116,12 +115,11 @@ class MultiplayerGameScreen extends Component {
 
         this.props.socket.emit('sendWord', { word, socketId: this.props.oponentSocketId });
 
-        this.startYourWordAnimation(word);
         this.setState({ showTimer: false })
     }
 
-    onTimeExpiredHandler = () => {
-        this.props.socket.emit('youLost', { socketId: this.props.oponentSocketId })
+    onTimeExpiredHandler = time => {
+        if(time < 0) return this.props.socket.emit('iLost', { socketId: this.props.oponentSocketId })
     }
 
     resetTimer = () => this.setState({
