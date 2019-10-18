@@ -40,6 +40,28 @@ class MultiplayerGameScreen extends Component {
         showCountModal: true
     }
 
+    componentDidMount() {
+        this.resetTimer();
+
+        this.props.socket.on('gotWord', data => {
+            console.log(data, 'WORRDDDD')
+            this.resetTimer()
+            this.onGotWordHandler(data.word)
+        });
+
+        this.props.socket.on('gameOver', data => {
+            this.setState({ loseModal: true })
+        })
+
+        this.props.socket.on('youWon', data => {
+            this.setState({ winModal: true })
+        })
+
+        this.props.socket.on('gotWord', data => this.onGotWordHandler(data.word));
+
+        this.props.socket.on('wordNotExists', data => this.wordNotExistsHandler(data.exists))
+    }
+
     //Animations
     //Round increment animation
     roundIncrementAnimation = () => Animated.timing(this.state.roundAnimation, {
@@ -68,23 +90,6 @@ class MultiplayerGameScreen extends Component {
 
     wordNotExistsHandler = exists => {
         if (!exists) return alert('Here let the user know that the inserted word does not exist');
-        this.resetTimer();
-
-        this.props.socket.on('gotWord', data => {
-            this.onGotWordHandler(data.word)
-        });
-
-        this.props.socket.on('gameOver', data => {
-            this.setState({ loseModal: true })
-        })
-
-        this.props.socket.on('youWon', data => {
-            this.setState({ winModal: true })
-        })
-
-        this.props.socket.on('gotWord', data => this.onGotWordHandler(data.word));
-
-        this.props.socket.on('wordNotExists', data => this.wordNotExistsHandler(data.exists))
     }
 
     navigateSearchGame = () => this.props.navigation.navigate('SearchGame');
@@ -102,8 +107,7 @@ class MultiplayerGameScreen extends Component {
         this.props.socket.emit('sendWord', { word, socketId: this.props.oponentSocketId });
 
         this.startYourWordAnimation(word);
-        this.fadeYouOut();
-        this.fadeOponentIn();
+        this.setState({ showTimer: false })
     }
 
     onTimeExpiredHandler = () => {

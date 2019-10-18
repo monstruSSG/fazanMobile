@@ -27,7 +27,8 @@ class Login extends Component {
     navigateHomeHandler = () => this.props.navigation.navigate('Home');
 
     loginHandler = () => LoginManager.logInWithPermissions(['public_profile'])
-        .then(() => {
+        .then(result => {
+            if(result.isCancelled)return this.navigateHomeHandler()
             this.setState({ loading: true });
             return AccessToken.getCurrentAccessToken();
         })
