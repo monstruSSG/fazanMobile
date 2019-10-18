@@ -52,14 +52,14 @@ class MultiplayerGameScreen extends Component {
             this.onGotWordHandler(data.word)
         });
 
-        this.props.socket.on('gameOver', data => {
-            console.log(data)
+        this.props.socket.on('gameOver', data => {  
             this.setState({ loseModal: true })
         })
 
         this.props.socket.on('oponentIsThinking', data => this.watingForOponent(data.word))
 
         this.props.socket.on('youWon', data => {
+            console.log(data, 'WON')
             this.setState({ winModal: true })
         })
 
@@ -67,7 +67,7 @@ class MultiplayerGameScreen extends Component {
     }
 
     componentWillUnmount() {
-        this.props.emit('exitGame', { socketId: this.props.oponentSocketId });
+        this.props.socket.emit('exitGame', { socketId: this.props.oponentSocketId });
     }
 
     onGotWordHandler = word => this.setState({ lastWord: word, word: word.slice(-2) })

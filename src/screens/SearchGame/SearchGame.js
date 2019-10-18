@@ -58,6 +58,7 @@ class SearchGameScreen extends Component {
     }
 
     componentWillUnmount() {
+        this.props.socket.emit('disconnectedFromGame', {});
         if (Platform.OS === 'android') {
             this.didFocus.remove();
             this.willBlur.remove();
@@ -70,11 +71,11 @@ class SearchGameScreen extends Component {
     getUsersHandler = () => getUsers(this.props.token, this.from, this.limit, this.search)
         .then(result => this.setState({
             users: result.map(user => ({
-                    username: user.shortName,
-                    score: user.score,
-                    picture: user.pictureUrl,
-                    _id: user._id
-                }))
+                username: user.shortName,
+                score: user.score,
+                picture: user.pictureUrl,
+                _id: user._id
+            }))
         }))
 
     navigateMultiplayerScreen = () => this.props.navigation.navigate('Multiplayer');
@@ -82,7 +83,7 @@ class SearchGameScreen extends Component {
     navigateProfileScreen = () => this.props.navigation.navigate('Profile');
 
     onPlayGameHandler = () => {
-        //this.setState({ loading: true })
+        this.setState({ loading: true })
 
         // this.props.socket.emit('reqConnectedUsers', {})
 
@@ -99,8 +100,7 @@ class SearchGameScreen extends Component {
         this.props.socket.emit('playRandom');
 
         this.props.socket.on('startGame', data => {
-            console.log(data, 'USERR')
-            //this.setState({ loading: false });
+            this.setState({ loading: false });
             this.props.setOponentSocketId(data.socketId);
             this.navigateMultiplayerScreen();
         })
@@ -116,7 +116,7 @@ class SearchGameScreen extends Component {
     }
 
     onChangeText = text => {
-        this.search = text; 
+        this.search = text;
         this.getUsersHandler();
     }
 
@@ -144,11 +144,11 @@ class SearchGameScreen extends Component {
                                             points={item.score || 123}
                                             picture={item.picture || false}
                                         />}
-                                        // onEndReached={() => {
-                                        //     this.from += 10;
-                                        //     this.limit += 10;
-                                        //     if (this.limit <= this.usersCount) this.getUsersHandler();
-                                        // }}
+                                    // onEndReached={() => {
+                                    //     this.from += 10;
+                                    //     this.limit += 10;
+                                    //     if (this.limit <= this.usersCount) this.getUsersHandler();
+                                    // }}
                                     />
                                 </View>
                                 <View style={styles.playGameButton}>
