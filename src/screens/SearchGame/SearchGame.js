@@ -39,7 +39,8 @@ class SearchGameScreen extends Component {
         showRanking: false,
         loading: true,
         user: null,
-        showPlayButton: true
+        showPlayButton: true,
+        showWaitingModal: false
     }
 
     from = 0;
@@ -102,7 +103,7 @@ class SearchGameScreen extends Component {
     navigateProfileScreen = () => this.props.navigation.navigate('Profile');
 
     onPlayGameHandler = () => {
-        this.setState({ loading: true })
+        this.setState({ showWaitingModal: true })
 
         // this.props.socket.emit('reqConnectedUsers', {})
 
@@ -119,7 +120,7 @@ class SearchGameScreen extends Component {
         this.props.socket.emit('playRandom');
 
         this.props.socket.on('startGame', data => {
-            this.setState({ loading: false });
+            this.setState({ showWaitingModal: false });
             this.props.setOponentSocketId(data.socketId);
             this.navigateMultiplayerScreen();
         })
@@ -195,6 +196,8 @@ class SearchGameScreen extends Component {
                                 isVisible={this.state.showRanking}
                                 users={this.state.users}
                                 close={() => this.setState({ showRanking: false })} />
+                            <WaitingModal isVisible={this.state.showWaitingModal} 
+                                onClose={() => this.setState({ showWaitingModal: false })} />
                         </>
                     ) : null}
                 <LoadingModal isVisible={this.state.loading} />

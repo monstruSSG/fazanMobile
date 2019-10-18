@@ -16,6 +16,8 @@ import Crown from '../../assets/Stuff/1st.png';
 import SinglePlayerTitle from '../../assets/Modals/titleShadow.png';
 import MultiplayerTitle from '../../assets/Stuff/titleBox.png';
 
+import WaitingModal from '../../components/Modals/WaitingModal'
+
 class HomeScreen extends Component {
     static navigationOptions = {
         header: null
@@ -41,7 +43,7 @@ class HomeScreen extends Component {
 
     componentDidMount() {
         this.readToken();
-        this.didBlurSubscription = this.props.navigation.addListener('didFocus',() => this.readToken());
+        this.didBlurSubscription = this.props.navigation.addListener('didFocus', () => this.readToken());
     }
 
     componentWillUnmount() {

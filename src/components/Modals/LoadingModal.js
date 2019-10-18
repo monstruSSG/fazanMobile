@@ -10,43 +10,51 @@ class LoadingModal extends Component {
         third: new Animated.Value(0)
     }
 
-    componentDidMount() {
-        Animated.loop(
-            Animated.sequence([
-                Animated.timing(this.state.first, {
-                    toValue: 1,
-                    duration: 300,
+    loadingAnimation = () => Animated.loop(
+        Animated.sequence([
+            Animated.timing(this.state.first, {
+                toValue: 1,
+                duration: 300,
+                useNativeDriver: true
+            }),
+            Animated.timing(this.state.secound, {
+                toValue: 1,
+                duration: 300,
+                useNativeDriver: true
+            }),
+            Animated.timing(this.state.third, {
+                toValue: 1,
+                duration: 300,
+                useNativeDriver: true
+            }),
+            Animated.parallel([
+                Animated.timing(this.state.third, {
+                    toValue: 0,
+                    duration: 100,
                     useNativeDriver: true
                 }),
                 Animated.timing(this.state.secound, {
-                    toValue: 1,
-                    duration: 300,
+                    toValue: 0,
+                    duration: 100,
                     useNativeDriver: true
                 }),
-                Animated.timing(this.state.third, {
-                    toValue: 1,
-                    duration: 300,
+                Animated.timing(this.state.first, {
+                    toValue: 0,
+                    duration: 100,
                     useNativeDriver: true
-                }),
-                Animated.parallel([
-                    Animated.timing(this.state.third, {
-                        toValue: 0,
-                        duration: 100,
-                        useNativeDriver: true
-                    }),
-                    Animated.timing(this.state.secound, {
-                        toValue: 0,
-                        duration: 100,
-                        useNativeDriver: true
-                    }),
-                    Animated.timing(this.state.first, {
-                        toValue: 0,
-                        duration: 100,
-                        useNativeDriver: true
-                    })
-                ])
+                })
             ])
-        ).start(() => console.log('IN ANIMATION'));
+        ])
+    ).start();
+
+    componentDidMount() {
+        this.loadingAnimation();
+    }
+
+    componentDidUpdate(prevProps) {
+        if(prevProps.isVisible != this.props.isVisible && this.props.isVisible === true) {
+            this.loadingAnimation();
+        }
     }
 
     render() {
