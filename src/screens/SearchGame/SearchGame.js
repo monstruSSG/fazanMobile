@@ -110,6 +110,7 @@ class SearchGameScreen extends Component {
         this.props.socket.emit('playRandom');
 
         this.props.socket.on('startGame', data => {
+            console.log(data, 'DATAAAA')
             this.setState({ showWaitingModal: false });
             this.props.setOponentSocketId(data.socketId);
             this.navigateMultiplayerScreen();

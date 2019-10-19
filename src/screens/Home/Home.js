@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text, ImageBackground, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
+import NetInfo from "@react-native-community/netinfo";
 
 import CustomText from '../../components/UI/Text/Text';
 import AboutModal from '../../components/Modals/AboutModal';
@@ -15,6 +16,8 @@ import ProfileButton from '../../assets/Buttons/locked.png';
 import Crown from '../../assets/Stuff/1st.png';
 import SinglePlayerTitle from '../../assets/Modals/titleShadow.png';
 import MultiplayerTitle from '../../assets/Stuff/titleBox.png';
+
+import NoInternet from '../../components/Modals/NoInternetModal'
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -105,6 +108,7 @@ class HomeScreen extends Component {
                     <AboutModal
                         isVisible={this.state.showAbout}
                         onClose={() => this.setState({ showAbout: false })} />
+                    {/* <NoInternet /> */}
                 </View>
             </ImageBackground>
         );

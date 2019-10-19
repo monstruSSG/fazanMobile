@@ -219,7 +219,7 @@ class MultiplayerGameScreen extends Component {
                                 {this.state.oponentMoving ?
                                     <OponentMoving message='RANDUL OPONENTULUI' /> :
                                     <>
-                                        <View style={{ width: '60%', height: '90%', justifyContent: 'center' }}>
+                                        <View style={{ width: '60%', height: '90%', justifyContent: 'center', flexDirection: 'row' }}>
                                             <CustomText style={{ fontSize: 26 }}>{this.state.word}</CustomText>
                                             <InputAnimation />
                                         </View>

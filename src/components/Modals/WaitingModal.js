@@ -69,7 +69,7 @@ class WaitingModal extends Component {
                         <TouchableOpacity style={styles.exitButtonPressArea} onPress={this.props.onClose} />
                     </View>
                     <View style={[styles.animationContent]}>
-                        <CustomText small>Asteapta</CustomText>
+                        <CustomText normal>Asteapta</CustomText>
                         <View style={[styles.center, { width: '80%', height: '20%', flexDirection: 'row' }]}>
                             <Animated.View style={{opacity: this.state.first}}><CustomText large>.</CustomText></Animated.View>
                             <Animated.View style={{opacity: this.state.secound}}><CustomText large>.</CustomText></Animated.View>
