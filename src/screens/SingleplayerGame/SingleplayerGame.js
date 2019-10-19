@@ -53,7 +53,7 @@ class SingleplayerGameScreen extends Component {
                     .then(word => this.setState({ lastWord: word, word: word.slice(-2), showTimer: true }))
                     .catch(e => console.log(e))
             })
-     
+
     }
 
     //Animations
@@ -204,7 +204,7 @@ class SingleplayerGameScreen extends Component {
                     <Count count={3} onTimeExpired={this.onCountTimeExiredHandler} /> :
                     <View style={[styles.maxWidthHeight, { alignItems: 'center' }]}>
                         <View style={[{ width: '100%', height: '14%' }]}>
-                            <Header headerTitle='ROBOT' count={20} showTimer={this.state.showTimer} onTimeExpired={this.onTimeExpiredHandler} />
+                            <Header onExitPressed={() => this.setState({ showAtentionModal: true })} headerTitle='ROBOT' count={20} showTimer={this.state.showTimer} onTimeExpired={this.onTimeExpiredHandler} />
                         </View>
                         <View style={[styles.centerContent, { width: '100%', height: '50%' }]}>
                             <View style={[styles.centerContent, { width: '30%', flex: 1, position: 'relative', top: '10%' }]}>

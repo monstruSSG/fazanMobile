@@ -42,6 +42,10 @@ class Login extends Component {
             this.props.navigation.navigate('SearchGame')
             this.setState({ loading: false });
         })
+        .catch(() => {
+            AsyncStorage.removeItem('token');
+            this.navigateHomeHandler();
+        })
 
     createSocketConnection = token => this.props.createSocketConnection(token);
 

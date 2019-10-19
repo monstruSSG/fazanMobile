@@ -144,7 +144,7 @@ class SearchGameScreen extends Component {
                                     />
                                 </View>
                                 <View style={styles.oponentList}>
-                                    {this.state.users.length > 1 ? <FlatList
+                                    {this.state.users.length > 0 ? <FlatList
                                         data={this.state.users.map(user => {
                                             return ({ ...user, key: user._id || 'asdasd' })
                                         })}
