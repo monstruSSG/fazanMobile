@@ -35,7 +35,7 @@ const loseModal = props => (
                         <TouchableOpacity style={[styles.max]} onPress={props.home}>
                             <ImageBackground source={MenuButton} style={[styles.max]} resizeMode='stretch'>
                                 <View style={[styles.max, styles.center]}>
-                                    <CustomText normal style={styles.menuPosition}>MENU</CustomText>
+                                    <CustomText normal style={styles.menuPosition}>{props.to}</CustomText>
                                 </View>
                             </ImageBackground>
                         </TouchableOpacity>

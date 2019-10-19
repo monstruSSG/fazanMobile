@@ -15,6 +15,7 @@ import NotExistsModal from '../../components/Modals/NotExist';
 import Count from '../../components/Modals/StartGameModal';
 import OponentMovingDots from './OponentMovingDots';
 import Header from './Header/Header';
+import InputAnimation from './InputAnimation';
 
 import Background from '../../assets/Stuff/bg.jpg';
 import BluePanel from '../../assets/Stuff/bluePanel.png';
@@ -30,6 +31,7 @@ class SingleplayerGameScreen extends Component {
         roundAnimation: new Animated.Value(1),
         lastWordAnimation: new Animated.Value(1),
         keyboardAnimation: new Animated.Value(1),
+        inputAnimation: new Animated.Value(1),
         roundNumber: 0,
         gameFinished: false,
         lastWord: '',
@@ -40,7 +42,8 @@ class SingleplayerGameScreen extends Component {
         showLoseModal: false,
         showAtentionModal: false,
         showNotExistsModal: false,
-        showCountModal: true
+        showCountModal: true,
+        oponentMoving: false
     }
 
     componentDidMount() {
@@ -50,9 +53,17 @@ class SingleplayerGameScreen extends Component {
                     .then(word => this.setState({ lastWord: word, word: word.slice(-2), showTimer: true }))
                     .catch(e => console.log(e))
             })
+     
     }
 
     //Animations
+    inputAnimation = () => Animated.loop([
+        Animated.timing(this.state.inputAnimation, {
+            toValue: 0.4,
+            duration: 200
+        })
+    ]).start()
+
     keyboardFadeOut = () => Animated.timing(this.state.keyboardAnimation, {
         toValue: 0.4,
         duration: 300,
@@ -114,8 +125,10 @@ class SingleplayerGameScreen extends Component {
                 showCountModal: true,
                 showLoseModal: false,
                 showWinModal: false,
+                oponentMoving: false,
                 lastWord: startWord,
-                word: startWord.slice(-2)
+                word: startWord.slice(-2),
+                roundNumber: 0
             }, this.resetTimer);
         })
 
@@ -128,7 +141,8 @@ class SingleplayerGameScreen extends Component {
             .then(exists => {
                 if (!exists) return Promise.reject({ message: 'WORD_NOT_EXISTS' });
                 this.resetTimer();
-                this.keyboardFadeOut()
+                this.keyboardFadeOut();
+                this.setState({ oponentMoving: true });
                 return this.props.generateWord(this.state.word);
             })
             .then(generatedWord => {
@@ -142,6 +156,7 @@ class SingleplayerGameScreen extends Component {
             })
             .then(exists => {
                 if (!exists) return Promise.reject({ message: 'YOU_LOST' });
+                this.setState({ oponentMoving: false });
                 this.keyboardFadeIn();
             })
             .catch(e => {
@@ -189,7 +204,7 @@ class SingleplayerGameScreen extends Component {
                     <Count count={3} onTimeExpired={this.onCountTimeExiredHandler} /> :
                     <View style={[styles.maxWidthHeight, { alignItems: 'center' }]}>
                         <View style={[{ width: '100%', height: '14%' }]}>
-                            <Header headerTitle='ROBOT' count={20} showTimer={this.state.showTimer} onTimeExpired={this.onTimeExpiredHandler}/>
+                            <Header headerTitle='ROBOT' count={20} showTimer={this.state.showTimer} onTimeExpired={this.onTimeExpiredHandler} />
                         </View>
                         <View style={[styles.centerContent, { width: '100%', height: '50%' }]}>
                             <View style={[styles.centerContent, { width: '30%', flex: 1, position: 'relative', top: '10%' }]}>
@@ -224,12 +239,13 @@ class SingleplayerGameScreen extends Component {
                         <View style={[{ flex: 1 }, styles.centerContent]}>
                             <View style={{ flex: 1, flexDirection: 'row' }}>
                                 <View style={{ width: '80%', flexDirection: 'row', justifyContent: 'center', borderBottomColor: '#FBFFB7', borderBottomWidth: 5 }}>
-                                    {true ?
+                                    {this.state.oponentMoving ?
                                         <OponentMovingDots message='RANDUL OPONENTULUI' /> :
                                         <>
-                                            <View style={{ width: '60%', height: '90%', justifyContent: 'center' }}>
+                                            <Animated.View style={{ width: '60%', height: '90%', justifyContent: 'center', flexDirection: 'row' }}>
                                                 <CustomText style={{ fontSize: 26 }}>{this.state.word}</CustomText>
-                                            </View>
+                                                <InputAnimation />
+                                            </Animated.View>
                                             <TouchableOpacity
                                                 style={styles.submitButton}
                                                 onPress={this.onInserWordHandler}
@@ -251,14 +267,16 @@ class SingleplayerGameScreen extends Component {
                             rounds={this.state.roundNumber}
                             restart={this.restartGame}
                             home={this.navigateHomeHandler}
-                            onClose={this.navigateHomeHandler} />
+                            onClose={this.navigateHomeHandler}
+                            to='home' />
                         <LoseModal isVisible={this.state.showLoseModal}
                             cu={this.state.lastWord}
                             oponent='ROBOT'
                             rounds={this.state.roundNumber}
                             restart={this.restartGame}
                             home={this.navigateHomeHandler}
-                            onClose={this.navigateHomeHandler} />
+                            onClose={this.navigateHomeHandler}
+                            to='home' />
                         <AtentionModal isVisible={this.state.showAtentionModal}
                             onContinue={() => this.setState({ showAtentionModal: false })}
                             onClose={this.navigateHomeHandler}

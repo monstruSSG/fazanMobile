@@ -234,14 +234,15 @@ class MultiplayerGameScreen extends Component {
                         oponent='ROBOT'
                         rounds={this.state.roundNumber}
                         restart={this.restartGame}
-                        home={this.navigateHomeHandler}
-                        onClose={this.navigateHomeHandler} />
+                        home={this.navigateSearchGame}
+                        onClose={this.navigateHomeHandler}
+                        to='Online' />
                     <LoseModal isVisible={this.state.showLoseModal}
                         cu={this.state.lastWord}
                         oponent='ROBOT'
                         rounds={this.state.roundNumber}
                         restart={this.restartGame}
-                        home={this.navigateHomeHandler}
+                        home={this.navigateSearchGame}
                         onClose={this.navigateHomeHandler} />
                     <AtentionModal isVisible={this.state.showAtentionModal}
                         onContinue={() => this.setState({ showAtentionModal: false })}
