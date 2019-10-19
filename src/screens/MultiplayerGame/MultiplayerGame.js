@@ -177,7 +177,7 @@ class MultiplayerGameScreen extends Component {
                                     <View style={[styles.centerContent, { flex: 1 }]}>
                                         {this.state.showTimer ? <Timer style={styles.counter}
                                             onTimeExpired={count => this.onTimeExpiredHandler(count)}
-                                            count={3} /> : null}
+                                            count={15} /> : null}
                                     </View>
                                 </View>
                             </View>
