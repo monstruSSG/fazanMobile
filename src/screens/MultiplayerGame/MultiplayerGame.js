@@ -51,6 +51,9 @@ class MultiplayerGameScreen extends Component {
         this.resetTimer();
 
         this.props.socket.on('gotWord', data => {
+            this.setState(prevState => ({
+                roundNumber: prevState.roundNumber + 1
+            }));
             this.resetTimer()
             this.onGotWordHandler(data.word)
             this.setState({ oponentMoving: false })
@@ -72,7 +75,7 @@ class MultiplayerGameScreen extends Component {
     }
 
     componentWillUnmount() {
-        this.props.socket.emit('exitGame', { socketId: this.props.oponentSocketId });
+        if(!this.state.showLoseModal)return this.props.socket.emit('exitGame', { socketId: this.props.oponentSocketId });
     }
 
     onGotWordHandler = word => this.setState({ lastWord: word, word: word.slice(-2), showTimer: true }, this.newLatestWordAnimation)
@@ -136,7 +139,7 @@ class MultiplayerGameScreen extends Component {
     }
 
     onTimeExpiredHandler = time => {
-        if (time == 0) {
+        if (time == 0 && !this.state.showLoseModal) {
             return this.props.socket.emit('iLost', { socketId: this.props.oponentSocketId, word: this.state.lastWord })
         }
     }
