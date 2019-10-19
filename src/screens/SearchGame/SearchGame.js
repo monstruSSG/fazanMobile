@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, BackHandler, View, StyleSheet, FlatList, ImageBackground, Text, TouchableOpacity, Keyboard } from 'react-native';
+import { Platform, BackHandler, View, StyleSheet, FlatList, ImageBackground, Image, TouchableOpacity, Keyboard } from 'react-native';
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -17,6 +17,7 @@ import CustomText from '../../components/UI/Text/Text';
 
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
 import PlayButton from '../../assets/Buttons/greenLabel.png';
+import NoOponentImage from '../../assets/Modals/warning.png';
 
 class SearchGameScreen extends Component {
     static navigationOptions = {
@@ -143,7 +144,7 @@ class SearchGameScreen extends Component {
                                     />
                                 </View>
                                 <View style={styles.oponentList}>
-                                    <FlatList
+                                    {this.state.users.length > 1 ? <FlatList
                                         data={this.state.users.map(user => {
                                             return ({ ...user, key: user._id || 'asdasd' })
                                         })}
@@ -157,7 +158,7 @@ class SearchGameScreen extends Component {
                                     //     this.limit += 10;
                                     //     if (this.limit <= this.usersCount) this.getUsersHandler();
                                     // }}
-                                    />
+                                    /> : <Image source={NoOponentImage} style={styles.max}  resizeMode='stretch'/>}
                                 </View>
                                 {this.state.showPlayButton ?
                                     <View style={[styles.playGameButton, styles.center]}>
@@ -184,7 +185,7 @@ class SearchGameScreen extends Component {
                                 isVisible={this.state.showRanking}
                                 users={this.state.users}
                                 close={() => this.setState({ showRanking: false })} />
-                            <WaitingModal isVisible={this.state.showWaitingModal} 
+                            <WaitingModal isVisible={this.state.showWaitingModal}
                                 onClose={() => this.setState({ showWaitingModal: false })} />
                         </>
                     ) : null}
@@ -196,6 +197,10 @@ class SearchGameScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+    max: {
+        width: '100%',
+        height: '100%'
+    },
     playButtonPosition: {
         position: 'relative',
         bottom: '8%'
@@ -222,7 +227,7 @@ const styles = StyleSheet.create({
     oponentList: {
         flex: 6,
         paddingTop: 16,
-        justifyContent: "center",
+        justifyContent: "center"
     },
     oponentDetails: {
         flexDirection: 'row',
