@@ -12,6 +12,9 @@ import AtentionModal from '../../components/Modals/AtentionModal';
 import NotExistsModal from '../../components/Modals/NotExist';
 import Background from '../../assets/Stuff/bg.jpg';
 import CustomText from '../../components/UI/Text/Text';
+import InputAnimation from '../../screens/SingleplayerGame/InputAnimation';
+import OponentMoving from '../../screens/SingleplayerGame/OponentMovingDots';
+
 
 import HeaderBg from '../../assets/Stuff/singleplayerHeader.png';
 import ExitButton from '../../assets/Buttons/exitButton.png';
@@ -35,7 +38,8 @@ class MultiplayerGameScreen extends Component {
         showWinModal: false,
         showLoseModal: false,
         showAtentionModal: false,
-        showNotExistsModal: false
+        showNotExistsModal: false,
+        oponentMoving: false
     }
 
     waitingForOponent = word => {
@@ -50,7 +54,7 @@ class MultiplayerGameScreen extends Component {
             this.onGotWordHandler(data.word)
         });
 
-        this.props.socket.on('gameOver', data => {  
+        this.props.socket.on('gameOver', data => {
             this.setState({ showLoseModal: true, showTimer: false })
         })
 
@@ -118,7 +122,7 @@ class MultiplayerGameScreen extends Component {
     }
 
     onTimeExpiredHandler = time => {
-        if(time == 0){
+        if (time == 0) {
             console.log(time, 'heree')
             return this.props.socket.emit('iLost', { socketId: this.props.oponentSocketId })
         }
@@ -212,15 +216,20 @@ class MultiplayerGameScreen extends Component {
                     <View style={[{ flex: 1 }, styles.centerContent]}>
                         <View style={{ flex: 1, flexDirection: 'row' }}>
                             <View style={{ width: '80%', flexDirection: 'row', justifyContent: 'center', borderBottomColor: '#FBFFB7', borderBottomWidth: 5 }}>
-                                <View style={{ width: '60%', height: '90%', justifyContent: 'center' }}>
-                                    <CustomText style={{ fontSize: 26 }}>{this.state.word}</CustomText>
-                                </View>
-                                <TouchableOpacity
-                                    style={styles.submitButton}
-                                    onPress={this.insertWordHandler}
-                                    style={{ width: '25%', height: '90%', justifyContent: 'center' }}>
-                                    <ImageBackground imageStyle={{ height: 50, width: 50, position: 'relative', bottom: '8%' }} source={SendWord} resizeMode="center" style={styles.submitButtonText} />
-                                </TouchableOpacity>
+                                {this.state.oponentMoving ?
+                                    <OponentMoving message='RANDUL OPONENTULUI' /> :
+                                    <>
+                                        <View style={{ width: '60%', height: '90%', justifyContent: 'center' }}>
+                                            <CustomText style={{ fontSize: 26 }}>{this.state.word}</CustomText>
+                                            <InputAnimation />
+                                        </View>
+                                        <TouchableOpacity
+                                            style={styles.submitButton}
+                                            onPress={this.insertWordHandler}
+                                            style={{ width: '25%', height: '90%', justifyContent: 'center' }}>
+                                            <ImageBackground imageStyle={{ height: 50, width: 50, position: 'relative', bottom: '8%' }} source={SendWord} resizeMode="center" style={styles.submitButtonText} />
+                                        </TouchableOpacity>
+                                    </>}
                             </View>
                         </View>
                         <View style={{ flex: 3 }}>
