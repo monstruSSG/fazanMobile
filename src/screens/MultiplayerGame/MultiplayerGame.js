@@ -30,6 +30,7 @@ class MultiplayerGameScreen extends Component {
     state = {
         roundAnimation: new Animated.Value(1),
         lastWordAnimation: new Animated.Value(1),
+        keyboardAnimation: new Animated.Value(1),
         roundNumber: 0,
         gameFinished: false,
         lastWord: '',
@@ -53,6 +54,7 @@ class MultiplayerGameScreen extends Component {
             this.resetTimer()
             this.onGotWordHandler(data.word)
             this.setState({ oponentMoving: false })
+            this.keyboardFadeIn()
         });
 
         this.props.socket.on('gameOver', data => {
@@ -76,6 +78,17 @@ class MultiplayerGameScreen extends Component {
     onGotWordHandler = word => this.setState({ lastWord: word, word: word.slice(-2), showTimer: true }, this.newLatestWordAnimation)
 
     //Animations
+    keyboardFadeOut = () => Animated.timing(this.state.keyboardAnimation, {
+        toValue: 0.4,
+        duration: 300,
+        useNativeDriver: true
+    }).start()
+
+    keyboardFadeIn = () => Animated.timing(this.state.keyboardAnimation, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: true
+    }).start()
     //Round increment animation
     roundIncrementAnimation = () => Animated.timing(this.state.roundAnimation, {
         toValue: 0.97,
@@ -118,7 +131,7 @@ class MultiplayerGameScreen extends Component {
         let { word, usedWords } = this.state;
 
         this.props.socket.emit('sendWord', { word, socketId: this.props.oponentSocketId });
-
+        this.keyboardFadeOut();
         this.setState({ showTimer: false, oponentMoving: true })
     }
 
@@ -232,11 +245,11 @@ class MultiplayerGameScreen extends Component {
                                     </>}
                             </View>
                         </View>
-                        <View style={{ flex: 3 }}>
+                        <Animated.View style={{ flex: 3, opacity: this.state.keyboardAnimation }}>
                             <Keyboard
                                 letterPressed={letter => this.letterPressedHandler(letter)}
                                 deleteLastLetter={() => this.deleteLastLetterHandler()} />
-                        </View>
+                        </Animated.View>
                     </View>
                     <WinModal isVisible={this.state.showWinModal}
                         cu={this.state.lastWord}
