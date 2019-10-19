@@ -138,6 +138,12 @@ class MultiplayerGameScreen extends Component {
         this.setState({ showTimer: false, oponentMoving: true })
     }
 
+    deleteLastLetterHandler = () => {
+        this.setState((prevState) => ({
+            word: prevState.word.length <= 2 ? prevState.word : prevState.word.slice(0, -1)
+        }))
+    }
+
     onTimeExpiredHandler = time => {
         if (time == 0 && !this.state.showLoseModal) {
             return this.props.socket.emit('iLost', { socketId: this.props.oponentSocketId, word: this.state.lastWord })
