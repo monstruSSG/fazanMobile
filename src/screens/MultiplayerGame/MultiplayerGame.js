@@ -39,7 +39,7 @@ class MultiplayerGameScreen extends Component {
         showLoseModal: false,
         showAtentionModal: false,
         showNotExistsModal: false,
-        oponentMoving: false
+        oponentMoving: true
     }
 
     waitingForOponent = word => {
@@ -52,6 +52,7 @@ class MultiplayerGameScreen extends Component {
         this.props.socket.on('gotWord', data => {
             this.resetTimer()
             this.onGotWordHandler(data.word)
+            this.setState({ oponentMoving: false })
         });
 
         this.props.socket.on('gameOver', data => {
@@ -118,12 +119,11 @@ class MultiplayerGameScreen extends Component {
 
         this.props.socket.emit('sendWord', { word, socketId: this.props.oponentSocketId });
 
-        this.setState({ showTimer: false })
+        this.setState({ showTimer: false, oponentMoving: true })
     }
 
     onTimeExpiredHandler = time => {
         if (time == 0) {
-            console.log(time, 'heree')
             return this.props.socket.emit('iLost', { socketId: this.props.oponentSocketId })
         }
     }
