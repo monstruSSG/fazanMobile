@@ -29,6 +29,7 @@ class SingleplayerGameScreen extends Component {
     state = {
         roundAnimation: new Animated.Value(1),
         lastWordAnimation: new Animated.Value(1),
+        keyboardAnimation: new Animated.Value(1),
         roundNumber: 0,
         gameFinished: false,
         lastWord: '',
@@ -52,6 +53,18 @@ class SingleplayerGameScreen extends Component {
     }
 
     //Animations
+    keyboardFadeOut = () => Animated.timing(this.state.keyboardAnimation, {
+        toValue: 0.4,
+        duration: 300,
+        useNativeDriver: true
+    }).start()
+
+    keyboardFadeIn = () => Animated.timing(this.state.keyboardAnimation, {
+        toValue: 1,
+        duration: 300,
+        useNativeDriver: true
+    }).start()
+
     //Round increment animation
     roundIncrementAnimation = () => Animated.timing(this.state.roundAnimation, {
         toValue: 0.97,
@@ -115,7 +128,7 @@ class SingleplayerGameScreen extends Component {
             .then(exists => {
                 if (!exists) return Promise.reject({ message: 'WORD_NOT_EXISTS' });
                 this.resetTimer();
-
+                this.keyboardFadeOut()
                 return this.props.generateWord(this.state.word);
             })
             .then(generatedWord => {
@@ -129,6 +142,7 @@ class SingleplayerGameScreen extends Component {
             })
             .then(exists => {
                 if (!exists) return Promise.reject({ message: 'YOU_LOST' });
+                this.keyboardFadeIn();
             })
             .catch(e => {
                 if (!e.message) return console.log(e);
@@ -240,11 +254,11 @@ class SingleplayerGameScreen extends Component {
                                     </TouchableOpacity>
                                 </View>
                             </View>
-                            <View style={{ flex: 3 }}>
+                            <Animated.View style={{ flex: 3, opacity: this.state.keyboardAnimation }}>
                                 <Keyboard
                                     letterPressed={letter => this.letterPressedHandler(letter)}
                                     deleteLastLetter={() => this.deleteLastLetterHandler()} />
-                            </View>
+                            </Animated.View>
                         </View>
                         <WinModal isVisible={this.state.showWinModal}
                             cu={this.state.lastWord}
