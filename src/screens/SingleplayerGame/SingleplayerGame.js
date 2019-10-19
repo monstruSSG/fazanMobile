@@ -13,10 +13,10 @@ import WinModal from '../../components/Modals/WinModal';
 import AtentionModal from '../../components/Modals/AtentionModal';
 import NotExistsModal from '../../components/Modals/NotExist';
 import Count from '../../components/Modals/StartGameModal';
+import OponentMovingDots from './OponentMovingDots';
+import Header from './Header/Header';
 
 import Background from '../../assets/Stuff/bg.jpg';
-import HeaderBg from '../../assets/Stuff/singleplayerHeader.png';
-import ExitButton from '../../assets/Buttons/exitButton.png';
 import BluePanel from '../../assets/Stuff/bluePanel.png';
 import LastWordImage from '../../assets/Stuff/titleBox.png';
 import SendWord from '../../assets/Buttons/sendWord.png';
@@ -189,26 +189,7 @@ class SingleplayerGameScreen extends Component {
                     <Count count={3} onTimeExpired={this.onCountTimeExiredHandler} /> :
                     <View style={[styles.maxWidthHeight, { alignItems: 'center' }]}>
                         <View style={[{ width: '100%', height: '14%' }]}>
-                            <ImageBackground source={HeaderBg} style={styles.maxWidthHeight} resizeMode='stretch'>
-                                <View style={[styles.maxWidthHeight, { flexDirection: 'row' }]}>
-                                    <View style={[styles.centerContent, { flex: 1 }]}>
-                                        <TouchableOpacity style={[styles.centerContent, styles.exitButtonSize, styles.exitButtonPosition]}
-                                            onPress={() => this.setState({ showAtentionModal: true })}>
-                                            <Image source={ExitButton} style={[styles.maxWidthHeight]} resizeMode='stretch' />
-                                        </TouchableOpacity>
-                                    </View>
-                                    <View style={[styles.centerContent, { flex: 1 }]}>
-                                        <CustomText large style={[styles.headerText]}>ROBOT</CustomText>
-                                    </View>
-                                    <View style={[styles.centerContent, { flex: 1 }]}>
-                                        <View style={[styles.centerContent, { flex: 1 }]}>
-                                            {this.state.showTimer ? <Timer style={styles.counter}
-                                                onTimeExpired={count => this.onTimeExpiredHandler(count)}
-                                                count={20} /> : null}
-                                        </View>
-                                    </View>
-                                </View>
-                            </ImageBackground>
+                            <Header headerTitle='ROBOT' count={20} showTimer={this.state.showTimer} onTimeExpired={this.onTimeExpiredHandler}/>
                         </View>
                         <View style={[styles.centerContent, { width: '100%', height: '50%' }]}>
                             <View style={[styles.centerContent, { width: '30%', flex: 1, position: 'relative', top: '10%' }]}>
@@ -243,15 +224,19 @@ class SingleplayerGameScreen extends Component {
                         <View style={[{ flex: 1 }, styles.centerContent]}>
                             <View style={{ flex: 1, flexDirection: 'row' }}>
                                 <View style={{ width: '80%', flexDirection: 'row', justifyContent: 'center', borderBottomColor: '#FBFFB7', borderBottomWidth: 5 }}>
-                                    <View style={{ width: '60%', height: '90%', justifyContent: 'center' }}>
-                                        <CustomText style={{ fontSize: 26 }}>{this.state.word}</CustomText>
-                                    </View>
-                                    <TouchableOpacity
-                                        style={styles.submitButton}
-                                        onPress={this.onInserWordHandler}
-                                        style={{width: '25%', height: '90%', justifyContent: 'center'}}>
-                                        <ImageBackground imageStyle={{height: 50, width: 50, position: 'relative', bottom: '8%'}} source={SendWord} resizeMode="center" style={styles.submitButtonText} />
-                                    </TouchableOpacity>
+                                    {true ?
+                                        <OponentMovingDots message='RANDUL OPONENTULUI' /> :
+                                        <>
+                                            <View style={{ width: '60%', height: '90%', justifyContent: 'center' }}>
+                                                <CustomText style={{ fontSize: 26 }}>{this.state.word}</CustomText>
+                                            </View>
+                                            <TouchableOpacity
+                                                style={styles.submitButton}
+                                                onPress={this.onInserWordHandler}
+                                                style={{ width: '25%', height: '90%', justifyContent: 'center' }}>
+                                                <ImageBackground imageStyle={{ height: 50, width: 50, position: 'relative', bottom: '8%' }} source={SendWord} resizeMode="center" style={styles.submitButtonText} />
+                                            </TouchableOpacity>
+                                        </>}
                                 </View>
                             </View>
                             <Animated.View style={{ flex: 3, opacity: this.state.keyboardAnimation }}>
