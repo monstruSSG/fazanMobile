@@ -35,7 +35,7 @@ class Login extends Component {
         .then(res => login({ fbToken: res.accessToken }))
         .then(data => Promise.all([
             this.props.saveToken(data.token),
-            AsyncStorage.setItem('token', data.token),
+            AsyncStorage.setItem('token', data.token),  
             this.createSocketConnection(data.token)
         ]))
         .then(() => {

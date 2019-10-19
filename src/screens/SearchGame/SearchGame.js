@@ -3,6 +3,7 @@ import { Platform, BackHandler, View, StyleSheet, FlatList, ImageBackground, Ima
 import { connect } from 'react-redux';
 import { withNavigation } from 'react-navigation';
 import AsyncStorage from '@react-native-community/async-storage';
+import { LoginManager } from 'react-native-fbsdk';
 
 import * as SOCKET from '../../store/actions/socket';
 import * as USER from '../../store/actions/user';
@@ -177,6 +178,7 @@ class SearchGameScreen extends Component {
                                     onLogout={() => AsyncStorage.removeItem('token').then(() => {
                                         this.props.deleteToken();
                                         this.navigateHomeScreen();
+                                        LoginManager.logOut();
                                     })}
                                     isVisible={this.state.sideState}
                                     onClose={this.closeSideDrawerHandler} />
