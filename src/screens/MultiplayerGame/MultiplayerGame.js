@@ -199,7 +199,7 @@ class MultiplayerGameScreen extends Component {
                                     <View style={[styles.centerContent, { flex: 1 }]}>
                                         {this.state.showTimer === true ? <Timer style={styles.counter}
                                             onTimeExpired={count => this.onTimeExpiredHandler(count)}
-                                            count={15} /> : null}
+                                            count={15} /> : <CustomText normal>OP</CustomText>}
                                     </View>
                                 </View>
                             </View>
@@ -264,7 +264,7 @@ class MultiplayerGameScreen extends Component {
                     </View>
                     <WinModal isVisible={this.state.showWinModal}
                         cu={this.state.lastWord}
-                        oponent='ROBOT'
+                        oponent={this.props.oponentName}
                         rounds={this.state.roundNumber}
                         restart={this.restartGame}
                         home={this.navigateSearchGame}
@@ -273,7 +273,7 @@ class MultiplayerGameScreen extends Component {
                         mp />
                     <LoseModal isVisible={this.state.showLoseModal}
                         cu={this.state.lastWord}
-                        oponent='ROBOT'
+                        oponent={this.state.oponentName}
                         rounds={this.state.roundNumber}
                         restart={this.restartGame}
                         home={this.navigateSearchGame}
@@ -370,7 +370,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
     socket: state.socket.socket,
-    oponentSocketId: state.socket.oponentSocketId
+    oponentSocketId: state.socket.oponentSocketId,
+    oponentName: state.user.oponentName
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -18,7 +18,6 @@ import CustomText from '../../components/UI/Text/Text';
 
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
 import PlayButton from '../../assets/Buttons/greenLabel.png';
-import NoOponentImage from '../../assets/Modals/warning.png';
 
 class SearchGameScreen extends Component {
     static navigationOptions = {
@@ -110,6 +109,7 @@ class SearchGameScreen extends Component {
         this.props.socket.emit('playRandom');
 
         this.props.socket.on('startGame', data => {
+            this.props.setOponentName(data.oponentName);
             this.setState({ showWaitingModal: false });
             this.props.setOponentSocketId(data.socketId);
             this.navigateMultiplayerScreen();
@@ -250,7 +250,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     setOponentSocketId: socketId => dispatch(SOCKET.setOponentSocketId(socketId)),
-    deleteToken: () => dispatch(USER.deleteToken())
+    deleteToken: () => dispatch(USER.deleteToken()),
+    setOponentName: name => dispatch(USER.setOponentName(name))
 });
 
 export default connect(

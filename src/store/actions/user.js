@@ -1,4 +1,4 @@
-import { SAVE_TOKEN, DELETE_TOKEN} from './actionTypes';
+import { SAVE_TOKEN, DELETE_TOKEN, OPONENT_NAME} from './actionTypes';
 
 export const saveToken = token => dispatch => {
     dispatch({
@@ -13,4 +13,12 @@ export const deleteToken = () => dispatch => {
         type: DELETE_TOKEN
     });
     return Promise.resolve();        
+}
+
+export const setOponentName = name => dispatch => {
+    dispatch({
+        type: OPONENT_NAME,
+        payload: name
+    });
+    return Promise.resolve();  
 }

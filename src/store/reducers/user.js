@@ -1,7 +1,8 @@
-import { SAVE_TOKEN, DELETE_TOKEN } from '../actions/actionTypes';
+import { SAVE_TOKEN, DELETE_TOKEN, OPONENT_NAME } from '../actions/actionTypes';
 
 const initialState = {
-    token: null
+    token: null,
+    oponentName: null
 };
 
 const userReducer = (state = initialState, action) => {
@@ -15,6 +16,11 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 token: null
+            }
+        case OPONENT_NAME:
+            return {
+                ...state,
+                oponentName: action.payload
             }
         default:
             return state;
