@@ -68,7 +68,7 @@ class SearchGameScreen extends Component {
 
         this.getUsersHandler();
         getMe(this.props.token)
-            .then(user => this.setState({ user: user.user, loading: false }, () => console.log(this.state.user)));
+            .then(user => this.setState({ user: user.user, loading: false }));
     }
 
     _keyboardDidShow = () => this.setState({ showPlayButton: false })
@@ -109,6 +109,7 @@ class SearchGameScreen extends Component {
         this.props.socket.emit('playRandom');
 
         this.props.socket.on('startGame', data => {
+            console.log(data, 'DATA')
             this.props.setOponentName(data.opponentName);
             this.setState({ showWaitingModal: false });
             this.props.setOponentSocketId(data.socketId);
