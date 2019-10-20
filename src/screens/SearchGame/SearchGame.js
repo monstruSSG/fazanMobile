@@ -110,7 +110,6 @@ class SearchGameScreen extends Component {
         this.props.socket.emit('playRandom');
 
         this.props.socket.on('startGame', data => {
-            console.log(data, 'DATAAAA')
             this.setState({ showWaitingModal: false });
             this.props.setOponentSocketId(data.socketId);
             this.navigateMultiplayerScreen();
@@ -129,7 +128,6 @@ class SearchGameScreen extends Component {
     onChangeText = text => {
         this.search = text;
         this.from = 0;
-        console.log(this.from, this.search)
         this.getUsersHandler();
     }
 
@@ -148,7 +146,7 @@ class SearchGameScreen extends Component {
                                     />
                                 </View>
                                 <View style={styles.oponentList}>
-                                    {this.state.users.length > 0 ? <FlatList
+                                    {this.state.users.length > 1 ? <FlatList
                                         data={this.state.users.map(user => {
                                             return ({ ...user, key: user._id || 'asdasd' })
                                         })}
@@ -157,12 +155,11 @@ class SearchGameScreen extends Component {
                                             points={item.score || 123}
                                             picture={item.picture || false}
                                         />}
-                                    onEndReached={() => {
-                                        console.log('HEREEE')
-                                        this.limit += 10;
-                                        if (this.limit <= this.usersCount) this.getUsersHandler();
-                                    }}
-                                    /> : <Image source={NoOponentImage} style={styles.max}  resizeMode='stretch'/>}
+                                        onEndReached={() => {
+                                            this.limit += 10;
+                                            if (this.limit <= this.usersCount) this.getUsersHandler();
+                                        }}
+                                    /> : <CustomText large style={{ textAlign: 'center' }}>Nu sunt {'\n'} useri {'\n'} conectati</CustomText>}
                                 </View>
                                 {this.state.showPlayButton ?
                                     <View style={[styles.playGameButton, styles.center]}>
