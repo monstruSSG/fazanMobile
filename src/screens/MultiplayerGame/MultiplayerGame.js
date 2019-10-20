@@ -61,6 +61,8 @@ class MultiplayerGameScreen extends Component {
 
         this.props.socket.on('gameOver', data => {
             this.setState({ showLoseModal: true, showTimer: false })
+            this.props.socket.off('gameOver')
+            this.props.socket.off('youWon')
         })
 
         this.props.socket.on('oponentIsThinking', data => this.watingForOponent(data.word))
@@ -68,6 +70,8 @@ class MultiplayerGameScreen extends Component {
         this.props.socket.on('youWon', data => {
             //oponentDisconnected timeExipired
             this.setState({ showWinModal: true })
+            this.props.socket.off('gameOver')
+            this.props.socket.off('youWon')
         })
 
         this.props.socket.on('wordNotExists', data => this.wordNotExistsHandler(data.exists))
