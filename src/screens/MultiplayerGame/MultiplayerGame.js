@@ -14,7 +14,7 @@ import Background from '../../assets/Stuff/bg.jpg';
 import CustomText from '../../components/UI/Text/Text';
 import InputAnimation from '../../screens/SingleplayerGame/InputAnimation';
 import OponentMoving from '../../screens/SingleplayerGame/OponentMovingDots';
-
+import * as WORDS from '../../store/actions/words';
 
 import HeaderBg from '../../assets/Stuff/singleplayerHeader.png';
 import ExitButton from '../../assets/Buttons/exitButton.png';
@@ -138,9 +138,14 @@ class MultiplayerGameScreen extends Component {
     insertWordHandler = () => {
         let { word, usedWords } = this.state;
 
-        this.props.socket.emit('sendWord', { word, socketId: this.props.oponentSocketId });
-        this.keyboardFadeOut();
-        this.setState({ showTimer: false, oponentMoving: true })
+        return this.props.checkWordExists(word)
+            .then(exist => {
+                if (!exist) return alert('WORD DOES NOT EXIST');
+
+                this.props.socket.emit('sendWord', { word, socketId: this.props.oponentSocketId });
+                this.keyboardFadeOut();
+                this.setState({ showTimer: false, oponentMoving: true })
+            })
     }
 
     deleteLastLetterHandler = () => {
@@ -150,7 +155,7 @@ class MultiplayerGameScreen extends Component {
     }
 
     onTimeExpiredHandler = time => {
-        if (time < 0 ) {
+        if (time < 0) {
             return this.props.socket.emit('iLost', { socketId: this.props.oponentSocketId, word: this.state.lastWord })
         }
     }
@@ -380,7 +385,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    closeSocketConnection: () => dispatch(SOCKET.closeSocketConnection())
+    closeSocketConnection: () => dispatch(SOCKET.closeSocketConnection()),
+    checkWordExists: word => dispatch(WORDS.checkWordExists(word))
 });
 
 export default connect(

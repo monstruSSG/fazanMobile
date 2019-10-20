@@ -3,7 +3,6 @@ import { View, Text, TouchableOpacity, StyleSheet, TextInput } from 'react-nativ
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import CONSTANTS from '../../utils/constants';
-import CustomInput from '../../components/UI/DefaultInput/DefaultInput';
 
 const textSize = Math.floor(CONSTANTS.screenWidth / 16);
 
