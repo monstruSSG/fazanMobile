@@ -19,7 +19,7 @@ const atention = props => (
                     <CustomText large>ATENTIE!!</CustomText>
                 </View>
                 <View style={[{ flex: 1 }, styles.center]}>
-                    <CustomText normal>DACA PARASESTI MECIUL VEI PIERDE...</CustomText>
+                    <CustomText style={{textAlign: 'center'}} normal>DACA PARASESTI MECIUL VEI PIERDE...</CustomText>
                 </View>
                 <View style={[{ flex: 1, flexDirection: 'row', justifyContent: 'center' }]}>
                     <View style={[styles.half]}>
