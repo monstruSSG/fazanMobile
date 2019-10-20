@@ -229,7 +229,9 @@ class MultiplayerGameScreen extends Component {
                                     style={[styles.maxWidthHeight]}
                                     resizeMode='stretch'>
                                     <Animated.View style={[styles.centerContent, { width: '100%', height: '60%' }, lastWordScale]}>
-                                        <CustomText large style={styles.lastWord}>{this.state.lastWord}</CustomText>
+                                        {!this.state.oponentMoving ?
+                                            <CustomText large style={styles.lastWord}>{this.state.lastWord}</CustomText> :
+                                            <OponentMoving style={styles.oponentMovingLastWord} message='' />}
                                     </Animated.View>
                                 </ImageBackground>
                             </View>
@@ -293,6 +295,10 @@ class MultiplayerGameScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+    oponentMovingLastWord: {
+        position: 'relative',
+        top: '3%'
+    },
     lastWord: {
         position: 'relative',
         top: '32%'
