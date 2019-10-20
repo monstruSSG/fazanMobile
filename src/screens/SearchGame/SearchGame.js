@@ -98,7 +98,7 @@ class SearchGameScreen extends Component {
                 picture: user.pictureUrl,
                 _id: user._id
             }))
-        }))
+        }, () => console.log(result)))
 
     navigateMultiplayerScreen = () => this.props.navigation.navigate('Multiplayer');
     navigateHomeScreen = () => this.props.navigation.navigate('Home');
@@ -128,6 +128,8 @@ class SearchGameScreen extends Component {
 
     onChangeText = text => {
         this.search = text;
+        this.from = 0;
+        console.log(this.from, this.search)
         this.getUsersHandler();
     }
 
@@ -155,11 +157,11 @@ class SearchGameScreen extends Component {
                                             points={item.score || 123}
                                             picture={item.picture || false}
                                         />}
-                                    // onEndReached={() => {
-                                    //     this.from += 10;
-                                    //     this.limit += 10;
-                                    //     if (this.limit <= this.usersCount) this.getUsersHandler();
-                                    // }}
+                                    onEndReached={() => {
+                                        console.log('HEREEE')
+                                        this.limit += 10;
+                                        if (this.limit <= this.usersCount) this.getUsersHandler();
+                                    }}
                                     /> : <Image source={NoOponentImage} style={styles.max}  resizeMode='stretch'/>}
                                 </View>
                                 {this.state.showPlayButton ?

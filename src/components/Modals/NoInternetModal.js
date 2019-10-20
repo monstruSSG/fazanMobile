@@ -18,8 +18,7 @@ export default props => (
 const styles = StyleSheet.create({
     exitButtonPressArea: {
         width: '20%',
-        height: '100%',
-        backgroundColor: 'green'
+        height: '100%'
     },
     exitButton: {
         width: '100%',

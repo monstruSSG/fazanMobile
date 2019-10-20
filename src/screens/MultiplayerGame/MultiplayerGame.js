@@ -75,7 +75,7 @@ class MultiplayerGameScreen extends Component {
     }
 
     componentWillUnmount() {
-        if(!this.state.showLoseModal)return this.props.socket.emit('exitGame', { socketId: this.props.oponentSocketId });
+        if (!this.state.showLoseModal) return this.props.socket.emit('exitGame', { socketId: this.props.oponentSocketId });
     }
 
     onGotWordHandler = word => this.setState({ lastWord: word, word: word.slice(-2), showTimer: true }, this.newLatestWordAnimation)
@@ -197,7 +197,7 @@ class MultiplayerGameScreen extends Component {
                                 </View>
                                 <View style={[styles.centerContent, { flex: 1 }]}>
                                     <View style={[styles.centerContent, { flex: 1 }]}>
-                                        {this.state.showTimer ? <Timer style={styles.counter}
+                                        {this.state.showTimer === true ? <Timer style={styles.counter}
                                             onTimeExpired={count => this.onTimeExpiredHandler(count)}
                                             count={15} /> : null}
                                     </View>
@@ -267,14 +267,17 @@ class MultiplayerGameScreen extends Component {
                         restart={this.restartGame}
                         home={this.navigateSearchGame}
                         onClose={this.navigateHomeHandler}
-                        to='Online' />
+                        to='SEARCH'
+                        mp />
                     <LoseModal isVisible={this.state.showLoseModal}
                         cu={this.state.lastWord}
                         oponent='ROBOT'
                         rounds={this.state.roundNumber}
                         restart={this.restartGame}
                         home={this.navigateSearchGame}
-                        onClose={this.navigateHomeHandler} />
+                        onClose={this.navigateHomeHandler}
+                        to='SEARCH'
+                        mp />
                     <AtentionModal isVisible={this.state.showAtentionModal}
                         onContinue={() => this.setState({ showAtentionModal: false })}
                         onClose={this.navigateHomeHandler}

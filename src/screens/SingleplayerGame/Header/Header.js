@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         right: '25%',
         bottom: '5%',
         width: '40%',
-        height: '55%'
+        height: '60%'
     }
 });
 

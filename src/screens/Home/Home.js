@@ -16,7 +16,6 @@ import ProfileButton from '../../assets/Buttons/locked.png';
 import Crown from '../../assets/Stuff/1st.png';
 import SinglePlayerTitle from '../../assets/Modals/titleShadow.png';
 import MultiplayerTitle from '../../assets/Stuff/titleBox.png';
-
 import NoInternet from '../../components/Modals/NoInternetModal'
 
 class HomeScreen extends Component {
@@ -26,12 +25,22 @@ class HomeScreen extends Component {
 
     state = {
         showAbout: false,
-        logged: false
+        logged: false,
+        showNoInternet: false,
+        isConnected: false
     }
 
     navigateSingleplayerScreen = () => this.props.navigation.navigate('Singleplayer');
-    navigateProfileScreen = () => this.state.logged ? this.props.navigation.navigate('Profile') : this.props.navigation.navigate('Login');
-    navigateSearchGameScreen = () => this.state.logged ? this.props.navigation.navigate('SearchGame') : this.props.navigation.navigate('Login');
+    navigateProfileScreen = () => {
+        if (!this.state.isConnected) return this.setState({ showNoInternet: true });
+
+        return this.state.logged ? this.props.navigation.navigate('Profile') : this.props.navigation.navigate('Login')
+    }
+    navigateSearchGameScreen = () => {
+        if (!this.state.isConnected) return this.setState({ showNoInternet: true });
+
+        return this.state.logged ? this.props.navigation.navigate('SearchGame') : this.props.navigation.navigate('Login')
+    }
 
     readToken = () => AsyncStorage.getItem('token')
         .then(token => isLogged(token)
@@ -43,11 +52,20 @@ class HomeScreen extends Component {
             .catch(() => this.setState({ logged: false })));
 
     componentDidMount() {
+        this.netInfoListener = NetInfo.addEventListener(state => {
+            this.setState({ isConnected: state.isConnected });
+        });
         this.readToken();
-        this.didBlurSubscription = this.props.navigation.addListener('didFocus', () => this.readToken());
+        this.didBlurSubscription = this.props.navigation.addListener('didFocus', () => {
+            this.netInfoListener = NetInfo.addEventListener(state => {
+                this.setState({ isConnected: state.isConnected });
+            });
+            this.readToken()
+        });
     }
 
     componentWillUnmount() {
+        this.netInfoListener();
         this.didBlurSubscription.remove();
     }
 
@@ -108,7 +126,9 @@ class HomeScreen extends Component {
                     <AboutModal
                         isVisible={this.state.showAbout}
                         onClose={() => this.setState({ showAbout: false })} />
-                    {/* <NoInternet /> */}
+                    <NoInternet
+                        isVisible={this.state.showNoInternet}
+                        onClose={() => this.setState({ showNoInternet: false })} />
                 </View>
             </ImageBackground>
         );

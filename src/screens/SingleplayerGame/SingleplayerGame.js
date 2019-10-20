@@ -50,7 +50,10 @@ class SingleplayerGameScreen extends Component {
         this.props.connectToDb()
             .then(() => {
                 this.props.generateStartWord()
-                    .then(word => this.setState({ lastWord: word, word: word.slice(-2), showTimer: true }))
+                    .then(word => {
+                        console.log(word, 'WORDD')
+                        this.setState({ lastWord: word, word: word.slice(-2), showTimer: true })
+                    })
                     .catch(e => console.log(e))
             })
 
@@ -146,6 +149,7 @@ class SingleplayerGameScreen extends Component {
                 return this.props.generateWord(this.state.word);
             })
             .then(generatedWord => {
+                console.log(generatedWord, 'EXISTA')
                 if (!generatedWord) return Promise.reject({ message: 'YOU_WON' });
 
                 //Here the 'AI' generates a word
@@ -160,7 +164,7 @@ class SingleplayerGameScreen extends Component {
                 this.keyboardFadeIn();
             })
             .catch(e => {
-                if (!e.message) return console.log(e);
+                console.log(e, 'EROARE')
 
                 if (e.message === 'YOU_LOST') {
                     return this.setState({ showLoseModal: true });
