@@ -17,6 +17,9 @@ import Crown from '../../assets/Stuff/1st.png';
 import SinglePlayerTitle from '../../assets/Modals/titleShadow.png';
 import MultiplayerTitle from '../../assets/Stuff/titleBox.png';
 import NoInternet from '../../components/Modals/NoInternetModal'
+import CONSTANTS from '../../utils/constants';
+
+const logoTextSize = Math.floor(CONSTANTS.screenWidth / 4);
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -81,7 +84,7 @@ class HomeScreen extends Component {
                                 <Image resizeMode="contain" source={Crown} />
                             </View>
                             <View style={[styles.titleTextWrapper]}>
-                                <Text style={styles.titeText}>FAZAN</Text>
+                                <Text style={[styles.titeText, { fontSize: logoTextSize }]}>FAZAN</Text>
                             </View>
                         </View>
                     </View>
@@ -165,7 +168,6 @@ const styles = StyleSheet.create({
     titeText: {
         fontFamily: 'Troika',
         color: '#FBFFB7',
-        fontSize: 96,
         letterSpacing: 8,
     },
     content: {
