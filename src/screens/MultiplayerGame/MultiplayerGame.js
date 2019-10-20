@@ -48,9 +48,8 @@ class MultiplayerGameScreen extends Component {
     }
 
     componentDidMount() {
-        this.resetTimer();
-
         this.props.socket.on('gotWord', data => {
+            this.resetTimer();
             this.setState(prevState => ({
                 roundNumber: prevState.roundNumber + 1
             }));
