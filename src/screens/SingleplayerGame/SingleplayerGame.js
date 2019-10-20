@@ -7,7 +7,6 @@ import Keyboard from '../../components/UI/Keyboard/Keyboard';
 import * as WORDS from '../../store/actions/words';
 import CONSTANTS from '../../utils/constants';
 import CustomText from '../../components/UI/Text/Text';
-import Timer from '../../components/Timer/Timer';
 import LoseModal from '../../components/Modals/LoseModal';
 import WinModal from '../../components/Modals/WinModal';
 import AtentionModal from '../../components/Modals/AtentionModal';
@@ -37,7 +36,7 @@ class SingleplayerGameScreen extends Component {
         lastWord: '',
         word: '',
         usedWords: [],
-        showTimer: false,
+        showTimer: true,
         showWinModal: false,
         showLoseModal: false,
         showAtentionModal: false,
@@ -51,7 +50,6 @@ class SingleplayerGameScreen extends Component {
             .then(() => {
                 this.props.generateStartWord()
                     .then(word => {
-                        console.log(word, 'WORDD')
                         this.setState({ lastWord: word, word: word.slice(-2), showTimer: true })
                     })
                     .catch(e => console.log(e))
@@ -149,7 +147,6 @@ class SingleplayerGameScreen extends Component {
                 return this.props.generateWord(this.state.word);
             })
             .then(generatedWord => {
-                console.log(generatedWord, 'EXISTA')
                 if (!generatedWord) return Promise.reject({ message: 'YOU_WON' });
 
                 //Here the 'AI' generates a word
@@ -208,7 +205,12 @@ class SingleplayerGameScreen extends Component {
                     <Count count={3} onTimeExpired={this.onCountTimeExiredHandler} /> :
                     <View style={[styles.maxWidthHeight, { alignItems: 'center' }]}>
                         <View style={[{ width: '100%', height: '14%' }]}>
-                            <Header onExitPressed={() => this.setState({ showAtentionModal: true })} headerTitle='ROBOT' count={20} showTimer={this.state.showTimer} onTimeExpired={this.onTimeExpiredHandler} />
+                            <Header
+                                onExitPressed={() => this.setState({ showAtentionModal: true })}
+                                headerTitle='ROBOT'
+                                count={20}
+                                showTimer={this.state.showTimer}
+                                onTimeExpired={this.onTimeExpiredHandler} />
                         </View>
                         <View style={[styles.centerContent, { width: '100%', height: '50%' }]}>
                             <View style={[styles.centerContent, { width: '30%', flex: 1, position: 'relative', top: '10%' }]}>
@@ -234,7 +236,9 @@ class SingleplayerGameScreen extends Component {
                                         style={[styles.maxWidthHeight]}
                                         resizeMode='stretch'>
                                         <Animated.View style={[styles.centerContent, { width: '100%', height: '60%' }, lastWordScale]}>
-                                            <CustomText normal style={styles.lastWord}>{this.state.lastWord}</CustomText>
+                                            {!this.state.oponentMoving ?
+                                                <CustomText normal style={styles.lastWord}>{this.state.lastWord}</CustomText> :
+                                                <OponentMovingDots style={styles.lastWordOponentMoving} message='' />}
                                         </Animated.View>
                                     </ImageBackground>
                                 </View>
@@ -297,6 +301,10 @@ class SingleplayerGameScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+    lastWordOponentMoving: {
+        position: 'relative',
+        top: '3%'
+    },
     lastWord: {
         position: 'relative',
         top: '32%'

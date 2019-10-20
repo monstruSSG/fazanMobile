@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { View, Animated, StyleSheet } from 'react-native';
 
 import CustomText from '../../components/UI/Text/Text';
+import CONSTANTS from '../../utils/constants';
+
+const textSize = Math.floor(CONSTANTS.screenWidth / 15);
 
 export default class OponentMovingDots extends Component {
     state = {
@@ -59,11 +62,11 @@ export default class OponentMovingDots extends Component {
 
     render() {
         return (
-            <View style={[styles.content]}>
-                <View><CustomText>{this.props.message}</CustomText></View>
-                <Animated.View style={{opacity: this.state.first}}><CustomText>.</CustomText></Animated.View>
-                <Animated.View style={{opacity: this.state.secound}}><CustomText>.</CustomText></Animated.View>
-                <Animated.View style={{opacity: this.state.third}}><CustomText>.</CustomText></Animated.View>
+            <View style={[styles.content, this.props.style]}>
+                <View><CustomText style={{ fontSize: textSize }}>{this.props.message}</CustomText></View>
+                <Animated.View style={{ opacity: this.state.first }}><CustomText style={{ fontSize: textSize }}>.</CustomText></Animated.View>
+                <Animated.View style={{ opacity: this.state.secound }}><CustomText style={{ fontSize: textSize }}>.</CustomText></Animated.View>
+                <Animated.View style={{ opacity: this.state.third }}><CustomText style={{ fontSize: textSize }}>.</CustomText></Animated.View>
             </View>
         );
     }
