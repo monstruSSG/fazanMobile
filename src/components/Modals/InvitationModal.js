@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Modal, StyleSheet, TouchableOpacity, Image, ImageBackground } from 'react-native';
 
-import WarningBackground from '../../assets/Modals/warningBack.png';
+import WarningBackground from '../../assets/Modals/acceptwaitmodal.png';
 import ExitButton from '../../assets/Buttons/exitButton.png';
 import RedButton from '../../assets/Buttons/redbutton.png';
 import GreenButton from '../../assets/Buttons/greenbutton.png';
@@ -29,32 +29,27 @@ class InvitationModal extends Component {
                 }}>
                     <View style={styles.container}>
 
-                        <ImageBackground source={WarningBackground} resizeMode="stretch" style={styles.backgroundImageContainer}>
+                        <ImageBackground source={WarningBackground} resizeMode="center" style={styles.backgroundImageContainer}>
                             <View style={styles.titleContainer}>
+                                <Text style={{position: 'relative', top: '30%', left: '27%'}} large>INVITATIE</Text>
                                 <TouchableOpacity onPress={this.props.onClose}>
-                                    <ImageBackground style={styles.buttonTopImage} resizeMode="contain" source={ExitButton}>
-                                    </ImageBackground>
+                                    <Image style={styles.buttonTopImage} resizeMode="contain" source={ExitButton} />
                                 </TouchableOpacity>
-                                <ImageBackground resizeMode="stretch" style={styles.titleImage} source={Title}>
-                                    <View style={[styles.centerItems, styles.max, styles.titleTextContainer]}>
-                                        <Text color="white" style={styles.titleText}>INVITATIE</Text>
-                                    </View>
-                                </ImageBackground>
                             </View>
                             <View style={styles.usersContainerWrapper}>
                                 <View style={{ flex: 3 }}>
-                                    <Text style={{ fontFamily: 'Troika', textAlign: 'center', paddingTop: '10%' }} normal color='white'>Ai primit o invitatie de la Silviu</Text>
-                                    <Text style={{ fontFamily: 'Troika', textAlign: 'center', paddingTop: '10%' }} normal color='white'>Ce ai de gand sa faci?</Text>
+                                    <Text style={{ fontFamily: 'Troika', textAlign: 'center', paddingTop: '20%', paddingRight: '7%' }} normal color='white'>Ai primit o invitatie de la Silviu</Text>
+                                    <Text style={{ fontFamily: 'Troika', textAlign: 'center', paddingTop: '10%', paddingRight: '7%' }} normal color='white'>Ce ai de gand sa faci?</Text>
                                 </View>
                                 <View style={{ flex: 1, flexDirection: 'row', width: '100%', alignItems: 'flex-end', justifyContent: 'center' }}>
-                                    <TouchableOpacity style={{ flex: 1, paddingLeft: '5%' }} onPress={this.props.onClose}>
+                                    <TouchableOpacity style={{ flex: 1 }} onPress={this.props.onClose}>
                                         <ImageBackground style={styles.buttonImage} resizeMode="contain" source={RedButton}>
-                                            <Text style={{ fontFamily: 'Troika', position: 'relative', left: '25%', top: '32%' }}>REFUZA</Text>
+                                            <Text style={{ fontFamily: 'Troika', position: 'relative', left: '25%', top: '30%' }}>REFUZA</Text>
                                         </ImageBackground>
                                     </TouchableOpacity>
                                     <TouchableOpacity style={{ flex: 1, paddingLeft: '8%' }} onPress={this.props.onClose}>
                                         <ImageBackground style={styles.buttonImage} resizeMode="contain" source={GreenButton}>
-                                            <Text style={{ fontFamily: 'Troika', position: 'relative', left: '25%', top: '32%' }}>ACCEPTA</Text>
+                                            <Text style={{ fontFamily: 'Troika', position: 'relative', left: '25%', top: '30%' }}>ACCEPTA</Text>
                                         </ImageBackground>
                                     </TouchableOpacity>
                                 </View>
@@ -112,11 +107,11 @@ const styles = StyleSheet.create({
     buttonTopImage: {
         width: "100%",
         height: "100%",
-        left: '45%',
-        bottom: "20%"
+        left: '40%',
+        bottom: '40%'
     },
     buttonImage: {
-        width: '100%',
+        width: '95%',
         height: '100%'
     },
     usersContainerWrapper: {

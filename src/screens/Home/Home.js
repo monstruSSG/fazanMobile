@@ -3,7 +3,7 @@ import { View, StyleSheet, Image, Text, ImageBackground, TouchableOpacity } from
 import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import WaitingModal from '../../components/Modals/InvitationModal'
+import WaitingModal from '../../components/Modals/WaitingModal'
 import CustomText from '../../components/UI/Text/Text';
 import AboutModal from '../../components/Modals/AboutModal';
 import { saveToken } from '../../store/actions/user';
@@ -106,9 +106,6 @@ class HomeScreen extends Component {
                     <AboutModal
                         isVisible={this.state.showAbout}
                         onClose={() => this.setState({ showAbout: false })} />
-                    <WaitingModal 
-                        isVisible={true}
-                        />
                 </View>
             </ImageBackground>
         );

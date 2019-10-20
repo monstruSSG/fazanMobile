@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { View, Modal, StyleSheet, TouchableOpacity, Image, ImageBackground } from 'react-native';
 
-import WarningBackground from '../../assets/Modals/warningBack.png';
+import WarningBackground from '../../assets/Modals/acceptwaitmodal.png';
 import ExitButton from '../../assets/Buttons/exitButton.png';
 import RedButton from '../../assets/Buttons/redbutton.png';
-import GreenButton from '../../assets/Buttons/greenbutton.png';
 import Title from '../../assets/Modals/titleShadow.png';
 
 import Text from '../../components/UI/Text/Text';
@@ -29,27 +28,21 @@ class WaitingModal extends Component {
                     }}>
                         <View style={styles.container}>
 
-                            <ImageBackground source={WarningBackground} resizeMode="stretch" style={styles.backgroundImageContainer}>
+                            <ImageBackground source={WarningBackground} resizeMode="center" style={styles.backgroundImageContainer}>
+                                <Text style={{ position: 'relative', top: '4%'}} large>CAUTARE</Text>
                                 <View style={styles.titleContainer}>
                                     <TouchableOpacity onPress={this.props.onClose}>
-                                        <ImageBackground style={styles.buttonTopImage} resizeMode="contain" source={ExitButton}>
-                                        </ImageBackground>
+                                        <Image style={styles.buttonTopImage} resizeMode="contain" source={ExitButton} />
                                     </TouchableOpacity>
-                                    <ImageBackground resizeMode="stretch" style={styles.titleImage} source={Title}>
-                                        <View style={[styles.centerItems, styles.max, styles.titleTextContainer]}>
-                                            <Text color="white" style={styles.titleText}>CAUTARE</Text>
-                                        </View>
-                                    </ImageBackground>
                                 </View>
                                 <View style={styles.usersContainerWrapper}>
                                     <View style={{ flex: 3 }}>
-                                        <Text style={{ fontFamily: 'Troika', textAlign: 'center', paddingTop: '10%' }} normal color='white'>Asteptam dupa jucatori disponibil!</Text>
-                                        
+                                        <Text style={{ fontFamily: 'Troika', textAlign: 'center', paddingTop: '20%', paddingRight: '5%' }} normal color='white'>Asteptam dupa jucatori disponibil!</Text>
                                     </View>
                                     <View style={{ flex: 1, flexDirection: 'row', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
-                                        <TouchableOpacity style={{ flex: 1, paddingLeft: '5%' }} onPress={this.props.onClose}>
+                                        <TouchableOpacity style={{ flex: 1, paddingRight: '8%'}} onPress={this.props.onClose}>
                                             <ImageBackground style={styles.buttonImage} resizeMode="contain" source={RedButton}>
-                                                <Text normal style={{ fontFamily: 'Troika', position: 'relative', left: '34%', top: '25%' }}>RENUNTA</Text>
+                                                <Text normal style={{ fontFamily: 'Troika', position: 'relative', left: '35%', top: '25%' }}>RENUNTA</Text>
                                             </ImageBackground>
                                         </TouchableOpacity>
                                     </View>
@@ -107,8 +100,8 @@ const styles = StyleSheet.create({
     buttonTopImage: {
         width: "100%",
         height: "100%",
-        left: '45%',
-        bottom: "20%"
+        left: '40%',
+        bottom: "35%",
     },
     buttonImage: {
         width: '100%',
