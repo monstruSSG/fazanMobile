@@ -74,7 +74,7 @@ class MultiplayerGameScreen extends Component {
             this.props.socket.off('youWon')
         })
 
-        this.props.socket.on('wordNotExists', data => this.wordNotExistsHandler(data.exists))
+        //this.props.socket.on('wordNotExists', data => this.wordNotExistsHandler(data.exists))
     }
 
     componentWillUnmount() {
@@ -196,7 +196,7 @@ class MultiplayerGameScreen extends Component {
                                     </TouchableOpacity>
                                 </View>
                                 <View style={[styles.centerContent, { flex: 1 }]}>
-                                    <CustomText large style={[styles.headerText]}>ROBOT</CustomText>
+                                    <CustomText large style={[styles.headerText]}>{this.props.oponentName}</CustomText>
                                 </View>
                                 <View style={[styles.centerContent, { flex: 1 }]}>
                                     <View style={[styles.centerContent, { flex: 1 }]}>
