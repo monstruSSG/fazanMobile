@@ -6,8 +6,8 @@ import Keyboard from '../../components/UI/Keyboard/Keyboard';
 import * as SOCKET from '../../store/actions/socket';
 import CONSTANTS from '../../utils/constants';
 import Timer from '../../components/Timer/Timer';
-import LoseModal from '../../components/Modals/LoseModal';
-import WinModal from '../../components/Modals/WinModal';
+import LoseModal from '../../components/Modals/MpLoseModal';
+import WinModal from '../../components/Modals/MpWinModal';
 import AtentionModal from '../../components/Modals/AtentionModal';
 import NotExistsModal from '../../components/Modals/NotExist';
 import Background from '../../assets/Stuff/bg.jpg';
@@ -40,16 +40,12 @@ class MultiplayerGameScreen extends Component {
         showLoseModal: false,
         showAtentionModal: false,
         showNotExistsModal: false,
-        oponentMoving: true
-    }
-
-    waitingForOponent = word => {
-
+        oponentMoving: true,
+        suggestion: ''
     }
 
     componentDidMount() {
         this.props.socket.on('gotWord', data => {
-            console.log(data, 'WORDDDDDD')
             this.resetTimer();
             this.setState(prevState => ({
                 roundNumber: prevState.roundNumber + 1
@@ -61,13 +57,10 @@ class MultiplayerGameScreen extends Component {
         });
 
         this.props.socket.on('gameOver', data => {
-            console.log(data, 'GAME OVEEERRR');
-            this.setState({ showLoseModal: true, showTimer: false })
+            this.setState({ showLoseModal: true, showTimer: false, suggestion: data.alternative })
             this.props.socket.off('gameOver')
             this.props.socket.off('youWon')
         })
-
-        this.props.socket.on('oponentIsThinking', data => this.watingForOponent(data.word))
 
         this.props.socket.on('youWon', data => {
             //oponentDisconnected timeExipired
@@ -75,8 +68,6 @@ class MultiplayerGameScreen extends Component {
             this.props.socket.off('gameOver')
             this.props.socket.off('youWon')
         })
-
-        //this.props.socket.on('wordNotExists', data => this.wordNotExistsHandler(data.exists))
     }
 
     componentWillUnmount() {
@@ -140,7 +131,10 @@ class MultiplayerGameScreen extends Component {
 
         return this.props.checkWordExists(word)
             .then(exist => {
-                if (!exist) return alert('WORD DOES NOT EXIST');
+                if (!exist) {
+                    this.setState({ showNotExistsModal: true });
+                    setTimeout(() => this.setState({ showNotExistsModal: false }), 500);
+                }
 
                 this.props.socket.emit('sendWord', { word, socketId: this.props.oponentSocketId });
                 this.keyboardFadeOut();
@@ -280,7 +274,7 @@ class MultiplayerGameScreen extends Component {
                         home={this.navigateSearchGame}
                         onClose={this.navigateHomeHandler}
                         to='SEARCH'
-                        mp />
+                    />
                     <LoseModal isVisible={this.state.showLoseModal}
                         cu={this.state.lastWord}
                         oponent={this.state.oponentName}
@@ -289,7 +283,8 @@ class MultiplayerGameScreen extends Component {
                         home={this.navigateSearchGame}
                         onClose={this.navigateHomeHandler}
                         to='SEARCH'
-                        mp />
+                        suggestion={this.state.suggestion}
+                    />
                     <AtentionModal isVisible={this.state.showAtentionModal}
                         onContinue={() => this.setState({ showAtentionModal: false })}
                         onClose={this.navigateHomeHandler}
