@@ -26,7 +26,7 @@ export default class OponentMovingDots extends Component {
     render() {
         this.loadingAnimation()
         return (
-            <Animated.View style={{opacity: this.state.animation}}><CustomText style={{fontSize: 26}}>_</CustomText></Animated.View>
+            <Animated.View style={[{opacity: this.state.animation}, this.props.style]}><CustomText normal>_</CustomText></Animated.View>
         );
     }
 }

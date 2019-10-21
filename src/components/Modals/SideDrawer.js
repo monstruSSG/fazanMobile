@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     },
     contentButtons: {
         height: '20%',
-        width: '100%'
+        width: '80%'
     },
     centerAndStart: {
         alignItems: 'center'
