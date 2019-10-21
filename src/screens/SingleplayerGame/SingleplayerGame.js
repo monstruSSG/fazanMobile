@@ -251,8 +251,8 @@ class SingleplayerGameScreen extends Component {
                                         <OponentMovingDots message='RANDUL OPONENTULUI' /> :
                                         <>
                                             <Animated.View style={{ width: '60%', height: '90%', justifyContent: 'center', flexDirection: 'row' }}>
-                                                <CustomText style={{ fontSize: 26 }}>{this.state.word}</CustomText>
-                                                <InputAnimation />
+                                                <CustomText style={styles.wordPosition} normal>{this.state.word}</CustomText>
+                                                <InputAnimation style={styles.wordPosition} />
                                             </Animated.View>
                                             <TouchableOpacity
                                                 style={styles.submitButton}
@@ -301,6 +301,10 @@ class SingleplayerGameScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+    wordPosition: {
+        position: 'relative',
+        top: '5%'
+    },
     lastWordOponentMoving: {
         position: 'relative',
         top: '3%'

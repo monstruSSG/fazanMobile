@@ -254,8 +254,8 @@ class MultiplayerGameScreen extends Component {
                                     <OponentMoving message='RANDUL OPONENTULUI' /> :
                                     <>
                                         <View style={{ width: '60%', height: '90%', justifyContent: 'center', flexDirection: 'row' }}>
-                                            <CustomText style={{ fontSize: 26 }}>{this.state.word}</CustomText>
-                                            <InputAnimation />
+                                            <CustomText style={styles.wordPosition} normal>{this.state.word}</CustomText>
+                                            <InputAnimation style={styles.wordPosition} />
                                         </View>
                                         <TouchableOpacity
                                             style={styles.submitButton}
@@ -305,6 +305,10 @@ class MultiplayerGameScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+    wordPosition: {
+        position: 'relative',
+        top: '5%'
+    },
     oponentMovingLastWord: {
         position: 'relative',
         top: '3%'
