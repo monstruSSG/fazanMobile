@@ -21,7 +21,7 @@ import CONSTANTS from '../../utils/constants';
 
 const logoTextSize = Math.floor(CONSTANTS.screenWidth / 4);
 
-import MpWinModal from '../../components/Modals/MpWinModal'
+import MpWinModal from '../../components/Modals/MpLoseModal'
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -136,6 +136,7 @@ class HomeScreen extends Component {
                         home={this.navigateSearchGame}
                         onClose={this.navigateHomeHandler}
                         to='SEARCH'
+                        suggestion='ALTERNATIVA'
                     />
                     <AboutModal
                         isVisible={this.state.showAbout}

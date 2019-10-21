@@ -5,7 +5,6 @@ import ModalTemplate from '../../components/Modals/ModalTemplate';
 import CustomText from '../UI/Text/Text';
 
 import WinBackground from '../../assets/Modals/win.png';
-import RetryButton from '../../assets/Buttons/retry.png';
 import MenuButton from '../../assets/Buttons/yellowHolder.png';
 
 const mpWinModal = props => (
@@ -50,7 +49,7 @@ const mpWinModal = props => (
 const styles = StyleSheet.create({
     searchPosition: {
         position: 'relative',
-        top: '12%'
+        top: '14%'
     },
     center: {
         justifyContent: 'center',
