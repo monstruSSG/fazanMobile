@@ -147,6 +147,7 @@ class SingleplayerGameScreen extends Component {
                 return this.props.generateWord(this.state.word);
             })
             .then(generatedWord => {
+                console.log(generatedWord, 'GENERATEDD  ')
                 if (!generatedWord) return Promise.reject({ message: 'YOU_WON' });
 
                 //Here the 'AI' generates a word
@@ -170,7 +171,7 @@ class SingleplayerGameScreen extends Component {
                 } else if (e.message === 'WORD_NOT_EXISTS') {
                     this.setState({ showNotExistsModal: true });
                     //close after 2 second
-                    setTimeout(() => this.setState({ showNotExistsModal: false }), 1500);
+                    setTimeout(() => this.setState({ showNotExistsModal: false }), 700);
                 } else {
                     console.log('INVALID_ERROR_MESSAGE');
                 }

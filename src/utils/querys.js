@@ -1,3 +1,3 @@
 module.exports = {
-    GET_WORDS: `SELECT word FROM words`
+    GET_WORDS: `SELECT * FROM words`
 }

@@ -25,9 +25,11 @@ export const generateStartWord = () => (dispatch, getState) => new Promise((reso
     const uniqueNumber = Math.floor(Math.random() * (wordsNumber + 1));
 
     return db.transaction(tx =>
-        tx.executeSql(`${GET_WORDS} WHERE words.id=?`, [uniqueNumber], (tx, res) => resolve(res.rows.item(0).word),
+        tx.executeSql(`${GET_WORDS} WHERE words.id=?`, [uniqueNumber], (tx, res) => {
+            return resolve(res.rows.item(0).word)
+        },
             err => reject(err.message)),
-        err => reject(err.message))    
+        err => reject(err.message))
 })
 
 //returns true if word exists in db, false otherwise
