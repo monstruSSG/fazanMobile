@@ -47,10 +47,11 @@ class SearchGameScreen extends Component {
     from = 0;
     limit = 10;
     usersCount = 40;
-    socket = null;
     search = ''
 
     componentDidMount() {
+        this.props.createSocketConnection(this.props.token)
+
         //For overriding default backButton behaviour
         if (Platform.OS === 'android') this.willBlur = this.props.navigation.addListener("willBlur", () =>
             BackHandler.removeEventListener("hardwareBackPress", this.onBack),
@@ -76,7 +77,7 @@ class SearchGameScreen extends Component {
     _keyboardDidHide = () => this.setState({ showPlayButton: true })
 
     componentWillUnmount() {
-        this.props.socket.emit('disconnectedFromMultiplayer', {});
+        this.props.socket.disconnect();
         if (Platform.OS === 'android') {
             this.didFocus.remove();
             this.willBlur.remove();
@@ -127,7 +128,6 @@ class SearchGameScreen extends Component {
 
     onChangeText = text => {
         this.search = text;
-        console.log(this.search, 'ASDASDSAD')
         this.from = 0;
         this.getUsersHandler();
     }
@@ -189,7 +189,10 @@ class SearchGameScreen extends Component {
                                 users={this.state.users}
                                 close={() => this.setState({ showRanking: false })} />
                             <WaitingModal isVisible={this.state.showWaitingModal}
-                                onClose={() => this.setState({ showWaitingModal: false })} />
+                                onClose={() => {
+                                    this.setState({ showWaitingModal: false })
+                                    this.props.socket.emit('endPlayRandom', {})
+                                }} />
                         </>
                     ) : null}
                 <LoadingModal isVisible={this.state.loading} />
@@ -252,7 +255,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     setOponentSocketId: socketId => dispatch(SOCKET.setOponentSocketId(socketId)),
     deleteToken: () => dispatch(USER.deleteToken()),
-    setOponentName: name => dispatch(USER.setOponentName(name))
+    setOponentName: name => dispatch(USER.setOponentName(name)),
+    closeConnection: () => dispatch(SOCKET.closeSocketConnection()),
+    createSocketConnection: token => dispatch(SOCKET.createSocketConnection(token))
 });
 
 export default connect(
