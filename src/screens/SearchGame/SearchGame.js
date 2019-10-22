@@ -109,7 +109,6 @@ class SearchGameScreen extends Component {
         this.props.socket.emit('playRandom');
 
         this.props.socket.on('startGame', data => {
-            console.log(data, 'DATA')
             this.props.setOponentName(data.opponentName);
             this.setState({ showWaitingModal: false });
             this.props.setOponentSocketId(data.socketId);
@@ -128,6 +127,7 @@ class SearchGameScreen extends Component {
 
     onChangeText = text => {
         this.search = text;
+        console.log(this.search, 'ASDASDSAD')
         this.from = 0;
         this.getUsersHandler();
     }
@@ -160,7 +160,7 @@ class SearchGameScreen extends Component {
                                             this.limit += 10;
                                             if (this.limit <= this.usersCount) this.getUsersHandler();
                                         }}
-                                    /> : <CustomText large style={{ textAlign: 'center' }}>Nu sunt {'\n'} useri {'\n'} conectati</CustomText>}
+                                    /> : <CustomText large style={{ textAlign: 'center' }}>Niciun {'\n'} user {'\n'} gasit</CustomText>}
                                 </View>
                                 {this.state.showPlayButton ?
                                     <View style={[styles.playGameButton, styles.center]}>

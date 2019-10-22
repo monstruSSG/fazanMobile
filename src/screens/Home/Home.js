@@ -49,7 +49,6 @@ class HomeScreen extends Component {
         .then(token => isLogged(token)
             .then(() => {
                 this.setState({ logged: true });
-                this.createSocketConnection(token);
                 return this.props.saveToken(token);
             })
             .catch(() => this.setState({ logged: false })));
