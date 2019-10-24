@@ -129,17 +129,9 @@ class MultiplayerGameScreen extends Component {
     insertWordHandler = () => {
         let { word, usedWords } = this.state;
 
-        return this.props.checkWordExists(word)
-            .then(exist => {
-                if (!exist) {
-                    this.setState({ showNotExistsModal: true });
-                    setTimeout(() => this.setState({ showNotExistsModal: false }), 500);
-                }
-
-                this.props.socket.emit('sendWord', { word, socketId: this.props.oponentSocketId });
-                this.keyboardFadeOut();
-                this.setState({ showTimer: false, oponentMoving: true })
-            })
+        this.props.socket.emit('sendWord', { word, socketId: this.props.oponentSocketId });
+        this.keyboardFadeOut();
+        this.setState({ showTimer: false, oponentMoving: true })
     }
 
     deleteLastLetterHandler = () => {
