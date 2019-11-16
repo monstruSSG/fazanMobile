@@ -55,6 +55,7 @@ package-lock.json
 
 # OS X
 .DS_Store
+/ios/build/
 
 # Test generated files
 /ReactAndroid/src/androidTest/assets/AndroidTestBundle.js
@@ -78,7 +79,9 @@ RNTester/build
 /packages/react-native-codegen/**/*.xcodeproj
 
 # CocoaPods
+/ios/Pods/
 /template/ios/Pods/
 /template/ios/Podfile.lock
 RNTester/Pods/Local Podspecs
+
 RNTester/Pods/Target Support Files

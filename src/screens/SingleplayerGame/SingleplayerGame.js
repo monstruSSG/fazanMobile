@@ -42,18 +42,22 @@ class SingleplayerGameScreen extends Component {
         showAtentionModal: false,
         showNotExistsModal: false,
         showCountModal: true,
-        oponentMoving: false
+        oponentMoving: false,
+        timerSeconds: 20
     }
+
+    generatedWords = []
 
     componentDidMount() {
         this.props.connectToDb()
             .then(() => {
-                this.props.generateStartWord()
-                    .then(word => {
-                        this.setState({ lastWord: word, word: word.slice(-2), showTimer: true })
+               this.props.generateStartWord()
+                    .then(item => {
+                        this.generatedWords.push(item.id)
+                        this.setState({ lastWord: item.word, word: item.word.slice(-2), showTimer: true })
                     })
                     .catch(e => console.log(e))
-            })
+            }).catch(err => console.log(err))
 
     }
 
@@ -121,14 +125,16 @@ class SingleplayerGameScreen extends Component {
     }
 
     restartGame = () => this.props.generateStartWord()
-        .then(startWord => {
+        .then(item => {
+            this.generatedWords = []
+            this.generatedWords.push(item.word)
             this.setState({
                 showCountModal: true,
                 showLoseModal: false,
                 showWinModal: false,
                 oponentMoving: false,
-                lastWord: startWord,
-                word: startWord.slice(-2),
+                lastWord: item.word,
+                word: item.word.slice(-2),
                 roundNumber: 0
             }, this.resetTimer);
         })
@@ -140,18 +146,23 @@ class SingleplayerGameScreen extends Component {
         //First check if inserted word exists
         this.props.checkWordExists(this.state.word)
             .then(exists => {
+                console.log("==========", exists)
                 if (!exists) return Promise.reject({ message: 'WORD_NOT_EXISTS' });
                 this.resetTimer();
                 this.keyboardFadeOut();
                 this.setState({ oponentMoving: true });
-                return this.props.generateWord(this.state.word);
+                return this.props.generateWord(this.state.word, this.generatedWords);
             })
-            .then(generatedWord => {
-                console.log(generatedWord, 'GENERATEDD  ')
+            .then(item => {
+                let generatedWord = item.word
+                this.generatedWords.push(item.id)
+
+                let addedSeconds = this.state.timerSeconds + 10 + (item.weight + 1) * 10 * 0.2 
+
                 if (!generatedWord) return Promise.reject({ message: 'YOU_WON' });
 
                 //Here the 'AI' generates a word
-                this.setState({ lastWord: generatedWord, word: generatedWord.slice(-2) }, this.newLatestWordAnimation);
+                this.setState({ lastWord: generatedWord, word: generatedWord.slice(-2), addedSeconds,  }, this.newLatestWordAnimation);
                 this.resetTimer();
                 this.roundIncrementAnimation();
                 return this.props.checkWordExistsWithPrefix(generatedWord)
@@ -209,7 +220,7 @@ class SingleplayerGameScreen extends Component {
                             <Header
                                 onExitPressed={() => this.setState({ showAtentionModal: true })}
                                 headerTitle='ROBOT'
-                                count={20}
+                                count={this.state.timerSeconds}
                                 showTimer={this.state.showTimer}
                                 onTimeExpired={this.onTimeExpiredHandler} />
                         </View>
@@ -388,7 +399,7 @@ const mapDispatchToProps = dispatch => ({
     closeDbConnection: () => dispatch(WORDS.closeDbConnection()),
     checkWordExists: word => dispatch(WORDS.checkWordExists(word)),
     checkWordExistsWithPrefix: prefix => dispatch(WORDS.checkWordExistsWithPrefix(prefix)),
-    generateWord: word => dispatch(WORDS.generateWord(word)),
+    generateWord: (word, generatedWords) => dispatch(WORDS.generateWord(word, generatedWords)),
     generateStartWord: () => dispatch(WORDS.generateStartWord())
 })
 

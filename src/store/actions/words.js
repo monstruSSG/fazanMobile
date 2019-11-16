@@ -22,14 +22,16 @@ export const connectToDb = () => dispatch => new Promise((resolve, reject) => {
 
 export const generateStartWord = () => (dispatch, getState) => new Promise((resolve, reject) => {
     const { db } = getState().words;
-    const uniqueNumber = Math.floor(Math.random() * (wordsNumber + 1));
+ 
+    //get a popular word which does not end the game
 
     return db.transaction(tx =>
-        tx.executeSql(`${GET_WORDS} WHERE words.id=?`, [uniqueNumber], (tx, res) => {
-            return resolve(res.rows.item(0).word)
+        tx.executeSql(`${GET_WORDS} WHERE weight = 1 and closed = 0 order by RANDOM() limit 1`, [] , (tx, res) => {
+            let item = res.rows.item(0)
+            return resolve(item)
         },
-            err => reject(err.message)),
-        err => reject(err.message))
+            err => reject(err)),
+        err => reject(err))
 })
 
 //returns true if word exists in db, false otherwise
@@ -40,7 +42,7 @@ export const checkWordExists = word => (dispatch, getState) =>
         word = word.toLowerCase();
 
         return db.transaction(tx =>
-            tx.executeSql(`${GET_WORDS} WHERE word=?`, [word], (tx, res) => resolve((res.rows.length > 0)),
+            tx.executeSql(`${GET_WORDS} WHERE word=? limit 1`, [word], (tx, res) => resolve((res.rows.length > 0)),
                 err => reject(err.message)),
             err => reject(err.message))
 
@@ -55,7 +57,7 @@ export const checkWordExistsWithPrefix = prefix => (dispatch, getState) =>
         prefix = prefix.toLowerCase();
 
         return db.transaction(tx =>
-            tx.executeSql(`${GET_WORDS} WHERE word LIKE '${prefix}%'`, [], (tx, res) => {
+            tx.executeSql(`${GET_WORDS} WHERE word LIKE '${prefix}%' limit 1`, [], (tx, res) => {
                 resolve(res.rows.length > 0)
 
             }),
@@ -64,21 +66,16 @@ export const checkWordExistsWithPrefix = prefix => (dispatch, getState) =>
     })
 
 //returns first words found with given prefix, emptyarray otherwise
-export const generateWord = word => (dispatch, getState) =>
+export const generateWord = (word, generatedWords) => (dispatch, getState) =>
     new Promise((resolve, reject) => {
         const { db } = getState().words;
 
         word = word.toLowerCase();
 
         return db.transaction(tx =>
-            tx.executeSql(`${GET_WORDS} WHERE word LIKE '${word.slice(-2)}%'`, [], (tx, res) => {
-                let endOfInterval = res.rows.length;
-
-                if (endOfInterval < 0) return resolve('')
-
-                let randomNumber = Math.floor(Math.random() * (endOfInterval + 1))
-
-                return resolve(res.rows.item(randomNumber).word)
+            tx.executeSql(`Select id, word, weight, random() as r from words WHERE word LIKE '${word.slice(-2)}%' and id not IN (?) order by weight desc, r limit 1`, [generatedWords], (tx, res) => {
+                
+                return resolve(res.rows.item(0))
             },
                 err => reject(err.message)),
             err => reject(err.message))

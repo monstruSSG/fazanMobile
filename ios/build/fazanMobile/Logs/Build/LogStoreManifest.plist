@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>10</integer>
+	<key>logs</key>
+	<dict>
+		<key>D0AC2684-C010-42E1-AE09-28B7C8ADFB9B</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>D0AC2684-C010-42E1-AE09-28B7C8ADFB9B.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>fazanMobile project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>fazanMobile</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building workspace fazanMobile with scheme fazanMobile and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>595624731.78734899</real>
+			<key>timeStoppedRecording</key>
+			<real>595624734.37282705</real>
+			<key>title</key>
+			<string>Building workspace fazanMobile with scheme fazanMobile and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>D0AC2684-C010-42E1-AE09-28B7C8ADFB9B</string>
+		</dict>
+		<key>D33DBC35-DE72-43F2-B6B9-3E87E47B2CE2</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>D33DBC35-DE72-43F2-B6B9-3E87E47B2CE2.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>fazanMobile project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>fazanMobile</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building workspace fazanMobile with scheme fazanMobile and configuration Debug</string>
+			<key>timeStartedRecording</key>
+			<real>595624796.23067105</real>
+			<key>timeStoppedRecording</key>
+			<real>595624798.26805496</real>
+			<key>title</key>
+			<string>Building workspace fazanMobile with scheme fazanMobile and configuration Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>D33DBC35-DE72-43F2-B6B9-3E87E47B2CE2</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

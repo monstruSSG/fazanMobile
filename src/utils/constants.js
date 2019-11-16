@@ -11,10 +11,10 @@ export default {
     secondaryColor: '#33691E',
     thirdColor: '#01579B',
     db: {
-        name: 'fazanWords.db'
+        name: 'words.db'
     },
-    backendUrl: 'http://192.168.43.153/api/v1',
-    socketsBackendUrl: 'http://192.168.43.153',
+    backendUrl: 'http://localhost/api/v1',
+    socketsBackendUrl: 'http://localhost',
     letters: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
         'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'],
     firstRow: ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
