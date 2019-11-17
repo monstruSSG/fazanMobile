@@ -21,6 +21,8 @@ import BluePanel from '../../assets/Stuff/bluePanel.png';
 import LastWordImage from '../../assets/Stuff/titleBox.png';
 import SendWord from '../../assets/Buttons/sendWord.png';
 
+const TIMER_DEFAULT_SECONDS = 20
+
 class SingleplayerGameScreen extends Component {
     static navigationOptions = {
         header: null
@@ -43,7 +45,7 @@ class SingleplayerGameScreen extends Component {
         showNotExistsModal: false,
         showCountModal: true,
         oponentMoving: false,
-        timerSeconds: 20
+        timerSeconds: TIMER_DEFAULT_SECONDS
     }
 
     generatedWords = []
@@ -51,7 +53,7 @@ class SingleplayerGameScreen extends Component {
     componentDidMount() {
         this.props.connectToDb()
             .then(() => {
-               this.props.generateStartWord()
+                this.props.generateStartWord()
                     .then(item => {
                         this.generatedWords.push(item.id)
                         this.setState({ lastWord: item.word, word: item.word.slice(-2), showTimer: true })
@@ -106,10 +108,12 @@ class SingleplayerGameScreen extends Component {
         duration: 200
     }).start())
 
-    navigateHomeHandler = () => this.props.navigation.navigate('Home');
+    navigateHomeHandler = () => this.setState({ showLoseModal: false, showWinModal: false }, () => this.props.navigation.navigate('Home'));
 
     onTimeExpiredHandler = count => {
+
         if (count < 0) this.setState({ gameFinished: true, showLoseModal: true, showTimer: false })
+        else this.setState({ timerSeconds: count })
     }
 
     letterPressedHandler = letter => {
@@ -143,7 +147,12 @@ class SingleplayerGameScreen extends Component {
     resetTimer = () => this.setState({ showTimer: false }, () => this.setState({ showTimer: true }))
 
     onInserWordHandler = () => {
-        //First check if inserted word exists
+        //check word length
+        if (this.state.word.length <= 2) {
+            //insert here some animation
+            return
+        }
+        //check if word exists
         this.props.checkWordExists(this.state.word)
             .then(exists => {
                 console.log("==========", exists)
@@ -157,12 +166,13 @@ class SingleplayerGameScreen extends Component {
                 let generatedWord = item.word
                 this.generatedWords.push(item.id)
 
-                let addedSeconds = this.state.timerSeconds + 10 + (item.weight + 1) * 10 * 0.2 
+                let addedSeconds = Math.floor(this.state.timerSeconds + 4 + (item.weight + 1) * 5 * 0.2)
+
+                if (addedSeconds > TIMER_DEFAULT_SECONDS) addedSeconds = TIMER_DEFAULT_SECONDS
 
                 if (!generatedWord) return Promise.reject({ message: 'YOU_WON' });
 
-                //Here the 'AI' generates a word
-                this.setState({ lastWord: generatedWord, word: generatedWord.slice(-2), addedSeconds,  }, this.newLatestWordAnimation);
+                this.setState({ lastWord: generatedWord, word: generatedWord.slice(-2), timerSeconds: addedSeconds, }, this.newLatestWordAnimation);
                 this.resetTimer();
                 this.roundIncrementAnimation();
                 return this.props.checkWordExistsWithPrefix(generatedWord)
@@ -176,9 +186,9 @@ class SingleplayerGameScreen extends Component {
                 console.log(e, 'EROARE')
 
                 if (e.message === 'YOU_LOST') {
-                    return this.setState({ showLoseModal: true });
+                    return this.setState({ showLoseModal: true, showTimer: false });
                 } else if (e.message === 'YOU_WON') {
-                    return this.setState({ showWinModal: true });
+                    return this.setState({ showWinModal: true, showTimer: false });
                 } else if (e.message === 'WORD_NOT_EXISTS') {
                     this.setState({ showNotExistsModal: true });
                     //close after 2 second

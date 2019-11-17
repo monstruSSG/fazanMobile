@@ -58,8 +58,7 @@ export const checkWordExistsWithPrefix = prefix => (dispatch, getState) =>
 
         return db.transaction(tx =>
             tx.executeSql(`${GET_WORDS} WHERE word LIKE '${prefix}%' limit 1`, [], (tx, res) => {
-                resolve(res.rows.length > 0)
-
+                resolve(res.rows.length > 0 && !res.rows.item(0).closed)
             }),
             err => reject(err.message),
             err => reject(err.message))
@@ -72,8 +71,10 @@ export const generateWord = (word, generatedWords) => (dispatch, getState) =>
 
         word = word.toLowerCase();
 
+        let inClause = `(${generatedWords.join(',')})`
+
         return db.transaction(tx =>
-            tx.executeSql(`Select id, word, weight, random() as r from words WHERE word LIKE '${word.slice(-2)}%' and id not IN (?) order by weight desc, r limit 1`, [generatedWords], (tx, res) => {
+            tx.executeSql(`Select id, word, weight, random() as r from words WHERE word LIKE '${word.slice(-2)}%' and id not IN ${inClause} order by weight desc, r limit 1`, [], (tx, res) => {
                 
                 return resolve(res.rows.item(0))
             },
