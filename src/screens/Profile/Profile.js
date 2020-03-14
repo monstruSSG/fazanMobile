@@ -61,8 +61,8 @@ class ProfileScreen extends Component {
         let firstGame = history[0];
         let secoundGame = history[1];
         let thirdGame = history[2];
-        console.log(history, 'IStoric')
-        const losesProcent = ((me.wins / (me.loses + 1)) * 100).toFixed(0)
+        let winsPercent = ((me.loses  / me.wins) * 100)
+        winsPercent = winsPercent > 100 ? 100 : winsPercent.toFixed(0)
 
         return (
             <ImageBackground source={BackgroundImg} style={{ flex: 1 }}>
@@ -93,10 +93,10 @@ class ProfileScreen extends Component {
                                             <ImageBackground source={BluePanel} style={[styles.bluePanel]} resizeMode='stretch'>
                                                 <View style={[styles.centerContent]}>
                                                     <View style={[styles.centerContent, styles.winLosePosition, { top: '10%', bottom: undefined }]}>
-                                                        <CustomText extra>W/L</CustomText>
+                                                        <CustomText large>Wins</CustomText>
                                                     </View>
                                                     <View style={[styles.centerContent, styles.winLosePosition, { flexDirection: 'row' }]}>
-                                                        <CustomText extra>{losesProcent}</CustomText>
+                                                        <CustomText extra>{winsPercent}</CustomText>
                                                         <CustomText normal>%</CustomText>
                                                     </View>
                                                 </View>
@@ -158,13 +158,13 @@ class ProfileScreen extends Component {
                             </View>
                             <View style={styles.lastGames}>
                                 <View style={[styles.centerContent]}>
-                                    <ProfileGameHistory name={firstGame ? firstGame.user.shortName : 'NO HISTORY'} win={firstGame ? firstGame.outcome === 'win' : false} none={firstGame ? false : true} />
+                                    <ProfileGameHistory name={firstGame ? firstGame.opponent.shortName : 'NO HISTORY'} win={firstGame ? firstGame.outcome === 'win' : false} none={firstGame ? false : true} />
                                 </View>
                                 <View style={[styles.centerContent]}>
-                                    <ProfileGameHistory name={secoundGame ? secoundGame.user.shortName : 'NO HISTORY'} win={secoundGame ? secoundGame.outcome === 'win' : false} none={secoundGame ? false : true} />
+                                    <ProfileGameHistory name={secoundGame ? secoundGame.opponent.shortName : 'NO HISTORY'} win={secoundGame ? secoundGame.outcome === 'win' : false} none={secoundGame ? false : true} />
                                 </View>
                                 <View style={[styles.centerContent]}>
-                                    <ProfileGameHistory name={thirdGame ? thirdGame.user.shortName : 'NO HISTORY'} win={thirdGame ? thirdGame.outcome === 'win' : false} none={thirdGame ? false : true} />
+                                    <ProfileGameHistory name={thirdGame ? thirdGame.opponent.shortName : 'NO HISTORY'} win={thirdGame ? thirdGame.outcome === 'win' : false} none={thirdGame ? false : true} />
                                 </View>
                             </View>
                         </View>
