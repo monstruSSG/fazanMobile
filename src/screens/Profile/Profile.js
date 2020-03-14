@@ -59,10 +59,14 @@ class ProfileScreen extends Component {
     render() {
         let { me, history } = this.state;
         let firstGame = history[0];
-        let secoundGame = history[1];
+        let secondGame = history[1];
         let thirdGame = history[2];
-        let winsPercent = ((me.loses  / me.wins) * 100)
-        winsPercent = winsPercent > 100 ? 100 : winsPercent.toFixed(0)
+        if (!me.loses && !me.wins) {
+            winsPercent = 0
+        } else {
+            let winsPercent = ((me.loses / me.wins) * 100)
+            winsPercent = winsPercent > 100 ? 100 : winsPercent.toFixed(0)
+        }
 
         return (
             <ImageBackground source={BackgroundImg} style={{ flex: 1 }}>
@@ -121,10 +125,10 @@ class ProfileScreen extends Component {
                                         <View style={[styles.centerContent, { flexDirection: 'row' }, { flex: 1 }]}>
                                             <View style={[styles.centerContent, { flex: 1 }]}>
                                                 <View style={[styles.centerContent, styles.maxWidthHeight]}>
-                                                    <ImageBackground style={[styles.littleStarsWidthHeight, { position: 'relative', left: '15%' }]}  source={!firstGame ? EmptyStar : firstGame.outcome == 'win' ? FullStar : EmptyStar} resizeMode='contain'>
+                                                    <ImageBackground style={[styles.littleStarsWidthHeight, { position: 'relative', left: '15%' }]} source={!firstGame ? EmptyStar : firstGame.outcome == 'won' ? FullStar : EmptyStar} resizeMode='contain'>
                                                         <View style={styles.centerContent}>
-                                                            <CustomText large style={{ color: !firstGame ? 'white' : firstGame.outcome == 'win' ? 'green' : 'red' }}>
-                                                                {!firstGame ? 'N' : firstGame.outcome == 'win' ? 'W' : 'L'}
+                                                            <CustomText large style={{ color: !firstGame ? 'white' : firstGame.outcome == 'won' ? 'green' : 'red' }}>
+                                                                {!firstGame ? 'N' : firstGame.outcome == 'won' ? 'W' : 'L'}
                                                             </CustomText>
                                                         </View>
                                                     </ImageBackground>
@@ -132,10 +136,10 @@ class ProfileScreen extends Component {
                                             </View>
                                             <View style={[styles.centerContent, { flex: 1 }]}>
                                                 <View style={[styles.centerContent, styles.maxWidthHeight]}>
-                                                    <ImageBackground style={[styles.maxWidthHeight, { position: 'relative', bottom: '20%' }]}  source={!secoundGame ? EmptyStar : secoundGame.outcome == 'win' ? FullStar : EmptyStar} resizeMode='contain'>
+                                                    <ImageBackground style={[styles.maxWidthHeight, { position: 'relative', bottom: '20%' }]} source={!secondGame ? EmptyStar : secondGame.outcome == 'won' ? FullStar : EmptyStar} resizeMode='contain'>
                                                         <View style={styles.centerContent}>
-                                                            <CustomText large style={{ color: !secoundGame ? 'white' : secoundGame.outcome == 'win' ? 'green' : 'red' }}>
-                                                                {!secoundGame ? 'N' : secoundGame.outcome == 'win' ? 'W' : 'L'}
+                                                            <CustomText large style={{ color: !secondGame ? 'white' : secondGame.outcome == 'won' ? 'green' : 'red' }}>
+                                                                {!secondGame ? 'N' : secondGame.outcome == 'won' ? 'W' : 'L'}
                                                             </CustomText>
                                                         </View>
                                                     </ImageBackground>
@@ -143,10 +147,10 @@ class ProfileScreen extends Component {
                                             </View>
                                             <View style={[styles.centerContent, { flex: 1 }]}>
                                                 <View style={[styles.centerContent, styles.maxWidthHeight]}>
-                                                    <ImageBackground style={[styles.littleStarsWidthHeight, { position: 'relative', right: '15%' }]} source={!thirdGame ? EmptyStar : thirdGame.outcome == 'win' ? FullStar : EmptyStar} resizeMode='contain'>
+                                                    <ImageBackground style={[styles.littleStarsWidthHeight, { position: 'relative', right: '15%' }]} source={!thirdGame ? EmptyStar : thirdGame.outcome == 'won' ? FullStar : EmptyStar} resizeMode='contain'>
                                                         <View style={[styles.centerContent]}>
-                                                            <CustomText large style={{ color: !thirdGame ? 'white' : thirdGame.outcome == 'win' ? 'green' : 'red' }}>
-                                                                {!thirdGame ? 'N' : thirdGame.outcome == 'win' ? 'W' : 'L'}
+                                                            <CustomText large style={{ color: !thirdGame ? 'white' : thirdGame.outcome == 'won' ? 'green' : 'red' }}>
+                                                                {!thirdGame ? 'N' : thirdGame.outcome == 'won' ? 'W' : 'L'}
                                                             </CustomText>
                                                         </View>
                                                     </ImageBackground>
@@ -158,13 +162,13 @@ class ProfileScreen extends Component {
                             </View>
                             <View style={styles.lastGames}>
                                 <View style={[styles.centerContent]}>
-                                    <ProfileGameHistory name={firstGame ? firstGame.opponent.shortName : 'NO HISTORY'} win={firstGame ? firstGame.outcome === 'win' : false} none={firstGame ? false : true} />
+                                    <ProfileGameHistory name={firstGame ? firstGame.opponent.shortName : 'NO HISTORY'} win={firstGame ? firstGame.outcome === 'won' : false} none={firstGame ? false : true} />
                                 </View>
                                 <View style={[styles.centerContent]}>
-                                    <ProfileGameHistory name={secoundGame ? secoundGame.opponent.shortName : 'NO HISTORY'} win={secoundGame ? secoundGame.outcome === 'win' : false} none={secoundGame ? false : true} />
+                                    <ProfileGameHistory name={secondGame ? secondGame.opponent.shortName : 'NO HISTORY'} win={secondGame ? secondGame.outcome === 'won' : false} none={secondGame ? false : true} />
                                 </View>
                                 <View style={[styles.centerContent]}>
-                                    <ProfileGameHistory name={thirdGame ? thirdGame.opponent.shortName : 'NO HISTORY'} win={thirdGame ? thirdGame.outcome === 'win' : false} none={thirdGame ? false : true} />
+                                    <ProfileGameHistory name={thirdGame ? thirdGame.opponent.shortName : 'NO HISTORY'} win={thirdGame ? thirdGame.outcome === 'won' : false} none={thirdGame ? false : true} />
                                 </View>
                             </View>
                         </View>
