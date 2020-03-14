@@ -41,7 +41,8 @@ class MultiplayerGameScreen extends Component {
         showAtentionModal: false,
         showNotExistsModal: false,
         oponentMoving: true,
-        suggestion: ''
+        suggestion: '',
+        lockLoseModal: false
     }
 
     componentDidMount() {
@@ -140,9 +141,11 @@ class MultiplayerGameScreen extends Component {
         }))
     }
 
+    _iLost = () => this.props.socket.emit('iLost', { socketId: this.props.oponentSocketId, word: this.state.lastWord })
+
     onTimeExpiredHandler = time => {
         if (time < 0) {
-            return this.props.socket.emit('iLost', { socketId: this.props.oponentSocketId, word: this.state.lastWord })
+            return this._iLost()
         }
     }
 
@@ -267,7 +270,7 @@ class MultiplayerGameScreen extends Component {
                         onClose={this.navigateHomeHandler}
                         to='SEARCH'
                     />
-                    <LoseModal isVisible={this.state.showLoseModal}
+                    <LoseModal isVisible={this.state.showLoseModal && !this.state.lockLoseModal}
                         cu={this.state.lastWord}
                         oponent={this.state.oponentName}
                         rounds={this.state.roundNumber}
@@ -279,7 +282,12 @@ class MultiplayerGameScreen extends Component {
                     />
                     <AtentionModal isVisible={this.state.showAtentionModal}
                         onContinue={() => this.setState({ showAtentionModal: false })}
-                        onClose={this.navigateHomeHandler}
+                        onClose={() => {
+                            this.setState({ lockLoseModal: true }, () => {
+                                this._iLost()
+                                this.navigateHomeHandler()
+                            })
+                        }}
                     />
                     <NotExistsModal isVisible={this.state.showNotExistsModal}
                         word={this.state.word}
