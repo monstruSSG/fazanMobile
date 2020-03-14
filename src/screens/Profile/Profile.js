@@ -61,12 +61,10 @@ class ProfileScreen extends Component {
         let firstGame = history[0];
         let secondGame = history[1];
         let thirdGame = history[2];
-        if (!me.loses && !me.wins) {
-            winsPercent = 0
-        } else {
-            let winsPercent = ((me.loses / me.wins) * 100)
-            winsPercent = winsPercent > 100 ? 100 : winsPercent.toFixed(0)
-        }
+        me.wins += 1
+        me.loses += 1
+        let winsPercent = ((me.wins / (me.loses + me.wins)) * 100)
+        winsPercent = winsPercent > 100 ? 100 : winsPercent.toFixed(0)
 
         return (
             <ImageBackground source={BackgroundImg} style={{ flex: 1 }}>
