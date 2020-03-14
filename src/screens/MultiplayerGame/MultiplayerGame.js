@@ -45,6 +45,8 @@ class MultiplayerGameScreen extends Component {
         lockLoseModal: false
     }
 
+    gameEnded = false
+
     componentDidMount() {
         this.props.socket.on('gotWord', data => {
             this.resetTimer();
@@ -61,6 +63,7 @@ class MultiplayerGameScreen extends Component {
             this.setState({ showLoseModal: true, showTimer: false, suggestion: data.alternative.word })
             this.props.socket.off('gameOver')
             this.props.socket.off('youWon')
+            gameEnded = true
         })
 
         this.props.socket.on('youWon', data => {
@@ -68,11 +71,14 @@ class MultiplayerGameScreen extends Component {
             this.setState({ showWinModal: true })
             this.props.socket.off('gameOver')
             this.props.socket.off('youWon')
+            gameEnded = true
         })
+        this.gameEnded = true
     }
 
     componentWillUnmount() {
-        return this.props.socket.emit('exitGame', { socketId: this.props.oponentSocketId });
+        if (!this.gameEnded)
+            return this.props.socket.emit('exitGame', { socketId: this.props.oponentSocketId });
     }
 
     onGotWordHandler = word => this.setState({ lastWord: word, word: word.slice(-2), showTimer: true }, this.newLatestWordAnimation)
