@@ -57,7 +57,7 @@ class MultiplayerGameScreen extends Component {
         });
 
         this.props.socket.on('gameOver', data => {
-            this.setState({ showLoseModal: true, showTimer: false, suggestion: data.alternative })
+            this.setState({ showLoseModal: true, showTimer: false, suggestion: data.alternative.word })
             this.props.socket.off('gameOver')
             this.props.socket.off('youWon')
         })
