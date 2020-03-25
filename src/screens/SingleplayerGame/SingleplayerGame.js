@@ -112,7 +112,7 @@ class SingleplayerGameScreen extends Component {
 
     onTimeExpiredHandler = count => {
 
-        if (count < 0) this.setState({ gameFinished: true, showLoseModal: true, showTimer: false })
+        if (count < 1) this.setState({ gameFinished: true, showLoseModal: true, showTimer: false })
         else this.setState({ timerSeconds: count })
     }
 
@@ -155,7 +155,6 @@ class SingleplayerGameScreen extends Component {
         //check if word exists
         this.props.checkWordExists(this.state.word)
             .then(exists => {
-                console.log("==========", exists)
                 if (!exists) return Promise.reject({ message: 'WORD_NOT_EXISTS' });
                 this.resetTimer();
                 this.keyboardFadeOut();
