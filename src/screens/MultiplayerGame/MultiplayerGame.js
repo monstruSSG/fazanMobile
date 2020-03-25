@@ -150,7 +150,7 @@ class MultiplayerGameScreen extends Component {
     _iLost = () => this.props.socket.emit('iLost', { socketId: this.props.oponentSocketId, word: this.state.lastWord })
 
     onTimeExpiredHandler = time => {
-        if (time < 0) {
+        if (time < 1) {
             return this._iLost()
         }
     }
