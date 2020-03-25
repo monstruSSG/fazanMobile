@@ -1,26 +1,24 @@
 import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 
-import * as USERS from './fakeData/users.json';
-import * as ME from './fakeData/me.json';
 import CONSTANTS from './constants';
+
+// Configure axios token interceptor
+axios.interceptors.request.use(async config => {
+    let token = await AsyncStorage.getItem('token')
+    console.log(token)
+    if (token) config.headers.authorisation = `Bearer ${token}`;
+
+    return config;
+}, (error) => Promise.reject(error));
 
 export const login = data => axios.post(`${CONSTANTS.backendUrl}/auth/login`, data)
     .then(res => Promise.resolve({ ...res.data.user }))
 
-export const getUsers = (token, from, limit, search) => axios.get(`${CONSTANTS.backendUrl}/user?from=${from}&limit=${limit}&search=${search}`, {
-    headers: {
-        Authorisation: `Bearer ${token}`
-    }
-}).then(result => Promise.resolve(result.data.users))
+export const getUsers = (_, from, limit, search) => axios.get(`${CONSTANTS.backendUrl}/user?from=${from}&limit=${limit}&search=${search}`)
+    .then(result => Promise.resolve(result.data.users))
 
-export const isLogged = token => axios.get(`${CONSTANTS.backendUrl}/isLogged`, {
-    headers: {
-        Authorisation: `Bearer ${token}`
-    }
-});
+export const isLogged = _ => axios.get(`${CONSTANTS.backendUrl}/isLogged`);
 
-export const getMe = token => axios.get(`${CONSTANTS.backendUrl}/user/profile`, {
-    headers: {
-        Authorisation: `Bearer ${token}`
-    }
-}).then(response => Promise.resolve({ user: response.data.user, history: response.data.gamesHistory }));
+export const getMe = _ => axios.get(`${CONSTANTS.backendUrl}/user/profile`)
+    .then(response => Promise.resolve({ user: response.data.user, history: response.data.gamesHistory }));
