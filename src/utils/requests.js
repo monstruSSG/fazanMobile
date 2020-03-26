@@ -6,7 +6,7 @@ import CONSTANTS from './constants';
 // Configure axios token interceptor
 axios.interceptors.request.use(async config => {
     let token = await AsyncStorage.getItem('token')
-    console.log(token)
+    
     if (token) config.headers.authorisation = `Bearer ${token}`;
 
     return config;
