@@ -18,6 +18,7 @@ import SinglePlayerTitle from '../../assets/Modals/titleShadow.png';
 import MultiplayerTitle from '../../assets/Stuff/titleBox.png';
 import NoInternet from '../../components/Modals/NoInternetModal'
 import CONSTANTS from '../../utils/constants';
+import ToturialModal from '../../components/Modals/ToturialModal'
 
 const logoTextSize = Math.floor(CONSTANTS.screenWidth / 4);
 
@@ -30,7 +31,10 @@ class HomeScreen extends Component {
         showAbout: false,
         logged: false,
         showNoInternet: false,
-        isConnected: false
+        isConnected: false,
+        oponent: null,
+        showInvitationModal: false,
+        showToturialModal: false
     }
 
     navigateSingleplayerScreen = () => this.props.navigation.navigate('Singleplayer');
@@ -54,10 +58,21 @@ class HomeScreen extends Component {
             .catch(() => this.setState({ logged: false })));
 
     componentDidMount() {
+        // Handle first app opnening
+        AsyncStorage.getItem('new')
+            .then(res => {
+                if (res) return
+
+                this.setState({ showToturialModal: true }, () => {
+                    AsyncStorage.setItem('new', 'false')
+                })
+            })
+            .catch(console.error)
+
+        // Get internet connection info 
         this.netInfoListener = NetInfo.addEventListener(state => {
             this.setState({ isConnected: state.isConnected });
         });
-        this.readToken();
         this.didBlurSubscription = this.props.navigation.addListener('didFocus', () => {
             this.netInfoListener = NetInfo.addEventListener(state => {
                 this.setState({ isConnected: state.isConnected });
@@ -74,6 +89,7 @@ class HomeScreen extends Component {
     createSocketConnection = token => this.props.createSocketConnection(token)
 
     render() {
+
         return (
             <ImageBackground source={BackgroundImg} style={[styles.max]}>
                 <View style={[styles.homePage]}>
@@ -131,6 +147,9 @@ class HomeScreen extends Component {
                     <NoInternet
                         isVisible={this.state.showNoInternet}
                         onClose={() => this.setState({ showNoInternet: false })} />
+                    <ToturialModal
+                        isVisible={this.state.showToturialModal}
+                        onClose={() => this.setState({ showToturialModal: false }, () => AsyncStorage.setItem('new', 'false'))} />
                 </View>
             </ImageBackground>
         );
@@ -242,7 +261,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-    token: state.user.token
+    token: state.user.token,
+    socket: state.socket.socket
 })
 
 const mapDispatchToProps = dispatch => ({
