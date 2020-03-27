@@ -2,6 +2,7 @@ import { Dimensions } from 'react-native';
 
 export default {
     screenWidth: Dimensions.get('window').width,
+    screenHeight: Dimensions.get('window').height,
     secondaryColor: '#2EB67D',
     thirdColor: '#4A154B',
     borderColor: '#000000',
