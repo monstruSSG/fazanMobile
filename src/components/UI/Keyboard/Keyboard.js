@@ -5,7 +5,7 @@ import CONSTANTS from '../../../utils/constants';
 import CustomText from '../../../components/UI/Text/Text';
 
 import LetterHolder from '../../../assets/Stuff/letterHolder.png';
-import DeleteButton from '../../../assets/Buttons/yellowHolder.png';
+import DeleteButton from '../../../assets/Buttons/deleteButtonRed.png';
 
 const elementSize = Math.floor(CONSTANTS.screenWidth / 10) - 2
 const textSize = Math.floor(elementSize * 2 / 3)
@@ -14,9 +14,9 @@ const element = (props, letter, isDelete) => (
     <View style={{ width: elementSize, height: elementSize }}>
         <TouchableOpacity onPress={isDelete ? props.deleteLastLetter : () => props.letterPressed(letter.trim().toLowerCase())}
             style={[styles.max, styles.center]}>
-            <ImageBackground source={LetterHolder} style={[styles.max, styles.center]}>
+            <ImageBackground source={isDelete ? DeleteButton : LetterHolder} style={[isDelete ? styles.maxDeleted : styles.max, styles.center]}>
                 <View style={[styles.max, styles.center]}>
-                    {isDelete ? <CustomText color='black' style={[{ fontSize: textSize }, styles.buttonTextPosition]}>{'-'}</CustomText> : <CustomText style={[{ fontSize: textSize }, styles.buttonTextPosition]}>{letter}</CustomText>}
+                    {isDelete ? <CustomText color='white' style={[{ fontSize: textSize }, styles.buttonTextPosition]}>{'-'}</CustomText> : <CustomText style={[{ fontSize: textSize }, styles.buttonTextPosition]}>{letter}</CustomText>}
                 </View>
             </ImageBackground>
         </TouchableOpacity>
@@ -48,6 +48,10 @@ const styles = StyleSheet.create({
     max: {
         width: '100%',
         height: '100%'
+    },
+    maxDeleted: {
+        width: '110%',
+        height: '110%'
     },
     center: {
         justifyContent: 'center',
