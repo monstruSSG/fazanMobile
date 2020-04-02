@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1023963061725",
+    "firebase_url": "https://fazan-ro.firebaseio.com",
+    "project_id": "fazan-ro",
+    "storage_bucket": "fazan-ro.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023963061725:android:e6308f175b851bff906a34",
+        "android_client_info": {
+          "package_name": "com.fazanmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023963061725-jod22700mt7upkqvv759igtkostft081.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fazanmobile",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "1023963061725-2bctqbkcsevkarje4o3m408m4q1j8jb1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDyRObljm_oC8LdbPQOs82GuqDjU0uJGQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023963061725-2bctqbkcsevkarje4o3m408m4q1j8jb1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

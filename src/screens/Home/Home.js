@@ -18,7 +18,8 @@ import SinglePlayerTitle from '../../assets/Modals/titleShadow.png';
 import MultiplayerTitle from '../../assets/Stuff/titleBox.png';
 import NoInternet from '../../components/Modals/NoInternetModal'
 import CONSTANTS from '../../utils/constants';
-import ToturialModal from '../../components/Modals/ToturialModal'
+import ToturialModal from '../../components/Modals/ToturialModal';
+import LoginModal from '../../components/Modals/LoginModal';
 
 const logoTextSize = Math.floor(CONSTANTS.screenWidth / 4);
 
@@ -34,19 +35,25 @@ class HomeScreen extends Component {
         isConnected: false,
         oponent: null,
         showInvitationModal: false,
-        showToturialModal: false
+        showToturialModal: false,
+        showLoginModal: false,
+        navigateProfileScreen: false
     }
 
     navigateSingleplayerScreen = () => this.props.navigation.navigate('Singleplayer');
     navigateProfileScreen = () => {
         if (!this.state.isConnected) return this.setState({ showNoInternet: true });
 
-        return this.state.logged ? this.props.navigation.navigate('Profile') : this.props.navigation.navigate('Login')
+        return this.state.logged ?
+            this.props.navigation.navigate('Profile') :
+            this.setState({ showLoginModal: true, navigateProfileScreen: true });
     }
     navigateSearchGameScreen = () => {
         if (!this.state.isConnected) return this.setState({ showNoInternet: true });
 
-        return this.state.logged ? this.props.navigation.navigate('SearchGame') : this.props.navigation.navigate('Login')
+        return this.state.logged ?
+            this.props.navigation.navigate('SearchGame') :
+            this.setState({ showLoginModal: true });
     }
 
     readToken = () => AsyncStorage.getItem('token')
@@ -58,6 +65,9 @@ class HomeScreen extends Component {
             .catch(() => this.setState({ logged: false })));
 
     componentDidMount() {
+        // If token exists we have to silently regenerate one for the user
+
+        // Check if user is logged
         // Handle first app opnening
         AsyncStorage.getItem('new')
             .then(res => {
@@ -141,6 +151,20 @@ class HomeScreen extends Component {
                             </View>
                         </View>
                     </View>
+                    <LoginModal
+                        isVisible={this.state.showLoginModal}
+                        onClose={() => {
+                            console.log('Triggered')
+                            this.setState({ showLoginModal: false })
+                        }}
+                        onLoginSucceed={() => this.setState({ showLoginModal: false }, () => this.state.navigateProfileScreen ?
+                            this.props.navigation.navigate('Profile') :
+                            this.props.navigation.navigate('SearchGame'))
+                        }
+                        onLoginFailed={() => this.setState({
+                            showLoginModal: false
+                        }, () => this.props.navigation.navigate('Home'))}
+                    />
                     <AboutModal
                         isVisible={this.state.showAbout}
                         onClose={() => this.setState({ showAbout: false })} />

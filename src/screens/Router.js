@@ -5,7 +5,6 @@ import SingleplayerScreen from './SingleplayerGame/SingleplayerGame';
 import MultiplayerScreen from './MultiplayerGame/MultiplayerGame';
 import SearchGameScreen from './SearchGame/SearchGame';
 import ProfileScreen from './Profile/Profile';
-import LoginScreen from './Login/Login';
 
 const ApplicationStack = createStackNavigator({
     Home: {
@@ -22,9 +21,6 @@ const ApplicationStack = createStackNavigator({
     },
     Profile: {
         screen: ProfileScreen
-    },
-    Login: {
-        screen: LoginScreen
     }
 }, {
     initialRouteName: 'Home'
