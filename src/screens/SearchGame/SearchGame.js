@@ -69,7 +69,7 @@ class SearchGameScreen extends Component {
 
         this.getUsersHandler();
         getMe(this.props.token)
-            .then(user => this.setState({ user: user.user, loading: false }));
+            .then(user => this.setState({ user: user.user, loading: false }, () => console.log("ME", user.user)));
     }
 
     _keyboardDidShow = () => this.setState({ showPlayButton: false })
@@ -98,7 +98,7 @@ class SearchGameScreen extends Component {
                 picture: user.pictureUrl,
                 _id: user._id
             }))
-        }, () => console.log(result)))
+        }))
 
     navigateMultiplayerScreen = () => this.props.navigation.navigate('Multiplayer');
     navigateHomeScreen = () => this.props.navigation.navigate('Home');
@@ -121,10 +121,13 @@ class SearchGameScreen extends Component {
         this.props.socket.disconnect();
     }
 
-    setSideDrawerStateHandler = state => this.setState({ sideState: state })
-    closeSideDrawerHandler = () => {
-        this.setState({ sideState: false });
+    setLeaderBoardStateHandler = state => {
+        this.getUsersHandler();
+        this.setState({ showRanking: state })
     }
+    // closeSideDrawerHandler = () => {
+    //     this.setState({ sideState: false });
+    // }
 
     onChangeText = text => {
         this.search = text;
@@ -142,7 +145,7 @@ class SearchGameScreen extends Component {
 
                                 <View style={styles.inputForm}>
                                     <Header
-                                        setSideDrawer={() => this.setSideDrawerStateHandler(true)}
+                                        setLeaderBoardTrue={() => this.setLeaderBoardStateHandler(true)}
                                         onChangeText={this.onChangeText}
                                     />
                                 </View>
@@ -170,7 +173,7 @@ class SearchGameScreen extends Component {
                                             </ImageBackground>
                                         </TouchableOpacity>
                                     </View> : null}
-                                <SideDrawer
+                                {/* <SideDrawer
                                     pictureUrl={this.state.user.pictureUrl}
                                     username={this.state.user.shortName}
                                     goToClasament={() => this.setState({ sideState: false, showRanking: true })}
@@ -182,12 +185,14 @@ class SearchGameScreen extends Component {
                                         LoginManager.logOut();
                                     })}
                                     isVisible={this.state.sideState}
-                                    onClose={this.closeSideDrawerHandler} />
+                                    onClose={this.closeSideDrawerHandler} /> */}
                             </View>
                             <RankingModal
                                 isVisible={this.state.showRanking}
                                 users={this.state.users}
+                                user={this.state.user}
                                 close={() => this.setState({ showRanking: false })} />
+
                             <WaitingModal isVisible={this.state.showWaitingModal}
                                 onClose={() => {
                                     this.setState({ showWaitingModal: false })
