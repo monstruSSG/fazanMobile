@@ -36,9 +36,12 @@ class Login extends Component {
             const data = await GoogleSignin.signIn();
             let deviceId = await AsyncStorage.getItem('deviceId');
 
-            let { token } = await gmailLogin({ gmailToken: data.idToken, id: data.user.id, deviceId })
+            let [{ token }] = await Promise.all([
+                gmailLogin({ gmailToken: data.idToken, id: data.user.id, deviceId }),
+                this.createSocketConnection(data.token)])
 
-            AsyncStorage.setItem('token', token);
+            await AsyncStorage.setItem('token', token);
+
             return this.props.onLoginSucceed();
 
         } catch (error) {
@@ -51,7 +54,7 @@ class Login extends Component {
             } else {
                 alert('A aparut o eroare la logare');
             }
-            
+
             return this.props.onLoginFailed();
         }
     }
@@ -62,9 +65,8 @@ class Login extends Component {
             this.setState({ loading: true });
             return Promise.all([AccessToken.getCurrentAccessToken(), AsyncStorage.getItem('deviceId')]);
         })
-        .then(([{accessToken}, deviceId]) => fbLogin({ fbToken: accessToken, deviceId }))
+        .then(([{ accessToken }, deviceId]) => fbLogin({ fbToken: accessToken, deviceId }))
         .then(data => Promise.all([
-            this.props.saveToken(data.token),
             AsyncStorage.setItem('token', data.token),
             this.createSocketConnection(data.token)
         ]))
@@ -72,7 +74,8 @@ class Login extends Component {
             this.setState({ loading: false });
             return this.props.onLoginSucceed();
         })
-        .catch(() => {
+        .catch(err => {
+            console.log(err)
             AsyncStorage.removeItem('token');
             return this.props.onLoginFailed();
         })

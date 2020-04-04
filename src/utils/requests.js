@@ -13,7 +13,7 @@ axios.interceptors.request.use(async config => {
 }, (error) => Promise.reject(error));
 
 export const fbLogin = data => axios.post(`${CONSTANTS.backendUrl}/auth/login/fb`, data)
-    .then(res => Promise.resolve({ ...res.data.user }))
+    .then(res => Promise.resolve({ ...res.data }))
 
 export const gmailLogin = data => axios.post(`${CONSTANTS.backendUrl}/auth/login/gmail`, data)
     .then(res => Promise.resolve({ ...res.data }))

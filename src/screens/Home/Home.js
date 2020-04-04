@@ -102,14 +102,12 @@ class HomeScreen extends Component {
         }
     }
 
-
     componentDidMount() {
         let hasNotificationPermission = this.checkPermission();
 
         if (hasNotificationPermission) {
             this.unsubscribeNotifications = messaging().onMessage(this.onNotificationRecieved);
         }
-
 
         // If token exists we have to silently regenerate one for the user
         isLogged()
@@ -206,7 +204,6 @@ class HomeScreen extends Component {
                     <LoginModal
                         isVisible={this.state.showLoginModal}
                         onClose={() => {
-                            console.log('Triggered')
                             this.setState({ showLoginModal: false })
                         }}
                         onLoginSucceed={() => this.setState({ showLoginModal: false }, () => this.state.navigateProfileScreen ?
