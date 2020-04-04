@@ -3,7 +3,8 @@ import { View, StyleSheet, Image, Text, ImageBackground, TouchableOpacity } from
 import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
 import NetInfo from '@react-native-community/netinfo';
-import DeviceInfo from 'react-native-device-info';
+import firebase from '@react-native-firebase/app';
+import messaging from '@react-native-firebase/messaging';
 
 import CustomText from '../../components/UI/Text/Text';
 import AboutModal from '../../components/Modals/AboutModal';
@@ -21,6 +22,7 @@ import NoInternet from '../../components/Modals/NoInternetModal'
 import CONSTANTS from '../../utils/constants';
 import ToturialModal from '../../components/Modals/ToturialModal';
 import LoginModal from '../../components/Modals/LoginModal';
+import InvitationModal from '../../components/Modals/InvitationModal';
 
 const logoTextSize = Math.floor(CONSTANTS.screenWidth / 4);
 
@@ -65,10 +67,54 @@ class HomeScreen extends Component {
             })
             .catch(() => this.setState({ logged: false })));
 
-    componentDidMount() {
-        // If token exists we have to silently regenerate one for the user
 
-        // Check if user is logged
+    // Notification permissions
+    checkPermission = async () => {
+        const enabled = await firebase.messaging().hasPermission();
+
+        if (enabled) {
+            this.getToken();
+            return true;
+        } else {
+            this.requestPermission();
+            return false;
+        }
+    }
+
+    getToken = async () => {
+        let deviceId = await AsyncStorage.getItem('deviceId');
+
+        if (!deviceId) {
+            deviceId = await firebase.messaging().getToken();
+
+            if (deviceId) {
+                await AsyncStorage.setItem('deviceId', deviceId);
+            }
+        }
+    }
+
+    requestPermission = async () => {
+        try {
+            await firebase.messaging().requestPermission();
+            this.getToken();
+        } catch (error) {
+            alert('Nu vei putea invita prieteni la joc fara aceasta optiune')
+        }
+    }
+
+
+    componentDidMount() {
+        let hasNotificationPermission = this.checkPermission();
+
+        if (hasNotificationPermission) {
+            this.unsubscribeNotifications = messaging().onMessage(this.onNotificationRecieved);
+        }
+
+
+        // If token exists we have to silently regenerate one for the user
+        isLogged()
+            .then(() => this.setState({ logged: true }))
+
         // Handle first app opnening
         AsyncStorage.getItem('new')
             .then(res => {
@@ -78,12 +124,6 @@ class HomeScreen extends Component {
                     AsyncStorage.setItem('new', 'false')
                 })
             })
-            .catch(console.error)
-        
-        let deviceId = DeviceInfo.getUniqueId();
-
-        AsyncStorage.setItem('deviceId', deviceId)
-            .then(() => console.log('Successfully set deviceId'))
             .catch(console.error)
 
         // Get internet connection info 
@@ -98,9 +138,14 @@ class HomeScreen extends Component {
         });
     }
 
+    onNotificationRecieved = data => {
+        this.setState({ showInvitationModal: true })
+    }
+
     componentWillUnmount() {
         this.netInfoListener();
         this.didBlurSubscription.remove();
+        if (this.unsubscribeNotifications) this.unsubscribeNotifications();
     }
 
     createSocketConnection = token => this.props.createSocketConnection(token)
@@ -171,6 +216,12 @@ class HomeScreen extends Component {
                         onLoginFailed={() => this.setState({
                             showLoginModal: false
                         }, () => this.props.navigation.navigate('Home'))}
+                    />
+                    <InvitationModal
+                        isVisible={this.state.showInvitationModal}
+                        from={'Andrei'}
+                        imageUrl={undefined}
+                        onClose={() => this.setState({ showInvitationModal: false })}
                     />
                     <AboutModal
                         isVisible={this.state.showAbout}
