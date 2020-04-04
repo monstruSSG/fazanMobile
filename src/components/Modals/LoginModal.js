@@ -34,7 +34,9 @@ class Login extends Component {
     googleLoginHandler = async () => {
         try {
             const data = await GoogleSignin.signIn();
-            let { token } = await gmailLogin({ gmailToken: data.idToken, id: data.user.id })
+            let deviceId = await AsyncStorage.getItem('deviceId');
+
+            let { token } = await gmailLogin({ gmailToken: data.idToken, id: data.user.id, deviceId })
 
             AsyncStorage.setItem('token', token);
             return this.props.onLoginSucceed();
@@ -49,6 +51,7 @@ class Login extends Component {
             } else {
                 alert('A aparut o eroare la logare');
             }
+            
             return this.props.onLoginFailed();
         }
     }
@@ -57,9 +60,9 @@ class Login extends Component {
         .then(result => {
             if (result.isCancelled) return this.navigateHomeHandler()
             this.setState({ loading: true });
-            return AccessToken.getCurrentAccessToken();
+            return Promise.all([AccessToken.getCurrentAccessToken(), AsyncStorage.getItem('deviceId')]);
         })
-        .then(res => fbLogin({ fbToken: res.accessToken }))
+        .then(([{accessToken}, deviceId]) => fbLogin({ fbToken: accessToken, deviceId }))
         .then(data => Promise.all([
             this.props.saveToken(data.token),
             AsyncStorage.setItem('token', data.token),
@@ -80,38 +83,38 @@ class Login extends Component {
         return (
             <ModalTemplate isVisible={this.props.isVisible} background={ContentBackground} onClose={this.props.onClose}>
                 <View style={[styles.center, styles.max]}>
-                        <View style={[styles.contentSize, styles.center]}>
-                            <View style={[styles.center, { flex: 1, flexDirection: 'row' }]}>
-                                <View style={[styles.center, { width: '80%', height: '50%' }]}>
-                                    <CustomText large style={[styles.headerTextPosition]}>Login</CustomText>
-                                </View>
-                                <View style={[styles.center, { width: '20%', height: '50%'}]}>
-                                    <TouchableOpacity style={styles.max} onPress={this.props.onClose} />
-                                </View>
+                    <View style={[styles.contentSize, styles.center]}>
+                        <View style={[styles.center, { flex: 1, flexDirection: 'row' }]}>
+                            <View style={[styles.center, { width: '80%', height: '50%' }]}>
+                                <CustomText large style={[styles.headerTextPosition]}>Login</CustomText>
                             </View>
-                            <View style={[styles.center, { flex: 1 }]}>
-                                <View style={[styles.center, { width: '100%', height: '100%' }]}>
-                                    <View style={[styles.center, { width: '100%', height: '20%' }]}>
-                                        <CustomText large>Logare!</CustomText>
-                                    </View>
-                                    <View style={[styles.center, { width: '60%', height: '80%' }]}>
-                                        <CustomText>Pentru a accesa partea online a jocului treuie sa fii autentificat</CustomText>
-                                    </View>
-                                </View>
+                            <View style={[styles.center, { width: '20%', height: '50%' }]}>
+                                <TouchableOpacity style={styles.max} onPress={this.props.onClose} />
                             </View>
-                            <View style={[styles.center, { width: '100%', height: '40%', flexDirection: 'row' }]}>
-                                <View style={[styles.center, { width: '40%', height: '40%', left: '8%' }, styles.buttonPosition]}>
-                                    <TouchableOpacity style={[styles.max, styles.center]} onPress={this.fbLoginHandler}>
-                                        <Image source={FacebookButton} style={styles.max} resizeMode='contain' />
-                                    </TouchableOpacity>
+                        </View>
+                        <View style={[styles.center, { flex: 1 }]}>
+                            <View style={[styles.center, { width: '100%', height: '100%' }]}>
+                                <View style={[styles.center, { width: '100%', height: '20%' }]}>
+                                    <CustomText large>Logare!</CustomText>
                                 </View>
-                                <View style={[styles.center, { width: '40%', height: '40%', right: '8%' }, styles.buttonPosition]}>
-                                    <TouchableOpacity style={[styles.max, styles.center]} onPress={this.googleLoginHandler}>
-                                        <Image source={GmailButton} style={styles.max} resizeMode='contain' />
-                                    </TouchableOpacity>
+                                <View style={[styles.center, { width: '60%', height: '80%' }]}>
+                                    <CustomText>Pentru a accesa partea online a jocului treuie sa fii autentificat</CustomText>
                                 </View>
                             </View>
                         </View>
+                        <View style={[styles.center, { width: '100%', height: '40%', flexDirection: 'row' }]}>
+                            <View style={[styles.center, { width: '40%', height: '40%', left: '8%' }, styles.buttonPosition]}>
+                                <TouchableOpacity style={[styles.max, styles.center]} onPress={this.fbLoginHandler}>
+                                    <Image source={FacebookButton} style={styles.max} resizeMode='contain' />
+                                </TouchableOpacity>
+                            </View>
+                            <View style={[styles.center, { width: '40%', height: '40%', right: '8%' }, styles.buttonPosition]}>
+                                <TouchableOpacity style={[styles.max, styles.center]} onPress={this.googleLoginHandler}>
+                                    <Image source={GmailButton} style={styles.max} resizeMode='contain' />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </View>
                 </View>
             </ModalTemplate>
         );

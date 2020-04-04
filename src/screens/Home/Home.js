@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text, ImageBackground, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
-import NetInfo from "@react-native-community/netinfo";
+import NetInfo from '@react-native-community/netinfo';
+import DeviceInfo from 'react-native-device-info';
 
 import CustomText from '../../components/UI/Text/Text';
 import AboutModal from '../../components/Modals/AboutModal';
@@ -77,6 +78,12 @@ class HomeScreen extends Component {
                     AsyncStorage.setItem('new', 'false')
                 })
             })
+            .catch(console.error)
+        
+        let deviceId = DeviceInfo.getUniqueId();
+
+        AsyncStorage.setItem('deviceId', deviceId)
+            .then(() => console.log('Successfully set deviceId'))
             .catch(console.error)
 
         // Get internet connection info 
