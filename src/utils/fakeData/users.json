@@ -1,0 +1,107 @@
+[
+    {
+        "_id": 1,
+        "username": "Andrew",
+        "isActive": true,
+        "isDeleted": false,
+        "status": "busy",
+        "socketId": "randomsocketid",
+        "wins": 12,
+        "loses": 3,
+        "score": 2012
+    },
+    {
+        "_id": 2,
+        "username": "Silviu MSR",
+        "isActive": true,
+        "isDeleted": false,
+        "status": "available",
+        "socketId": "randomsocketid",
+        "wins": 1001,
+        "loses": 3,
+        "score": 3000
+    },
+    {
+        "_id": 3,
+        "username": "Amazing",
+        "isActive": true,
+        "isDeleted": false,
+        "status": "busy",
+        "socketId": "randomsocketid",
+        "wins": 2,
+        "loses": 12,
+        "score": 101
+    },    {
+        "_id": 4,
+        "username": "Nice Name",
+        "isActive": true,
+        "isDeleted": false,
+        "status": "busy",
+        "socketId": "randomsocketid",
+        "wins": 22,
+        "loses": 9,
+        "score": 999
+    },    {
+        "_id": 99,
+        "username": "Nice Name",
+        "isActive": true,
+        "isDeleted": false,
+        "status": "busy",
+        "socketId": "randomsocketid",
+        "wins": 22,
+        "loses": 9,
+        "score": 999
+    },    {
+        "_id": 5,
+        "username": "Nice Name",
+        "isActive": true,
+        "isDeleted": false,
+        "status": "busy",
+        "socketId": "randomsocketid",
+        "wins": 22,
+        "loses": 9,
+        "score": 999
+    },    {
+        "_id": 6,
+        "username": "Nice Name",
+        "isActive": true,
+        "isDeleted": false,
+        "status": "busy",
+        "socketId": "randomsocketid",
+        "wins": 22,
+        "loses": 9,
+        "score": 999
+    },    {
+        "_id": 7,
+        "username": "Nice Name",
+        "isActive": true,
+        "isDeleted": false,
+        "status": "busy",
+        "socketId": "randomsocketid",
+        "wins": 22,
+        "loses": 9,
+        "score": 999
+    },
+    {
+        "_id": 12,
+        "username": "Nice Name",
+        "isActive": true,
+        "isDeleted": false,
+        "status": "busy",
+        "socketId": "randomsocketid",
+        "wins": 22,
+        "loses": 9,
+        "score": 999
+    },
+    {
+        "_id": 14,
+        "username": "GhostRider",
+        "isActive": true,
+        "isDeleted": false,
+        "status": "available",
+        "socketId": "randomsocketid",
+        "wins": 1202,
+        "loses": 37,
+        "score": 2000
+    }
+]

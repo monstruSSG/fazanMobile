@@ -1,0 +1,92 @@
+[
+    {
+        "_id": 1,
+        "user": {
+            "username": "Andrew",
+            "isActive": true,
+            "isDeleted": false,
+            "status": "busy",
+            "socketId": "randomsocketid",
+            "wins": 12,
+            "loses": 3,
+            "score": 2012
+        },
+        "outcome": "won",
+        "dateTime": "12/02/2019"
+    },
+    {
+        "_id": 2,
+        "user": {
+            "username": "Silviu MSR",
+            "isActive": true,
+            "isDeleted": false,
+            "status": "available",
+            "socketId": "randomsocketid",
+            "wins": 1001,
+            "loses": 3,
+            "score": 300012
+        },
+        "outcome": "lose",
+        "dateTime": "13/02/2019"
+    },
+    {
+        "_id": 3,
+        "user": {
+            "username": "ShadowKiller12",
+            "isActive": true,
+            "isDeleted": false,
+            "status": "busy",
+            "socketId": "randomsocketid",
+            "wins": 2,
+            "loses": 12,
+            "score": 101
+        },
+        "outcome": "won",
+        "dateTime": "12/02/2018"
+    },
+    {
+        "_id": 4,
+        "user": {
+            "username": "JohnTheRapperXXNX",
+            "isActive": true,
+            "isDeleted": false,
+            "status": "busy",
+            "socketId": "randomsocketid",
+            "wins": 22,
+            "loses": 9,
+            "score": 999
+        },
+        "outcome": "won",
+        "dateTime": "22/02/2019"
+    },
+    {
+        "_id": 5,
+        "user": {
+            "username": "GhostRider",
+            "isActive": true,
+            "isDeleted": false,
+            "status": "available",
+            "socketId": "randomsocketid",
+            "wins": 1202,
+            "loses": 37,
+            "score": 2012001
+        },
+        "outcome": "lose",
+        "dateTime": "12/02/2019"
+    },
+    {
+        "_id": 6,
+        "user": {
+            "username": "GutaTheMusician",
+            "isActive": true,
+            "isDeleted": false,
+            "status": "available",
+            "socketId": "randomsocketid",
+            "wins": 128,
+            "loses": 98,
+            "score": 2012
+        },
+        "outcome": "won",
+        "dateTime": "12/02/2019"
+    }
+]

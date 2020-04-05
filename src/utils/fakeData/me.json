@@ -1,0 +1,24 @@
+{
+    "_id": 1,
+    "username": "Andrew",
+    "wins": 300,
+    "loses": 3,
+    "score": 2012,
+    "history": [
+        {
+            "oponent": "COZLOSCHI RAUL",
+            "picture": "urlToHisPicture",
+            "win": true
+        },
+        {
+            "oponent": "MIREA ANDREI",
+            "picture": "urlToHisPicture",
+            "win": true
+        },
+        {
+            "oponent": "COMIATI RUPTU",
+            "picture": "urlToHisPicture",
+            "win": false
+        }
+    ]
+}
