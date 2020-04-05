@@ -1,166 +1,150 @@
 import React, { Component } from 'react';
-import { View, Modal, StyleSheet, TouchableOpacity, Image, ImageBackground, Text } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Image, ImageBackground } from 'react-native';
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
-import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
 import { connect } from 'react-redux';
+import AsyncStorage from '@react-native-community/async-storage';
+import { GoogleSignin, statusCodes, } from '@react-native-community/google-signin';
 
 import FacebookButton from '../../assets/Buttons/fbButton.png';
+import ContentBackground from '../../assets/Modals/mission.png';
 import GmailButton from '../../assets/Buttons/gmailButton.png';
-import SimpleButton from '../../assets/Buttons/simpleButton.png';
-import WarningBackground from '../../assets/Modals/warningBack.png';
-import Title from '../../assets/Modals/titleShadow.png';
-import ExitButton from '../../assets/Buttons/exitButton.png';
 
-import { saveToken, login } from '../../store/actions/user';
+import * as SOCKET from '../../store/actions/socket';
+import { saveToken } from '../../store/actions/user';
+import { fbLogin, gmailLogin } from '../../utils/requests';
+import CustomText from '../../components/UI/Text/Text';
+import ModalTemplate from '../Modals/ModalTemplate';
 
-class LoginModal extends Component {
-    loginHandler = () => LoginManager.logInWithPermissions(['public_profile'])
-        .then(result => {
-            if (result.isCancelled) {
-                return alert('Canceled')
+class Login extends Component {
+    static navigationOptions = {
+        header: null
+    }
+
+    state = {
+        loading: false
+    }
+
+    componentDidMount() {
+        // Fine to configure here since it will mount everytime 
+        GoogleSignin.configure({
+            webClientId: '1023963061725-2bctqbkcsevkarje4o3m408m4q1j8jb1.apps.googleusercontent.com'
+        });
+    }
+
+    googleLoginHandler = async () => {
+        try {
+            const data = await GoogleSignin.signIn();
+            let deviceId = await AsyncStorage.getItem('deviceId');
+
+            let [{ token }] = await Promise.all([
+                gmailLogin({ gmailToken: data.idToken, id: data.user.id, deviceId }),
+                this.createSocketConnection(data.token)])
+
+            await AsyncStorage.setItem('token', token);
+
+            return this.props.onLoginSucceed();
+
+        } catch (error) {
+            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                // Userul a dat cancel la logare
+            } else if (error.code === statusCodes.IN_PROGRESS) {
+                alert('A aparut o eroare la logare')
+            } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+                alert('Te rog instaleaza-ti google store pentru a accesa aceasta sectiune');
+            } else {
+                alert('A aparut o eroare la logare');
             }
-            return AccessToken.getCurrentAccessToken()
+
+            return this.props.onLoginFailed();
+        }
+    }
+
+    fbLoginHandler = () => LoginManager.logInWithPermissions(['public_profile'])
+        .then(result => {
+            if (result.isCancelled) return this.navigateHomeHandler()
+            this.setState({ loading: true });
+            return Promise.all([AccessToken.getCurrentAccessToken(), AsyncStorage.getItem('deviceId')]);
         })
-        .then(res => login({ fbToken: res.accessToken }))
-        .then(data => {
-            this.props.saveToken(data.token)
-            return this.props.onLogin(data.token)
+        .then(([{ accessToken }, deviceId]) => fbLogin({ fbToken: accessToken, deviceId }))
+        .then(data => Promise.all([
+            AsyncStorage.setItem('token', data.token),
+            this.createSocketConnection(data.token)
+        ]))
+        .then(() => {
+            this.setState({ loading: false });
+            return this.props.onLoginSucceed();
         })
-        .catch(console.log)
+        .catch(err => {
+            console.log(err)
+            AsyncStorage.removeItem('token');
+            return this.props.onLoginFailed();
+        })
+
+    createSocketConnection = token => this.props.createSocketConnection(token);
 
     render() {
         return (
-            <Modal visible={this.props.isVisible} onRequestClose={this.props.onClose} animationType="slide" transparent={true}>
-                <View style={{
-                    flex: 1,
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: 'rgba(0,0,0,0.9)'
-                }}>
-                    <View style={{
-                        width: "80%",
-                        height: "95%",
-                        position: 'relative',
-                        top: '5%',
-                        elevation: 20,
-                    }}>
-                        <View style={styles.container}>
-
-                            <ImageBackground source={WarningBackground} resizeMode="stretch" style={styles.backgroundImageContainer}>
-                                <View style={styles.titleContainer}>
-                                    <TouchableOpacity onPress={this.props.exitGame}>
-                                        <ImageBackground style={styles.buttonImage} resizeMode="cover" source={ExitButton}>
-                                        </ImageBackground>
-                                    </TouchableOpacity>
-                                    <ImageBackground resizeMode="stretch" style={styles.titleImage} source={Title}>
-                                        <View style={[styles.centerItems, styles.max, styles.titleTextContainer]}>
-                                            <Text color="white" style={styles.titleText}>LOGARE</Text>
-                                        </View>
-                                    </ImageBackground>
+            <ModalTemplate isVisible={this.props.isVisible} background={ContentBackground} onClose={this.props.onClose}>
+                <View style={[styles.center, styles.max]}>
+                    <View style={[styles.contentSize, styles.center]}>
+                        <View style={[styles.center, { flex: 1, flexDirection: 'row' }]}>
+                            <View style={[styles.center, { width: '80%', height: '50%' }]}>
+                                <CustomText large style={[styles.headerTextPosition]}>Login</CustomText>
+                            </View>
+                            <View style={[styles.center, { width: '20%', height: '50%' }]}>
+                                <TouchableOpacity style={styles.max} onPress={this.props.onClose} />
+                            </View>
+                        </View>
+                        <View style={[styles.center, { flex: 1 }]}>
+                            <View style={[styles.center, { width: '100%', height: '100%' }]}>
+                                <View style={[styles.center, { width: '100%', height: '20%' }]}>
+                                    <CustomText large>Logare!</CustomText>
                                 </View>
-                                <View style={styles.usersContainerWrapper}>
-                                    <View style={{ flex: 3 }}>
-                                        <Text color="white" style={styles.infoText}>Pentru a accesa parte de multiplayer a jocului trebuie
-                                    sa va logati.</Text>
-                                        <Text color="white" style={styles.infoText}>Urmatoarele optiuni sunt disponibile:</Text>
-                                    </View>
-                                    <View style={{ flex: 1, flexDirection: 'row', width: '100%', alignItems: 'flex-end', justifyContent: 'center' }}>
-                                        <TouchableOpacity onPress={this.loginHandler}>
-                                            <Image source={FacebookButton} style={{ width: 50, height: 50, marginRight: 18 }} resizeMode="stretch" />
-                                        </TouchableOpacity>
-                                        <Text style={[styles.infoText, { paddingBottom: 12 }]} color="white">SAU</Text>
-                                        <TouchableOpacity onPress={this.loginHandler}>
-                                            <Image source={GmailButton} style={{ width: 50, height: 50, marginLeft: 18 }} resizeMode="stretch" />
-                                        </TouchableOpacity>
-                                    </View>
+                                <View style={[styles.center, { width: '60%', height: '80%' }]}>
+                                    <CustomText>Pentru a accesa partea online a jocului treuie sa fii autentificat</CustomText>
                                 </View>
-                            </ImageBackground>
-
+                            </View>
+                        </View>
+                        <View style={[styles.center, { width: '100%', height: '40%', flexDirection: 'row' }]}>
+                            <View style={[styles.center, { width: '40%', height: '40%', left: '8%' }, styles.buttonPosition]}>
+                                <TouchableOpacity style={[styles.max, styles.center]} onPress={this.fbLoginHandler}>
+                                    <Image source={FacebookButton} style={styles.max} resizeMode='contain' />
+                                </TouchableOpacity>
+                            </View>
+                            <View style={[styles.center, { width: '40%', height: '40%', right: '8%' }, styles.buttonPosition]}>
+                                <TouchableOpacity style={[styles.max, styles.center]} onPress={this.googleLoginHandler}>
+                                    <Image source={GmailButton} style={styles.max} resizeMode='contain' />
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     </View>
                 </View>
-            </Modal>
+            </ModalTemplate>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+    buttonPosition: {
+        position: 'relative',
+        bottom: '15%'
     },
-    contentWrapper: {
-        flex: 1,
-        flexDirection: 'column',
-        backgroundColor: 'rgba(0,0,0,0.5)'
+    headerTextPosition: {
+        position: 'relative',
+        left: '14%'
     },
-    centerItems: {
-        justifyContent: 'center',
-        alignItems: 'center'
+    contentSize: {
+        width: '90%',
+        height: '80%'
     },
     max: {
-        flex: 1
+        width: '100%',
+        height: '100%'
     },
-    container: {
-        justifyContent: "flex-end",
-        position: 'relative',
-        right: '3%'
-    },
-    backgroundImageContainer: {
-        height: "90%",
-        width: "100%",
-        justifyContent: 'flex-start',
+    center: {
+        justifyContent: 'center',
         alignItems: 'center'
-    },
-    titleContainer: {
-        width: "100%",
-        height: "15%",
-    },
-    titleImage: {
-        height: "100%",
-        width: "95%",
-        position: 'relative',
-        bottom: "150%",
-        left: '5%'
-    },
-    buttonImage: {
-        width: "45%",
-        height: "95%",
-        left: '88%',
-        bottom: "8%"
-    },
-    usersContainerWrapper: {
-        height: "75%",
-        width: "80%",
-        position: 'absolute',
-        left: "13%",
-        top: "8%",
-        alignItems: 'center',
-    },
-    userWrapper: {
-        width: "100%"
-    },
-    titleTextContainer: {
-        display: 'flex'
-    },
-    titleText: {
-        position: 'relative',
-        marginTop: '5%',
-        fontFamily: 'Troika',
-        color: 'white',
-        fontSize: 26,
-        letterSpacing: 2,
-    },
-    infoText: {
-        paddingTop: 12,
-        fontFamily: 'Troika',
-        fontSize: 22,
-        color: 'white',
-        textAlign: 'center',
     }
-
 })
 
 const mapStateToProps = state => ({
@@ -168,10 +152,11 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    saveToken: token => dispatch(saveToken(token))
+    saveToken: token => dispatch(saveToken(token)),
+    createSocketConnection: token => dispatch(SOCKET.createSocketConnection(token))
 })
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(LoginModal); 
+)(Login); 

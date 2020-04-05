@@ -44,13 +44,6 @@ const sideDrawer = props => (
                                     </ImageBackground>
                                 </TouchableOpacity>
                             </View>
-                            <View style={[styles.contentButtons, styles.centerAndStart]}>
-                                <TouchableOpacity style={[styles.max]} onPress={props.onClose}>
-                                    <ImageBackground style={[styles.max, styles.center]} source={GreenButton} resizeMode='stretch'>
-                                        <CustomText normal style={[styles.textPosition]}>INCHIDE</CustomText>
-                                    </ImageBackground>
-                                </TouchableOpacity>
-                            </View>
                         </View>
                         <View style={[styles.bottom, styles.centerAndEnd]}>
                             <View style={[styles.contentButtons, { height: '50%' }, styles.centerAndStart]}>

@@ -85,3 +85,6 @@ RNTester/build
 RNTester/Pods/Local Podspecs
 
 RNTester/Pods/Target Support Files
+
+#Code 
+.history
