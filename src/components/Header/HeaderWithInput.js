@@ -13,7 +13,7 @@ export default class Header extends Component {
             <View style={[styles.content, this.props.contentStyles]}>
                 <View style={styles.navigate}>
                     <TouchableOpacity
-                        onPress={this.props.setSideDrawer}
+                        onPress={this.props.setLeaderBoardTrue}
                         style={[styles.fullAndCenter, styles.menuIcon]}>
                         <View>
                             <Icon name='navicon' size={30} color={CONSTANTS.textColor} />

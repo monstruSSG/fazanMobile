@@ -14,7 +14,7 @@ import { isLogged } from '../../utils/requests';
 
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
 import AboutButton from '../../assets/Buttons/about.png';
-import ProfileButton from '../../assets/Buttons/greenLines.png';
+import ProfileButton from '../../assets/Buttons/profileIcon.png';
 import Crown from '../../assets/Stuff/1st.png';
 import SinglePlayerTitle from '../../assets/Modals/titleShadow.png';
 import MultiplayerTitle from '../../assets/Stuff/titleBox.png';

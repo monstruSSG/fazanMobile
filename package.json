@@ -44,8 +44,8 @@
     "@babel/core": "7.5.4",
     "@babel/runtime": "7.5.4",
     "@react-native-community/eslint-config": "0.0.3",
-    "babel-jest": "24.8.0",
-    "jest": "24.8.0",
+    "babel-jest": "^25.2.6",
+    "jest": "^25.2.7",
     "metro-react-native-babel-preset": "0.54.1",
     "react-test-renderer": "16.8.6"
   },
