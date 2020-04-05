@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Image, Text, ImageBackground, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
-import NetInfo from "@react-native-community/netinfo";
+import NetInfo from '@react-native-community/netinfo';
+import firebase from '@react-native-firebase/app';
+import messaging from '@react-native-firebase/messaging';
 
 import CustomText from '../../components/UI/Text/Text';
 import AboutModal from '../../components/Modals/AboutModal';
@@ -12,12 +14,15 @@ import { isLogged } from '../../utils/requests';
 
 import BackgroundImg from '../../assets/Stuff/bg.jpg';
 import AboutButton from '../../assets/Buttons/about.png';
-import ProfileButton from '../../assets/Buttons/locked.png';
+import ProfileButton from '../../assets/Buttons/greenLines.png';
 import Crown from '../../assets/Stuff/1st.png';
 import SinglePlayerTitle from '../../assets/Modals/titleShadow.png';
 import MultiplayerTitle from '../../assets/Stuff/titleBox.png';
 import NoInternet from '../../components/Modals/NoInternetModal'
 import CONSTANTS from '../../utils/constants';
+import ToturialModal from '../../components/Modals/ToturialModal';
+import LoginModal from '../../components/Modals/LoginModal';
+import InvitationModal from '../../components/Modals/InvitationModal';
 
 const logoTextSize = Math.floor(CONSTANTS.screenWidth / 4);
 
@@ -30,19 +35,28 @@ class HomeScreen extends Component {
         showAbout: false,
         logged: false,
         showNoInternet: false,
-        isConnected: false
+        isConnected: false,
+        oponent: null,
+        showInvitationModal: false,
+        showToturialModal: false,
+        showLoginModal: false,
+        navigateProfileScreen: false
     }
 
     navigateSingleplayerScreen = () => this.props.navigation.navigate('Singleplayer');
     navigateProfileScreen = () => {
         if (!this.state.isConnected) return this.setState({ showNoInternet: true });
 
-        return this.state.logged ? this.props.navigation.navigate('Profile') : this.props.navigation.navigate('Login')
+        return this.state.logged ?
+            this.props.navigation.navigate('Profile') :
+            this.setState({ showLoginModal: true, navigateProfileScreen: true });
     }
     navigateSearchGameScreen = () => {
         if (!this.state.isConnected) return this.setState({ showNoInternet: true });
 
-        return this.state.logged ? this.props.navigation.navigate('SearchGame') : this.props.navigation.navigate('Login')
+        return this.state.logged ?
+            this.props.navigation.navigate('SearchGame') :
+            this.setState({ showLoginModal: true });
     }
 
     readToken = () => AsyncStorage.getItem('token')
@@ -53,11 +67,67 @@ class HomeScreen extends Component {
             })
             .catch(() => this.setState({ logged: false })));
 
+
+    // Notification permissions
+    checkPermission = async () => {
+        const enabled = await firebase.messaging().hasPermission();
+
+        if (enabled) {
+            this.getToken();
+            return true;
+        } else {
+            this.requestPermission();
+            return false;
+        }
+    }
+
+    getToken = async () => {
+        let deviceId = await AsyncStorage.getItem('deviceId');
+
+        if (!deviceId) {
+            deviceId = await firebase.messaging().getToken();
+
+            if (deviceId) {
+                await AsyncStorage.setItem('deviceId', deviceId);
+            }
+        }
+    }
+
+    requestPermission = async () => {
+        try {
+            await firebase.messaging().requestPermission();
+            this.getToken();
+        } catch (error) {
+            alert('Nu vei putea invita prieteni la joc fara aceasta optiune')
+        }
+    }
+
     componentDidMount() {
+        let hasNotificationPermission = this.checkPermission();
+
+        if (hasNotificationPermission) {
+            this.unsubscribeNotifications = messaging().onMessage(this.onNotificationRecieved);
+        }
+
+        // If token exists we have to silently regenerate one for the user
+        isLogged()
+            .then(() => this.setState({ logged: true }))
+
+        // Handle first app opnening
+        AsyncStorage.getItem('new')
+            .then(res => {
+                if (res) return
+
+                this.setState({ showToturialModal: true }, () => {
+                    AsyncStorage.setItem('new', 'false')
+                })
+            })
+            .catch(console.error)
+
+        // Get internet connection info 
         this.netInfoListener = NetInfo.addEventListener(state => {
             this.setState({ isConnected: state.isConnected });
         });
-        this.readToken();
         this.didBlurSubscription = this.props.navigation.addListener('didFocus', () => {
             this.netInfoListener = NetInfo.addEventListener(state => {
                 this.setState({ isConnected: state.isConnected });
@@ -66,14 +136,20 @@ class HomeScreen extends Component {
         });
     }
 
+    onNotificationRecieved = data => {
+        this.setState({ showInvitationModal: true })
+    }
+
     componentWillUnmount() {
         this.netInfoListener();
         this.didBlurSubscription.remove();
+        if (this.unsubscribeNotifications) this.unsubscribeNotifications();
     }
 
     createSocketConnection = token => this.props.createSocketConnection(token)
 
     render() {
+
         return (
             <ImageBackground source={BackgroundImg} style={[styles.max]}>
                 <View style={[styles.homePage]}>
@@ -125,12 +201,34 @@ class HomeScreen extends Component {
                             </View>
                         </View>
                     </View>
+                    <LoginModal
+                        isVisible={this.state.showLoginModal}
+                        onClose={() => {
+                            this.setState({ showLoginModal: false })
+                        }}
+                        onLoginSucceed={() => this.setState({ showLoginModal: false }, () => this.state.navigateProfileScreen ?
+                            this.props.navigation.navigate('Profile') :
+                            this.props.navigation.navigate('SearchGame'))
+                        }
+                        onLoginFailed={() => this.setState({
+                            showLoginModal: false
+                        }, () => this.props.navigation.navigate('Home'))}
+                    />
+                    <InvitationModal
+                        isVisible={this.state.showInvitationModal}
+                        from={'Andrei'}
+                        imageUrl={undefined}
+                        onClose={() => this.setState({ showInvitationModal: false })}
+                    />
                     <AboutModal
                         isVisible={this.state.showAbout}
                         onClose={() => this.setState({ showAbout: false })} />
                     <NoInternet
                         isVisible={this.state.showNoInternet}
                         onClose={() => this.setState({ showNoInternet: false })} />
+                    <ToturialModal
+                        isVisible={this.state.showToturialModal}
+                        onClose={() => this.setState({ showToturialModal: false }, () => AsyncStorage.setItem('new', 'false'))} />
                 </View>
             </ImageBackground>
         );
@@ -242,7 +340,8 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-    token: state.user.token
+    token: state.user.token,
+    socket: state.socket.socket
 })
 
 const mapDispatchToProps = dispatch => ({
