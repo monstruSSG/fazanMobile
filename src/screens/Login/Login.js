@@ -26,26 +26,30 @@ class Login extends Component {
 
     navigateHomeHandler = () => this.props.navigation.navigate('Home');
 
-    loginHandler = () => LoginManager.logInWithPermissions(['public_profile'])
+    loginHandler = () => {
+        return LoginManager.logInWithPermissions(['public_profile'])
         .then(result => {
-            if(result.isCancelled)return this.navigateHomeHandler()
+            if (result.isCancelled) return this.navigateHomeHandler()
             this.setState({ loading: true });
             return AccessToken.getCurrentAccessToken();
         })
         .then(res => login({ fbToken: res.accessToken }))
-        .then(data => Promise.all([
-            this.props.saveToken(data.token),
-            AsyncStorage.setItem('token', data.token),  
-            this.createSocketConnection(data.token)
-        ]))
+        .then(data => {
+            return Promise.all([
+                this.props.saveToken(data.token),
+                AsyncStorage.setItem('token', data.token),
+                this.createSocketConnection(data.token)
+            ])
+        })
         .then(() => {
             this.props.navigation.navigate('SearchGame')
             this.setState({ loading: false });
         })
-        .catch(() => {
+        .catch((err) => {
             AsyncStorage.removeItem('token');
             this.navigateHomeHandler();
         })
+    }
 
     createSocketConnection = token => this.props.createSocketConnection(token);
 

@@ -5,14 +5,26 @@ import ClasamentUserDetails from '../ClasamentUserDetails/ClasamentUserDetails';
 
 import RankingModal from '../../assets/Modals/clasamentModal.png';
 
-const renderUserList = props => <FlatList
-    data={props.users.map((user, index) => ({ ...user, key: user._id, index: index + 1 }))}
-    renderItem={({ item }) => <ClasamentUserDetails
-        name={item.username}
-        points={item.score || 123}
-        position={item.index}
-    />}
-/>
+const createUserList = (users, user) => {
+    return users.concat([{
+        username: user.shortName,
+        score: user.score,
+        picture: user.pictureUrl,
+        _id: user._id
+    }])
+}
+
+const renderUserList = props => {
+    const allUsers = createUserList(props.users, props.user);
+    return <FlatList
+        data={allUsers.map((user, index) => ({ ...user, key: user._id, index: index + 1 }))}
+        renderItem={({ item }) => <ClasamentUserDetails
+            name={item.username}
+            points={item.score || 123}
+            position={item.index}
+        />}
+    />
+}
 
 export default props => (
 
@@ -37,7 +49,7 @@ export default props => (
 const styles = StyleSheet.create({
     users: {
         width: '70%',
-        height: '73%',  
+        height: '73%',
         position: 'relative',
         left: '2%'
     },
